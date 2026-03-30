@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OCPS Improvement Cycle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #fff;
+      display: block;
+      min-height: auto;
+      padding: 0;
+    }
+
+    .ocps-wrap {
+      font-family: 'DM Sans', sans-serif;
+      padding: 16px 16px 18px;
+      background: transparent;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .ocps-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #C4894A;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .ocps-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 34px;
+      font-weight: 400;
+      text-align: center;
+      color: #0F1F3D;
+      line-height: 1.2;
+      margin: 0 0 6px;
+    }
+
+    .ocps-title em {
+      font-style: italic;
+      color: #C4894A;
+    }
+
+    .ocps-sub {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 300;
+      color: #6B7280;
+      letter-spacing: 0.04em;
+      margin: 0 0 24px;
+    }
+
+    .ocps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3px;
+      border-radius: 20px;
+      overflow: hidden;
+      max-width: 880px;
+      margin: 0 auto;
+      position: relative;
+      background: #D4C8B0;
+    }
+
+    .q1 { background: #F5F0E8; }
+    .q2 { background: #162848; }
+    .q3 { background: #162848; }
+    .q4 { background: #F5F0E8; }
+
+    .ocps-quad {
+      padding: 32px 28px 28px;
+      position: relative;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ocps-qnum {
+      font-family: 'DM Serif Display', serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      margin-bottom: 12px;
+    }
+
+    .q1 .ocps-qnum, .q4 .ocps-qnum { color: #C4894A; }
+    .q2 .ocps-qnum, .q3 .ocps-qnum { color: #E8A066; }
+
+    .ocps-qtitle {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.25;
+      margin: 0 0 14px;
+    }
+
+    .q1 .ocps-qtitle, .q4 .ocps-qtitle { color: #0F1F3D; }
+    .q2 .ocps-qtitle, .q3 .ocps-qtitle { color: #F5F0E8; }
+
+    .ocps-qdesc {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .q1 .ocps-qdesc, .q4 .ocps-qdesc { color: #5A5040; }
+    .q2 .ocps-qdesc, .q3 .ocps-qdesc { color: #A8B4C4; }
+
+    .ocps-arrow {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      z-index: 10;
+    }
+
+    .q1 .ocps-arrow { background: #0F1F3D; color: #E8A066; right: -13px; top: 50%; transform: translateY(-50%); }
+    .q2 .ocps-arrow { background: #E8A066; color: #0F1F3D; bottom: -13px; left: 50%; transform: translateX(-50%); }
+    .q3 .ocps-arrow { background: #F5F0E8; color: #0F1F3D; top: -13px; left: 50%; transform: translateX(-50%); }
+    .q4 .ocps-arrow { background: #0F1F3D; color: #E8A066; left: -13px; top: 50%; transform: translateY(-50%); }
+
+    .ocps-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: #F5F0E8;
+      border: 2px solid #E8A066;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      text-align: center;
+      gap: 1px;
+    }
+
+    .ocps-center-one {
+      font-size: 8px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #C4894A;
+    }
+
+    .ocps-center-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: #0F1F3D;
+      line-height: 1;
+    }
+
+    .ocps-center-tagline {
+      font-size: 7.5px;
+      font-weight: 300;
+      color: #7A6A50;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+      text-align: center;
+      padding: 0 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ocps-wrap">
+    <p class="ocps-eyebrow">ONE OCPS — Culture · Climate · Collaboration</p>
+    <h1 class="ocps-title">Continuous <em>improvement</em> cycle</h1>
+    <p class="ocps-sub">A shared framework for identifying, addressing, and sustaining progress</p>
+
+    <div class="ocps-grid">
+
+      <div class="ocps-quad q1">
+        <span class="ocps-qnum">01 ——</span>
+        <h2 class="ocps-qtitle">Determine an area of focus</h2>
+        <p class="ocps-qdesc">Define the specific challenge or goal the team will prioritize together.</p>
+        <div class="ocps-arrow">→</div>
+      </div>
+
+      <div class="ocps-quad q2">
+        <span class="ocps-qnum">02 ——</span>
+        <h2 class="ocps-qtitle">Identify the root cause</h2>
+        <p class="ocps-qdesc">Dig beneath surface symptoms to uncover the underlying drivers of the issue.</p>
+        <div class="ocps-arrow">↓</div>
+      </div>
+
+      <div class="ocps-quad q3">
+        <span class="ocps-qnum">04 ——</span>
+        <h2 class="ocps-qtitle">Implement, progress monitor &amp; adjust</h2>
+        <p class="ocps-qdesc">Execute the plan, track outcomes, and iterate continuously based on data.</p>
+        <div class="ocps-arrow">↑</div>
+      </div>
+
+      <div class="ocps-quad q4">
+        <span class="ocps-qnum">03 ——</span>
+        <h2 class="ocps-qtitle">Collaboratively develop next steps</h2>
+        <p class="ocps-qdesc">Co-create an action plan with all relevant stakeholders and shared ownership.</p>
+        <div class="ocps-arrow">←</div>
+      </div>
+
+      <div class="ocps-center">
+        <span class="ocps-center-one">One</span>
+        <span class="ocps-center-brand">OCPS</span>
+        <span class="ocps-center-tagline">Culture<br>Climate<br>Collaboration</span>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
