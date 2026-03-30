@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credible Feedback Process</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+
+    html, body { width: 100%; overflow-x: hidden; }
+
+    @media (max-width: 700px) {
+      body {
+        display: block;
+        min-height: auto;
+        padding: 16px 12px 24px;
+      }
+    }
+    body {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .cfp-wrap {
+      font-family: 'DM Sans', sans-serif;
+      padding: 48px 40px 52px;
+      background: transparent;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .cfp-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9A9590;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .cfp-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      text-align: center;
+      color: #2C2A27;
+      line-height: 1.15;
+      margin: 0 0 8px;
+    }
+
+    .cfp-title em {
+      font-style: italic;
+      color: #6B6560;
+    }
+
+    .cfp-subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #7A7570;
+      margin: 0 0 44px;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+    }
+
+    .cfp-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .cfp-connector {
+      position: absolute;
+      top: 28px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: #D4CFC9;
+      z-index: 0;
+    }
+
+    .cfp-connector::after {
+      content: '';
+      position: absolute;
+      top: -3px; right: 0;
+      width: 6px; height: 6px;
+      border-top: 1px solid #B0AAA2;
+      border-right: 1px solid #B0AAA2;
+      transform: rotate(45deg);
+    }
+
+    .cfp-step {
+      position: relative;
+      z-index: 1;
+      padding: 0 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cfp-num-wrap {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      position: relative;
+      background: #F0EDE8;
+    }
+
+    .cfp-num-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1px solid #C4BFB8;
+      opacity: 0.5;
+    }
+
+    .cfp-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: #5A5550;
+      line-height: 1;
+    }
+
+    .cfp-step-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #9A9590;
+      margin-bottom: 6px;
+    }
+
+    .cfp-step-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #2C2A27;
+      text-align: center;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .cfp-divider {
+      width: 24px;
+      height: 1px;
+      background: #C4BFB8;
+      margin-bottom: 16px;
+    }
+
+    .cfp-details {
+      list-style: none;
+      padding: 0; margin: 0;
+      width: 100%;
+    }
+
+    .cfp-details li {
+      font-size: 11.5px;
+      color: #1A1916;
+      font-weight: 400;
+      padding: 5px 0;
+      border-top: 1px solid #E4E0DB;
+      line-height: 1.4;
+    }
+
+    .cfp-details li:last-child {
+      border-bottom: 1px solid #E4E0DB;
+    }
+  
+    @media (max-width: 700px) {
+      .cfp-wrap { padding: 20px 8px 24px; max-width: 100%; }
+      .cfp-title { font-size: 28px; }
+      .cfp-subtitle { font-size: 12px; margin-bottom: 24px; }
+      .cfp-steps { grid-template-columns: 1fr; gap: 18px; }
+      .cfp-connector { display: none; }
+      .cfp-step { padding: 0 0 8px; }
+      .cfp-step .num { margin-bottom: 12px; }
+      .cfp-step h4 { font-size: 13px; }
+      .cfp-step ul { font-size: 11px; }
+    }
+
+</style>
+</head>
+<body>
+  <div class="cfp-wrap">
+    <p class="cfp-eyebrow">Instructional leadership framework</p>
+    <h1 class="cfp-title">Credible feedback <em>process</em></h1>
+    <p class="cfp-subtitle">A four-step approach to observation, analysis, and accountable support</p>
+
+    <div class="cfp-steps">
+      <div class="cfp-connector"></div>
+
+      <div class="cfp-step">
+        <div class="cfp-num-wrap"><span class="cfp-num">01</span></div>
+        <span class="cfp-step-label">Step one</span>
+        <p class="cfp-step-title">Attain knowledge of the standards</p>
+        <div class="cfp-divider"></div>
+        <ul class="cfp-details">
+          <li>PLC presence</li>
+          <li>See/hear charts</li>
+          <li>Vertical alignment of standards</li>
+          <li>Content-specific professional learning</li>
+        </ul>
+      </div>
+
+      <div class="cfp-step">
+        <div class="cfp-num-wrap"><span class="cfp-num">02</span></div>
+        <span class="cfp-step-label">Step two</span>
+        <p class="cfp-step-title">Conduct classroom observations</p>
+        <div class="cfp-divider"></div>
+        <ul class="cfp-details">
+          <li>Observation roles</li>
+          <li>Low-inference data</li>
+          <li>See/hear charts</li>
+          <li>Calibration</li>
+        </ul>
+      </div>
+
+      <div class="cfp-step">
+        <div class="cfp-num-wrap"><span class="cfp-num">03</span></div>
+        <span class="cfp-step-label">Step three</span>
+        <p class="cfp-step-title">Analyze data to determine area of focus &amp; feedback</p>
+        <div class="cfp-divider"></div>
+        <ul class="cfp-details">
+          <li>Synthesize findings</li>
+          <li>Data-driven area of focus</li>
+          <li>Cumulative coaching</li>
+          <li>Feedback generation</li>
+        </ul>
+      </div>
+
+      <div class="cfp-step">
+        <div class="cfp-num-wrap"><span class="cfp-num">04</span></div>
+        <span class="cfp-step-label">Step four</span>
+        <p class="cfp-step-title">Deliver feedback with accountable support systems</p>
+        <div class="cfp-divider"></div>
+        <ul class="cfp-details">
+          <li>Differentiated feedback delivery</li>
+          <li>Specific next steps</li>
+          <li>Accountability measures</li>
+          <li>Coaching support systems</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
