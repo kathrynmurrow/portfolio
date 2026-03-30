@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OCPS Improvement Cycle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#102142;
+      --gold:#C4894A;
+      --paper:#F7F3EC;
+      --ink:#485062;
+      --line:#DDD4C6;
+      --dark:#162848;
+    }
+    body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--navy);padding:24px 14px 30px;}
+    .wrap{max-width:1120px;margin:0 auto;}
+    .eyebrow{text-align:center;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+    h1{text-align:center;font-family:'DM Serif Display',serif;font-size:clamp(2.25rem,5vw,4rem);line-height:1.02;color:var(--navy);margin-bottom:10px;}
+    h1 em{font-style:italic;color:var(--gold)}
+    .sub{text-align:center;color:#6B7280;font-size:clamp(.98rem,2vw,1.1rem);line-height:1.65;max-width:760px;margin:0 auto 24px;}
+    .mobile-note{text-align:center;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#8A867F;margin:0 auto 18px;}
+    .cycle-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;position:relative;}
+    .card{border-radius:24px;padding:28px 24px;min-height:240px;position:relative;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden}
+    .light{background:var(--paper);color:var(--navy);}
+    .dark{background:var(--dark);color:#F5F0E8;}
+    .num{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:700;}
+    .dark .num{color:#E8A066;}
+    .title{font-family:'DM Serif Display',serif;font-size:clamp(1.45rem,2.5vw,2rem);line-height:1.16;margin-bottom:14px;}
+    .desc{font-size:1rem;line-height:1.72;color:inherit;opacity:.9;max-width:38ch;}
+    .arrow{position:absolute;width:34px;height:34px;border-radius:999px;display:grid;place-items:center;font-size:1rem;font-weight:700;z-index:3;box-shadow:0 8px 18px rgba(0,0,0,.1)}
+    .a1{right:-17px;top:50%;transform:translateY(-50%);background:var(--navy);color:#E8A066;}
+    .a2{left:50%;bottom:-17px;transform:translateX(-50%);background:#E8A066;color:var(--navy);}
+    .a3{left:50%;top:-17px;transform:translateX(-50%);background:#F5F0E8;color:var(--navy);}
+    .a4{left:-17px;top:50%;transform:translateY(-50%);background:var(--navy);color:#E8A066;}
+
+    @media (max-width: 820px){
+      body{padding:18px 12px 24px;}
+      .cycle-grid{grid-template-columns:1fr;gap:12px;}
+      .card{min-height:auto;padding:22px 18px 20px;border-radius:18px;}
+      .arrow{display:none;}
+      .desc{max-width:none;font-size:.97rem;line-height:1.65;}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">ONE OCPS · Culture · Climate · Collaboration</p>
+    <h1>Continuous <em>improvement</em> cycle</h1>
+    <p class="sub">A shared framework for identifying, addressing, and sustaining progress.</p>
+    <p class="mobile-note">Scroll naturally on mobile. The framework is stacked in reading order.</p>
+
+    <section class="cycle-grid">
+      <article class="card light">
+        <div class="num">01</div>
+        <h2 class="title">Determine an area of focus</h2>
+        <p class="desc">Define the specific challenge or goal the team will prioritize together.</p>
+        <div class="arrow a1">→</div>
+      </article>
+
+      <article class="card dark">
+        <div class="num">02</div>
+        <h2 class="title">Identify root cause</h2>
+        <p class="desc">Dig beneath symptoms to uncover the underlying issue.</p>
+        <div class="arrow a2">↓</div>
+      </article>
+
+      <article class="card dark">
+        <div class="num">03</div>
+        <h2 class="title">Collaborate and develop next steps</h2>
+        <p class="desc">Co-create an action plan with all stakeholders and assign ownership.</p>
+        <div class="arrow a3">↑</div>
+      </article>
+
+      <article class="card light">
+        <div class="num">04</div>
+        <h2 class="title">Implement, progress monitor &amp; adjust</h2>
+        <p class="desc">Execute the plan, track outcomes, and iterate continuously using evidence.</p>
+        <div class="arrow a4">←</div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
