@@ -1,269 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>High Impact Restaurant Visit Protocol</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-
-
-    html, body { width: 100%; overflow-x: hidden; }
-
-    @media (max-width: 700px) {
-      body {
-        display: block;
-        min-height: auto;
-        padding: 16px 12px 24px;
-      }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #fff; padding: 28px 16px 36px; color: #2C3A28; }
+    .wrap { max-width: 760px; margin: 0 auto; border-left: 3px solid #8FA07A; padding: 18px 18px 26px 22px; }
+    .eyebrow { text-align: center; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #7A8C6E; margin-bottom: 8px; }
+    .titleTop { text-align: center; font-family: 'DM Serif Display', serif; font-size: 48px; font-style: italic; line-height: 1.02; color: #2C3A28; }
+    .titleBottom { text-align: center; font-size: 18px; letter-spacing: .14em; text-transform: uppercase; color: #5A6B50; margin-top: 8px; }
+    .rule { width: 56px; height: 1px; background: #B0BA9E; margin: 22px auto; }
+    .label { display:flex; align-items:center; gap:12px; margin-bottom: 18px; }
+    .label::before,.label::after{content:'';height:1px;background:#C8D0B8;flex:1;}
+    .label span { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color:#7A8C6E; white-space: nowrap; }
+    .steps { display:grid; gap: 10px; }
+    .step { display:grid; grid-template-columns: 56px 1fr; gap:18px; align-items:start; padding:18px 0; border-top:1px solid #E4E8DC; }
+    .step:last-child { border-bottom:1px solid #E4E8DC; }
+    .num { width:56px;height:56px;border-radius:999px;background:#EEF0E8;border:1px solid #C8D0B8;display:grid;place-items:center;font-family:'DM Serif Display',serif;font-size:24px;color:#4A5E3A; }
+    h2 { font-family:'DM Serif Display',serif; font-size:30px; line-height:1.08; margin-bottom:8px; }
+    p { font-size:16px; line-height:1.65; color:#6C7461; }
+    .footer { display:flex; justify-content:space-between; gap:16px; border-top:1px solid #C8D0B8; margin-top:24px; padding-top:16px; }
+    .brand { font-family:'DM Serif Display',serif; font-style:italic; font-size:24px; color:#4A6038; }
+    .dept { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#A0AA90; align-self:center; }
+    @media (max-width: 640px){
+      .wrap { border-left-width: 2px; padding: 16px 14px 22px 16px; }
+      .titleTop { font-size: 38px; }
+      .titleBottom { font-size: 15px; }
+      .step { grid-template-columns: 48px 1fr; gap: 14px; }
+      .num { width:48px; height:48px; font-size:22px; }
+      h2 { font-size: 24px; }
+      p { font-size: 15px; }
+      .footer { flex-direction: column; align-items: flex-start; }
     }
-    body {
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
-
-    .hvp-wrap {
-      font-family: 'DM Sans', sans-serif;
-      background: transparent;
-      max-width: 480px;
-      width: 100%;
-      padding: 48px 40px 52px 37px;
-      border-left: 3px solid #8FA07A;
-    }
-
-    .hvp-eyebrow {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #7A8C6E;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-
-    .hvp-title-top {
-      font-family: 'DM Serif Display', serif;
-      font-size: 42px;
-      font-weight: 400;
-      font-style: italic;
-      text-align: center;
-      color: #2C3A28;
-      line-height: 1.1;
-      margin: 0;
-      letter-spacing: -0.01em;
-    }
-
-    .hvp-title-bottom {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-align: center;
-      color: #5A6B50;
-      margin: 6px 0 0;
-    }
-
-    .hvp-rule {
-      width: 48px;
-      height: 1px;
-      background: #B0BA9E;
-      margin: 20px auto 24px;
-    }
-
-    .hvp-section-label {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-
-    .hvp-section-label::before,
-    .hvp-section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: #C8D0B8;
-    }
-
-    .hvp-section-text {
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #7A8C6E;
-      white-space: nowrap;
-    }
-
-    .hvp-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .hvp-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      padding: 18px 0;
-      border-bottom: 1px solid #E4E8DC;
-    }
-
-    .hvp-step:first-child {
-      border-top: 1px solid #E4E8DC;
-    }
-
-    .hvp-num {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #EEF0E8;
-      border: 1px solid #C8D0B8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'DM Serif Display', serif;
-      font-size: 17px;
-      font-weight: 400;
-      color: #4A5E3A;
-      flex-shrink: 0;
-    }
-
-    .hvp-step-content {
-      padding-top: 8px;
-    }
-
-    .hvp-step-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 19px;
-      font-weight: 400;
-      color: #2C3A28;
-      line-height: 1.3;
-      margin: 0;
-    }
-
-    .hvp-step-sub {
-      font-size: 12px;
-      font-weight: 300;
-      color: #7A8C6E;
-      margin: 4px 0 0;
-      line-height: 1.5;
-    }
-
-    .hvp-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 36px;
-      padding-top: 20px;
-      border-top: 1px solid #C8D0B8;
-    }
-
-    .hvp-brand {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #7A8C6E;
-    }
-
-    .hvp-brand span {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 15px;
-      color: #4A5E3A;
-      letter-spacing: 0;
-      text-transform: none;
-    }
-
-    .hvp-dept {
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #A0AA90;
-    }
-  
-    @media (max-width: 700px) {
-      .hvp-wrap { max-width: 100%; padding: 24px 16px 28px 16px; border-left-width: 2px; }
-      .hvp-eyebrow { font-size: 9px; }
-      .hvp-title-top { font-size: 34px; }
-      .hvp-title-bottom { font-size: 13px; }
-      .hvp-section-label { margin-bottom: 20px; }
-      .hvp-step { grid-template-columns: 42px 1fr; gap: 14px; padding: 16px 0; }
-      .hvp-step-number { width: 42px; height: 42px; font-size: 22px; }
-      .hvp-step-title { font-size: 17px; }
-      .hvp-step-desc { font-size: 11px; line-height: 1.55; }
-    }
-
-</style>
+  </style>
 </head>
 <body>
-  <div class="hvp-wrap">
-    <p class="hvp-eyebrow">Bojangles · Training &amp; Development</p>
-    <h1 class="hvp-title-top">High Impact</h1>
-    <p class="hvp-title-bottom">Restaurant Visit Protocol</p>
-    <div class="hvp-rule"></div>
-
-    <div class="hvp-section-label">
-      <span class="hvp-section-text">Area Director Responsibilities</span>
-    </div>
-
-    <div class="hvp-steps">
-
-      <div class="hvp-step">
-        <div class="hvp-num">1</div>
-        <div class="hvp-step-content">
-          <p class="hvp-step-title">Pre-visit planning</p>
-          <p class="hvp-step-sub">Review data, set objectives, prepare materials</p>
-        </div>
-      </div>
-
-      <div class="hvp-step">
-        <div class="hvp-num">2</div>
-        <div class="hvp-step-content">
-          <p class="hvp-step-title">Manager's walk / day part</p>
-          <p class="hvp-step-sub">Observe operations alongside the manager on duty</p>
-        </div>
-      </div>
-
-      <div class="hvp-step">
-        <div class="hvp-num">3</div>
-        <div class="hvp-step-content">
-          <p class="hvp-step-title">Observations, coaching &amp; feedback</p>
-          <p class="hvp-step-sub">Document findings, deliver real-time coaching</p>
-        </div>
-      </div>
-
-      <div class="hvp-step">
-        <div class="hvp-num">4</div>
-        <div class="hvp-step-content">
-          <p class="hvp-step-title">Training Care Conversation</p>
-          <p class="hvp-step-sub">Structured dialogue on development priorities</p>
-        </div>
-      </div>
-
-      <div class="hvp-step">
-        <div class="hvp-num">5</div>
-        <div class="hvp-step-content">
-          <p class="hvp-step-title">Accountability &amp; follow-up</p>
-          <p class="hvp-step-sub">Set commitments, confirm next steps and timelines</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="hvp-footer">
-      <p class="hvp-brand"><span>Bojangles</span></p>
-      <p class="hvp-dept">Training &amp; Development</p>
-    </div>
-  </div>
+  <main class="wrap">
+    <p class="eyebrow">Bojangles · Training &amp; Development</p>
+    <h1 class="titleTop">High Impact</h1>
+    <div class="titleBottom">Restaurant Visit Protocol</div>
+    <div class="rule"></div>
+    <div class="label"><span>Area Director responsibilities</span></div>
+    <section class="steps">
+      <article class="step"><div class="num">1</div><div><h2>Pre-visit planning</h2><p>Review data, set objectives, and prepare materials before arriving onsite.</p></div></article>
+      <article class="step"><div class="num">2</div><div><h2>Manager's walk / day part</h2><p>Observe operations alongside the manager on duty and anchor the visit in real work.</p></div></article>
+      <article class="step"><div class="num">3</div><div><h2>Observations, coaching &amp; feedback</h2><p>Document findings, ask strong questions, and coach in real time.</p></div></article>
+      <article class="step"><div class="num">4</div><div><h2>Training Care Conversation</h2><p>Facilitate a structured dialogue on development priorities and needed support.</p></div></article>
+      <article class="step"><div class="num">5</div><div><h2>Accountability &amp; follow-up</h2><p>Set commitments, define next steps, and confirm the follow-up cadence.</p></div></article>
+    </section>
+    <div class="footer"><div class="brand">Bojangles</div><div class="dept">Training &amp; Development</div></div>
+  </main>
 </body>
 </html>

@@ -1,364 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Facilitator Certification Program</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-
-
-    html, body { width: 100%; overflow-x: hidden; }
-
-    @media (max-width: 700px) {
-      body {
-        display: block;
-        min-height: auto;
-        padding: 16px 12px 24px;
-      }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #fff; padding: 28px 16px 36px; color: #1A2410; }
+    .wrap { max-width: 1180px; margin: 0 auto; }
+    .top { display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; padding-bottom: 24px; border-bottom:1px solid #D4D8C8; margin-bottom: 24px; }
+    .eyebrow { font-size: 10px; letter-spacing:.18em; text-transform:uppercase; color:#9A9590; margin-bottom:10px; }
+    h1 { font-family:'DM Serif Display',serif; font-size:46px; line-height:1.06; margin-bottom:12px; }
+    h1 em { color:#6A8A52; font-style: italic; }
+    .intro { font-size:16px; line-height:1.7; color:#6B7060; margin-bottom:18px; }
+    .meta { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+    .badge { display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; border:1px solid #C8D0B8; background:#EEF0E8; font-size:11px; text-transform:uppercase; letter-spacing:.16em; color:#4A6038; }
+    .dot { width:8px; height:8px; border-radius:999px; background:#6A8A52; }
+    .duration { color:#9A9E8E; font-size:16px; }
+    .culm { background:#173113; color:#F0EDE4; border-radius:18px; padding:26px 24px; }
+    .culm .label { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#6A8A52; margin-bottom:10px; }
+    .culm h2 { font-family:'DM Serif Display',serif; font-size:34px; font-style:italic; line-height:1.15; margin-bottom:12px; }
+    .culm p { font-size:15px; line-height:1.7; color:#B7C0B0; }
+    .header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+    .header::after { content:''; flex:1; height:1px; background:#D4D8C8; }
+    .header h3 { font-family:'DM Serif Display',serif; font-size:30px; font-style:italic; }
+    .sessions { display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:16px; }
+    .session { border:1px solid #DDE0D4; border-radius:16px; background:#FAFAF7; padding:22px 20px; }
+    .session .num { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#6A8A52; margin-bottom:8px; }
+    .session h4 { font-family:'DM Serif Display',serif; font-size:28px; line-height:1.18; margin-bottom:12px; }
+    .session p { font-size:15px; line-height:1.7; color:#6B7060; margin-bottom:18px; }
+    .resources { border-top:1px solid #E4E8DC; padding-top:14px; }
+    .resources-label { font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#9A9E8E; margin-bottom:10px; }
+    .tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .tag { font-size:14px; line-height:1.4; color:#4A6038; background:#EEF2E6; border:1px solid #C8D4B0; border-radius:999px; padding:6px 14px; }
+    .footer { display:flex; justify-content:space-between; gap:16px; border-top:1px solid #D4D8C8; margin-top:24px; padding-top:16px; }
+    .brand { font-family:'DM Serif Display',serif; font-size:22px; font-style:italic; color:#4A6038; }
+    .dept { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#A0A890; align-self:center; }
+    @media (max-width: 900px) {
+      .top { grid-template-columns: 1fr; }
+      h1 { font-size: 38px; }
+      .header h3 { font-size: 26px; }
+      .sessions { grid-template-columns: 1fr; }
+      .session h4 { font-size: 24px; }
+      .footer { flex-direction:column; align-items:flex-start; }
     }
-    body {
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
-
-    .fcp-wrap {
-      font-family: 'DM Sans', sans-serif;
-      padding: 40px 44px 44px;
-      background: transparent;
-      max-width: 1100px;
-      width: 100%;
-    }
-
-    .fcp-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: start;
-      margin-bottom: 32px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid #D4D8C8;
-    }
-
-    .fcp-eyebrow {
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #9A9590;
-      margin-bottom: 8px;
-    }
-
-    .fcp-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 34px;
-      font-weight: 400;
-      color: #1A2410;
-      line-height: 1.1;
-      margin: 0 0 12px;
-    }
-
-    .fcp-title em {
-      font-style: italic;
-      color: #6A8A52;
-    }
-
-    .fcp-intro {
-      font-size: 12px;
-      font-weight: 300;
-      color: #6B7060;
-      line-height: 1.7;
-      margin: 0 0 16px;
-    }
-
-    .fcp-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .fcp-badge {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: #EEF0E8;
-      border: 1px solid #C8D0B8;
-      border-radius: 20px;
-      padding: 4px 12px 4px 8px;
-    }
-
-    .fcp-badge-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: #6A8A52;
-    }
-
-    .fcp-badge-text {
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #4A6038;
-    }
-
-    .fcp-meta-divider {
-      width: 1px; height: 14px;
-      background: #D4D8C8;
-    }
-
-    .fcp-duration {
-      font-size: 11px;
-      font-weight: 300;
-      color: #9A9E8E;
-    }
-
-    .fcp-culminating {
-      background: #1A2C14;
-      border-radius: 12px;
-      padding: 24px 26px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100%;
-    }
-
-    .fcp-culm-label {
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #6A8A52;
-      margin-bottom: 8px;
-    }
-
-    .fcp-culm-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 20px;
-      font-weight: 400;
-      font-style: italic;
-      color: #F0EDE4;
-      margin: 0 0 10px;
-      line-height: 1.2;
-    }
-
-    .fcp-culm-desc {
-      font-size: 11.5px;
-      font-weight: 300;
-      color: #A0A890;
-      line-height: 1.65;
-      margin: 0;
-    }
-
-    .fcp-sessions-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .fcp-sessions-header::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: #D4D8C8;
-    }
-
-    .fcp-section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 16px;
-      font-weight: 400;
-      font-style: italic;
-      color: #1A2410;
-      white-space: nowrap;
-    }
-
-    .fcp-sessions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .fcp-session {
-      border: 1px solid #DDE0D4;
-      border-radius: 10px;
-      padding: 20px 18px 18px;
-      display: flex;
-      flex-direction: column;
-      background: #FAFAF7;
-    }
-
-    .fcp-session-num {
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #6A8A52;
-      margin-bottom: 5px;
-    }
-
-    .fcp-session-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 17px;
-      font-weight: 400;
-      color: #1A2410;
-      line-height: 1.25;
-      margin: 0 0 10px;
-    }
-
-    .fcp-session-desc {
-      font-size: 11.5px;
-      font-weight: 300;
-      color: #6B7060;
-      line-height: 1.6;
-      flex: 1;
-      margin-bottom: 16px;
-    }
-
-    .fcp-resources-label {
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #9A9E8E;
-      margin-bottom: 8px;
-      padding-top: 14px;
-      border-top: 1px solid #E4E8DC;
-    }
-
-    .fcp-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-
-    .fcp-tag {
-      font-size: 10px;
-      font-weight: 400;
-      color: #4A6038;
-      background: #EEF2E6;
-      border: 1px solid #C8D4B0;
-      border-radius: 20px;
-      padding: 2px 9px;
-      line-height: 1.5;
-    }
-
-    .fcp-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 28px;
-      padding-top: 18px;
-      border-top: 1px solid #D4D8C8;
-    }
-
-    .fcp-brand {
-      font-family: 'DM Serif Display', serif;
-      font-size: 14px;
-      font-style: italic;
-      color: #4A6038;
-    }
-
-    .fcp-dept {
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #A0A890;
-    }
-  
-    @media (max-width: 800px) {
-      .fcp-wrap { padding: 20px 10px 24px; max-width: 100%; }
-      .fcp-top { grid-template-columns: 1fr; gap: 20px; margin-bottom: 24px; padding-bottom: 24px; }
-      .fcp-title { font-size: 28px; }
-      .fcp-journey { grid-template-columns: 1fr; gap: 18px; }
-      .fcp-card { padding: 20px; }
-      .fcp-closing { grid-template-columns: 1fr; }
-    }
-
-</style>
+  </style>
 </head>
 <body>
-  <div class="fcp-wrap">
-
-    <div class="fcp-top">
+  <main class="wrap">
+    <section class="top">
       <div>
-        <p class="fcp-eyebrow">Bojangles · Training &amp; Development</p>
-        <h1 class="fcp-title">Facilitator <em>Certification</em> Program</h1>
-        <p class="fcp-intro">Over the course of 6–9 months, participants attend three in-person sessions focused on planning, questioning, and facilitating using structured activities and learner-centered approaches.</p>
-        <div class="fcp-meta">
-          <div class="fcp-badge">
-            <div class="fcp-badge-dot"></div>
-            <span class="fcp-badge-text">3 Sessions</span>
-          </div>
-          <div class="fcp-meta-divider"></div>
-          <span class="fcp-duration">6–9 month program</span>
+        <div class="eyebrow">Bojangles · Training &amp; Development</div>
+        <h1>Facilitator <em>Certification</em> Program</h1>
+        <p class="intro">Over the course of 6–9 months, participants attend three in-person sessions focused on planning, questioning, and facilitating using structured activities and learner-centered approaches.</p>
+        <div class="meta">
+          <div class="badge"><span class="dot"></span><span>3 Sessions</span></div>
+          <div class="duration">6–9 month program</div>
         </div>
       </div>
-
-      <div class="fcp-culminating">
-        <p class="fcp-culm-label">Program Culmination</p>
-        <h3 class="fcp-culm-title">Culminating Presentation &amp; Peer Review</h3>
-        <p class="fcp-culm-desc">The program culminates in a learner-developed presentation given to a room of peers, who provide feedback based on what they have learned throughout the program.</p>
+      <div class="culm">
+        <div class="label">Program culmination</div>
+        <h2>Culminating Presentation &amp; Peer Review</h2>
+        <p>The program culminates in a learner-developed presentation delivered to peers, followed by structured feedback rooted in the practices introduced throughout the certification journey.</p>
       </div>
-    </div>
-
-    <div class="fcp-sessions-header">
-      <span class="fcp-section-title">The Certification Journey</span>
-    </div>
-
-    <div class="fcp-sessions">
-
-      <div class="fcp-session">
-        <span class="fcp-session-num">Session 01</span>
-        <h2 class="fcp-session-title">Planning &amp; Preparation</h2>
-        <p class="fcp-session-desc">Building the foundation for effective facilitation. Participants learn how to structure sessions, set learning objectives, and prepare materials that drive engagement and retention.</p>
-        <p class="fcp-resources-label">Key Resources</p>
-        <div class="fcp-tags">
-          <span class="fcp-tag">Training Playbook</span>
-          <span class="fcp-tag">Session Planning Guide</span>
-          <span class="fcp-tag">Activity Design Templates</span>
-        </div>
-      </div>
-
-      <div class="fcp-session">
-        <span class="fcp-session-num">Session 02</span>
-        <h2 class="fcp-session-title">Questioning &amp; Engagement</h2>
-        <p class="fcp-session-desc">Mastering learner-centered questioning techniques. Participants practice using open-ended questions with a specific focus, and have multiple opportunities to apply questioning with their peers before implementation.</p>
-        <p class="fcp-resources-label">Key Resources</p>
-        <div class="fcp-tags">
-          <span class="fcp-tag">Questioning Toolkit</span>
-          <span class="fcp-tag">Planning Strategic Questions</span>
-          <span class="fcp-tag">Questioning Practice</span>
-        </div>
-      </div>
-
-      <div class="fcp-session">
-        <span class="fcp-session-num">Session 03</span>
-        <h2 class="fcp-session-title">Facilitation &amp; Delivery</h2>
-        <p class="fcp-session-desc">Putting it all together through practice facilitation. Participants deliver a learner-developed presentation to their peers and receive structured feedback on their approach.</p>
-        <p class="fcp-resources-label">Key Resources</p>
-        <div class="fcp-tags">
-          <span class="fcp-tag">Peer Presentation</span>
-          <span class="fcp-tag">Feedback Framework</span>
-          <span class="fcp-tag">Design Strategies</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="fcp-footer">
-      <span class="fcp-brand">Bojangles</span>
-      <span class="fcp-duration">3 in-person sessions · learner-centered approach</span>
-      <span class="fcp-dept">Training &amp; Development</span>
-    </div>
-
-  </div>
+    </section>
+    <div class="header"><h3>The Certification Journey</h3></div>
+    <section class="sessions">
+      <article class="session">
+        <div class="num">Session 01</div>
+        <h4>Planning &amp; Preparation</h4>
+        <p>Building the foundation for effective facilitation. Participants learn how to structure sessions, set learning objectives, and prepare materials that drive engagement and retention.</p>
+        <div class="resources"><div class="resources-label">Key resources</div><div class="tags"><span class="tag">Training Playbook</span><span class="tag">Session Planning Guide</span><span class="tag">Activity Design Templates</span></div></div>
+      </article>
+      <article class="session">
+        <div class="num">Session 02</div>
+        <h4>Questioning &amp; Engagement</h4>
+        <p>Mastering learner-centered questioning techniques. Participants practice open-ended questions, discussion structures, and facilitation moves that increase ownership and interaction.</p>
+        <div class="resources"><div class="resources-label">Key resources</div><div class="tags"><span class="tag">Questioning Toolkit</span><span class="tag">Discussion Protocols</span><span class="tag">Facilitation Practice Guide</span></div></div>
+      </article>
+      <article class="session">
+        <div class="num">Session 03</div>
+        <h4>Facilitation &amp; Feedback</h4>
+        <p>Applying all components in live facilitation. Participants receive peer and facilitator feedback, refine their delivery, and demonstrate readiness through the culminating presentation.</p>
+        <div class="resources"><div class="resources-label">Key resources</div><div class="tags"><span class="tag">Observation Tool</span><span class="tag">Peer Review Protocol</span><span class="tag">Presentation Rubric</span></div></div>
+      </article>
+    </section>
+    <div class="footer"><div class="brand">Bojangles</div><div class="dept">Training &amp; Development</div></div>
+  </main>
 </body>
 </html>
