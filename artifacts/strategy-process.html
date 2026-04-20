@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategy Diagnosis Structure — Process & Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1a1a2e; --cream: #f8f4ee; --warm: #f0e9de;
+  --deep: #12121e; --white: #fff;
+  --amber: #c17f3a; --teal: #4a7c7e; --plum: #8b5e84;
+  --green: #3a6b4a; --red: #a83232; --muted: #7a7a8a;
+  --border: #ddd5c8;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--cream); color: var(--ink); line-height: 1.7;
+}
+
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(26,26,46,0.97); backdrop-filter: blur(10px);
+  padding: 0 32px; height: 50px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.nav-brand { font-family: 'Playfair Display', serif; font-size: 14px; color: #d0ccc8; font-weight: 600; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link {
+  font-size: 10px; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; color: #6060a0; text-decoration: none;
+  padding: 5px 12px; border-radius: 14px;
+  transition: all 0.2s;
+}
+.nav-link:hover { color: #e8a855; background: rgba(232,168,85,0.08); }
+
+/* HERO */
+.hero {
+  background: var(--deep); padding: 80px 48px 72px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute;
+  top: -100px; right: -60px; width: 560px; height: 560px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(193,127,58,0.07) 0%, transparent 65%);
+}
+.hero::after {
+  content: ''; position: absolute;
+  bottom: -80px; left: -40px; width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,124,126,0.05) 0%, transparent 70%);
+}
+.hero-inner { max-width: 780px; position: relative; z-index: 1; }
+.hero-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 5vw, 52px); font-weight: 700;
+  line-height: 1.07; color: #f0eeea; margin-bottom: 22px;
+}
+.hero h1 em { font-style: italic; color: #e8a855; }
+.hero-desc {
+  font-size: clamp(14px, 1.8vw, 16px); color: #8080a0;
+  font-weight: 300; line-height: 1.75; max-width: 620px;
+}
+.hero-desc strong { color: #b0b0c8; font-weight: 500; }
+
+/* STAT ROW */
+.stat-row {
+  display: flex; gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin-top: 40px; padding-top: 32px;
+}
+.stat { flex: 1; padding-right: 28px; border-right: 1px solid rgba(255,255,255,0.06); margin-right: 28px; }
+.stat:last-child { border-right: none; margin-right: 0; }
+.stat-n { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: var(--amber); line-height: 1; margin-bottom: 4px; }
+.stat-l { font-size: 11px; color: #5050a0; font-weight: 300; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* MAIN */
+.page { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* SECTION */
+.section { margin: 64px 0 0; }
+.section-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--ink); line-height: 1.15; margin-bottom: 12px; }
+.section-title em { font-style: italic; color: var(--amber); }
+.section-body { font-size: 14.5px; color: #3a3a4a; line-height: 1.75; font-weight: 300; margin-bottom: 24px; }
+.section-body strong { font-weight: 600; color: var(--ink); }
+.divider { height: 1px; background: var(--border); margin: 60px 0 0; }
+
+/* PROCESS STEPS */
+.process-stack { display: flex; flex-direction: column; gap: 0; margin: 28px 0; position: relative; }
+.process-stack::before {
+  content: ''; position: absolute;
+  left: 19px; top: 28px; bottom: 28px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--amber), var(--teal), var(--plum), var(--green));
+  opacity: 0.2; z-index: 0;
+}
+.p-step { display: grid; grid-template-columns: 40px 1fr; gap: 0 16px; margin-bottom: 6px; position: relative; z-index: 1; }
+.p-step-left { display: flex; flex-direction: column; align-items: center; padding-top: 3px; }
+.p-num {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700;
+  color: white; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+.p-line { flex: 1; width: 2px; background: var(--border); margin: 3px 0; min-height: 14px; }
+.p-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 9px; padding: 16px 18px 14px; margin-bottom: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.p-card-tag { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+.p-card-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 5px; line-height: 1.3; }
+.p-card-body { font-size: 13px; color: #3a3a4a; line-height: 1.65; font-weight: 300; }
+.p-card-body strong { font-weight: 600; color: var(--ink); }
+
+/* DOC CARDS */
+.doc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 28px 0; }
+.doc-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 9px; padding: 16px 16px 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  position: relative; overflow: hidden;
+}
+.doc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.dc-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; line-height: 1; opacity: 0.08; color: var(--ink); margin-bottom: -6px; }
+.dc-type { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+.dc-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
+.dc-desc { font-size: 11.5px; color: var(--muted); line-height: 1.55; font-weight: 300; }
+
+/* CONCEPTS */
+.concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0; }
+.concept-card {
+  border-radius: 10px; padding: 20px 20px 18px;
+  border: 1px solid; position: relative;
+}
+.concept-urgency {
+  position: absolute; top: 14px; right: 14px;
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 2px 8px; border-radius: 10px;
+}
+.cc-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+.cc-tag { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.cc-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
+.cc-body { font-size: 12.5px; color: #3a3a4a; line-height: 1.65; font-weight: 300; margin-bottom: 10px; }
+.cc-questions { list-style: none; display: flex; flex-direction: column; gap: 5px; border-top: 1px solid; padding-top: 10px; }
+.cc-questions li { font-size: 11.5px; line-height: 1.5; padding-left: 14px; position: relative; font-weight: 300; font-style: italic; }
+.cc-questions li::before { content: '→'; position: absolute; left: 0; font-size: 10px; top: 1px; font-style: normal; }
+
+/* Concept color variants */
+.cc-red   { background: rgba(168,50,50,0.05);  border-color: rgba(168,50,50,0.2); }
+.cc-red   .cc-tag, .cc-red .cc-questions li::before { color: var(--red); }
+.cc-red   .cc-questions { border-color: rgba(168,50,50,0.12); }
+.cc-red   .concept-urgency { background: rgba(168,50,50,0.1); color: var(--red); }
+
+.cc-amber { background: rgba(193,127,58,0.06); border-color: rgba(193,127,58,0.22); }
+.cc-amber .cc-tag, .cc-amber .cc-questions li::before { color: var(--amber); }
+.cc-amber .cc-questions { border-color: rgba(193,127,58,0.14); }
+.cc-amber .concept-urgency { background: rgba(193,127,58,0.1); color: var(--amber); }
+
+.cc-teal  { background: rgba(74,124,126,0.06); border-color: rgba(74,124,126,0.22); }
+.cc-teal  .cc-tag, .cc-teal .cc-questions li::before { color: var(--teal); }
+.cc-teal  .cc-questions { border-color: rgba(74,124,126,0.14); }
+.cc-teal  .concept-urgency { background: rgba(74,124,126,0.1); color: var(--teal); }
+
+.cc-plum  { background: rgba(139,94,132,0.06); border-color: rgba(139,94,132,0.2); }
+.cc-plum  .cc-tag, .cc-plum .cc-questions li::before { color: var(--plum); }
+.cc-plum  .cc-questions { border-color: rgba(139,94,132,0.12); }
+.cc-plum  .concept-urgency { background: rgba(139,94,132,0.1); color: var(--plum); }
+
+.cc-green { background: rgba(58,107,74,0.06);  border-color: rgba(58,107,74,0.2); }
+.cc-green .cc-tag, .cc-green .cc-questions li::before { color: var(--green); }
+.cc-green .cc-questions { border-color: rgba(58,107,74,0.12); }
+.cc-green .concept-urgency { background: rgba(58,107,74,0.1); color: var(--green); }
+
+/* PULL QUOTE */
+.pull-quote {
+  border-left: 3px solid var(--amber); padding: 18px 26px;
+  margin: 28px 0; background: var(--white);
+  border-radius: 0 9px 9px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.pq-text { font-family: 'Playfair Display', serif; font-size: clamp(15px, 2vw, 18px); font-style: italic; line-height: 1.5; color: var(--ink); margin-bottom: 6px; }
+.pq-cite { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+
+/* RESEARCH CALLOUT */
+.research-box {
+  background: var(--warm); border: 1px solid var(--border);
+  border-radius: 9px; padding: 18px 20px 16px; margin: 20px 0;
+}
+.rb-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #b8762e; margin-bottom: 8px; }
+.rb-body { font-size: 13px; color: #3a2a10; line-height: 1.65; font-weight: 300; }
+.rb-body strong { font-weight: 600; color: #2a1a00; }
+.rb-cite { font-size: 11px; color: var(--muted); margin-top: 6px; font-style: italic; }
+
+/* DARK CALLOUT */
+.dark-callout { background: var(--ink); border-radius: 10px; padding: 24px 28px 22px; margin: 28px 0; }
+.dc-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #e8a855; margin-bottom: 10px; }
+.dark-callout p { font-size: 14px; color: #c8c8e0; line-height: 1.7; }
+.dark-callout p strong { color: #f0eeea; font-weight: 500; }
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+  .hero { padding: 56px 20px; }
+  .stat-row { flex-direction: column; gap: 16px; }
+  .stat { border-right: none; padding-right: 0; margin-right: 0; }
+  .doc-grid { grid-template-columns: 1fr; }
+  .concept-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">Strategy Diagnosis Structure</div>
+  <div class="nav-links">
+    <a href="#what" class="nav-link">What It Is</a>
+    <a href="#how" class="nav-link">How It Was Built</a>
+    <a href="#concepts" class="nav-link">Concepts to Discuss</a>
+    <a href="#conversation" class="nav-link">The Conversation</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Strategy Diagnosis Structure · For Discussion</div>
+    <h1>The Strategy<br><em>Diagnosis Structure</em></h1>
+    <p class="hero-desc">
+      This document explains the construction process behind a six-part organizational effectiveness portfolio — what it is, why it was built the way it was, what research shaped every decision, and what <strong>concepts still need to be surfaced, discussed, and acted on</strong> before this work produces the outcomes it's designed for.
+    </p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-n">6</div>
+        <div class="stat-l">Documents in the portfolio</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">15+</div>
+        <div class="stat-l">Peer-reviewed citations</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">100</div>
+        <div class="stat-l">Real participants whose data grounds this</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">12</div>
+        <div class="stat-l">Months of execution this represents</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ── WHAT IT IS ── -->
+<div class="section" id="what">
+  <div class="section-eyebrow">What This Portfolio Is</div>
+  <div class="section-title">Not a Record of Work. A <em>Case</em> for How Work Should Be Done.</div>
+  <div class="section-body">
+    Most portfolios are retrospective — they document what was built and present it favorably. This one is different. It was constructed around a central argument: that the organization built real, well-designed programs inside a system that wasn't yet ready to support them — and that the honest response to that finding is not to slow down, but to sequence correctly.
+    <br><br>
+    The portfolio uses real data from four real initiatives, real participant feedback (not reconstructed or approximated), real feedback scores including the ones that were uncomfortable, and real research to make a case that most L&D practitioners avoid making out loud: <strong>we don't know if what we built is working, and we need to be honest about why before we build more.</strong>
+  </div>
+
+  <!-- Six doc cards -->
+  <div class="doc-grid">
+    <div class="doc-card" style="--dc:var(--amber);">
+      <style>.doc-card:nth-child(1)::before{background:var(--amber);}</style>
+      <div class="dc-num">01</div>
+      <div class="dc-type" style="color:var(--amber);">Case Study</div>
+      <div class="dc-title">When Training Isn't the Answer</div>
+      <div class="dc-desc">The narrative framing. Establishes the central diagnostic question and introduces the cascade failure model across three organizational layers.</div>
+    </div>
+    <div class="doc-card">
+      <style>.doc-card:nth-child(2)::before{background:var(--teal);}</style>
+      <div class="dc-num">02</div>
+      <div class="dc-type" style="color:var(--teal);">Data Analysis</div>
+      <div class="dc-title">The Evaluation Gap</div>
+      <div class="dc-desc">The evidence layer. Four real datasets, Kirkpatrick gap visualization, the 29% manager walks signal, and the documented absence of Level 3 or 4 data anywhere.</div>
+    </div>
+    <div class="doc-card">
+      <style>.doc-card:nth-child(3)::before{background:var(--red);}</style>
+      <div class="dc-num">03</div>
+      <div class="dc-type" style="color:var(--red);">Strategic Rec.</div>
+      <div class="dc-title">Before We Go Further</div>
+      <div class="dc-desc">The uncomfortable recommendation. Research-backed case for why expansion before validation multiplies risk, not impact. Includes a five-factor risk table.</div>
+    </div>
+    <div class="doc-card">
+      <style>.doc-card:nth-child(4)::before{background:var(--plum);}</style>
+      <div class="dc-num">04</div>
+      <div class="dc-type" style="color:var(--plum);">Strategic Thinking</div>
+      <div class="dc-title">An Honest Evaluation</div>
+      <div class="dc-desc">The personal intellectual honesty layer. Named bias, both sides of the tension held simultaneously, the question chain, and three-layer ownership model.</div>
+    </div>
+    <div class="doc-card">
+      <style>.doc-card:nth-child(5)::before{background:var(--plum);}</style>
+      <div class="dc-num">05</div>
+      <div class="dc-type" style="color:var(--plum);">Calibration Plan</div>
+      <div class="dc-title">Before We Expand, We Calibrate</div>
+      <div class="dc-desc">The research-grounded plan. Root cause structure, measurement limitations named candidly, five-step sequence, 12-month timeline, stakeholder table.</div>
+    </div>
+    <div class="doc-card">
+      <style>.doc-card:nth-child(6)::before{background:var(--green);}</style>
+      <div class="dc-num">06</div>
+      <div class="dc-type" style="color:var(--green);">Action Plan</div>
+      <div class="dc-title">The Week-by-Week Playbook</div>
+      <div class="dc-desc">The operational translation. 12-month week-by-week plan with role tasks, KPIs, AI automation, reporting protocols, and phase gates.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── HOW IT WAS BUILT ── -->
+<div class="section" id="how">
+  <div class="section-eyebrow">The Construction Process</div>
+  <div class="section-title">How We Built It — <em>And Why in That Order</em></div>
+  <div class="section-body">
+    The portfolio was built in deliberate sequence, each layer dependent on the one before it. The order was not arbitrary — it follows the same diagnostic logic the portfolio itself argues for: understand before prescribing, name the real problem before designing the solution.
+  </div>
+
+  <div class="process-stack">
+
+    <div class="p-step">
+      <div class="p-step-left">
+        <div class="p-num" style="background:var(--amber);">1</div>
+        <div class="p-line"></div>
+      </div>
+      <div class="p-card">
+        <div class="p-card-tag" style="color:var(--amber);">Start with real data — not narrative</div>
+        <div class="p-card-title">The actual participant feedback came first</div>
+        <div class="p-card-body">Four spreadsheets of real survey data were analyzed before a single sentence of the portfolio was written. The data shaped the argument — not the other way around. This is the step most organizational storytelling skips: the data is gathered after the narrative is set, and it's used to support rather than inform. Here it ran the opposite direction. The 4.72 average satisfaction score, the Kirkpatrick gap, the 29% manager walks signal — these aren't illustrative numbers. They're the actual findings that drove every recommendation.</div>
+      </div>
+    </div>
+
+    <div class="p-step">
+      <div class="p-step-left">
+        <div class="p-num" style="background:var(--teal);">2</div>
+        <div class="p-line"></div>
+      </div>
+      <div class="p-card">
+        <div class="p-card-tag" style="color:var(--teal);">Apply root cause methodology to the data</div>
+        <div class="p-card-title">Gilbert's BEM was used as the diagnostic filter</div>
+        <div class="p-card-body">Thomas Gilbert's Behavioral Engineering Model provided the analytical scaffold. For every performance gap identified in the data, the same question was applied: <strong>is this a knowledge and skill deficit, or an environmental failure?</strong> Environmental factors — information, resources, incentives, accountability structures — dominate performance problems in the research (75–80% per Stolovitch &amp; Keeps, 2012; 94% per Deming). Applying this filter revealed that most of the gaps named in the data weren't training problems. They were structural and operational problems that training was being asked to solve.</div>
+      </div>
+    </div>
+
+    <div class="p-step">
+      <div class="p-step-left">
+        <div class="p-num" style="background:var(--red);">3</div>
+        <div class="p-line"></div>
+      </div>
+      <div class="p-card">
+        <div class="p-card-tag" style="color:var(--red);">Name the measurement problem explicitly</div>
+        <div class="p-card-title">The portfolio confronts its own data limitations</div>
+        <div class="p-card-body">Most program portfolios present their data favorably and avoid discussing what the data can't prove. This portfolio does the opposite: it names the self-report bias (Sitzmann et al., 2010: r=.14–.28 with actual learning), quantifies the Hawthorne effect (Srigley et al., 2014: 253% compliance inflation during observation), and documents the structural impossibility of demonstrating training ROI when field behavior tracking is done on erasable paper. These aren't limitations buried in footnotes — they're central arguments for why the current measurement approach is insufficient and what needs to change before expansion decisions can be made responsibly.</div>
+      </div>
+    </div>
+
+    <div class="p-step">
+      <div class="p-step-left">
+        <div class="p-num" style="background:var(--plum);">4</div>
+        <div class="p-line"></div>
+      </div>
+      <div class="p-card">
+        <div class="p-card-tag" style="color:var(--plum);">Map ownership — not just problems</div>
+        <div class="p-card-title">Three-layer model separates L&D's problems from operations' problems</div>
+        <div class="p-card-body">One of the most common failure modes in organizational effectiveness work is treating all problems as the same function's responsibility to solve. The portfolio builds a three-layer ownership model that explicitly separates structural problems (executive leadership owns), operational infrastructure problems (operations owns), and evaluation architecture problems (L&D owns). <strong>This distinction is not rhetorical — it determines who must be in the room and what decisions they need to make.</strong> Without this mapping, the calibration process collapses into an L&D initiative that operations ignores.</div>
+      </div>
+    </div>
+
+    <div class="p-step">
+      <div class="p-step-left">
+        <div class="p-num" style="background:var(--green);">5</div>
+        <div class="p-line"></div>
+      </div>
+      <div class="p-card">
+        <div class="p-card-tag" style="color:var(--green);">Ground recommendations in peer-reviewed research</div>
+        <div class="p-card-title">Every recommendation is traceable to evidence</div>
+        <div class="p-card-body">The research backbone was assembled from peer-reviewed literature and practitioner benchmarking data spanning 30 years: Baldwin &amp; Ford (1988), Blume et al. (2010), Kirkpatrick &amp; Kirkpatrick (2016), Weiner (2009), Prosci's 12-study benchmarking database, McKinsey's 1,034-executive transformation survey (2021), NIRN implementation timelines, Bersin's 1,000-company learning maturity research (2022), and ATD's 2025 benchmarking data. The intent was that no recommendation in the portfolio could be challenged as opinion — every significant claim has a citation, and every citation is chosen because it applies to large, multi-unit organizational contexts.</div>
+      </div>
+    </div>
+
+    <div class="p-step">
+      <div class="p-step-left">
+        <div class="p-num" style="background:var(--amber);">6</div>
+        <div class="p-line"></div>
+      </div>
+      <div class="p-card">
+        <div class="p-card-tag" style="color:var(--amber);">Translate research into operational sequence</div>
+        <div class="p-card-title">The week-by-week plan closes the gap between theory and execution</div>
+        <div class="p-card-body">Research without operational translation is analysis that never changes anything. The final step was converting the research-backed recommendations into a week-by-week plan with role-specific tasks, observable data targets, AI automation specifics, reporting protocols, and phase gates. The sequence follows NIRN implementation science (12–18 months minimum for functional measurement systems), Prosci's change management sequencing (Awareness and Desire before Knowledge and Ability), and Gilbert's BEM (environmental conditions before individual interventions). The plan is not prescriptive — it's a structured starting point designed to be refined against operational reality.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pull-quote">
+    <div class="pq-text">"The sequence in which an organization builds capability matters more than the quality of any individual program."</div>
+    <div class="pq-cite">The central argument of the portfolio — synthesized from Gilbert (1978), Kirkpatrick &amp; Kirkpatrick (2016), and Prosci (2023)</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── CONCEPTS TO DISCUSS ── -->
+<div class="section" id="concepts">
+  <div class="section-eyebrow">What Still Needs to Be Discussed</div>
+  <div class="section-title">Concepts the Portfolio <em>Names</em> But Hasn't Resolved</div>
+  <div class="section-body">
+    A portfolio that argues for honest evaluation needs to apply the same standard to itself. What follows are the concepts this body of work raises that are not yet resolved — the organizational and intellectual tensions that need a real conversation before the calibration plan can succeed.
+  </div>
+
+  <div class="concept-grid">
+
+    <div class="concept-card cc-red">
+      <div class="concept-urgency">Most Urgent</div>
+      <span class="cc-icon">🔍</span>
+      <div class="cc-tag">Root Cause</div>
+      <div class="cc-title">The Cascade Failure Has a Name — Does Leadership Accept It?</div>
+      <div class="cc-body">The portfolio identifies a cascade failure: VP of Ops and RDOs are not consistently modeling the standard the programs are designed to teach. This is documented and named. What isn't resolved is whether the people responsible for that layer have acknowledged it and accepted ownership of it. A portfolio can name a problem. Only a conversation — and then action — can resolve it. The calibration process cannot begin in earnest until the people at Layer 1 are willing to say: <em>we own this.</em></div>
+      <ul class="cc-questions">
+        <li>"What does consistent leadership modeling actually look like at the VP and RDO level — and what are we willing to commit to measuring?"</li>
+        <li>"If the answer to Gilbert's diagnostic question is 'yes, they could do it if their lives depended on it' — then what's the environmental factor we're not yet naming?"</li>
+      </ul>
+    </div>
+
+    <div class="concept-card cc-amber">
+      <div class="concept-urgency">Operational Decision</div>
+      <span class="cc-icon">📋</span>
+      <div class="cc-tag">Measurement Infrastructure</div>
+      <div class="cc-title">The Paper Tracking Problem Is an Operations Decision, Not an L&D Problem</div>
+      <div class="cc-body">The portfolio makes the case that field behavior tracked on erasable paper makes it structurally impossible to demonstrate training ROI. But this is an operations infrastructure decision — L&D can only surface it and make the business case. What hasn't been discussed is whether operations is willing to invest in the minimum viable digital tracking solution that closes this gap. Without that conversation happening and producing a formal decision, the measurement gap persists indefinitely regardless of what L&D builds.</div>
+      <ul class="cc-questions">
+        <li>"What would a minimum viable digital field behavior tracking system look like — and what's the real cost of not having one?"</li>
+        <li>"Who owns this decision, and what does 'yes' or 'no' actually require from them?"</li>
+      </ul>
+    </div>
+
+    <div class="concept-card cc-teal">
+      <div class="concept-urgency">Strategic Gap</div>
+      <span class="cc-icon">🔗</span>
+      <div class="cc-tag">Transfer Infrastructure</div>
+      <div class="cc-title">Supervisor Reinforcement Is a Program Component — Not an AD Responsibility</div>
+      <div class="cc-body">The transfer of training literature is unambiguous: supervisor support is the single strongest predictor of whether training changes behavior (Blume et al., 2010). The portfolio argues for supervisor briefing protocols, 30/60/90 follow-up, and behavioral observation tools. What hasn't been formally discussed is whether Area Directors understand their role as reinforcement agents — not recipients of development, but active infrastructure for everyone below them. This reframes their entire relationship to the program and requires an explicit conversation about what that asks of them.</div>
+      <ul class="cc-questions">
+        <li>"What does it actually mean for an AD to 'reinforce' what a GM learned? What's the specific behavior — and how is it different from a standard store visit?"</li>
+        <li>"If an AD's GMs show low behavioral transfer at 90 days, what does that tell us about the AD's coaching practice — and what do we do with that?"</li>
+      </ul>
+    </div>
+
+    <div class="concept-card cc-plum">
+      <div class="concept-urgency">Systemic Gap</div>
+      <span class="cc-icon">🎯</span>
+      <div class="cc-tag">RDO Development</div>
+      <div class="cc-title">The Highest-Leverage Investment We Haven't Made Is the RDO Layer</div>
+      <div class="cc-body">Regional Directors of Operations are identified in the portfolio as the linchpin of whether anything the Leadership Foundations Series teaches gets reinforced at scale. They currently have no structured development pathway. Prosci's benchmarking confirms active sponsorship from this layer is the primary predictor of change success. The portfolio names this gap — but building the RDO pathway requires executive sponsorship, budget, and a willingness to invest in the people who are already operating at capacity. None of that has been formally secured.</div>
+      <ul class="cc-questions">
+        <li>"What does an RDO need to be good at in order to develop ADs effectively — and is that different from what we've historically asked of them?"</li>
+        <li>"If RDOs received the same quality of development investment we've given GMs, what would change downstream?"</li>
+      </ul>
+    </div>
+
+    <div class="concept-card cc-amber">
+      <div class="concept-urgency">Organizational Readiness</div>
+      <span class="cc-icon">⚡</span>
+      <div class="cc-tag">Change Saturation</div>
+      <div class="cc-title">73% of Organizations Are at or Near Change Saturation — Are We?</div>
+      <div class="cc-body">Prosci's most recent benchmarking found 73% of organizations are at or near change saturation. Gartner data shows employees managing an average of ten simultaneous enterprise changes. The calibration plan adds to this load — even though it's designed to improve the system rather than expand it. What hasn't been discussed is an honest assessment of whether the field has the capacity to engage with a 12-month calibration process on top of their existing operational responsibilities. Calibration that burns people out proves nothing and builds cynicism.</div>
+      <ul class="cc-questions">
+        <li>"What else are RDOs and ADs being asked to absorb right now — and is there a realistic path to protecting some of their bandwidth for this work?"</li>
+        <li>"If we had to choose the three most important elements of the calibration plan given current capacity constraints, what would they be?"</li>
+      </ul>
+    </div>
+
+    <div class="concept-card cc-green">
+      <div class="concept-urgency">Long-Term Vision</div>
+      <span class="cc-icon">🌱</span>
+      <div class="cc-tag">Learning Ecosystem</div>
+      <div class="cc-title">The Goal After Calibration Is Not More Events — It's Embedded Development</div>
+      <div class="cc-body">Bersin's (2022) research identifies Level 4 organizations — those embedding development in the flow of work rather than delivering it as events — as 4.1x more likely to adapt to change and 29x more likely to develop employee potential. The portfolio builds toward this. But the concept of "learning in the flow of work" — coaching embedded in store visits, development that doesn't require pulling a GM out of a shift — is a fundamentally different operating model than what currently exists. That transition requires a shared vision conversation that this portfolio sets up but cannot complete.</div>
+      <ul class="cc-questions">
+        <li>"What would it look like if development happened in the field rather than in a classroom — and who would need to lead that shift?"</li>
+        <li>"What would we need to stop doing in order to build the space for embedded development to take root?"</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="research-box">
+    <div class="rb-label">The Research Pattern Behind All Six Concepts</div>
+    <div class="rb-body">Every concept listed above maps to the same root finding in the organizational change literature: <strong>initiatives that skip the alignment and diagnosis phase fail at approximately 50% higher rates than those that don't</strong> (Weiner, 2009). The portfolio doesn't exist to argue against expansion — it exists to argue for sequencing. Every concept above represents a gap between where the organization is now and where it needs to be before expansion becomes a force multiplier rather than a risk multiplier. The conversations these questions require are not obstacles to the plan. They are the plan.</div>
+    <div class="rb-cite">Weiner, B. J. (2009). A theory of organizational readiness for change. Implementation Science, 4, 67.</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── THE CONVERSATION ── -->
+<div class="section" id="conversation">
+  <div class="section-eyebrow">Where This Goes Next</div>
+  <div class="section-title">The Portfolio Opens a Conversation.<br><em>It Doesn't Finish One.</em></div>
+  <div class="section-body">
+    Six documents, fifteen-plus citations, twelve months of execution planning, and four datasets of real participant data — all of it is in service of a single conversation: are we willing to build the conditions for this work to succeed before we build more work?
+    <br><br>
+    That conversation has a specific shape. It's not a presentation. It's not a leadership review. It's a structured diagnostic session where the people who own each layer of the problem — executive leadership, operations, and L&D — sit in the same room with the same data and make explicit decisions about what they're each willing to do. The diagnostic framework in this portfolio was built to run that session. The calibration plan was built to execute what comes out of it.
+  </div>
+
+  <div class="dark-callout">
+    <div class="dc-label">What the Portfolio Is Designed to Produce</div>
+    <p>Not agreement. Not buy-in. Not a project kickoff. <strong>Shared ownership of a shared problem.</strong> That's the specific output the research says organizations skip and later regret. Mittal et al. (2023) found leaders self-report 82% alignment while actual alignment measures at 23%. McKinsey (2021) found 47% of transformation leaders would spend more time aligning their top team if they could do it over. The portfolio exists to close that gap before it costs the organization another 12 months of well-designed programs that can't prove they worked.</p>
+  </div>
+
+  <div class="section-body" style="margin-top:24px;">
+    The most important thing this process revealed — and the thing the portfolio was built to make visible — is that <strong>good program design and organizational readiness are not the same thing.</strong> The programs are good. The courses are well-designed, competency-mapped, and field-grounded. Participants say so consistently and in their own words. That's real. It's also incomplete. Good content delivered into an undiagnosed system produces activity. The work described in this portfolio is what turns activity into outcomes.
+  </div>
+
+  <div class="pull-quote" style="border-left-color:var(--teal);">
+    <div class="pq-text">"Calibration is not a delay. It is the intervention. The 1-10-100 rule applies: every dollar spent on diagnosis saves ten in mid-course correction and a hundred in wholesale program failure and organizational cynicism."</div>
+    <div class="pq-cite">Synthesized from Crosby (1979), McKinsey (2015), and 30 years of transfer of training research</div>
+  </div>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>
