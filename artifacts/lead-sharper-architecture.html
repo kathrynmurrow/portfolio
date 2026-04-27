@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lead Sharper · Strategic Architecture</title>
+<meta name="description" content="A production AI coaching companion architected for continuity, security, and per-user data isolation. Built across six iterations. Live demo and full case study landing May 6.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#152235;
+    --ink-soft:#2a3a4d;
+    --paper:#f7f4ee;
+    --white:#fffdfa;
+    --line:#e5ddd0;
+    --muted:#6d7783;
+    --gold:#c9b79c;
+    --gold-deep:#af9a7c;
+    --sage:#a9b8a5;
+    --sage-warm:#9aae93;
+    --olive:#6f7e6d;
+    --slate:#70839b;
+    --rose:#c89494;
+    --shadow:0 18px 45px rgba(21,34,53,.08);
+    --shadow-soft:0 8px 24px rgba(21,34,53,.05);
+    --radius-xl:28px;
+    --radius-lg:20px;
+    --radius-md:18px;
+    --max:1200px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  a{color:inherit;text-decoration:none}
+
+  .shell{
+    min-height:100vh;
+    background:
+      radial-gradient(circle at top right, rgba(154,174,147,.18), transparent 22%),
+      linear-gradient(180deg, #fbf9f5 0%, var(--paper) 100%);
+  }
+  .wrap{width:min(var(--max), calc(100vw - 48px));margin:0 auto}
+
+  /* ── TOPBAR ───────────────────────────────────────────────── */
+  .topbar{padding:22px 0}
+  .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{font-family:'DM Serif Display',serif;font-size:1.15rem;letter-spacing:.02em}
+  .nav{display:flex;gap:22px;color:var(--muted);font-size:.92rem}
+  .nav a:hover{color:var(--ink)}
+  .back-link{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.82rem;font-weight:600;letter-spacing:.04em;color:var(--muted);
+    transition:color .15s
+  }
+  .back-link:hover{color:var(--ink)}
+
+  /* ── HERO ─────────────────────────────────────────────────── */
+  .hero{padding:34px 0 30px}
+  .hero-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:32px;align-items:start}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:24px}}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--sage-warm);margin-bottom:22px
+  }
+  .eyebrow::before{content:"";width:38px;height:1px;background:var(--sage-warm)}
+
+  h1{
+    margin:0 0 18px;font-family:'DM Serif Display',serif;
+    font-size:clamp(2.4rem, 4.5vw, 3.8rem);line-height:1.04;letter-spacing:-.025em;
+    max-width:18ch;font-weight:400
+  }
+  .hero-sub{margin:0;max-width:60ch;color:var(--ink-soft);font-size:1.05rem;line-height:1.85}
+
+  .status-strip{
+    margin-top:28px;display:inline-flex;align-items:center;gap:14px;
+    padding:10px 16px;background:rgba(255,253,250,.7);
+    border:1px solid var(--line);border-radius:999px;
+    font-size:.82rem;color:var(--ink-soft);
+  }
+  .status-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--sage-warm);
+    box-shadow:0 0 0 4px rgba(154,174,147,.18);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:.5;transform:scale(.85)}
+    50%{opacity:1;transform:scale(1.1)}
+  }
+  .status-strip strong{color:var(--ink);font-weight:600;margin-right:4px}
+
+  .hero-actions{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;
+    border-radius:999px;border:1px solid var(--line);font-size:.82rem;font-weight:600;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:var(--shadow-soft)}
+  .btn-secondary{background:rgba(255,255,255,.55)}
+  .btn-disabled{background:rgba(255,255,255,.4);color:var(--muted);cursor:not-allowed;border-color:var(--line)}
+  .btn-disabled:hover{transform:none}
+
+  /* ── HERO PANEL (snapshot mock) ───────────────────────────── */
+  .hero-panel{
+    background:rgba(255,255,255,.78);border:1px solid rgba(229,221,208,.95);
+    border-radius:var(--radius-xl);box-shadow:var(--shadow);padding:22px;backdrop-filter:blur(10px);
+  }
+  .panel-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--sage-warm);font-weight:700;margin-bottom:14px}
+
+  .mock-app{
+    border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;
+    background:#fffdfa;
+  }
+  .mock-bar{
+    padding:8px 12px;border-bottom:1px solid var(--line);
+    display:flex;gap:5px;align-items:center;background:#fbf8f2
+  }
+  .mock-bar span{width:9px;height:9px;border-radius:50%;background:var(--line)}
+  .mock-bar small{margin-left:auto;font-size:.65rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+
+  .mock-modes{
+    display:flex;gap:14px;padding:10px 14px;border-bottom:1px solid var(--line);
+    font-size:.7rem;color:var(--muted);letter-spacing:.04em;overflow:hidden
+  }
+  .mock-modes span{padding-bottom:4px}
+  .mock-modes .active{color:var(--sage-warm);border-bottom:2px solid var(--sage-warm);font-weight:600}
+
+  .mock-conv{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+
+  .mock-msg{
+    font-size:.78rem;line-height:1.55;padding:9px 12px;border-radius:10px;
+  }
+  .mock-msg.user{background:#f4ebe1;color:var(--ink)}
+  .mock-msg.coach{background:#f2f5f0;color:var(--ink-soft);border:1px solid #e3ebe0}
+  .mock-meta{font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:-4px}
+
+  .mock-mem{
+    margin-top:8px;padding:10px 12px;background:#fbf8f2;border:1px solid var(--line);
+    border-radius:10px;
+  }
+  .mock-mem-h{font-size:.6rem;color:var(--sage-warm);letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:4px}
+  .mock-mem-i{font-size:.72rem;color:var(--ink-soft);line-height:1.5}
+
+  /* ── SCOPE STRIP ──────────────────────────────────────────── */
+  .scope-strip{
+    margin:8px 0 24px;padding:24px 28px;
+    background:rgba(255,253,250,.75);border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px
+  }
+  @media(max-width:760px){.scope-strip{grid-template-columns:repeat(2,1fr);gap:18px}}
+  .scope-num{font-family:'DM Serif Display',serif;font-size:1.85rem;line-height:1;color:var(--ink);margin-bottom:6px}
+  .scope-label{font-size:.75rem;color:var(--muted);letter-spacing:.04em;line-height:1.45}
+
+  /* ── SECTIONS ─────────────────────────────────────────────── */
+  .section{padding:34px 0}
+  .section-kicker{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--sage-warm);margin-bottom:8px}
+  h2{margin:0;font-family:'DM Serif Display',serif;font-size:clamp(1.85rem, 2.6vw, 2.4rem);line-height:1.1;font-weight:400;letter-spacing:-.02em;max-width:24ch}
+  .section-intro{max-width:68ch;color:var(--muted);font-size:1rem;line-height:1.85;margin:14px 0 0}
+
+  /* ── DECISION GRID (replaces flagship-grid for inner use) ── */
+  .decision-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:26px}
+  @media(max-width:760px){.decision-grid{grid-template-columns:1fr}}
+
+  .decision-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-soft);overflow:hidden;
+  }
+  .decision-band{height:4px;background:var(--card-accent,var(--sage-warm))}
+  .decision-body{padding:22px 24px}
+  .decision-num{font-size:.7rem;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+  .decision-title{font-family:'DM Serif Display',serif;font-size:1.3rem;line-height:1.2;letter-spacing:-.01em;font-weight:400;margin:0 0 6px}
+  .decision-vs{font-size:.78rem;color:var(--muted);font-style:italic;margin-bottom:10px}
+  .decision-card p{margin:0;font-size:.92rem;line-height:1.7;color:var(--ink-soft)}
+
+  /* ── TIMELINE ─────────────────────────────────────────────── */
+  .timeline{
+    margin-top:28px;
+    background:rgba(255,253,250,.7);border:1px solid var(--line);
+    border-radius:var(--radius-lg);padding:28px;
+  }
+  .timeline-row{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .timeline-row:last-child{border-bottom:none}
+  .timeline-row:first-child{padding-top:0}
+  @media(max-width:600px){.timeline-row{grid-template-columns:1fr;gap:6px}}
+
+  .timeline-version{
+    font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--gold-deep);
+    line-height:1.2;
+  }
+  .timeline-version small{display:block;font-family:'Inter',sans-serif;font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:3px;font-weight:600}
+  .timeline-body strong{display:block;font-size:.95rem;color:var(--ink);margin-bottom:3px;font-weight:600}
+  .timeline-body p{margin:0;font-size:.88rem;line-height:1.65;color:var(--muted)}
+  .timeline-version.current{color:var(--sage-warm)}
+
+  /* ── STACK GRID ───────────────────────────────────────────── */
+  .stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+  @media(max-width:760px){.stack-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.stack-grid{grid-template-columns:1fr}}
+  .stack-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius-md);
+    padding:16px 18px;
+  }
+  .stack-card small{display:block;font-size:.65rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:5px;font-weight:600}
+  .stack-card strong{display:block;font-family:'DM Serif Display',serif;font-size:1.05rem;line-height:1.25;margin-bottom:4px;font-weight:400}
+  .stack-card span{display:block;color:var(--muted);font-size:.82rem;line-height:1.55}
+
+  /* ── PRINCIPLE CALLOUT ────────────────────────────────────── */
+  .principle{
+    margin:28px 0;padding:26px 30px;
+    background:rgba(255,253,250,.85);border:1px solid var(--line);
+    border-left:4px solid var(--sage-warm);border-radius:0 var(--radius-md) var(--radius-md) 0;
+  }
+  .principle-label{
+    font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;
+    color:var(--sage-warm);font-weight:700;margin-bottom:8px
+  }
+  .principle p{
+    margin:0;font-family:'DM Serif Display',serif;font-size:1.25rem;line-height:1.45;
+    color:var(--ink);font-weight:400;font-style:italic;letter-spacing:-.01em;
+  }
+
+  /* ── METHOD BAND (matches portfolio) ──────────────────────── */
+  .method-band{
+    margin-top:24px;padding:30px;background:rgba(255,253,250,.7);
+    border:1px solid var(--line);border-radius:var(--radius-lg)
+  }
+  .method-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  @media(max-width:760px){.method-grid{grid-template-columns:repeat(2,1fr)}}
+  .method-item small{font-size:.7rem;color:var(--gold-deep);font-weight:700;letter-spacing:.16em;display:block;margin-bottom:6px}
+  .method-item strong{display:block;font-family:'DM Serif Display',serif;font-size:1.1rem;line-height:1.25;margin-bottom:6px;font-weight:400}
+  .method-item p{margin:0;font-size:.85rem;color:var(--muted);line-height:1.6}
+
+  /* ── COMING SOON CTA ──────────────────────────────────────── */
+  .cta-band{
+    margin-top:48px;padding:48px 32px;background:var(--ink);
+    color:rgba(247,244,238,.92);border-radius:var(--radius-xl);text-align:center
+  }
+  .cta-band .section-kicker{color:var(--gold);margin-bottom:6px}
+  .cta-band h2{color:#fff;margin:0 auto 14px}
+  .cta-band p{max-width:54ch;margin:0 auto 26px;color:rgba(247,244,238,.72);font-size:1rem;line-height:1.75}
+  .cta-band .btn-primary{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+  .cta-band .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,.25)}
+  .cta-band .btn-secondary:hover{background:rgba(255,255,255,.06)}
+
+  footer{
+    padding:32px 0;border-top:1px solid var(--line);margin-top:32px;
+    text-align:center;font-size:.85rem;color:var(--muted)
+  }
+
+  /* ── SCROLL FADE ──────────────────────────────────────────── */
+  .fade{opacity:0;transform:translateY(10px);transition:opacity .7s ease,transform .7s ease}
+  .fade.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- TOPBAR -->
+  <div class="wrap topbar">
+    <div class="topbar-inner">
+      <a href="preview__6_.html" class="brand">Kathryn Murrow</a>
+      <nav class="nav">
+        <a href="preview__6_.html#flagship">Strategic Architecture</a>
+        <a href="preview__6_.html#method">Method</a>
+        <a href="preview__6_.html#supporting">Execution Infrastructure</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="wrap hero">
+    <a href="preview__6_.html#flagship" class="back-link">← Back to portfolio</a>
+
+    <div class="hero-grid" style="margin-top:18px">
+      <div>
+        <div class="eyebrow">AI Coaching Architecture · Flagship</div>
+        <h1>Lead Sharper: a coach that remembers you across devices, sessions, and modes.</h1>
+        <p class="hero-sub">A production AI coaching companion architected around continuity, security, and per-user data isolation. Six iterations from prompt-only prototype to a deployed system with magic-link authentication, cloud-synced memory, multi-mode coaching stances, and a serverless API layer that keeps the API key off the client. The premise: the value of AI coaching lives in the connective tissue between sessions, not in the intelligence of any single response.</p>
+
+        <div class="status-strip">
+          <span class="status-dot"></span>
+          <span><strong>In active development.</strong> Live demo and full case study landing May 6.</span>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="preview__6_.html#flagship">Back to portfolio</a>
+          <span class="btn btn-disabled" title="Live demo lands May 6">Demo · Coming May 6</span>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <div class="panel-label">Interface preview</div>
+        <div class="mock-app">
+          <div class="mock-bar">
+            <span></span><span></span><span></span>
+            <small>Lead Sharper</small>
+          </div>
+          <div class="mock-modes">
+            <span class="active">Reflection</span>
+            <span>Decision</span>
+            <span>Systems</span>
+            <span>Pivot</span>
+          </div>
+          <div class="mock-conv">
+            <div class="mock-meta">You · 9:42 AM</div>
+            <div class="mock-msg user">I keep saying I want to pivot but I haven't moved on it in three weeks.</div>
+            <div class="mock-meta">Coach · 9:42 AM</div>
+            <div class="mock-msg coach">Three weeks of no movement is a signal, not a setback. What did you do this week that <em>looked</em> like progress but wasn't? Often the answer is "I researched more." Research feels productive. It also defers the irreversible move.</div>
+            <div class="mock-mem">
+              <div class="mock-mem-h">Memory · pattern</div>
+              <div class="mock-mem-i">Researches when avoiding action — surfaced from prior session</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SCOPE STRIP -->
+  <section class="wrap" style="padding:8px 0 32px">
+    <div class="scope-strip">
+      <div>
+        <div class="scope-num">6</div>
+        <div class="scope-label">Iterations from prompt to production</div>
+      </div>
+      <div>
+        <div class="scope-num">9</div>
+        <div class="scope-label">Coaching modes, each with its own system prompt and stance</div>
+      </div>
+      <div>
+        <div class="scope-num">4</div>
+        <div class="scope-label">Reliability fixes that mattered more than any new feature</div>
+      </div>
+      <div>
+        <div class="scope-num">0</div>
+        <div class="scope-label">API keys ever exposed in the browser, by architecture</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="wrap section fade">
+    <div class="section-kicker">The strategic problem</div>
+    <h2>Most AI tools forget the user the moment the session closes.</h2>
+    <p class="section-intro">
+      The dominant pattern in AI coaching tools today treats every conversation as a fresh start — re-explain context, re-establish trust, re-introduce the patterns that matter. The result is a tool that feels intelligent in the moment and disposable across moments. Lead Sharper was built around the inverse premise: continuity is the thing that turns AI coaching from a parlor trick into infrastructure. Sessions that build on each other. Memory that persists across devices. Coaching modes that hold their stance over time. The architecture decisions are downstream of that single strategic claim.
+    </p>
+  </section>
+
+  <!-- ARCHITECTURE DECISIONS -->
+  <section class="wrap section fade">
+    <div class="section-kicker">Architecture decisions</div>
+    <h2>Six decisions that shaped the build.</h2>
+    <p class="section-intro">
+      Each version forced a tradeoff. Most weren't about what to build — they were about what to refuse to build, what to defer, and what to architect for now versus later. These are the six that mattered most.
+    </p>
+
+    <div class="decision-grid">
+      <article class="decision-card">
+        <div class="decision-band" style="--card-accent:var(--gold-deep)"></div>
+        <div class="decision-body">
+          <div class="decision-num">01 / Security boundary</div>
+          <h3 class="decision-title">Serverless proxy, not direct API call</h3>
+          <div class="decision-vs">Speed of build vs. shareability</div>
+          <p>Putting an API key in the browser is acceptable for a single-user prototype and unacceptable the moment the tool might be shared. Moved the inference call behind a Vercel function before adding authentication. The proxy then became the right place for retry logic, input validation, and rate limiting — all of which would be needed anyway.</p>
+        </div>
+      </article>
+
+      <article class="decision-card">
+        <div class="decision-band" style="--card-accent:var(--olive)"></div>
+        <div class="decision-body">
+          <div class="decision-num">02 / Persistence layer</div>
+          <h3 class="decision-title">Cloud database with row-level security</h3>
+          <div class="decision-vs">Zero-config simplicity vs. real continuity</div>
+          <p>Browser storage is fast and free, but locked to one device. Real continuity required a backend, which required authentication, which required per-user data isolation. Chose Supabase over Firebase because row-level security policies let the database itself enforce isolation — no application bug can leak data between users.</p>
+        </div>
+      </article>
+
+      <article class="decision-card">
+        <div class="decision-band" style="--card-accent:var(--sage)"></div>
+        <div class="decision-body">
+          <div class="decision-num">03 / Authentication</div>
+          <h3 class="decision-title">Magic-link auth, not OAuth</h3>
+          <div class="decision-vs">Familiar pattern vs. lower friction</div>
+          <p>OAuth is what most SaaS products do. It's also four extra clicks, an account dependency, and a configuration burden. Magic-link via email is one input, one click, signed in. For a tool meant to feel like a private journal, friction at the front door shapes the entire experience.</p>
+        </div>
+      </article>
+
+      <article class="decision-card">
+        <div class="decision-band" style="--card-accent:var(--slate)"></div>
+        <div class="decision-body">
+          <div class="decision-num">04 / Memory architecture</div>
+          <h3 class="decision-title">Relevance-scored injection, not full context dump</h3>
+          <div class="decision-vs">Maximum recall vs. signal-to-noise</div>
+          <p>Sending all memories every turn works at five entries and breaks at fifty. Built a lightweight scorer combining recency, type weight, keyword overlap, and mode affinity that surfaces the top twenty most relevant memories per turn. No embeddings, no vector database — just enough infrastructure to keep context lean as conversations accumulate.</p>
+        </div>
+      </article>
+
+      <article class="decision-card">
+        <div class="decision-band" style="--card-accent:var(--rose)"></div>
+        <div class="decision-body">
+          <div class="decision-num">05 / Audience scope</div>
+          <h3 class="decision-title">Two products, one codebase — not one tool for everyone</h3>
+          <div class="decision-vs">Reach vs. fit</div>
+          <p>The temptation was a single coaching tool flexible enough for any user. The honest answer was that calibration for a senior practitioner actively underserves an earlier-career user, and vice versa. Architected a persona layer beneath the mode layer so the same UI and infrastructure can serve distinct audiences with different system prompts — deferred building the second persona until the first was battle-tested.</p>
+        </div>
+      </article>
+
+      <article class="decision-card">
+        <div class="decision-band" style="--card-accent:var(--sage-warm)"></div>
+        <div class="decision-body">
+          <div class="decision-num">06 / Reliability stance</div>
+          <h3 class="decision-title">Four small fixes, not a rebuild</h3>
+          <div class="decision-vs">Polish vs. pragmatism</div>
+          <p>The instinct when something feels off is to start over. Most of the time, what's actually broken is mundane: token limits set too low, no retry on transient errors, memory architecture that worked at five entries but breaks at fifty. A focused reliability pass — proxy plus retries plus token budget plus memory filter — fixed more than any redesign would have.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PRINCIPLE -->
+  <section class="wrap" style="padding:0">
+    <div class="principle">
+      <div class="principle-label">The principle underneath the build</div>
+      <p>If you're building an AI tool for "anyone," you're building for no one. Pick the user explicitly. Build for them with full specificity. Earn the right to expand by being indispensable to that user — not by being mediocre for everyone.</p>
+    </div>
+  </section>
+
+  <!-- THE STACK -->
+  <section class="wrap section fade">
+    <div class="section-kicker">The stack</div>
+    <h2>Boring infrastructure, on purpose.</h2>
+    <p class="section-intro">
+      Production AI fails not because the model is wrong but because the surrounding system is fragile. Every choice below was made to push complexity down the stack so the surface — prompts, modes, memory — could stay sharp.
+    </p>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <small>Inference</small>
+        <strong>Anthropic Claude (Sonnet 4)</strong>
+        <span>Strong instruction-following on multi-mode prompts. Generous context window for memory-heavy turns.</span>
+      </div>
+      <div class="stack-card">
+        <small>API gateway</small>
+        <strong>Vercel serverless functions</strong>
+        <span>Hides the API key, handles retries with exponential backoff, validates input size, logs errors.</span>
+      </div>
+      <div class="stack-card">
+        <small>Auth + database</small>
+        <strong>Supabase (Postgres + magic link)</strong>
+        <span>Row-level security policies make per-user data isolation a database guarantee, not an application concern.</span>
+      </div>
+      <div class="stack-card">
+        <small>Frontend</small>
+        <strong>Vanilla HTML, no framework</strong>
+        <span>Single-file app loads in 60ms with no build step. Complexity belongs in the prompts and data layer, not the UI.</span>
+      </div>
+      <div class="stack-card">
+        <small>State persistence</small>
+        <strong>Auto-save on every turn</strong>
+        <span>Drafts persist to local storage, conversations to Postgres optimistically, theme preference per user.</span>
+      </div>
+      <div class="stack-card">
+        <small>Memory architecture</small>
+        <strong>Relevance-scored injection</strong>
+        <span>Keyword overlap + recency + type weight + mode affinity. No embeddings — just enough to keep context lean.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILD TIMELINE -->
+  <section class="wrap section fade">
+    <div class="section-kicker">Build process</div>
+    <h2>From prompt to production in six iterations.</h2>
+    <p class="section-intro">
+      Each version solved a specific failure mode of the previous one. The pattern wasn't planned in advance — it emerged from real usage. Each iteration was a single concentrated decision, not a feature dump.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-row">
+        <div class="timeline-version">v1<small>Prompt-only</small></div>
+        <div class="timeline-body">
+          <strong>The crude prototype</strong>
+          <p>A single system prompt pasted into Claude's web interface. Worked beautifully in the moment. Forgot everything between sessions. Confirmed the coaching value; revealed continuity as the missing piece.</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-version">v2<small>Browser app</small></div>
+        <div class="timeline-body">
+          <strong>HTML wrapper with browser storage</strong>
+          <p>A custom interface with multi-mode coaching stances and IndexedDB-backed memory. Solved within-browser continuity. Locked the user to one device and exposed the API key in the client.</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-version">v3<small>Hardened</small></div>
+        <div class="timeline-body">
+          <strong>Serverless proxy + reliability pass</strong>
+          <p>Moved the API call behind a Vercel function. Added retry logic, input validation, raised the token budget. The tool could now be shared without exposing the key — and stopped truncating responses mid-thought.</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-version">v4<small>Memory layer</small></div>
+        <div class="timeline-body">
+          <strong>Relevance-scored memory injection</strong>
+          <p>Replaced "send all memories every turn" with a scoring function. Conversations got noticeably sharper as memory volume grew rather than degrading. Deferred vector search as premature for the data scale.</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-version">v5<small>Cloud sync</small></div>
+        <div class="timeline-body">
+          <strong>Supabase backend with row-level security</strong>
+          <p>Migrated persistence from browser to Postgres. Added magic-link authentication. Memory and conversations now follow the user across every device they sign in from. The architecture commitment to multi-user isolation was built in from this point forward.</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-version current">v6<small>Current · in deployment</small></div>
+        <div class="timeline-body">
+          <strong>Persona-layer architecture, sanitized public demo</strong>
+          <p>Added a persona layer beneath the mode layer to enable distinct audiences without sharing context. Built a sanitized public version alongside the personal one, both running on shared infrastructure with database-enforced isolation. Deploying through May 6.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section class="wrap section fade">
+    <div class="section-kicker">Operating method</div>
+    <h2>How I approached the build.</h2>
+    <p class="section-intro">
+      The same diagnostic logic that shapes my enterprise work shaped this one — clarify the real problem, define the right structure around it, and build the conditions required for execution to hold.
+    </p>
+
+    <div class="method-band">
+      <div class="method-grid">
+        <div class="method-item">
+          <small>01</small>
+          <strong>Diagnose</strong>
+          <p>Identified continuity, not intelligence, as the missing piece in current AI coaching.</p>
+        </div>
+        <div class="method-item">
+          <small>02</small>
+          <strong>Govern</strong>
+          <p>Established data isolation, security, and key handling as architectural non-negotiables.</p>
+        </div>
+        <div class="method-item">
+          <small>03</small>
+          <strong>Enable</strong>
+          <p>Built the infrastructure (proxy, auth, memory) that makes the coaching surface possible.</p>
+        </div>
+        <div class="method-item">
+          <small>04</small>
+          <strong>Iterate</strong>
+          <p>Six versions, each solving a single concrete failure mode surfaced by real usage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="wrap">
+    <div class="cta-band">
+      <div class="section-kicker">What's next</div>
+      <h2>Live demo and full case study land May 6.</h2>
+      <p>The architecture is built and the deployment is in motion. By May 6, three things go live: a sanitized public demo anyone can sign in to and try, a long-form case study with the full reasoning behind each decision, and a companion piece written for peers evaluating their own builds.</p>
+      <div class="hero-actions" style="justify-content:center">
+        <a class="btn btn-primary" href="preview__6_.html#flagship">Back to portfolio</a>
+        <a class="btn btn-secondary" href="mailto:hello@example.com">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p style="margin:0">Kathryn Murrow · Strategic Architecture Portfolio · 2026</p>
+  </footer>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
