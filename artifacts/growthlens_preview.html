@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowthLens | AI Development Intelligence System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#f8f4ec',
+            cream2: '#faf7f0',
+            ink: '#020617',
+            navy: '#0f172a'
+          },
+          boxShadow: {
+            soft: '0 18px 50px rgba(15, 23, 42, 0.10)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #f8f4ec; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .nav-btn.active { background: #ffffff; color: #0f172a; }
+    .nav-btn:not(.active):hover { background: rgba(255,255,255,.1); color: #fff; }
+    .person-card.active { border-color: #0f172a; box-shadow: 0 10px 30px rgba(15,23,42,.12); }
+    .fade-in { animation: fadeIn .35s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .pill { display:inline-flex; align-items:center; border-radius:999px; border:1px solid; padding:.25rem .65rem; font-size:.72rem; font-weight:800; }
+    .pill-green { background:#ecfdf5; color:#047857; border-color:#a7f3d0; }
+    .pill-amber { background:#fffbeb; color:#b45309; border-color:#fde68a; }
+    .pill-blue { background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe; }
+    .pill-violet { background:#f5f3ff; color:#6d28d9; border-color:#ddd6fe; }
+    .pill-gray { background:#fafaf9; color:#57534e; border-color:#e7e5e4; }
+    .card { border:1px solid #e2e8f0; background:rgba(255,255,255,.92); border-radius:1.5rem; box-shadow:0 1px 2px rgba(15,23,42,.04); }
+    .section-icon { display:flex; align-items:center; justify-content:center; width:2rem; height:2rem; border-radius:1rem; background:#0f172a; color:white; flex:none; }
+    .mini-icon { width:1.25rem; height:1.25rem; }
+  </style>
+</head>
+<body class="text-slate-950 antialiased">
+  <div class="min-h-screen lg:flex">
+    <aside class="lg:fixed lg:inset-y-0 lg:left-0 lg:w-72 bg-slate-950 text-white p-5 z-30">
+      <div class="mb-8 flex items-center gap-3">
+        <div class="rounded-2xl bg-white p-2 text-slate-950">✨</div>
+        <div>
+          <p class="text-lg font-black tracking-tight">GrowthLens</p>
+          <p class="text-xs text-slate-300">Development Intelligence</p>
+        </div>
+      </div>
+      <nav class="grid gap-2" id="nav">
+        <button data-tab="overview" class="nav-btn active flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-semibold text-slate-300 transition">📊 Executive Overview</button>
+        <button data-tab="person" class="nav-btn flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-semibold text-slate-300 transition">👤 Person Dashboard</button>
+        <button data-tab="log" class="nav-btn flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-semibold text-slate-300 transition">➕ Add Coaching Log</button>
+        <button data-tab="assessment" class="nav-btn flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-semibold text-slate-300 transition">📋 Assessments</button>
+        <button data-tab="career" class="nav-btn flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-semibold text-slate-300 transition">🎯 Career Ladder</button>
+        <button data-tab="governance" class="nav-btn flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-semibold text-slate-300 transition">🛡️ Governance</button>
+      </nav>
+      <div class="mt-8 rounded-3xl border border-white/10 bg-white/5 p-4">
+        <div class="mb-2 flex items-center gap-2 text-sm font-bold">🔒 Development-first</div>
+        <p class="text-xs leading-5 text-slate-300">Private prep stays private until a manager chooses to convert it into a shared development note.</p>
+      </div>
+    </aside>
+
+    <main class="min-w-0 flex-1 lg:ml-72">
+      <header class="sticky top-0 z-20 border-b border-slate-200 bg-cream/90 px-4 py-4 backdrop-blur lg:px-8">
+        <div class="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">AI-enabled growth story system</p>
+            <h1 class="mt-1 text-2xl font-black tracking-tight text-slate-950 lg:text-3xl">From coaching moments to growth stories</h1>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2 shadow-sm">
+              <span class="text-slate-400">🔎</span>
+              <span class="text-sm text-slate-500">Search people, evidence, supports...</span>
+            </div>
+            <select id="personSelect" class="rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm outline-none">
+              <option value="0">Maria Lopez</option>
+              <option value="1">Jordan Smith</option>
+              <option value="2">Avery Chen</option>
+            </select>
+          </div>
+        </div>
+      </header>
+
+      <div class="p-4 lg:p-8">
+        <section id="overview" class="tab-panel active fade-in space-y-6">
+          <div class="rounded-[2rem] bg-slate-950 p-6 text-white shadow-soft lg:p-8">
+            <div class="grid gap-6 lg:grid-cols-[1.6fr_1fr] lg:items-center">
+              <div>
+                <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-slate-200">✨ Prototype Concept</div>
+                <h2 class="text-3xl font-black tracking-tight lg:text-5xl">Development intelligence, not documentation theater.</h2>
+                <p class="mt-4 max-w-3xl text-base leading-7 text-slate-300">GrowthLens helps leaders diagnose what a person needs, provide the right support, track what happened next, and build a fair, evidence-based story of growth over time.</p>
+                <div class="mt-6 flex flex-wrap gap-3">
+                  <button onclick="showTab('person')" class="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950 hover:bg-slate-100">View person dashboard →</button>
+                  <button onclick="showTab('log')" class="rounded-2xl border border-white/20 bg-white/10 px-5 py-3 font-bold text-white hover:bg-white/20">Add coaching log</button>
+                </div>
+              </div>
+              <div class="rounded-[1.75rem] border border-white/10 bg-white/5 p-5">
+                <p class="mb-3 text-sm font-bold text-slate-200">Core question</p>
+                <p class="text-2xl font-black leading-tight tracking-tight">“Before we judge performance, have we provided the right support and collected the right evidence?”</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-3">
+            <div class="card p-5"><p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Most common development need</p><p class="mt-2 text-2xl font-black">Confidence / Readiness</p><p class="mt-3 text-sm leading-6 text-slate-600">Leaders are most often supporting people who understand the work but hesitate to act independently.</p></div>
+            <div class="card p-5"><p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Support gap detected</p><p class="mt-2 text-2xl font-black">Practice follow-up</p><p class="mt-3 text-sm leading-6 text-slate-600">Verbal coaching is used often, but only 58% of logs include a scheduled practice opportunity.</p></div>
+            <div class="card p-5"><p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Objectivity health</p><p class="mt-2 text-2xl font-black">Moderate</p><p class="mt-3 text-sm leading-6 text-slate-600">Most entries include observed behavior, but employee perspective is missing in 2 active cases.</p></div>
+          </div>
+
+          <div class="card p-5 lg:p-6">
+            <div class="mb-4 flex items-start gap-3"><div class="section-icon">👥</div><div><h2 class="text-lg font-bold">People actively being supported</h2><p class="mt-1 text-sm leading-6 text-slate-600">A manager-level view of current development stories, follow-ups, support quality, and readiness signals.</p></div></div>
+            <div class="overflow-hidden rounded-2xl border border-slate-200">
+              <table class="w-full min-w-[760px] border-collapse text-left text-sm">
+                <thead class="bg-slate-50 text-xs uppercase tracking-[0.12em] text-slate-500"><tr><th class="p-4">Person</th><th class="p-4">Focus</th><th class="p-4">Status</th><th class="p-4">Readiness</th><th class="p-4">Last Update</th></tr></thead>
+                <tbody id="peopleTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="person" class="tab-panel fade-in space-y-6">
+          <div class="card overflow-hidden rounded-[2rem]">
+            <div class="bg-slate-950 p-6 text-white lg:p-8">
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                <div>
+                  <div class="mb-3 flex flex-wrap items-center gap-2"><span id="personStatusPill"></span><span id="personLocation" class="rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-xs font-semibold text-slate-200"></span></div>
+                  <h2 id="personName" class="text-4xl font-black tracking-tight"></h2>
+                  <p id="personMeta" class="mt-2 text-slate-300"></p>
+                </div>
+                <div class="rounded-3xl border border-white/10 bg-white/5 p-4"><p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-300">Progress Trend</p><p id="personTrend" class="mt-1 text-3xl font-black text-white"></p></div>
+              </div>
+            </div>
+            <div class="p-6 lg:p-8">
+              <div class="mb-4 flex items-start gap-3"><div class="section-icon">📖</div><div><h2 class="text-lg font-bold">AI Growth Story</h2><p class="mt-1 text-sm leading-6 text-slate-600">A living, evidence-based narrative of where the person started, what support was provided, what changed, and what should happen next.</p></div></div>
+              <p id="personSummary" class="rounded-3xl border border-slate-200 bg-cream2 p-5 text-base leading-8 text-slate-700"></p>
+            </div>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-4" id="personMetrics"></div>
+
+          <div class="grid gap-6 xl:grid-cols-[1.35fr_1fr]">
+            <div class="card p-5 lg:p-6">
+              <div class="mb-4 flex items-start gap-3"><div class="section-icon">📈</div><div><h2 class="text-lg font-bold">Support Timeline</h2><p class="mt-1 text-sm leading-6 text-slate-600">Tracks what was observed, how it was diagnosed, what support was provided, and what happened next.</p></div></div>
+              <div class="space-y-4" id="timeline"></div>
+            </div>
+            <div class="card p-5 lg:p-6">
+              <div class="mb-4 flex items-start gap-3"><div class="section-icon">🛡️</div><div><h2 class="text-lg font-bold">Support Transparency Ledger</h2><p class="mt-1 text-sm leading-6 text-slate-600">Before escalation, the tool checks whether the person actually received the right support.</p></div></div>
+              <div class="space-y-3" id="supportLedger"></div>
+            </div>
+          </div>
+
+          <div class="card p-5 lg:p-6">
+            <div class="mb-4 flex items-start gap-3"><div class="section-icon">✨</div><div><h2 class="text-lg font-bold">Next Best Action</h2><p class="mt-1 text-sm leading-6 text-slate-600">AI-generated recommendation based on current evidence, support history, and career ladder expectations.</p></div></div>
+            <div class="rounded-3xl bg-slate-950 p-5 text-white"><p id="nextStep" class="text-lg font-bold"></p><p class="mt-3 text-sm leading-6 text-slate-300">Recommendation confidence: <strong class="text-white">Moderate to High.</strong> Evidence includes repeated observations, support history, and current progress. Confidence would increase with one more high-volume observation and an employee reflection after the stretch assignment.</p></div>
+          </div>
+        </section>
+
+        <section id="log" class="tab-panel fade-in space-y-6">
+          <div class="card rounded-[2rem] p-6 lg:p-8">
+            <div class="mb-4 flex items-start gap-3"><div class="section-icon">➕</div><div><h2 class="text-lg font-bold">Add Coaching / Development Log</h2><p class="mt-1 text-sm leading-6 text-slate-600">Guided intake that separates facts from assumptions before generating a support plan.</p></div></div>
+            <div class="grid gap-5 lg:grid-cols-2">
+              <label class="space-y-2"><span class="text-sm font-bold text-slate-700">What happened?</span><textarea class="min-h-28 w-full rounded-2xl border border-slate-200 bg-cream2 p-4 text-sm outline-none focus:ring-2 focus:ring-slate-900" placeholder="Describe the situation in plain language..."></textarea></label>
+              <label class="space-y-2"><span class="text-sm font-bold text-slate-700">What was the role expectation?</span><textarea class="min-h-28 w-full rounded-2xl border border-slate-200 bg-cream2 p-4 text-sm outline-none focus:ring-2 focus:ring-slate-900" placeholder="What should someone in this role be able to do?"></textarea></label>
+              <label class="space-y-2"><span class="text-sm font-bold text-slate-700">Observed behavior</span><textarea class="min-h-24 w-full rounded-2xl border border-slate-200 bg-white p-4 text-sm outline-none focus:ring-2 focus:ring-slate-900" placeholder="What did you actually see or hear?"></textarea></label>
+              <label class="space-y-2"><span class="text-sm font-bold text-slate-700">Impact</span><textarea class="min-h-24 w-full rounded-2xl border border-slate-200 bg-white p-4 text-sm outline-none focus:ring-2 focus:ring-slate-900" placeholder="What was the impact on guests, team, operations, safety, speed, or readiness?"></textarea></label>
+            </div>
+          </div>
+
+          <div class="grid gap-6 xl:grid-cols-2">
+            <div class="card p-5 lg:p-6">
+              <div class="mb-4 flex items-start gap-3"><div class="section-icon">🛡️</div><div><h2 class="text-lg font-bold">Objectivity Check</h2><p class="mt-1 text-sm leading-6 text-slate-600">Name possible interpretation risks so the AI can help keep the recommendation fair and evidence-based.</p></div></div>
+              <div class="grid gap-3 md:grid-cols-2" id="biasButtons"></div>
+              <div class="mt-4 rounded-3xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900"><strong>AI calibration prompt:</strong> Because you named an objectivity risk, the tool will separate repeated evidence from emotional interpretation and ask what evidence might contradict your current read.</div>
+            </div>
+            <div class="card p-5 lg:p-6">
+              <div class="mb-4 flex items-start gap-3"><div class="section-icon">🔒</div><div><h2 class="text-lg font-bold">Visibility Setting</h2><p class="mt-1 text-sm leading-6 text-slate-600">Private reflection should not automatically become an employee record.</p></div></div>
+              <div class="space-y-3" id="visibilityButtons"></div>
+            </div>
+          </div>
+
+          <div class="card p-5 lg:p-6">
+            <div class="mb-4 flex items-start gap-3"><div class="section-icon">✨</div><div><h2 class="text-lg font-bold">AI Output Preview</h2><p class="mt-1 text-sm leading-6 text-slate-600">This is the type of support plan the backend would generate from the submitted log.</p></div></div>
+            <div class="grid gap-4 lg:grid-cols-3">
+              <div class="rounded-3xl bg-cream2 p-5"><p class="font-black">Likely diagnosis</p><p class="mt-2 text-sm leading-6 text-slate-600">Confidence + readiness gap. Not enough evidence yet for accountability.</p></div>
+              <div class="rounded-3xl bg-cream2 p-5"><p class="font-black">Recommended support</p><p class="mt-2 text-sm leading-6 text-slate-600">Clarify expectation, model behavior, assign one low-risk practice rep, then debrief.</p></div>
+              <div class="rounded-3xl bg-cream2 p-5"><p class="font-black">Missing evidence</p><p class="mt-2 text-sm leading-6 text-slate-600">Employee perspective and one additional observation under the same role standard.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="assessment" class="tab-panel fade-in space-y-6">
+          <div class="card p-5 lg:p-6">
+            <div class="mb-4 flex items-start gap-3"><div class="section-icon">📋</div><div><h2 class="text-lg font-bold">Self + Supervisor Assessment Comparison</h2><p class="mt-1 text-sm leading-6 text-slate-600">Side-by-side calibration to uncover confidence gaps, perception gaps, and evidence gaps.</p></div></div>
+            <div class="overflow-hidden rounded-2xl border border-slate-200">
+              <table class="w-full min-w-[760px] border-collapse text-left text-sm"><thead class="bg-slate-50 text-xs uppercase tracking-[0.12em] text-slate-500"><tr><th class="p-4">Competency</th><th class="p-4">Self</th><th class="p-4">Supervisor</th><th class="p-4">AI Insight</th></tr></thead><tbody id="assessmentTable"></tbody></table>
+            </div>
+          </div>
+          <div class="card p-5 lg:p-6">
+            <div class="mb-4 flex items-start gap-3"><div class="section-icon">💡</div><div><h2 class="text-lg font-bold">AI Assessment Insight</h2><p class="mt-1 text-sm leading-6 text-slate-600">The tool turns rating gaps into practical next steps, not awkward score debates.</p></div></div>
+            <div class="rounded-3xl bg-slate-950 p-5 text-white"><p class="text-lg font-bold">Peak decision-making shows the largest calibration gap.</p><p class="mt-3 text-sm leading-6 text-slate-300">Maria rates herself higher than the supervisor in peak decision-making. This may indicate that the expectation for “ready” is not yet shared. Recommended next step: review examples of emerging, developing, ready, and advanced deployment behavior, then agree on what evidence would demonstrate readiness.</p></div>
+          </div>
+        </section>
+
+        <section id="career" class="tab-panel fade-in space-y-6">
+          <div class="card p-5 lg:p-6">
+            <div class="mb-4 flex items-start gap-3"><div class="section-icon">🎯</div><div><h2 class="text-lg font-bold">Career Ladder Readiness Tracker</h2><p class="mt-1 text-sm leading-6 text-slate-600">Evidence is mapped to next-role behaviors. Missing evidence is labeled as no evidence yet, not not capable.</p></div></div>
+            <div class="grid gap-4 md:grid-cols-4">
+              <div class="card bg-cream2 p-5"><p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Manager observation</p><p class="mt-2 text-2xl font-black">3 shift notes</p></div>
+              <div class="card bg-cream2 p-5"><p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Employee reflection</p><p class="mt-2 text-2xl font-black">2 entries</p></div>
+              <div class="card bg-cream2 p-5"><p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">KPI signal</p><p class="mt-2 text-2xl font-black">Speed improved</p></div>
+              <div class="card bg-cream2 p-5"><p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Career evidence</p><p class="mt-2 text-2xl font-black">4 items mapped</p></div>
+            </div>
+            <div class="mt-6 overflow-hidden rounded-2xl border border-slate-200">
+              <table class="w-full min-w-[760px] border-collapse text-left text-sm"><thead class="bg-slate-50 text-xs uppercase tracking-[0.12em] text-slate-500"><tr><th class="p-4">AGM Readiness Behavior</th><th class="p-4">Evidence</th><th class="p-4">Status</th></tr></thead><tbody id="careerTable"></tbody></table>
+            </div>
+          </div>
+        </section>
+
+        <section id="governance" class="tab-panel fade-in space-y-6">
+          <div class="rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-sm lg:p-8">
+            <div class="mb-4 flex items-start gap-3"><div class="section-icon bg-white text-slate-950">🛡️</div><div><h2 class="text-lg font-bold">Governance + Guardrails</h2><p class="mt-1 text-sm leading-6 text-slate-300">The tool is only trustworthy if it protects people while improving support quality.</p></div></div>
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3" id="rulesGrid"></div>
+          </div>
+          <div class="card p-5 lg:p-6">
+            <div class="mb-4 flex items-start gap-3"><div class="section-icon">💼</div><div><h2 class="text-lg font-bold">Recommended Technical Stack</h2><p class="mt-1 text-sm leading-6 text-slate-600">A scalable version can be built with a modern React frontend, Supabase backend, and OpenAI-powered intelligence chains.</p></div></div>
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3" id="stackGrid"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const people = [
+      { name:'Maria Lopez', role:'Shift Leader', timeInRole:'8 months', targetRole:'Assistant Manager', location:'Store 864', status:'Improving', focus:'Peak deployment + decision-making', trend:'+18%', primaryGap:'Confidence / Readiness', supportQuality:'Strong', readiness:'Emerging toward Ready', lastUpdated:'Apr. 25', summary:'Maria’s growth has focused on building confidence and consistency in shift leadership during peak periods. Early observations showed strong operational knowledge, but hesitation when making deployment decisions without manager direction. Recent logs show she is beginning to make proactive team-positioning decisions with less prompting.', nextStep:'Assign one high-volume deployment stretch opportunity and debrief within 10 minutes after peak.' },
+      { name:'Jordan Smith', role:'Assistant Manager', timeInRole:'1 year, 3 months', targetRole:'General Manager', location:'Store 989', status:'Support in Progress', focus:'Follow-through after coaching conversations', trend:'+6%', primaryGap:'Clarity / Accountability Threshold', supportQuality:'Moderate', readiness:'Developing', lastUpdated:'Apr. 22', summary:'Jordan has shown strong guest focus and team rapport, but recent development work is focused on follow-through after coaching conversations. The current evidence supports a follow-through gap, but the tool recommends clarifying written expectations before moving into accountability.', nextStep:'Create a written follow-up checklist and review completion after the next two coaching cycles.' },
+      { name:'Avery Chen', role:'Certified Trainer', timeInRole:'5 months', targetRole:'Training Manager', location:'Training Team', status:'Ready for Stretch', focus:'Coaching others through behavior-based feedback', trend:'+24%', primaryGap:'Stretch / Readiness', supportQuality:'Strong', readiness:'Ready for Stretch', lastUpdated:'Apr. 24', summary:'Avery consistently demonstrates strong technical knowledge and has started coaching others with clearer behavior-based feedback. Current evidence suggests readiness for a stretch assignment focused on leading a peer coaching cycle with light manager support.', nextStep:'Assign Avery to lead one peer coaching observation and generate a reflection summary afterward.' }
+    ];
+
+    const supportTimeline = [
+      { date:'Mar. 3', observation:'Waited for manager direction during lunch rush before moving team members.', diagnosis:'Confidence / Readiness', support:'Clarified what strong deployment leadership looks like and modeled one decision.', impact:'Maria could explain the expected decision process after debrief.', next:'Practice one deployment decision next shift.' },
+      { date:'Mar. 8', observation:'Made one team-positioning decision with prompting.', diagnosis:'Skill + Confidence', support:'Guided practice and immediate feedback after peak.', impact:'Reduced hesitation when prompted; still waited for confirmation.', next:'Make one move before manager prompt.' },
+      { date:'Mar. 15', observation:'Made two proactive deployment decisions during moderate volume.', diagnosis:'Confidence Improving', support:'Reinforcement, debrief, and stretch goal.', impact:'Less manager intervention needed during rush setup.', next:'Test during higher volume window.' }
+    ];
+
+    const supportLedger = [
+      { item:'Expectation clarified', status:'Complete', detail:'Role expectation reviewed on Mar. 3' },
+      { item:'Behavior modeled', status:'Complete', detail:'Manager demonstrated deployment decision' },
+      { item:'Guided practice', status:'Complete', detail:'Three observed lunch shifts' },
+      { item:'Employee perspective', status:'Complete', detail:'Maria shared hesitation around making the wrong call' },
+      { item:'System barriers explored', status:'Partial', detail:'Staffing issue noted but not fully resolved' },
+      { item:'Follow-up completed', status:'Complete', detail:'Debriefs completed after each observed shift' }
+    ];
+
+    const assessmentRows = [
+      { competency:'Role clarity', self:4, supervisor:4, insight:'Aligned' },
+      { competency:'Peak decision-making', self:4, supervisor:2, insight:'Calibration gap' },
+      { competency:'Coaching others', self:3, supervisor:2, insight:'Needs evidence' },
+      { competency:'Confidence under pressure', self:2, supervisor:3, insight:'Possible confidence gap' },
+      { competency:'Promotion readiness', self:4, supervisor:3, insight:'Emerging evidence' }
+    ];
+
+    const readinessRows = [
+      { item:'Runs shift independently', evidence:'3 observed moderate-volume shifts with reduced prompting', status:'Developing' },
+      { item:'Manages deployment', evidence:'4 observed team-positioning decisions', status:'Ready' },
+      { item:'Coaches team members', evidence:'1 observed example; more evidence needed', status:'Emerging' },
+      { item:'Handles guest recovery', evidence:'No evidence yet', status:'No evidence yet' },
+      { item:'Understands business impact', evidence:'Needs labor/speed connection practice', status:'Developing' }
+    ];
+
+    const rules = [
+      ['Development-first','The tool supports growth, coaching, and readiness. It is not a hidden punishment file.'],
+      ['Private prep stays private','Managers choose whether to delete, keep private, or convert notes into shared development plans.'],
+      ['AI does not decide','AI recommendations support human judgment and should never be the sole basis for discipline, termination, or promotion denial.'],
+      ['Evidence over labels','The tool flags vague language and pushes users toward observed behavior, impact, and role standards.'],
+      ['Employee voice matters','The system prompts leaders to capture employee perspective before finalizing a diagnosis.'],
+      ['Bias is calibrated, not punished','Objectivity checks help leaders name interpretation risks without shame and improve decision quality.']
+    ];
+
+    const stack = [
+      ['Frontend','Next.js / React + Tailwind dashboard UI'],
+      ['Backend','Supabase Postgres with row-level security'],
+      ['Auth','Supabase Auth now; Azure AD / Okta later'],
+      ['AI','OpenAI API with structured prompt chains'],
+      ['Storage','Supabase Storage for evidence attachments'],
+      ['Hosting','Vercel for fast deployment'],
+      ['Vector Search','Supabase pgvector for logs and evidence retrieval'],
+      ['Analytics','Embedded dashboards or Power BI later'],
+      ['Audit','Access logs, prompt versions, visibility history']
+    ];
+
+    function pill(status) {
+      const map = {
+        'Improving':'pill-green', 'Support in Progress':'pill-amber', 'Ready for Stretch':'pill-blue',
+        'Complete':'pill-green', 'Partial':'pill-amber', 'Ready':'pill-green', 'Developing':'pill-blue',
+        'Emerging':'pill-violet', 'No evidence yet':'pill-gray', 'Aligned':'pill-green',
+        'Calibration gap':'pill-amber', 'Needs evidence':'pill-gray', 'Possible confidence gap':'pill-blue', 'Emerging evidence':'pill-violet'
+      };
+      return `<span class="pill ${map[status] || 'pill-gray'}">${status}</span>`;
+    }
+
+    function showTab(tab) {
+      document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+      document.getElementById(tab).classList.add('active');
+      document.getElementById(tab).classList.remove('fade-in'); void document.getElementById(tab).offsetWidth; document.getElementById(tab).classList.add('fade-in');
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tab));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updatePerson(index) {
+      const p = people[index];
+      document.getElementById('personName').textContent = p.name;
+      document.getElementById('personMeta').textContent = `${p.role} • ${p.timeInRole} in role • Target: ${p.targetRole}`;
+      document.getElementById('personLocation').textContent = p.location;
+      document.getElementById('personStatusPill').innerHTML = pill(p.status);
+      document.getElementById('personTrend').textContent = p.trend;
+      document.getElementById('personSummary').textContent = p.summary;
+      document.getElementById('nextStep').textContent = p.nextStep;
+      const metrics = [
+        ['Primary Gap', p.primaryGap], ['Support Quality', p.supportQuality], ['Readiness', p.readiness], ['Next Step', 'Assigned']
+      ];
+      document.getElementById('personMetrics').innerHTML = metrics.map(([a,b]) => `<div class="card p-5"><p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">${a}</p><p class="mt-2 text-xl font-black">${b}</p></div>`).join('');
+    }
+
+    function render() {
+      document.getElementById('peopleTable').innerHTML = people.map((p,i) => `<tr class="${i%2===0?'bg-white':'bg-cream2'}"><td class="p-4"><div class="font-bold text-slate-950">${p.name}</div><div class="text-xs text-slate-500">${p.role} • ${p.timeInRole}</div></td><td class="p-4 text-slate-700">${p.focus}</td><td class="p-4">${pill(p.status)}</td><td class="p-4 text-slate-700">${p.readiness}</td><td class="p-4 text-slate-500">${p.lastUpdated}</td></tr>`).join('');
+      document.getElementById('timeline').innerHTML = supportTimeline.map(item => `<div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm"><div class="mb-2 flex flex-wrap items-center justify-between gap-2"><span class="rounded-full bg-slate-950 px-3 py-1 text-xs font-bold text-white">${item.date}</span>${pill(item.diagnosis.includes('Improving')?'Improving':'Developing')}</div><p class="text-sm font-bold text-slate-950">Observation</p><p class="mt-1 text-sm leading-6 text-slate-600">${item.observation}</p><div class="mt-3 grid gap-3 md:grid-cols-3"><div class="rounded-2xl bg-cream2 p-3"><p class="text-xs font-bold uppercase text-slate-500">Diagnosis</p><p class="mt-1 text-sm font-semibold text-slate-800">${item.diagnosis}</p></div><div class="rounded-2xl bg-cream2 p-3"><p class="text-xs font-bold uppercase text-slate-500">Support</p><p class="mt-1 text-sm font-semibold text-slate-800">${item.support}</p></div><div class="rounded-2xl bg-cream2 p-3"><p class="text-xs font-bold uppercase text-slate-500">Next</p><p class="mt-1 text-sm font-semibold text-slate-800">${item.next}</p></div></div></div>`).join('');
+      document.getElementById('supportLedger').innerHTML = supportLedger.map(item => `<div class="flex gap-3 rounded-2xl border border-slate-200 bg-cream2 p-3"><div class="mt-0.5">${item.status==='Complete'?'✅':'⚠️'}</div><div><div class="flex flex-wrap items-center gap-2"><p class="text-sm font-bold text-slate-950">${item.item}</p>${pill(item.status)}</div><p class="mt-1 text-xs leading-5 text-slate-600">${item.detail}</p></div></div>`).join('');
+      document.getElementById('assessmentTable').innerHTML = assessmentRows.map((row,i) => `<tr class="${i%2===0?'bg-white':'bg-cream2'}"><td class="p-4 font-bold">${row.competency}</td><td class="p-4"><span class="text-lg font-black">${row.self}</span><span class="text-slate-400"> / 5</span></td><td class="p-4"><span class="text-lg font-black">${row.supervisor}</span><span class="text-slate-400"> / 5</span></td><td class="p-4">${pill(row.insight)}</td></tr>`).join('');
+      document.getElementById('careerTable').innerHTML = readinessRows.map((row,i) => `<tr class="${i%2===0?'bg-white':'bg-cream2'}"><td class="p-4 font-bold">${row.item}</td><td class="p-4 text-slate-700">${row.evidence}</td><td class="p-4">${pill(row.status)}</td></tr>`).join('');
+      document.getElementById('rulesGrid').innerHTML = rules.map(([title,text]) => `<div class="rounded-3xl border border-white/10 bg-white/5 p-5"><p class="font-black text-white">${title}</p><p class="mt-2 text-sm leading-6 text-slate-300">${text}</p></div>`).join('');
+      document.getElementById('stackGrid').innerHTML = stack.map(([title,text]) => `<div class="rounded-3xl border border-slate-200 bg-cream2 p-5"><p class="font-black">${title}</p><p class="mt-2 text-sm leading-6 text-slate-600">${text}</p></div>`).join('');
+      const biases = ['Frustration fatigue','Recency bias','Confirmation bias','Halo effect','Horns effect','Leniency bias','Severity bias','Attribution bias'];
+      document.getElementById('biasButtons').innerHTML = biases.map((b,i) => `<button class="bias-btn rounded-2xl border p-3 text-left text-sm font-semibold transition ${i===0?'border-slate-950 bg-slate-950 text-white':'border-slate-200 bg-cream2 text-slate-700 hover:border-slate-400'}">${b}</button>`).join('');
+      document.querySelectorAll('.bias-btn').forEach(btn => btn.addEventListener('click', () => { document.querySelectorAll('.bias-btn').forEach(b=>b.className='bias-btn rounded-2xl border p-3 text-left text-sm font-semibold transition border-slate-200 bg-cream2 text-slate-700 hover:border-slate-400'); btn.className='bias-btn rounded-2xl border p-3 text-left text-sm font-semibold transition border-slate-950 bg-slate-950 text-white'; }));
+      const visibility = [['Private manager prep','Draft thoughts, reflection, and conversation rehearsal.'],['Shared development plan','Goals, support, next steps, and success evidence.'],['Formal documentation','Escalation or talent-review evidence with appropriate review.']];
+      document.getElementById('visibilityButtons').innerHTML = visibility.map(([title,text],i) => `<button class="vis-btn flex w-full items-start gap-3 rounded-2xl border p-4 text-left transition ${i===0?'border-slate-950 bg-slate-950 text-white':'border-slate-200 bg-cream2 text-slate-700 hover:border-slate-400'}"><span>✅</span><span><span class="block text-sm font-bold">${title}</span><span class="mt-1 block text-xs leading-5 ${i===0?'text-slate-300':'text-slate-500'}">${text}</span></span></button>`).join('');
+      document.querySelectorAll('.vis-btn').forEach(btn => btn.addEventListener('click', () => { document.querySelectorAll('.vis-btn').forEach(b=>b.className='vis-btn flex w-full items-start gap-3 rounded-2xl border p-4 text-left transition border-slate-200 bg-cream2 text-slate-700 hover:border-slate-400'); btn.className='vis-btn flex w-full items-start gap-3 rounded-2xl border p-4 text-left transition border-slate-950 bg-slate-950 text-white'; }));
+      updatePerson(0);
+    }
+
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.tab)));
+    document.getElementById('personSelect').addEventListener('change', e => updatePerson(Number(e.target.value)));
+    render();
+  </script>
+</body>
+</html>
