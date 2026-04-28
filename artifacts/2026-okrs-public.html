@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 OKR Execution Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F1C2E;
+    --gold: #FFC72C;
+    --cream: #F8F5F0;
+    --card-white: #FFFFFF;
+    --teal: #2A9D8F;
+    --rose: #E76F51;
+    --muted: #6B7280;
+    --border: #E5E0D8;
+    --navy-mid: #1E3150;
+    --navy-light: #2D4A70;
+    --gold-light: #FFF3C4;
+    --text: #1A1A2E;
+    --text-light: #4A5568;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ─── HEADER ─── */
+  .site-header {
+    background: var(--navy);
+    border-bottom: 1px solid rgba(255,199,44,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 2rem;
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    gap: 1.5rem;
+  }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+  .header-logo {
+    width: 28px;
+    height: 28px;
+    background: var(--gold);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .header-logo svg { width: 16px; height: 16px; }
+  .header-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.85rem;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+  }
+  .header-title span { color: var(--gold); }
+  .header-nav {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .header-nav a {
+    color: rgba(248,245,240,0.6);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .header-nav a:hover { color: var(--gold); background: rgba(255,199,44,0.08); }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a2d4a 100%);
+    border-bottom: 2px solid rgba(255,199,44,0.3);
+    padding: 4rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,199,44,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1200px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+  .hero h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 0.9rem;
+    color: rgba(248,245,240,0.6);
+    margin-bottom: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .hero-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 99px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.75rem;
+    color: rgba(248,245,240,0.75);
+  }
+  .hero-pill .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .hero-pill .dot.teal { background: var(--teal); }
+  .hero-pill .dot.rose { background: var(--rose); }
+
+  /* ─── MAIN LAYOUT ─── */
+  .main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+  .section-gap { margin-bottom: 4rem; }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(15,28,46,0.12);
+  }
+  .section-header h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .section-header h2 em { font-style: italic; color: var(--gold); filter: brightness(0.85); }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(15,28,46,0.4);
+  }
+
+  /* ─── GLANCE GRID ─── */
+  .glance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(15,28,46,0.1);
+    border: 1px solid rgba(15,28,46,0.12);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .glance-cell {
+    background: #FFFFFF;
+    padding: 1.25rem 1.5rem;
+  }
+  .glance-cell .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(15,28,46,0.4);
+    margin-bottom: 0.4rem;
+  }
+  .glance-cell .value {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .glance-cell .value.gold { color: #B8860B; }
+  .glance-cell .sub {
+    font-size: 0.72rem;
+    color: rgba(15,28,46,0.45);
+    margin-top: 0.2rem;
+  }
+
+  /* ─── CALLOUT BOX ─── */
+  .callout {
+    background: rgba(255,199,44,0.08);
+    border: 1px solid rgba(184,134,11,0.2);
+    border-left: 3px solid #B8860B;
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .callout h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: #8B6914;
+    margin-bottom: 0.6rem;
+  }
+  .callout h3 em { font-style: italic; }
+  .callout p { font-size: 0.875rem; color: rgba(15,28,46,0.75); line-height: 1.7; }
+  .callout .warning-note {
+    background: rgba(231,111,81,0.07);
+    border: 1px solid rgba(231,111,81,0.2);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    color: rgba(15,28,46,0.7);
+    margin-top: 0.75rem;
+  }
+  .callout .warning-note strong { color: var(--rose); }
+
+  /* ─── OKR CARDS ─── */
+  .okr-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .okr-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(15,28,46,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15,28,46,0.06);
+  }
+  .okr-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .okr-card-header:hover { background: rgba(15,28,46,0.02); }
+  .okr-badge {
+    flex-shrink: 0;
+    width: 42px; height: 42px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .badge-ref { background: rgba(107,114,128,0.2); color: #9CA3AF; border: 1px solid rgba(107,114,128,0.3); }
+  .badge-anchor { background: rgba(255,199,44,0.15); color: var(--gold); border: 1px solid rgba(255,199,44,0.3); }
+  .badge-people { background: rgba(42,157,143,0.15); color: var(--teal); border: 1px solid rgba(42,157,143,0.3); }
+  .badge-perf { background: rgba(99,102,241,0.15); color: #818CF8; border: 1px solid rgba(99,102,241,0.3); }
+  .badge-profit { background: rgba(249,115,22,0.15); color: #FB923C; border: 1px solid rgba(249,115,22,0.3); }
+  .badge-personal { background: rgba(236,72,153,0.15); color: #F472B6; border: 1px solid rgba(236,72,153,0.3); }
+  .badge-deferred { background: rgba(107,114,128,0.1); color: #6B7280; border: 1px solid rgba(107,114,128,0.2); }
+
+  .okr-card-title-area { flex: 1; }
+  .okr-card-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(15,28,46,0.35);
+    margin-bottom: 0.2rem;
+  }
+  .okr-card-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .okr-card-sub {
+    font-size: 0.78rem;
+    color: rgba(15,28,46,0.5);
+    margin-top: 0.3rem;
+  }
+  .okr-toggle {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: rgba(15,28,46,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    margin-top: 4px;
+  }
+  .okr-toggle svg { width: 10px; height: 10px; fill: rgba(15,28,46,0.4); }
+  .okr-card.open .okr-toggle { transform: rotate(180deg); }
+  .okr-body {
+    display: none;
+    padding: 0 1.5rem 1.5rem;
+    border-top: 1px solid rgba(15,28,46,0.07);
+  }
+  .okr-card.open .okr-body { display: block; }
+  .okr-desc {
+    font-size: 0.85rem;
+    color: rgba(15,28,46,0.65);
+    line-height: 1.75;
+    margin: 1rem 0 1.25rem;
+  }
+  .okr-desc strong { color: var(--navy); }
+
+  /* KR list */
+  .kr-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .kr-item {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.6rem 0.9rem;
+    background: rgba(15,28,46,0.03);
+    border: 1px solid rgba(15,28,46,0.07);
+    border-radius: 5px;
+    font-size: 0.82rem;
+  }
+  .kr-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: rgba(15,28,46,0.35);
+    letter-spacing: 0.05em;
+  }
+  .kr-text { color: rgba(15,28,46,0.75); line-height: 1.5; }
+  .kr-text strong { color: var(--navy); font-weight: 500; }
+  .kr-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(15,28,46,0.35);
+    white-space: nowrap;
+    text-align: right;
+  }
+  .kr-date.hard { color: var(--rose); }
+  .kr-date.conf { color: #8B6914; }
+  .kr-date.done {
+    background: rgba(42,157,143,0.1);
+    color: var(--teal);
+    border: 1px solid rgba(42,157,143,0.2);
+    border-radius: 3px;
+    padding: 1px 5px;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline-section {
+    background: #FFFFFF;
+    border: 1px solid rgba(15,28,46,0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    box-shadow: 0 1px 3px rgba(15,28,46,0.06);
+  }
+  .timeline-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-header h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+  }
+  .timeline-legend {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-left: auto;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.7rem;
+    color: rgba(15,28,46,0.5);
+  }
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .legend-dot.anchor { background: var(--gold); }
+  .legend-dot.people { background: var(--teal); }
+  .legend-dot.perf { background: #818CF8; }
+  .legend-dot.profit { background: #FB923C; }
+  .legend-dot.personal { background: #F472B6; }
+  .legend-dot.conf { background: var(--rose); }
+
+  .timeline-table { min-width: 900px; }
+  .tl-months {
+    display: grid;
+    grid-template-columns: 200px repeat(12, 1fr);
+    gap: 0;
+    margin-bottom: 0.5rem;
+  }
+  .tl-month {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(15,28,46,0.35);
+    text-align: center;
+    padding: 0.25rem 0;
+  }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 200px repeat(12, 1fr);
+    gap: 0;
+    margin-bottom: 2px;
+    align-items: center;
+    min-height: 28px;
+  }
+  .tl-label {
+    font-size: 0.72rem;
+    color: rgba(15,28,46,0.6);
+    padding-right: 0.75rem;
+    line-height: 1.3;
+  }
+  .tl-label .okr-ref {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(15,28,46,0.3);
+    display: block;
+  }
+  .tl-bar-area {
+    position: relative;
+    grid-column: span 1;
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .tl-full { grid-column: 2 / -1; display: grid; grid-template-columns: repeat(12, 1fr); gap: 0; }
+  .tl-bar {
+    background: rgba(255,199,44,0.25);
+    border-radius: 3px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    font-size: 0.58rem;
+    color: rgba(248,245,240,0.5);
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 2px 1px;
+  }
+  .tl-bar.gold { background: rgba(255,199,44,0.3); color: var(--gold); font-family: 'DM Mono', monospace; }
+  .tl-bar.teal { background: rgba(42,157,143,0.25); color: var(--teal); }
+  .tl-bar.purple { background: rgba(99,102,241,0.25); color: #818CF8; }
+  .tl-bar.orange { background: rgba(249,115,22,0.2); color: #FB923C; }
+  .tl-bar.pink { background: rgba(236,72,153,0.2); color: #F472B6; }
+  .tl-bar.muted { background: rgba(107,114,128,0.15); }
+  .tl-star {
+    background: var(--rose) !important;
+    color: white !important;
+    font-weight: 600;
+    padding: 0 6px;
+    border-radius: 3px;
+    height: 20px;
+    display: flex; align-items: center;
+    font-size: 0.65rem;
+    white-space: nowrap;
+  }
+  .tl-spacer { background: transparent; }
+
+  /* ─── HOURS ─── */
+  .hours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .hours-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(15,28,46,0.1);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 1px 3px rgba(15,28,46,0.06);
+  }
+  .hours-card h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+  .hours-card .hours-period {
+    font-size: 0.72rem;
+    color: rgba(15,28,46,0.4);
+    margin-bottom: 1rem;
+    font-family: 'DM Mono', monospace;
+  }
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(15,28,46,0.06);
+    font-size: 0.8rem;
+  }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-row .okr-name { color: rgba(15,28,46,0.7); }
+  .hours-row .hrs {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: #8B6914;
+    opacity: 0.9;
+  }
+  .hours-total {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(184,134,11,0.2);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .hours-total .total-label { color: rgba(15,28,46,0.6); }
+  .hours-total .total-val { color: #8B6914; font-family: 'DM Mono', monospace; }
+
+  /* ─── QUARTERLY SECTIONS ─── */
+  .quarter-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    align-items: start;
+    background: #FFFFFF;
+    border: 1px solid rgba(15,28,46,0.1);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 1px 3px rgba(15,28,46,0.06);
+  }
+  .quarter-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba(184,134,11,0.1);
+    color: #8B6914;
+    border: 1px solid rgba(184,134,11,0.25);
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+  .quarter-badge.q3 { background: rgba(231,111,81,0.08); color: var(--rose); border-color: rgba(231,111,81,0.2); }
+  .quarter-badge.q4 { background: rgba(42,157,143,0.08); color: var(--teal); border-color: rgba(42,157,143,0.2); }
+  .quarter-badge.q1x { background: rgba(99,102,241,0.08); color: #4F46E5; border-color: rgba(99,102,241,0.2); }
+  .quarter-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+  .quarter-theme {
+    font-size: 0.82rem;
+    color: rgba(15,28,46,0.6);
+    line-height: 1.6;
+  }
+
+  .week-accordion { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+  .week-item {
+    background: #FFFFFF;
+    border: 1px solid rgba(15,28,46,0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(15,28,46,0.04);
+  }
+  .week-header {
+    display: grid;
+    grid-template-columns: 50px auto 1fr auto;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .week-header:hover { background: rgba(15,28,46,0.02); }
+  .week-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(15,28,46,0.3);
+    letter-spacing: 0.05em;
+  }
+  .week-milestone {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(231,111,81,0.15);
+    color: var(--rose);
+    border: 1px solid rgba(231,111,81,0.25);
+    border-radius: 3px;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.62rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  .week-milestone.gold-ms {
+    background: rgba(255,199,44,0.12);
+    color: var(--gold);
+    border-color: rgba(255,199,44,0.25);
+  }
+  .week-title {
+    font-size: 0.83rem;
+    color: rgba(15,28,46,0.85);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .week-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(15,28,46,0.3);
+    white-space: nowrap;
+  }
+  .week-tags { display: flex; gap: 0.35rem; flex-wrap: wrap; margin-top: 0.3rem; }
+  .week-tag {
+    font-size: 0.6rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+  .wt-gold { background: rgba(184,134,11,0.1); color: rgba(139,105,20,0.8); }
+  .wt-teal { background: rgba(42,157,143,0.1); color: rgba(21,128,117,0.8); }
+  .wt-purple { background: rgba(99,102,241,0.1); color: rgba(79,70,229,0.8); }
+  .wt-orange { background: rgba(234,88,12,0.1); color: rgba(194,65,12,0.8); }
+  .wt-pink { background: rgba(219,39,119,0.1); color: rgba(190,24,93,0.8); }
+  .wt-rose { background: rgba(231,111,81,0.1); color: rgba(194,65,12,0.8); }
+  .wt-muted { background: rgba(15,28,46,0.06); color: rgba(15,28,46,0.45); }
+  .week-body {
+    display: none;
+    padding: 0 1rem 1rem;
+    border-top: 1px solid rgba(15,28,46,0.06);
+  }
+  .week-item.open .week-body { display: block; }
+  .week-body-inner { padding-top: 0.75rem; }
+  .week-hours-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(15,28,46,0.04);
+    border: 1px solid rgba(15,28,46,0.08);
+    border-radius: 4px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.72rem;
+    color: rgba(15,28,46,0.5);
+    margin-bottom: 0.75rem;
+    font-family: 'DM Mono', monospace;
+  }
+  .task-list { display: flex; flex-direction: column; gap: 0.4rem; }
+  .task-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    padding: 0.55rem 0.75rem;
+    background: rgba(15,28,46,0.02);
+    border-radius: 4px;
+    border: 1px solid rgba(15,28,46,0.05);
+    font-size: 0.8rem;
+  }
+  .task-item .task-text { color: rgba(15,28,46,0.7); line-height: 1.5; }
+  .task-item .task-text strong { color: var(--navy); }
+  .task-item .task-hrs {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: rgba(15,28,46,0.3);
+    white-space: nowrap;
+    align-self: start;
+    margin-top: 2px;
+  }
+  .week-note {
+    margin-top: 0.75rem;
+    padding: 0.6rem 0.85rem;
+    background: rgba(184,134,11,0.05);
+    border: 1px solid rgba(184,134,11,0.15);
+    border-radius: 4px;
+    font-size: 0.78rem;
+    color: rgba(15,28,46,0.55);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* ─── RISKS ─── */
+  .risk-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+  .risk-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(15,28,46,0.08);
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(15,28,46,0.04);
+  }
+  .risk-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    align-items: center;
+  }
+  .risk-level {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+  }
+  .risk-level.high { background: rgba(231,111,81,0.1); color: var(--rose); border: 1px solid rgba(231,111,81,0.2); }
+  .risk-level.med { background: rgba(184,134,11,0.1); color: #8B6914; border: 1px solid rgba(184,134,11,0.2); }
+  .risk-level.low { background: rgba(42,157,143,0.1); color: var(--teal); border: 1px solid rgba(42,157,143,0.2); }
+  .risk-title { font-size: 0.88rem; font-weight: 500; color: rgba(15,28,46,0.85); }
+  .risk-toggle { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+  .risk-toggle svg { width: 10px; height: 10px; fill: rgba(15,28,46,0.3); }
+  .risk-card.open .risk-toggle { transform: rotate(180deg); }
+  .risk-body { display: none; padding: 0 1.25rem 1.25rem; border-top: 1px solid rgba(15,28,46,0.06); }
+  .risk-card.open .risk-body { display: block; }
+  .risk-desc { font-size: 0.82rem; color: rgba(15,28,46,0.65); line-height: 1.7; margin: 0.75rem 0; }
+  .risk-response {
+    background: rgba(42,157,143,0.05);
+    border: 1px solid rgba(42,157,143,0.15);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    color: rgba(15,28,46,0.7);
+    line-height: 1.65;
+  }
+  .risk-response::before {
+    content: 'Response';
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.4rem;
+    opacity: 0.8;
+  }
+
+  /* ─── STRATEGIES ─── */
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .strategy-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(15,28,46,0.08);
+    border-radius: 7px;
+    padding: 1.25rem;
+    box-shadow: 0 1px 2px rgba(15,28,46,0.04);
+  }
+  .strategy-icon { font-size: 1.4rem; margin-bottom: 0.75rem; }
+  .strategy-card h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .strategy-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .strategy-list li {
+    font-size: 0.8rem;
+    color: rgba(15,28,46,0.65);
+    line-height: 1.55;
+    padding-left: 0.75rem;
+    position: relative;
+  }
+  .strategy-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: #8B6914;
+    opacity: 0.7;
+  }
+  .strategy-list li strong { color: var(--navy); }
+
+  /* ─── MASTER TABLE ─── */
+  .master-table-wrap {
+    background: #FFFFFF;
+    border: 1px solid rgba(15,28,46,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15,28,46,0.06);
+  }
+  .master-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  .master-table th {
+    background: rgba(15,28,46,0.04);
+    padding: 0.65rem 1rem;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(15,28,46,0.4);
+    border-bottom: 1px solid rgba(15,28,46,0.08);
+    white-space: nowrap;
+  }
+  .master-table td {
+    padding: 0.6rem 1rem;
+    color: rgba(15,28,46,0.7);
+    border-bottom: 1px solid rgba(15,28,46,0.05);
+    vertical-align: top;
+  }
+  .master-table tr:last-child td { border-bottom: none; }
+  .master-table tr:hover td { background: rgba(15,28,46,0.02); }
+  .master-table .kr-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(15,28,46,0.35);
+    white-space: nowrap;
+  }
+  .master-table .kr-desc { line-height: 1.5; }
+  .master-table .kr-desc strong { color: var(--navy); font-weight: 500; }
+  .master-table .kr-owner {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(15,28,46,0.35);
+    white-space: nowrap;
+  }
+  .master-table .kr-deadline { white-space: nowrap; font-size: 0.75rem; }
+  .master-table .kr-deadline.hard { color: var(--rose); }
+  .master-table .kr-deadline.conf { color: #8B6914; }
+  .master-table .kr-deadline.done {
+    color: var(--teal);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+  }
+  .master-table .okr-group-row td {
+    padding: 0.4rem 1rem;
+    background: rgba(15,28,46,0.03);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(15,28,46,0.35);
+  }
+
+  /* ─── FOOTER ─── */
+  .site-footer {
+    border-top: 1px solid rgba(15,28,46,0.1);
+    padding: 2rem;
+    text-align: center;
+    background: var(--cream);
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.85rem;
+    color: rgba(15,28,46,0.5);
+    margin-bottom: 0.25rem;
+  }
+  .footer-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    color: rgba(15,28,46,0.3);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .main { padding: 1rem; }
+    .hero { padding: 2.5rem 1rem 2rem; }
+    .tl-months, .tl-row { grid-template-columns: 130px repeat(12, 1fr); }
+    .hours-grid { grid-template-columns: 1fr; }
+    .master-table th:nth-child(3), .master-table td:nth-child(3) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-logo">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="4" width="14" height="2" rx="1" fill="#0F1C2E"/>
+          <rect x="1" y="7" width="10" height="2" rx="1" fill="#0F1C2E"/>
+          <rect x="1" y="10" width="12" height="2" rx="1" fill="#0F1C2E"/>
+        </svg>
+      </div>
+      <span class="header-title">Bojangles T&amp;D <span>·</span> 2026 OKR Plan</span>
+    </div>
+    <nav class="header-nav">
+      <a href="#overview">Overview</a>
+      <a href="#okrs">OKRs</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#hours">Hours</a>
+      <a href="#q2">Q2</a>
+      <a href="#q3">Q3</a>
+      <a href="#q4">Q4</a>
+      <a href="#q1x">Q1 2027</a>
+      <a href="#roadblocks">Roadblocks</a>
+      <a href="#strategies">Strategies</a>
+      <a href="#master">Master Table</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Revised v2 · LMS-Anchored</p>
+    <h1>2026 OKR <em>Execution Calendar</em></h1>
+    <p class="hero-sub">Bojangles T&amp;D Department · Week-by-week roadmap anchored on the LMS Architecture Transformation</p>
+    <div class="hero-meta">
+      <div class="hero-pill"><span class="dot"></span>Plan Window: Apr 2026 – Mar 2027</div>
+      <div class="hero-pill"><span class="dot teal"></span>Anchor OKR: LMS Architecture</div>
+      <div class="hero-pill"><span class="dot rose"></span>Hard Deadline: Mid-Sep 2026 · Conference</div>
+      <div class="hero-pill"><span class="dot"></span>Owner: Kathryn Murrow, Director</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- AT A GLANCE -->
+  <section id="overview" class="section-gap">
+    <div class="section-header">
+      <h2>At a <em>Glance</em></h2>
+      <span class="section-tag">LMS-Anchored</span>
+    </div>
+
+    <div class="glance-grid">
+      <div class="glance-cell">
+        <div class="label">Conference Launch</div>
+        <div class="value gold">Mid-Sep 2026</div>
+        <div class="sub">FZ dashboards + new LMS onboarding go live</div>
+      </div>
+      <div class="glance-cell">
+        <div class="label">Anchor OKR Hrs/Wk</div>
+        <div class="value">~6–7 hrs</div>
+        <div class="sub">LMS Architecture = 60%+ of OKR capacity May–Aug</div>
+      </div>
+      <div class="glance-cell">
+        <div class="label">Dir Total OKR Hrs/Wk</div>
+        <div class="value">~10–12 hrs</div>
+        <div class="sub">LMS anchor pushes upper bound</div>
+      </div>
+      <div class="glance-cell">
+        <div class="label">Capacity Recovered</div>
+        <div class="value">~35+ hrs</div>
+        <div class="sub">ILT deferred · automations 4→2 · field visits flexible</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h3>Everything on this plan drives to <em>mid-September 2026</em></h3>
+      <p>The Annual Conference is where franchise dashboards and the new LMS onboarding experience launch publicly. Governance Playbook signed off by end of May. Backend rebuilt by end of June. Design system and role-based homepages live by end of July. Five feature activations complete by mid-August so there's a four-week pilot window before conference. That sequence is tight — it only works if the critical path stays intact.</p>
+      <div class="warning-note"><strong>⚠ Critical Sequencing Rule:</strong> OKR 1 (Complete Docebo Reconstruction, guided by the Architecture Hub in OKR 0) is mutually dependent with OKR 3 (FZ onboarding inside the Regional menu) and OKR 4 (FZ dashboards in Insights). The reconstruction's Regional menu doesn't function without the FZ Learning Plan deployed into it; the dashboards don't have audience value without the reconstruction's role-based access. These three synchronize to the conference deadline. OpCo onboarding (OKR 2) and Monday Readiness Email (OKR 9) both live inside the reconstructed LMS and launch downstream of it.</div>
+    </div>
+
+    <!-- OKR Summary Grid -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.75rem;margin-top:1rem;">
+      <div style="background:#FFF;border:1px solid rgba(184,134,11,0.2);border-radius:6px;padding:1rem 1.25rem;box-shadow:0 1px 2px rgba(15,28,46,0.04);">
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:#8B6914;opacity:0.8;margin-bottom:0.35rem;">⭐ Anchor</div>
+        <div style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.1rem;">Docebo Reconstruction</div>
+        <div style="font-size:0.72rem;color:rgba(15,28,46,0.45);">OKR 0 + 1 · Governs everything</div>
+      </div>
+      <div style="background:#FFF;border:1px solid rgba(42,157,143,0.2);border-radius:6px;padding:1rem 1.25rem;box-shadow:0 1px 2px rgba(15,28,46,0.04);">
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);opacity:0.8;margin-bottom:0.35rem;">🏗 People</div>
+        <div style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.1rem;">OpCo · FZ Onboarding · CTM Email</div>
+        <div style="font-size:0.72rem;color:rgba(15,28,46,0.45);">OKRs 2, 3, 9 · Conference-gated</div>
+      </div>
+      <div style="background:#FFF;border:1px solid rgba(99,102,241,0.2);border-radius:6px;padding:1rem 1.25rem;box-shadow:0 1px 2px rgba(15,28,46,0.04);">
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:#4F46E5;opacity:0.8;margin-bottom:0.35rem;">📊 Performance</div>
+        <div style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.1rem;">FZ Dashboards · Signal Analysis</div>
+        <div style="font-size:0.72rem;color:rgba(15,28,46,0.45);">OKRs 4, 5 · Q4 measurement</div>
+      </div>
+      <div style="background:#FFF;border:1px solid rgba(234,88,12,0.2);border-radius:6px;padding:1rem 1.25rem;box-shadow:0 1px 2px rgba(15,28,46,0.04);">
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:#C2410C;opacity:0.8;margin-bottom:0.35rem;">⚡ Profit</div>
+        <div style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.1rem;">Automation · Field Visits</div>
+        <div style="font-size:0.72rem;color:rgba(15,28,46,0.45);">OKRs 6, 7 · Devin partnership</div>
+      </div>
+      <div style="background:#FFF;border:1px solid rgba(219,39,119,0.2);border-radius:6px;padding:1rem 1.25rem;box-shadow:0 1px 2px rgba(15,28,46,0.04);">
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:#BE185D;opacity:0.8;margin-bottom:0.35rem;">🧠 Personal</div>
+        <div style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.1rem;">AI Workflows</div>
+        <div style="font-size:0.72rem;color:rgba(15,28,46,0.45);">OKR 8 · Serving the LMS build</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OKRs -->
+  <section id="okrs" class="section-gap">
+    <div class="section-header">
+      <h2>The Full <em>OKR Set</em></h2>
+      <span class="section-tag">OKR 0 + 9 Active · 1 Deferred</span>
+    </div>
+    <p style="font-size:0.85rem;color:rgba(15,28,46,0.55);margin-bottom:1.5rem;line-height:1.65;">OKRs ordered by priority, not by pillar. OKR 0 (the Architecture Hub reference document) is already complete and serves as the source of truth. OKR 1 (Complete Docebo Reconstruction) is the anchor execution; OKRs 3 and 4 are mutually dependent with it and synchronize to conference. Everything else either measures the reconstruction or runs in parallel with it.</p>
+
+    <div class="okr-grid">
+
+      <!-- OKR 0 -->
+      <div class="okr-card">
+        <div class="okr-card-header" onclick="toggleCard(this)">
+          <div class="okr-badge badge-ref">OKR 0</div>
+          <div class="okr-card-title-area">
+            <div class="okr-card-eyebrow">Reference</div>
+            <div class="okr-card-title">LMS Architecture Hub — The Plan Document</div>
+            <div class="okr-card-sub">Already complete · 14-section blueprint · Source of truth</div>
+          </div>
+          <div class="okr-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="okr-body">
+          <p class="okr-desc">The 14-section LMS Architecture Hub serves as the complete planning blueprint for the Docebo reconstruction. It includes the 7-menu market architecture, 138→12 catalog consolidation logic, design system (Deep Navy #0F1C2E, Bojangles Gold #FFC72C, Warm Cream #F8F5F0, Libre Baskerville / DM Sans / DM Mono typography), 5 feature activation specs, governance playbook framework, and 6-month phased implementation plan. <strong>Status: build-out plan complete.</strong> The Hub is what everything else in the plan executes against.</p>
+          <div class="kr-list">
+            <div class="kr-item">
+              <div class="kr-num">KR 0.1</div>
+              <div class="kr-text"><strong>LMS Architecture Hub complete</strong> — 14 sections covering menu architecture, catalog consolidation, design system, feature activations, governance, phased implementation plan. Available to all partners executing against it.</div>
+              <div class="kr-date done">Complete</div>
+            </div>
+            <div class="kr-item">
+              <div class="kr-num">KR 0.2</div>
+              <div class="kr-text"><strong>Hub actively referenced during Q2–Q3 execution</strong> — the Hub is the source of truth for the reconstruction work. Any decisions that deviate from it are documented as explicit exceptions, not silent drift.</div>
+              <div class="kr-date">Ongoing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OKR 1 -->
+      <div class="okr-card">
+        <div class="okr-card-header" onclick="toggleCard(this)">
+          <div class="okr-badge badge-anchor">OKR 1</div>
+          <div class="okr-card-title-area">
+            <div class="okr-card-eyebrow">Anchor</div>
+            <div class="okr-card-title">Complete Reconstruction of Docebo LMS — Live at Conference</div>
+            <div class="okr-card-sub">Governance: end May · Backend: end Jun · Homepages: end Jul · Features: mid-Aug · LAUNCH: mid-Sep</div>
+          </div>
+          <div class="okr-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="okr-body">
+          <p class="okr-desc">Delivers the complete reconstruction of Docebo, executed against the LMS Architecture Hub (OKR 0). One Governance Playbook (consolidating three previously-scoped guides — Superadmin, Franchisee, Above-Store); full backend reconfiguration (7-menu architecture, 138→12 catalog consolidation, branch/group/page mapping); UI architecture and design system; and five feature activations (Channels, Skill Management, Observation Checklists, Learning Plans, Insights). <strong>Why it's the anchor:</strong> the reconstruction is the largest body of work on the plan and the forcing function everything else synchronizes around.</p>
+          <div class="kr-list">
+            <div class="kr-item"><div class="kr-num">KR 1.1</div><div class="kr-text"><strong>Governance Playbook published</strong> — decision rights, naming standard, catalog creation rules, LTO lifecycle, page publication checklist, governance calendar.</div><div class="kr-date hard">End May</div></div>
+            <div class="kr-item"><div class="kr-num">KR 1.2</div><div class="kr-text"><strong>Backend infrastructure reconfigured</strong> — 7 menus built and assigned; 138 catalogs collapsed to 12 governed catalogs; all groups role-mapped; Default Menu reduced to &lt;5% of users.</div><div class="kr-date hard">End June</div></div>
+            <div class="kr-item"><div class="kr-num">KR 1.3</div><div class="kr-text"><strong>Design system applied and role-based homepages built</strong> — 7 role-based homepage pages live with Priority Right Now, path progress, team progress, resources widgets; mobile preview approved for each.</div><div class="kr-date hard">End July</div></div>
+            <div class="kr-item"><div class="kr-num">KR 1.4</div><div class="kr-text"><strong>Five feature activations complete</strong> — 4 Channels; 7 Leadership Competencies as Skill Sets with all 267 courses tagged; 3 Observation Checklists; 5 Learning Plans live with auto-enrollment; 3 Insights dashboards scoped.</div><div class="kr-date hard">Mid-August</div></div>
+            <div class="kr-item"><div class="kr-num">KR 1.5</div><div class="kr-text"><strong>Pilot market validates the architecture</strong> — one market assigned to new menus + learning paths; measurement captured; revisions incorporated pre-conference.</div><div class="kr-date">Early Sep</div></div>
+            <div class="kr-item"><div class="kr-num">KR 1.6</div><div class="kr-text"><strong>Conference launch</strong> — all users migrated, Regional menu live, 3 Insights dashboards accessible to appropriate role groups, governance calendar activated, stakeholder readout delivered.</div><div class="kr-date conf">Mid-Sep</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OKR 2 -->
+      <div class="okr-card">
+        <div class="okr-card-header" onclick="toggleCard(this)">
+          <div class="okr-badge badge-people">OKR 2</div>
+          <div class="okr-card-title-area">
+            <div class="okr-card-eyebrow">People</div>
+            <div class="okr-card-title">OpCo Onboarding, Rebuilt Inside the New LMS</div>
+            <div class="okr-card-sub">4 role Learning Plans + leadership proposal</div>
+          </div>
+          <div class="okr-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="okr-body">
+          <p class="okr-desc">Audit work already completed this year still stands. The 4 role levels (SM, AGM, GM, AD) become 4 structured Learning Plans inside the new LMS. The "100% enrollment within 2 business days" KR is now handled by Docebo's auto-enrollment trigger when a user is assigned to a role group.</p>
+          <div class="kr-list">
+            <div class="kr-item"><div class="kr-num">KR 2.1</div><div class="kr-text"><strong>4 role-level Learning Plans live with auto-enrollment</strong> — SL Foundation, AGM Development, GM Leadership, AD Excellence. Each maps to role groups. (Rolled into OKR 1 KR 1.4.)</div><div class="kr-date hard">Mid-August</div></div>
+            <div class="kr-item"><div class="kr-num">KR 2.2</div><div class="kr-text"><strong>Consolidation proposal delivered to leadership</strong> — what was separate Docebo content + Excel tracking now unified in one platform. Present at or before conference.</div><div class="kr-date conf">Mid-Sep</div></div>
+            <div class="kr-item"><div class="kr-num">KR 2.3</div><div class="kr-text"><strong>Pilot cohort tracked post-conference</strong> — 100% enrollment within 2 business days for new-manager cohort; dropout point by module surfaced via Insights; 2+ curriculum recommendations filed.</div><div class="kr-date">End Q4</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OKR 3 -->
+      <div class="okr-card">
+        <div class="okr-card-header" onclick="toggleCard(this)">
+          <div class="okr-badge badge-people">OKR 3</div>
+          <div class="okr-card-title-area">
+            <div class="okr-card-eyebrow">People</div>
+            <div class="okr-card-title">Franchise Operator Onboarding Ships by Conference</div>
+            <div class="okr-card-sub">Web objects: end Jun · Rise build: mid-Jul · Deployed: mid-Aug · Demo at conference</div>
+          </div>
+          <div class="okr-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="okr-body">
+          <p class="okr-desc">Moving the already-designed FZ Onboarding Suite (6 modules, 40+ quiz items, 18 web objects, program architecture + data measurement strategy all complete) through production, Rise build, and Docebo deployment in time for conference. The program content is ready; the question is how cleanly the build-and-deploy pipeline runs.</p>
+          <div class="kr-list">
+            <div class="kr-item"><div class="kr-num">KR 3.1</div><div class="kr-text"><strong>18 web objects + 2 M6 companion tools produced.</strong> HTML generation pass complete. All objects tested desktop + mobile. Print/Save PDF verified on applicable SOPs.</div><div class="kr-date hard">End June</div></div>
+            <div class="kr-item"><div class="kr-num">KR 3.2</div><div class="kr-text"><strong>Rise courses built + SCORM 2004 exported for all 6 modules.</strong> Restricted navigation, Complete All Lessons, Always Resume configured. SCORM packages validated.</div><div class="kr-date">Mid-late July</div></div>
+            <div class="kr-item"><div class="kr-num">KR 3.3</div><div class="kr-text"><strong>Docebo deployment in Regional menu as 6-module Learning Plan.</strong> Sequential locking, Due Date offsets (M1=3d through M6=28d), Call #1 (M4) and Call #2 (M6) Notification Center automation configured and tested end-to-end.</div><div class="kr-date hard">Mid-August</div></div>
+            <div class="kr-item"><div class="kr-num">KR 3.4</div><div class="kr-text"><strong>Conference demo + pilot cohort enrolled.</strong> Live walkthrough of the new Regional experience and onboarding program.</div><div class="kr-date conf">Mid-Sep</div></div>
+            <div class="kr-item"><div class="kr-num">KR 3.5</div><div class="kr-text"><strong>Post-conference measurement.</strong> First cohort tracked: 85% completion within 30 days, 4.2/5.0 confidence score. Confidence pulse and quiz-item data reviewed with FBCs ahead of Call #1 and Call #2.</div><div class="kr-date">End Q4</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OKR 4 -->
+      <div class="okr-card">
+        <div class="okr-card-header" onclick="toggleCard(this)">
+          <div class="okr-badge badge-perf">OKR 4</div>
+          <div class="okr-card-title-area">
+            <div class="okr-card-eyebrow">Performance</div>
+            <div class="okr-card-title">Franchise Dashboards Live at Conference</div>
+            <div class="okr-card-sub">Built: mid-Aug · Launch: mid-Sep · 1st Quarterly Insights Review: Q4</div>
+          </div>
+          <div class="okr-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="okr-body">
+          <p class="okr-desc">Franchise dashboards are native Docebo Insights dashboards built inside the Regional menu. Governance is role-scoped (franchise admin sees only their operator's content). QuickSight integration moves to 2027 — valuable, but not needed for conference launch.</p>
+          <div class="kr-list">
+            <div class="kr-item"><div class="kr-num">KR 4.1</div><div class="kr-text"><strong>Three Insights dashboards scoped and built</strong> — GM (team completion, AGM progress, ILT), AD/RDO (market readiness trends, observation checklist completion by market), T&amp;D Admin (platform-wide completion, search terms, governance health).</div><div class="kr-date hard">Mid-August</div></div>
+            <div class="kr-item"><div class="kr-num">KR 4.2</div><div class="kr-text"><strong>Dashboards accessible to franchise admins at conference</strong> — Regional menu access configured; franchise admins see their operator's data only; walkthrough delivered as conference session.</div><div class="kr-date conf">Mid-Sep</div></div>
+            <div class="kr-item"><div class="kr-num">KR 4.3</div><div class="kr-text"><strong>First Quarterly Insights Review completed</strong> — 30 days post-launch. Stakeholder readout on completion trends, menu engagement, readiness coverage. Informs Q1 2027 adjustments.</div><div class="kr-date">End Q4</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OKR 5 -->
+      <div class="okr-card">
+        <div class="okr-card-header" onclick="toggleCard(this)">
+          <div class="okr-badge badge-perf">OKR 5</div>
+          <div class="okr-card-title-area">
+            <div class="okr-card-eyebrow">Performance</div>
+            <div class="okr-card-title">LMS Passive Signal Analysis — Onboarding Friction, FZ Dashboard Gaps, ILT Anchor</div>
+            <div class="okr-card-sub">Surveys drafted: Aug · Reports + ILT convo: Q4</div>
+          </div>
+          <div class="okr-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="okr-body">
+          <p class="okr-desc">Hours previously allocated to quarterly field visits redirect into analyzing LMS data — clicks, passive checkpoints, dropout points, search queries — to understand where onboarding friction lives and where franchise dashboards are landing. KR 5.4 also covers the post-launch ILT anchor conversation with VP of Ops and RDOs — positioning the 2027 ILT work using real post-launch data as the conversation input.</p>
+          <div class="kr-list">
+            <div class="kr-item"><div class="kr-num">KR 5.1</div><div class="kr-text"><strong>Survey instruments developed</strong> — short, role-targeted pulse surveys embedded in the LMS and sent at defined checkpoints (new hire 30-day, GM path milestones, post-conference franchise cohort).</div><div class="kr-date">End August</div></div>
+            <div class="kr-item"><div class="kr-num">KR 5.2</div><div class="kr-text"><strong>Onboarding friction signal report</strong> — pulled from Insights 30 days post-conference. Identifies dropout points by module, revisit rates, zero-result searches. Feeds 2+ specific curriculum adjustments.</div><div class="kr-date">End October</div></div>
+            <div class="kr-item"><div class="kr-num">KR 5.3</div><div class="kr-text"><strong>FZ dashboard gap analysis</strong> — 60 days post-launch. Which dashboards are franchise admins actually using? What data is missing? Documented with recommended v2 changes for Q1 2027.</div><div class="kr-date">End Q4</div></div>
+            <div class="kr-item"><div class="kr-num">KR 5.4</div><div class="kr-text"><strong>Post-launch ILT anchor conversation</strong> — single 60-minute working session with VP of Ops and 2–3 RDOs. Uses 60 days of LMS + Observation Checklist data. Output: written summary framing the 2027 ILT diagnostic agenda.</div><div class="kr-date">Nov / Dec</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OKR 6 -->
+      <div class="okr-card">
+        <div class="okr-card-header" onclick="toggleCard(this)">
+          <div class="okr-badge badge-profit">OKR 6</div>
+          <div class="okr-card-title-area">
+            <div class="okr-card-eyebrow">Profit</div>
+            <div class="okr-card-title">Automation — Narrowed to LMS-Supporting Work</div>
+            <div class="okr-card-sub">#1 naming audit: end May · #2 Default Menu report: end Jun</div>
+          </div>
+          <div class="okr-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="okr-body">
+          <p class="okr-desc">Reduced from 4 automations to 2. Both must directly support the LMS build. "5+ hours/week recovered" target stands — but those hours redirect into OKR 5 (signal analysis), not into field visits.</p>
+          <div class="kr-list">
+            <div class="kr-item"><div class="kr-num">KR 6.1</div><div class="kr-text"><strong>Automation #1 — course naming audit</strong> — scan all 267 courses against the new naming standard, flag non-compliant, produce weekly report. Supports governance calendar directly.</div><div class="kr-date hard">End May</div></div>
+            <div class="kr-item"><div class="kr-num">KR 6.2</div><div class="kr-text"><strong>Automation #2 — Default Menu + orphan catalog report</strong> — daily automated report on users in Default Menu &gt;5 days and catalogs with 0 enrolled users.</div><div class="kr-date hard">End June</div></div>
+            <div class="kr-item"><div class="kr-num">KR 6.3</div><div class="kr-text"><strong>5+ hours/week recovered, redirected to OKR 5</strong> — measured via time log. Hours redirected to signal analysis and survey work.</div><div class="kr-date">End Q4</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OKR 7 -->
+      <div class="okr-card">
+        <div class="okr-card-header" onclick="toggleCard(this)">
+          <div class="okr-badge badge-profit">OKR 7</div>
+          <div class="okr-card-title-area">
+            <div class="okr-card-eyebrow">Profit</div>
+            <div class="okr-card-title">Field Visits — Flexible Cadence Tied to Live Field Work</div>
+            <div class="okr-card-sub">May–Sep Devin partnership · Q3 synthesis · Q4 chain narrative</div>
+          </div>
+          <div class="okr-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="okr-body">
+          <p class="okr-desc">Field visit cadence reframed from fixed-quarterly to flexible, paced to real field happenings — with a target of 4 per quarter. Two named partnerships drive most of the 2026 visits: (1) Devin (Director of Field Training) side-by-side with a new operator taking over an existing store; (2) Devin full-cycle with a different new operator opening a new store, multiple sites across May–September culminating in attending an NRO together. These produce field data feeding directly into the OpCo onboarding path (OKR 2) and the 2027 multi-unit leader development work.</p>
+          <div class="kr-list">
+            <div class="kr-item"><div class="kr-num">KR 7.1</div><div class="kr-text"><strong>90-day retention baseline pulled</strong> — by store and role level. Sets before-state for whatever the LMS launch produces.</div><div class="kr-date hard">End May</div></div>
+            <div class="kr-item"><div class="kr-num">KR 7.2</div><div class="kr-text"><strong>Side-by-side with new operator taking over existing store</strong> — recurring local visits through the multi-unit portion of training. Partner: Devin. Goal: observe how the current onboarding path supports a takeover-scenario operator.</div><div class="kr-date">May – Sep</div></div>
+            <div class="kr-item"><div class="kr-num">KR 7.3</div><div class="kr-text"><strong>Full-cycle with new-store-opening operator</strong> — multi-site visits across build-out and NRO. Partner: Devin. Culminates in attending the NRO together.</div><div class="kr-date">May – Sep</div></div>
+            <div class="kr-item"><div class="kr-num">KR 7.4</div><div class="kr-text"><strong>Multi-unit leader onboarding — enablement insights captured</strong> — written synthesis end of Q3, feeding the OpCo onboarding OKR and the 2027 multi-unit leader track.</div><div class="kr-date">End Q3</div></div>
+            <div class="kr-item"><div class="kr-num">KR 7.5</div><div class="kr-text"><strong>Chain documented</strong> — one-page narrative: automation freed time → that time built LMS + analyzed signals → signals + field visits surfaced onboarding adjustments → retention baseline reviewed for change.</div><div class="kr-date">End Q4</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OKR 8 -->
+      <div class="okr-card">
+        <div class="okr-card-header" onclick="toggleCard(this)">
+          <div class="okr-badge badge-personal">OKR 8</div>
+          <div class="okr-card-title-area">
+            <div class="okr-card-eyebrow">Personal</div>
+            <div class="okr-card-title">AI Workflows That Serve the LMS Build</div>
+            <div class="okr-card-sub">#1 metadata tagging: end Jun · #2 checklist gen: end Jul</div>
+          </div>
+          <div class="okr-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="okr-body">
+          <p class="okr-desc">Reduced from 3 workflows to 2. Both selected specifically because they accelerate LMS delivery. The 25% dev time reduction target stands on the two that remain.</p>
+          <div class="kr-list">
+            <div class="kr-item"><div class="kr-num">KR 8.1</div><div class="kr-text"><strong>Workflow #1 — Course metadata &amp; skill tagging</strong> — AI-assisted tagging of all 267 courses against the 7 Leadership Competencies and operational skills. Documented SOP + prompt library.</div><div class="kr-date hard">End June</div></div>
+            <div class="kr-item"><div class="kr-num">KR 8.2</div><div class="kr-text"><strong>Workflow #2 — Observation checklist content generation</strong> — AI-assisted translation of existing rubrics into Docebo Observation Checklist format. Documented SOP.</div><div class="kr-date hard">End July</div></div>
+            <div class="kr-item"><div class="kr-num">KR 8.3</div><div class="kr-text"><strong>25% dev time reduction measured</strong> — before/after time on at least one asset type, using the two documented workflows.</div><div class="kr-date">End Q4</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OKR 9 -->
+      <div class="okr-card">
+        <div class="okr-card-header" onclick="toggleCard(this)">
+          <div class="okr-badge badge-people">OKR 9</div>
+          <div class="okr-card-title-area">
+            <div class="okr-card-eyebrow">People</div>
+            <div class="okr-card-title">Monday Readiness Email — Launched at July CTM Meeting</div>
+            <div class="okr-card-sub">Email built: end Jun · CTM launch: Jul</div>
+          </div>
+          <div class="okr-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="okr-body">
+          <p class="okr-desc">Weekly Monday Readiness Email launches for OpCo in July, introduced at the July CTM meeting with a dashboard breakout giving operators a lab-style opportunity to tinker with the LMS dashboards themselves. Launching at the CTM meeting builds adoption rather than announcing a tool and hoping for it. The email surfaces a weekly readiness signal; the CTMs are trained to use those signals in their coaching conversations with GMs — a closed loop from data → coaching → action.</p>
+          <div class="kr-list">
+            <div class="kr-item"><div class="kr-num">KR 9.1</div><div class="kr-text"><strong>Monday Readiness Email designed + built</strong> — template, weekly signal pull, distribution list, Power Automate flow. Tested with one cohort before launch.</div><div class="kr-date hard">End June</div></div>
+            <div class="kr-item"><div class="kr-num">KR 9.2</div><div class="kr-text"><strong>July CTM meeting — dashboard breakout delivered</strong> — lab-style breakout where operators see the GM Insights dashboard and tinker with it in real time. Connects to coaching conversations CTMs facilitate with GMs.</div><div class="kr-date hard">July</div></div>
+            <div class="kr-item"><div class="kr-num">KR 9.3</div><div class="kr-text"><strong>Email launches live for OpCo</strong> — first Monday after the CTM meeting. Weekly cadence established. Open-rate and click-through tracked as adoption signal.</div><div class="kr-date">July (post-CTM)</div></div>
+            <div class="kr-item"><div class="kr-num">KR 9.4</div><div class="kr-text"><strong>Coaching connection validated</strong> — 60 days after launch, pulse check with CTMs: are they using the email's content in their GM coaching conversations? First iteration of the closed loop documented.</div><div class="kr-date">End Sep</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deferred -->
+      <div class="okr-card">
+        <div class="okr-card-header" onclick="toggleCard(this)">
+          <div class="okr-badge badge-deferred">2027</div>
+          <div class="okr-card-title-area">
+            <div class="okr-card-eyebrow">Deferred</div>
+            <div class="okr-card-title">ILT Field Application Standards — Full Diagnostic &amp; Pilot</div>
+            <div class="okr-card-sub">Moved to 2027 · Kept warm via OKR 5 KR 5.4 anchor conversation</div>
+          </div>
+          <div class="okr-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="okr-body">
+          <p class="okr-desc">Full scope (inventory, RDO/VP Ops diagnostic sessions, performance standards, evaluation criteria, pilot, findings report, toolkit) moves to 2027 — where Observation Checklists feature is already live and can be used as the measurement tool. <strong>Kept warm in 2026 via OKR 5 KR 5.4 anchor conversation</strong> in Nov/Dec, which frames the 2027 agenda using 60 days of real LMS data.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline" class="section-gap">
+    <div class="section-header">
+      <h2>Visual <em>Timeline</em></h2>
+      <span class="section-tag">Apr 2026 → Mar 2027</span>
+    </div>
+    <div class="timeline-section">
+      <div class="timeline-header">
+        <h3>OKR Execution Timeline — Conference Launch mid-September 2026</h3>
+        <div class="timeline-legend">
+          <div class="legend-item"><div class="legend-dot anchor"></div>Anchor</div>
+          <div class="legend-item"><div class="legend-dot people"></div>People</div>
+          <div class="legend-item"><div class="legend-dot perf"></div>Performance</div>
+          <div class="legend-item"><div class="legend-dot profit"></div>Profit</div>
+          <div class="legend-item"><div class="legend-dot personal"></div>Personal</div>
+          <div class="legend-item"><div class="legend-dot conf"></div>Conference</div>
+        </div>
+      </div>
+      <div class="timeline-table">
+        <div class="tl-months">
+          <div></div>
+          <div class="tl-month">Apr</div><div class="tl-month">May</div><div class="tl-month">Jun</div>
+          <div class="tl-month">Jul</div><div class="tl-month">Aug</div><div class="tl-month" style="color:var(--rose);opacity:0.9;">Sep ⚑</div>
+          <div class="tl-month">Oct</div><div class="tl-month">Nov</div><div class="tl-month">Dec</div>
+          <div class="tl-month">Jan</div><div class="tl-month">Feb</div><div class="tl-month">Mar</div>
+        </div>
+        <!-- OKR 0 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 0</span>Architecture Hub</div>
+          <div class="tl-full">
+            <div class="tl-bar muted" style="grid-column:1/13;">Reference document · Complete · In use</div>
+          </div>
+        </div>
+        <!-- OKR 1.1 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 1.1</span>Governance Playbook</div>
+          <div class="tl-full">
+            <div class="tl-bar gold" style="grid-column:1/3;">Draft → Publish</div>
+          </div>
+        </div>
+        <!-- OKR 1.2 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 1.2</span>Backend / 7 menus</div>
+          <div class="tl-full">
+            <div class="tl-bar gold" style="grid-column:2/4;">Build → Deploy</div>
+          </div>
+        </div>
+        <!-- OKR 1.3 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 1.3</span>Design + homepages</div>
+          <div class="tl-full">
+            <div class="tl-bar gold" style="grid-column:3/5;">Design → Build</div>
+          </div>
+        </div>
+        <!-- OKR 1.4 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 1.4</span>5 Feature activations</div>
+          <div class="tl-full">
+            <div class="tl-bar gold" style="grid-column:4/6;">Channels · Skills · Checklists · Plans · Insights</div>
+          </div>
+        </div>
+        <!-- OKR 1.5 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 1.5</span>Pilot market</div>
+          <div class="tl-full">
+            <div class="tl-bar gold" style="grid-column:5/7;">Pilot</div>
+          </div>
+        </div>
+        <!-- OKR 1.6 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 1.6</span>Conference launch</div>
+          <div class="tl-full">
+            <div class="tl-star" style="grid-column:6/7;">★ CONF</div>
+          </div>
+        </div>
+        <!-- OKR 2 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 2</span>OpCo plans + proposal</div>
+          <div class="tl-full">
+            <div class="tl-bar teal" style="grid-column:2/7;">Build in Plans → Proposal at conference</div>
+          </div>
+        </div>
+        <!-- OKR 3.1 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 3.1</span>Web objects production</div>
+          <div class="tl-full">
+            <div class="tl-bar teal" style="grid-column:2/4;">18 WOs + 2 tools</div>
+          </div>
+        </div>
+        <!-- OKR 3.2 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 3.2</span>Rise build + SCORM</div>
+          <div class="tl-full">
+            <div class="tl-bar teal" style="grid-column:4/5;">6 modules</div>
+          </div>
+        </div>
+        <!-- OKR 3.3–3.4 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 3.3–3.4</span>Deploy + demo</div>
+          <div class="tl-full">
+            <div class="tl-bar teal" style="grid-column:5/7;">Deploy → Conference</div>
+          </div>
+        </div>
+        <!-- OKR 3.5 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 3.5</span>Post-conf measurement</div>
+          <div class="tl-full">
+            <div class="tl-bar teal" style="grid-column:7/10;">Cohort tracking</div>
+          </div>
+        </div>
+        <!-- OKR 4 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 4</span>FZ Dashboards</div>
+          <div class="tl-full">
+            <div class="tl-bar purple" style="grid-column:3/7;">Scope → Build → Launch</div>
+          </div>
+        </div>
+        <!-- OKR 4.3 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 4.3</span>Q1 Insights Review</div>
+          <div class="tl-full">
+            <div class="tl-bar purple" style="grid-column:7/9;">Q1 review</div>
+          </div>
+        </div>
+        <!-- OKR 5.1 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 5.1</span>Surveys drafted</div>
+          <div class="tl-full">
+            <div class="tl-bar purple" style="grid-column:5/6;">Draft</div>
+          </div>
+        </div>
+        <!-- OKR 5.2–5.3 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 5.2–5.3</span>Friction + gap reports</div>
+          <div class="tl-full">
+            <div class="tl-bar purple" style="grid-column:7/12;">Onboarding → FZ dashboards</div>
+          </div>
+        </div>
+        <!-- OKR 5.4 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 5.4</span>ILT anchor convo</div>
+          <div class="tl-full">
+            <div class="tl-bar purple" style="grid-column:8/10;">1 session</div>
+          </div>
+        </div>
+        <!-- OKR 6 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 6</span>Automation (2)</div>
+          <div class="tl-full">
+            <div class="tl-bar orange" style="grid-column:1/4;">#1 → #2</div>
+          </div>
+        </div>
+        <!-- OKR 7.1 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 7.1</span>Retention baseline</div>
+          <div class="tl-full">
+            <div class="tl-bar orange" style="grid-column:2/3;">Baseline</div>
+          </div>
+        </div>
+        <!-- OKR 7.2–7.3 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 7.2–7.3</span>Devin field partnerships</div>
+          <div class="tl-full">
+            <div class="tl-bar orange" style="grid-column:2/7;">Takeover-store + New-store build → NRO</div>
+          </div>
+        </div>
+        <!-- OKR 7.4 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 7.4</span>Multi-unit synthesis</div>
+          <div class="tl-full">
+            <div class="tl-bar orange" style="grid-column:7/8;">Synthesis</div>
+          </div>
+        </div>
+        <!-- OKR 7.5 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 7.5</span>Chain narrative</div>
+          <div class="tl-full">
+            <div class="tl-bar orange" style="grid-column:9/10;">Narrative doc</div>
+          </div>
+        </div>
+        <!-- OKR 8 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 8</span>AI workflows (2)</div>
+          <div class="tl-full">
+            <div class="tl-bar pink" style="grid-column:2/5;">#1 → #2 + SOPs</div>
+          </div>
+        </div>
+        <!-- OKR 9 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 9</span>Monday Email + CTM</div>
+          <div class="tl-full">
+            <div class="tl-bar teal" style="grid-column:3/5;">Build → CTM Launch (Jul)</div>
+          </div>
+        </div>
+        <!-- OKR 9.4 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">OKR 9.4</span>Coaching connection</div>
+          <div class="tl-full">
+            <div class="tl-bar teal" style="grid-column:6/8;">Coaching loop validated</div>
+          </div>
+        </div>
+        <!-- ILT 2027 -->
+        <div class="tl-row">
+          <div class="tl-label"><span class="okr-ref">Future</span>ILT full diagnostic</div>
+          <div class="tl-full">
+            <div class="tl-bar muted" style="grid-column:10/13;">2027 OKR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section id="hours" class="section-gap">
+    <div class="section-header">
+      <h2>Weekly Hours <em>Commitment</em></h2>
+      <span class="section-tag">Capacity Planning</span>
+    </div>
+    <p style="font-size:0.85rem;color:rgba(15,28,46,0.55);margin-bottom:1.25rem;line-height:1.65;">The plan runs in two capacity modes: <strong style="color:rgba(15,28,46,0.8);">May–August</strong> is the heavy build window (Docebo reconstruction dominates, plus Devin field partnerships and Monday Email build). <strong style="color:rgba(15,28,46,0.8);">October–December</strong> shifts toward measurement and signal analysis. September is transition/launch — mostly conference execution, buffer built in.</p>
+    <div class="hours-grid">
+      <div class="hours-card">
+        <h4>Kathryn — May through August</h4>
+        <div class="hours-period">Heavy OKR build period · Conference-critical</div>
+        <div class="hours-row"><span class="okr-name">OKR 1 Docebo Reconstruction (anchor)</span><span class="hrs">6–7 hrs</span></div>
+        <div class="hours-row"><span class="okr-name">OKR 7 Devin field partnerships</span><span class="hrs">2–4 hrs (variable)</span></div>
+        <div class="hours-row"><span class="okr-name">OKR 3 FZ production orchestration</span><span class="hrs">1 hr</span></div>
+        <div class="hours-row"><span class="okr-name">OKR 2 + 4 OpCo plans + Insights dashboards</span><span class="hrs">2 hrs</span></div>
+        <div class="hours-row"><span class="okr-name">OKR 9 Monday Email build + CTM prep</span><span class="hrs">1.5 hrs</span></div>
+        <div class="hours-row"><span class="okr-name">OKR 6 + 8 Automation + AI workflows</span><span class="hrs">1.5 hrs</span></div>
+        <div class="hours-row"><span class="okr-name">Planning + buffer</span><span class="hrs">1 hr</span></div>
+        <div class="hours-total"><span class="total-label">Total OKR-dedicated time</span><span class="total-val">~13–15 hrs/wk</span></div>
+      </div>
+      <div class="hours-card">
+        <h4>Kathryn — October through December</h4>
+        <div class="hours-period">Post-launch measurement period · Eases after conference</div>
+        <div class="hours-row"><span class="okr-name">OKR 5 Signal analysis + ILT anchor convo</span><span class="hrs">3 hrs</span></div>
+        <div class="hours-row"><span class="okr-name">OKR 1 Governance calendar runs</span><span class="hrs">1.5 hrs</span></div>
+        <div class="hours-row"><span class="okr-name">OKR 2, 3, 4 post-launch cohort tracking</span><span class="hrs">2 hrs</span></div>
+        <div class="hours-row"><span class="okr-name">OKR 7 Chain narrative + follow-on visits</span><span class="hrs">0.5–1 hr avg</span></div>
+        <div class="hours-row"><span class="okr-name">OKR 9 Monday Email coaching validation</span><span class="hrs">0.5 hr</span></div>
+        <div class="hours-total"><span class="total-label">Total OKR-dedicated time</span><span class="total-val">~7–8 hrs/wk</span></div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:0;">
+      <h3>Time Allocation Rule of Thumb</h3>
+      <p><strong>Monday AM (1 hr):</strong> Weekly OKR check-in. Name the single most important deliverable for the week. Review FZ production pipeline status and Devin field-visit calendar separately.<br><br>
+      <strong>Tue–Thu (2–3 hrs/day):</strong> Deep work blocks on OKR 1 (anchor). No meeting scheduling during these windows if possible. This is where the LMS build actually happens.<br><br>
+      <strong>Friday (30 min):</strong> Log hours, update tracker, flag at-risk deliverables for next week. Chase external reviewers where needed.<br><br>
+      <strong>Conference-protection rule:</strong> Between now and mid-September, treat every new-initiative request as a direct trade against OKR 1. If it has to be yes, name what slides. Don't compress the anchor.</p>
+    </div>
+  </section>
+
+  <!-- Q2 -->
+  <section id="q2" class="section-gap">
+    <div class="section-header">
+      <h2>Q2 <em>2026</em> — April through June</h2>
+      <span class="section-tag">Foundation Quarter</span>
+    </div>
+    <div class="quarter-header">
+      <div class="quarter-badge">Q2</div>
+      <div>
+        <div class="quarter-title">Foundation · Governance + backend rebuild · Devin field partnerships begin · Email built</div>
+        <div class="quarter-theme">Publish the Governance Playbook, rebuild the backend, start the Devin field partnerships in May. The Governance Playbook signs off end of May; the backend rebuild closes end of June; web object production for FZ onboarding wraps by end of June; the Monday Readiness Email gets built in late June ready for July launch; and the two Devin field-visit partnerships begin in May and run through September.</div>
+      </div>
+    </div>
+    <div class="week-accordion">
+      <!-- W1 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W01</div>
+          <div></div>
+          <div><div class="week-title">Launch Week — OKR 1 Kickoff + Devin Partnership Scoped</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1</span><span class="week-tag wt-orange">Devin</span></div></div>
+          <div class="week-date">Apr 13–18</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 9 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>OKR 1 scope kickoff + current-state audit</strong> — Block time with IT and Docebo account team to confirm which platform changes can be made directly vs. which require their involvement. Pull current-state inventory: 267 courses, 138 catalogs, 30 pages, 5 menus.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Devin partnership scoped (OKR 7.2 + 7.3 prep)</strong> — Align with Devin on two partnerships starting in May. Confirm operators, approximate visit cadence, shared observation framework, NRO date on calendar.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Initiate time audit (OKR 6)</strong> — Log every task for 2 weeks in 30-min blocks. Data selects automation targets.</div><div class="task-hrs">1.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Outline the Governance Playbook structure (OKR 1.1)</strong> — Use the LMS Architecture Hub Section 14.5 as the skeleton. Section outline only this week — content fills in W2–W3.</div><div class="task-hrs">2 hrs</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- W2 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W02</div>
+          <div></div>
+          <div><div class="week-title">Governance Playbook Drafting + Current-State Audits</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1</span><span class="week-tag wt-muted">Audits</span></div></div>
+          <div class="week-date">Apr 20–25</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 11 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Governance Playbook — Sections 1–3 drafted (OKR 1.1)</strong> — Decision rights, naming standard, catalog creation rules. Pull content directly from Architecture Hub where possible.</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Group audit — all Default Menu users identified (OKR 1.2 prep)</strong> — Pull list of users currently in Default Menu. How many? Which roles? Which markets?</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Course naming audit scoped (OKR 6.1 prep)</strong> — Define the naming standard rules so the automation has something to check against.</div><div class="task-hrs">1.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Devin operator identification confirmed (OKR 7 prep)</strong> — Specific operators named for both partnerships. First visit date on calendar for early May.</div><div class="task-hrs">1 hr</div></div>
+              <div class="task-item"><div class="task-text"><strong>All 30 pages assessed against publication checklist (OKR 1.2 prep)</strong> — Which pages are current-state clutter? Which survive the rebuild?</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Update Smartsheet tracker</strong> — Plan visible to senior director. Weekly ritual.</div><div class="task-hrs">0.5 hr</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- W3 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W03</div>
+          <div></div>
+          <div><div class="week-title">Governance Playbook Completion + 12-Catalog Architecture Named</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1</span><span class="week-tag wt-orange">Devin</span><span class="week-tag wt-pink">AI Workflow</span></div></div>
+          <div class="week-date">Apr 27–May 2</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 12 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Governance Playbook — Sections 4–7 drafted (OKR 1.1)</strong> — LTO lifecycle, page publication checklist, user group assignment, governance calendar. Playbook complete in draft.</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>12-catalog architecture named + owners assigned (OKR 1.2 prep)</strong> — All-Leadership, All-Compliance, Core-Ops, Exp-Ops, LTO-Active/Archive, Onboarding, Regional-Ops, etc. Named owner per catalog.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Time audit analysis — final automation targets (OKR 6)</strong> — Synthesize 2-week log. Confirm: Automation #1 = course naming audit; Automation #2 = Default Menu + orphan catalog report.</div><div class="task-hrs">1.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>AI Workflow #1 build begins (OKR 8.1)</strong> — Course metadata &amp; skill tagging. Start with 20-course subset to prove the approach.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Monday Readiness Email scoped (OKR 9 prep)</strong> — Draft the weekly email signal schema: what completion data, what priority surface, what dashboard links, what coaching call-to-action.</div><div class="task-hrs">1 hr</div></div>
+              <div class="task-item"><div class="task-text"><strong>Retention baseline request submitted (OKR 7.1)</strong> — Request 90-day retention data from HR/Ops by store and role level.</div><div class="task-hrs">0.5 hr</div></div>
+              <div class="task-item"><div class="task-text"><strong>Playbook internal review</strong> — Share draft Playbook with Sr. Director for pre-read before formal sign-off in W4.</div><div class="task-hrs">1.5 hrs</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- W4 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W04</div>
+          <div class="week-milestone gold-ms">★ KR 1.1 ✓</div>
+          <div><div class="week-title">Governance Playbook Signed Off + Course Naming Audit</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1.1 ✓</span><span class="week-tag wt-orange">Devin</span></div></div>
+          <div class="week-date">May 4–9</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 12 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Governance Playbook signed off + published (OKR 1.1 ✓)</strong> — Sr. Director sign-off obtained. Playbook posted to shared location. Governance calendar activated in draft.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Course naming audit — all 267 courses flagged (OKR 1.1 / 6.1)</strong> — Manual + partial AI-assisted first pass. Flagged courses logged for renaming during backend rebuild.</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Automation #1 — build + test (OKR 6.1)</strong> — Course naming audit automation live by end of week. Documented SOP, prompt library, example outputs. Closes KR 6.1.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>First Devin field visit or scoping call (OKR 7.2/7.3 starts)</strong> — Late April / early May window — first in-field or virtual session. Log observations.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>AI Workflow #1 continues (OKR 8.1)</strong> — Scale from 20-course pilot to full 267. Tag against 7 Leadership Competencies + operational skills.</div><div class="task-hrs">2 hrs</div></div>
+            </div>
+            <div class="week-note">Milestone check: KR 1.1 closed. This is the first major deliverable of the plan and gates everything downstream.</div>
+          </div>
+        </div>
+      </div>
+      <!-- W5 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W05</div>
+          <div></div>
+          <div><div class="week-title">Backend Rebuild Begins — 7 Menus Created</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1.2</span><span class="week-tag wt-orange">Retention</span><span class="week-tag wt-pink">AI</span></div></div>
+          <div class="week-date">May 11–16</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 12 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>7 menus created in Docebo (OKR 1.2)</strong> — Core, Core Express, Expansion, Expansion Express, Hybrid, York Rd, Regional. Named and staged — not yet assigned to users.</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Group remapping plan drafted (OKR 1.2)</strong> — Which groups move to which menus. Plan first, execute in W6.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Retention baseline received + logged (OKR 7.1 ✓)</strong> — 90-day retention by store and role level. Filed. KR 7.1 closed.</div><div class="task-hrs">1 hr</div></div>
+              <div class="task-item"><div class="task-text"><strong>Automation #2 scoped (OKR 6.2)</strong> — Default Menu users &gt;5 days + orphan catalog report. Daily automation.</div><div class="task-hrs">1 hr</div></div>
+              <div class="task-item"><div class="task-text"><strong>Devin field visit (OKR 7.2 / 7.3)</strong> — One session this week. Observations logged against the multi-unit leader onboarding question.</div><div class="task-hrs">2–4 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Catalog consolidation plan (OKR 1.2)</strong> — Map all 138 existing catalogs to the 12 governed ones.</div><div class="task-hrs">2 hrs</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- W6 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W06</div>
+          <div></div>
+          <div><div class="week-title">Group Remapping Executes + Catalog Collapse Wave 1</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1.2</span><span class="week-tag wt-orange">Devin</span><span class="week-tag wt-pink">AI</span></div></div>
+          <div class="week-date">May 18–23</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 12 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Group remapping live in Docebo (OKR 1.2)</strong> — All groups reassigned to correct menus. Default Menu population reduced to pending-assignment-only. Monitor for 5 days.</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Catalog collapse wave 1 (OKR 1.2)</strong> — Retire obvious clutter: empty test catalogs, dead LTO catalogs, duplicate franchise-specific catalogs. ~30–40 catalogs retired.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Devin field visit (OKR 7.2 / 7.3)</strong> — Continued partnership work. Pattern emerging on what multi-unit training is actually asking of the takeover-scenario operator.</div><div class="task-hrs">2–4 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Automation #2 build begins (OKR 6.2)</strong> — Default Menu + orphan catalog report. Target working prototype by end of W8.</div><div class="task-hrs">1.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Web object production pipeline scoped (OKR 3.1 prep)</strong> — Named partner. Produce brief. Production runs W8–W11.</div><div class="task-hrs">1 hr</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- W7 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W07</div>
+          <div></div>
+          <div><div class="week-title">Buffer Week + AI Workflow #1 Wraps + Monday Email Build Starts</div><div class="week-tags"><span class="week-tag wt-muted">Buffer</span><span class="week-tag wt-pink">AI ✓</span><span class="week-tag wt-teal">OKR 9 build</span></div></div>
+          <div class="week-date">May 25–30</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 9 hrs (lighter week)</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>AI Workflow #1 finalized + SOP documented (OKR 8.1 ✓)</strong> — Full 267 courses tagged. Prompt library, example outputs, edge-case handling documented. Closes KR 8.1.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Catalog collapse wave 2 (OKR 1.2)</strong> — Another 30–40 catalogs retired. Consolidation 60%+ complete.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Monday Readiness Email build begins (OKR 9.1)</strong> — Template design. Weekly signal pull logic. Power Automate flow scaffolding.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Buffer / catch-up</strong> — If everything's on track, use the time to get ahead on W8 backend polish.</div><div class="task-hrs">2 hrs</div></div>
+            </div>
+            <div class="week-note">This week is intentionally lighter. The anchor benefits most from protected slack.</div>
+          </div>
+        </div>
+      </div>
+      <!-- W8 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W08</div>
+          <div></div>
+          <div><div class="week-title">Design System Begins + Automation #2 Finalizes</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1.3</span><span class="week-tag wt-orange">Automation ✓</span><span class="week-tag wt-teal">Web Objects</span></div></div>
+          <div class="week-date">Jun 1–6</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 11 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Design system — tokens defined (OKR 1.3)</strong> — Palette (Deep Navy, Bojangles Gold, Warm Cream, Card White, Leadership Blue, Readiness Teal). Typography (Libre Baskerville display, DM Sans interface, DM Mono data).</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Automation #2 ships + SOP (OKR 6.2 ✓)</strong> — Default Menu + orphan catalog report live. Daily. Documented SOP. Closes KR 6.2.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Catalog collapse — 85%+ done (OKR 1.2)</strong> — Push toward 12-catalog target.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Web object production kickoff (OKR 3.3)</strong> — Producer briefed with full web-object inventory + specs. Production target: 18 web objects + 2 M6 companion tools complete by end of June.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>AI Workflow #2 scoped (OKR 8.2)</strong> — Observation Checklist content generation. Pilot with one rubric translation this week.</div><div class="task-hrs">1.5 hrs</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- W9 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W09</div>
+          <div class="week-milestone gold-ms">★ KR 1.2 ✓</div>
+          <div><div class="week-title">Backend Rebuilt — 138→12 Catalogs, 7 Menus Assigned</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1.2 ✓</span><span class="week-tag wt-gold">OKR 1.3</span><span class="week-tag wt-teal">WO Production</span></div></div>
+          <div class="week-date">Jun 8–13</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 11 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>KR 1.2 closed — backend rebuilt (OKR 1.2 ✓)</strong> — 138→12 catalogs done. 7 menus assigned. Default Menu reduced to &lt;5% of users. Governance calendar activated.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Role-based homepage design begins (OKR 1.3)</strong> — 7 homepage pages. Start with GM homepage. Widget layout: welcome, progress, priority, team, resources.</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Web object production check-in (OKR 3.3)</strong> — 20% of web objects should be complete. Review quality against specs.</div><div class="task-hrs">1.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>AI Workflow #2 building (OKR 8.2)</strong> — One Observation Checklist drafted via AI-assisted translation. Validate output quality.</div><div class="task-hrs">2 hrs</div></div>
+            </div>
+            <div class="week-note">Halfway mark: 2 of 6 OKR 1 KRs closed. Next up is homepages and feature activations.</div>
+          </div>
+        </div>
+      </div>
+      <!-- W10 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W10</div>
+          <div></div>
+          <div><div class="week-title">Web Object Production + Homepage Designs Sprint</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1.3</span><span class="week-tag wt-teal">WO Production</span><span class="week-tag wt-pink">AI</span></div></div>
+          <div class="week-date">Jun 15–20</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 12 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Homepage designs — 3 of 7 (OKR 1.3)</strong> — GM, AD/RDO, SL homepages designed with role-specific Priority Right Now, path progress, team view, resource links.</div><div class="task-hrs">4 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Web object production — 50% complete (OKR 3.3)</strong> — Mid-point check on production partner. Tested on desktop. Mobile preview check for SOPs.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>AI Workflow #2 — 3 checklists drafted (OKR 8.2)</strong> — Draft SL, GM, Facilitator observation checklists. Validate against original rubrics.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>FZ dashboard spec begins (OKR 4.1)</strong> — Three Insights dashboards specified: GM, AD/RDO, T&amp;D Admin.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Skill Set mapping begins (OKR 1.4 prep)</strong> — 7 Leadership Competencies → 7 Skill Sets in Docebo. Start configuration.</div><div class="task-hrs">1.5 hrs</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- W11 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W11</div>
+          <div></div>
+          <div><div class="week-title">Homepages Continue + Web Objects 75%+ + AI Workflow #2 Ships</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1.3</span><span class="week-tag wt-teal">WO</span><span class="week-tag wt-pink">AI ✓</span></div></div>
+          <div class="week-date">Jun 22–27</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 12 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Homepage designs — 5 of 7 (OKR 1.3)</strong> — AGM + Regional homepages. Regional homepage is especially important — it's the franchise operator's front door at conference.</div><div class="task-hrs">3.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Web object production — 75%+ complete (OKR 3.3)</strong> — Most standard SOPs done. M6 companion tools in active build.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>AI Workflow #2 ships + SOP (OKR 8.2 ✓)</strong> — Full workflow documented. All 3 observation checklists drafted. Ready to feed into OKR 1.4 Observation Checklists activation.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Skill Sets — 7 Leadership Competencies mapped (OKR 1.4 prep)</strong> — Skill Sets configured in Docebo. All 267 courses mapped to ≥1 skill. Validation pass.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Channel scoping (OKR 1.4 prep)</strong> — 4 Channels named, owners assigned: SL Toolkit, GM Resources, LTO Central, Food Safety Quick Ref.</div><div class="task-hrs">1.5 hrs</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- W12 -->
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W12</div>
+          <div class="week-milestone gold-ms">★ Q2 Close</div>
+          <div><div class="week-title">Q2 Close — Web Objects Done + KRs Verified + Email Pilot-Ready</div><div class="week-tags"><span class="week-tag wt-teal">KR 3.1 ✓</span><span class="week-tag wt-gold">OKR 1.3</span><span class="week-tag wt-teal">OKR 9 ready</span></div></div>
+          <div class="week-date">Jun 29–Jul 4</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 10 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Web object production complete (OKR 3.1 ✓)</strong> — 18 web objects + 2 M6 companion tools all produced. Desktop + mobile tested. Handed to Rise developer for W13 build kickoff.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Homepages — 6 of 7 (OKR 1.3)</strong> — All except one complex homepage designed.</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Monday Readiness Email pilot-ready (OKR 9.1 ✓)</strong> — Template done. Weekly signal pull working. Power Automate flow tested end-to-end. Ready to go live at July CTM meeting. Closes KR 9.1.</div><div class="task-hrs">1.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Q2 OKR close-out + Q3 planning</strong> — Q2 KRs reviewed. Closed: 0.1, 1.1, 1.2, 3.1, 6.1, 6.2, 7.1, 8.1, 9.1. Q3 sprint anchored on feature activations + Rise build + July CTM + conference launch.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>FZ dashboard spec finalized (OKR 4.1)</strong> — Three dashboards fully specified. Data sources confirmed.</div><div class="task-hrs">1.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Rise developer briefing (OKR 3.2 kickoff)</strong> — Hand off: build specs (6 modules), completed web objects (18 + 2), SCORM 2004 configuration. Target: Rise build complete mid-to-late July.</div><div class="task-hrs">1.5 hrs</div></div>
+            </div>
+            <div class="week-note">Q2 non-negotiable closures: (1) Governance Playbook signed off. (2) Backend rebuilt. (3) Web objects produced. (4) Both automations shipped. (5) Both AI workflows documented. (6) Retention baseline pulled. (7) Monday Email pilot-ready. (8) Devin partnership visits underway.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Q3 -->
+  <section id="q3" class="section-gap">
+    <div class="section-header">
+      <h2>Q3 <em>2026</em> — July through September</h2>
+      <span class="section-tag">Launch Quarter</span>
+    </div>
+    <div class="quarter-header">
+      <div class="quarter-badge q3">Q3</div>
+      <div>
+        <div class="quarter-title">Feature activations · Rise build · Docebo deploy · Pilot · ★ CONFERENCE</div>
+        <div class="quarter-theme">Activate, pilot, launch. Homepages finish, five feature activations complete, Rise build delivers, Docebo deployment happens, pilot market validates, and the conference lands mid-September. The pace here is the heaviest of the year — every week has build milestones that depend on the prior one. Conference week = W23.</div>
+      </div>
+    </div>
+    <div class="week-accordion">
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W13</div>
+          <div></div>
+          <div><div class="week-title">Feature Activations Begin + July CTM Breakout Prep</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1.4</span><span class="week-tag wt-gold">OKR 1.3 ✓</span><span class="week-tag wt-teal">Rise Build</span></div></div>
+          <div class="week-date">Jul 6–11</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 13 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>4 Channels built + published (OKR 1.4)</strong> — SL Toolkit, GM Resources, LTO Central, Food Safety Quick Ref. Each with named owner, quarterly review date, thumbnail + 3+ items minimum.</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Skill Management activation (OKR 1.4)</strong> — 7 Leadership Competencies live as Skill Sets. 267 courses mapped. First coverage reports run.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Last homepage designed — KR 1.3 closes (OKR 1.3 ✓)</strong> — Final homepage (York Rd pilot-focused). All 7 role-based homepages designed, mobile previewed, approved.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>CTM dashboard breakout designed (OKR 9.2 prep)</strong> — Lab-style session design for the July CTM meeting.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>FZ dashboard build begins (OKR 4.1)</strong> — GM dashboard first. Data sources connected. Role-scoped access configured.</div><div class="task-hrs">2 hrs</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W14</div>
+          <div class="week-milestone rose">★ CTM LAUNCH</div>
+          <div><div class="week-title">July CTM Dashboard Breakout + Monday Email Goes Live</div><div class="week-tags"><span class="week-tag wt-teal">OKR 9.2 ✓</span><span class="week-tag wt-teal">OKR 9.3 ✓</span><span class="week-tag wt-gold">OKR 1.4</span></div></div>
+          <div class="week-date">Jul 13–18</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 14 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>CTM dashboard breakout delivered (OKR 9.2 ✓)</strong> — Lab-style session at July CTM meeting. Operators see and tinker with GM Insights dashboard in real time. Connects to coaching conversation frameworks. Closes KR 9.2.</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Monday Readiness Email launches for OpCo (OKR 9.3 ✓)</strong> — First Monday after CTM meeting. Weekly cadence active. Closes KR 9.3.</div><div class="task-hrs">1 hr</div></div>
+              <div class="task-item"><div class="task-text"><strong>3 Observation Checklists activated (OKR 1.4)</strong> — SL, GM, Facilitator Certification. Configured in Docebo. Observer-only role permissions set.</div><div class="task-hrs">2.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>5 Learning Plans built + auto-enrollment (OKR 1.4 + 2.1)</strong> — Onboarding Path, SL Foundation, AGM Development, GM Leadership, AD Excellence.</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>All 7 homepages deployed to Docebo Pages (OKR 1.3 / 1.4)</strong> — Pages created, widgets configured, assigned to menus, preview mode testing.</div><div class="task-hrs">2.5 hrs</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W15–18</div>
+          <div></div>
+          <div><div class="week-title">Insights Dashboards Built + Rise Build Finishes</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1.4</span><span class="week-tag wt-purple">OKR 4</span><span class="week-tag wt-teal">Rise</span></div></div>
+          <div class="week-date">Jul 20–Aug 15</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 10–14 hrs/wk</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>All 3 Insights dashboards built (OKR 4.1)</strong> — T&amp;D Admin (W15), GM + AD/RDO (W13–14). All 3 complete mid-August. Role-scoped access per the Playbook.</div><div class="task-hrs">3 hrs/wk</div></div>
+              <div class="task-item"><div class="task-text"><strong>Rise M1–M6 reviewed + SCORM exported (OKR 3.2 ✓)</strong> — Rise developer builds all 6 modules. Reviews happen weekly M1→M6. All SCORM 2004 packages validated. Closes KR 3.2.</div><div class="task-hrs">2 hrs/wk oversight</div></div>
+              <div class="task-item"><div class="task-text"><strong>KR 1.4 verified complete</strong> — All 5 feature activations live: 4 Channels, Skill Management, 3 Observation Checklists, 5 Learning Plans, 3 Insights dashboards.</div><div class="task-hrs">1.5 hrs (W17)</div></div>
+              <div class="task-item"><div class="task-text"><strong>Survey instruments drafted (OKR 5.1)</strong> — Role-targeted pulse surveys embedded in LMS at defined checkpoints.</div><div class="task-hrs">2.5 hrs (W17)</div></div>
+              <div class="task-item"><div class="task-text"><strong>OpCo Learning Plans finalized (OKR 2.1)</strong> — All 4 plans content-complete. Test enrollment flow.</div><div class="task-hrs">2.5 hrs (W16)</div></div>
+              <div class="task-item"><div class="task-text"><strong>Pilot market selected + briefed (OKR 1.5)</strong> — Criteria: manageable size, willing AD/RDO, representative role mix.</div><div class="task-hrs">1 hr (W16)</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W18</div>
+          <div class="week-milestone rose">★ KR 3.3 ✓</div>
+          <div><div class="week-title">FZ Onboarding Deploys to Docebo</div><div class="week-tags"><span class="week-tag wt-teal">KR 3.3 ✓</span><span class="week-tag wt-gold">Pilot Prep</span></div></div>
+          <div class="week-date">Aug 10–15</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 11 hrs</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Docebo deployment complete (OKR 3.3 ✓)</strong> — All 6 SCORM packages uploaded to Regional menu. Learning Plan built. Sequential locking, Due Date offsets, Call #1 and Call #2 Notification Center automation configured + tested end-to-end. Closes KR 3.3.</div><div class="task-hrs">4 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Pilot market assignment (OKR 1.5)</strong> — Pilot AD/RDO's market assigned to new menus. Role-based homepages visible.</div><div class="task-hrs">2 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Governance calendar activated (OKR 1.6 prep)</strong> — Monthly reports scheduled. Automations #1 and #2 now feeding governance.</div><div class="task-hrs">1.5 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>Conference demo outline (OKR 1.6 / 3.6 / 4.2)</strong> — Walkthrough script. 30-minute session covering role-based homepage, Regional menu, Insights dashboards, 6-module onboarding.</div><div class="task-hrs">2 hrs</div></div>
+            </div>
+            <div class="week-note">Dual milestone week: FZ onboarding deployed AND pilot prep done. This is the highest-risk technical week — protect it from all non-essential meetings.</div>
+          </div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W19–22</div>
+          <div></div>
+          <div><div class="week-title">Pilot Live → Revisions → Migration → Conference Prep</div><div class="week-tags"><span class="week-tag wt-gold">OKR 1.5</span><span class="week-tag wt-rose">OKR 1.6 prep</span></div></div>
+          <div class="week-date">Aug 17–Sep 12</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 9–11 hrs/wk</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Pilot market live (OKR 1.5)</strong> — Monitor engagement through Insights. Time-to-first-action, path engagement, search queries, observation checklist adoption. Daily check first 5 days.</div><div class="task-hrs">W19</div></div>
+              <div class="task-item"><div class="task-text"><strong>Pilot revisions deployed (OKR 1.5 ✓)</strong> — Critical fixes applied. Non-critical items queued for post-launch v2. Closes KR 1.5.</div><div class="task-hrs">W20</div></div>
+              <div class="task-item"><div class="task-text"><strong>Full user migration (W21–22)</strong> — Phased migration of all users from Default/old menus. Complete by conference opening day.</div><div class="task-hrs">W21–22</div></div>
+              <div class="task-item"><div class="task-text"><strong>Conference materials finalized</strong> — Deck, demo environment, handouts, one-pagers. Full rehearsal with Sr. Director + stakeholder.</div><div class="task-hrs">W20–22</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W23</div>
+          <div class="week-milestone rose">⚑ CONFERENCE</div>
+          <div><div class="week-title">CONFERENCE WEEK — LMS Live · FZ Onboarding Launches · Dashboards Visible</div><div class="week-tags"><span class="week-tag wt-rose">OKR 1.6 ✓</span><span class="week-tag wt-teal">OKR 3.4 ✓</span><span class="week-tag wt-purple">OKR 4.2 ✓</span></div></div>
+          <div class="week-date">Sep 14–19</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Conference launch (OKR 1.6 ✓)</strong> — Stakeholder readout delivered. Live walkthrough of new LMS architecture. Regional menu, Insights dashboards, 6-module franchise onboarding all shown working. Closes KR 1.6.</div><div class="task-hrs">session</div></div>
+              <div class="task-item"><div class="task-text"><strong>Franchise operator demo (OKR 3.4 ✓)</strong> — Live walkthrough of 6-module onboarding experience. Pilot cohort enrolled same week. Closes KR 3.4.</div><div class="task-hrs">session</div></div>
+              <div class="task-item"><div class="task-text"><strong>FZ dashboards walkthrough (OKR 4.2 ✓)</strong> — Franchise admins see their dashboards. Walkthrough delivered as conference session. Closes KR 4.2.</div><div class="task-hrs">session</div></div>
+              <div class="task-item"><div class="task-text"><strong>Consolidation proposal presented (OKR 2.2 ✓)</strong> — Delivered to leadership. Closes KR 2.2.</div><div class="task-hrs">session</div></div>
+            </div>
+            <div class="week-note">The year's headline week. Four KRs close simultaneously. This is what everything since April was for. Take at least one day of recovery before jumping into post-launch measurement.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Q4 -->
+  <section id="q4" class="section-gap">
+    <div class="section-header">
+      <h2>Q4 <em>2026</em> — October through December</h2>
+      <span class="section-tag">Measurement Quarter</span>
+    </div>
+    <div class="quarter-header">
+      <div class="quarter-badge q4">Q4</div>
+      <div>
+        <div class="quarter-title">Signal analysis · Friction report · FZ dashboard gap · Multi-unit synthesis · ILT anchor</div>
+        <div class="quarter-theme">Let the LMS speak. The launch shifted the whole plan from building to measuring. Q4 is where signals start surfacing, the multi-unit synthesis from Devin partnerships gets written up, and adjustments get made. The ILT anchor conversation in November/December positions the 2027 work. Pace lightens to about 7–8 hours/week.</div>
+      </div>
+    </div>
+    <div class="week-accordion">
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W26–28</div>
+          <div></div>
+          <div><div class="week-title">Signal Analysis Kicks In · Governance Calendar First Month</div><div class="week-tags"><span class="week-tag wt-purple">OKR 5</span><span class="week-tag wt-gold">Governance</span><span class="week-tag wt-teal">FZ Cohort</span></div></div>
+          <div class="week-date">Oct 5–24</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 8 hrs/wk</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>OKR 5 signal analysis setup (OKR 5.2 in progress)</strong> — Establish the signal-collection routine: weekly Insights pulls, dropout points by module, revisit rates, zero-result searches. Build the report template.</div><div class="task-hrs">3 hrs/wk</div></div>
+              <div class="task-item"><div class="task-text"><strong>Governance calendar first monthly runs</strong> — Automations #1 and #2 producing reports. First month's findings logged; rule-of-thumb baselines established.</div><div class="task-hrs">1.5 hrs/wk</div></div>
+              <div class="task-item"><div class="task-text"><strong>FZ pilot cohort — Days 11–30 (OKR 3.5)</strong> — Cohort progresses through M3–M6. Call #1 and Call #2 triggers verified firing.</div><div class="task-hrs">2 hrs/wk</div></div>
+              <div class="task-item"><div class="task-text"><strong>Survey instruments deployed (OKR 5.1)</strong> — Embedded in LMS at defined checkpoints. First responses start flowing.</div><div class="task-hrs">1 hr/wk</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W29–31</div>
+          <div class="week-milestone gold-ms">★ KR 5.2 ✓</div>
+          <div><div class="week-title">Onboarding Friction Report + Multi-Unit Synthesis</div><div class="week-tags"><span class="week-tag wt-purple">KR 5.2 ✓</span><span class="week-tag wt-orange">KR 7.4</span><span class="week-tag wt-teal">FZ 30-day</span></div></div>
+          <div class="week-date">Oct 26–Nov 14</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 8 hrs/wk</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>Onboarding friction signal report delivered (OKR 5.2 ✓)</strong> — Pulled from Insights 30 days post-conference. Dropout points by module, revisit rates, zero-result searches. 2+ curriculum adjustment recommendations filed. Closes KR 5.2.</div><div class="task-hrs">3 hrs (W29)</div></div>
+              <div class="task-item"><div class="task-text"><strong>Multi-unit leader onboarding synthesis drafted (OKR 7.4)</strong> — Observations from the May–Sep Devin partnerships. Answers: <em>how are we onboarding multi-unit leaders for success when high-impact visits are being implemented by ADs?</em></div><div class="task-hrs">3 hrs (W30)</div></div>
+              <div class="task-item"><div class="task-text"><strong>First FZ cohort 30-day completion measured (OKR 3.5 prep)</strong> — Completion rate toward 85% target. Confidence pulse average toward 4.2/5.0.</div><div class="task-hrs">2 hrs (W30)</div></div>
+              <div class="task-item"><div class="task-text"><strong>ILT anchor conversation scheduled (OKR 5.4 prep)</strong> — Reach out to VP of Ops and identify 2–3 RDOs. Propose 60-minute working session in Nov/Dec.</div><div class="task-hrs">1 hr (W31)</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W32–34</div>
+          <div class="week-milestone gold-ms">★ KR 5.3 ✓</div>
+          <div><div class="week-title">FZ Dashboard Gap Analysis + Chain Documented</div><div class="week-tags"><span class="week-tag wt-purple">KR 5.3 ✓</span><span class="week-tag wt-orange">KR 7.5 ✓</span><span class="week-tag wt-gold">ILT Prep</span></div></div>
+          <div class="week-date">Nov 16–Dec 5</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 7 hrs/wk</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>FZ dashboard gap analysis (OKR 5.3 ✓)</strong> — 60 days post-launch. Which of the 3 Insights dashboards are franchise admins actually using? What's missing? Documented with recommended v2 changes for Q1 2027. Closes KR 5.3.</div><div class="task-hrs">3 hrs (W32–33)</div></div>
+              <div class="task-item"><div class="task-text"><strong>Chain narrative documented (OKR 7.5 ✓)</strong> — One-page: automation freed hours → that time built LMS + analyzed signals → signals + Devin field visits surfaced onboarding adjustments → retention baseline reviewed for change. Closes KR 7.5.</div><div class="task-hrs">2 hrs (W33)</div></div>
+              <div class="task-item"><div class="task-text"><strong>ILT anchor conversation data brief prepared (OKR 5.4 prep)</strong> — Assemble: Insights snapshots, Observation Checklist completion by market, search query patterns, friction report patterns touching ILT transfer.</div><div class="task-hrs">2 hrs (W34)</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W35–38</div>
+          <div class="week-milestone rose">★ KR 5.4 ✓</div>
+          <div><div class="week-title">ILT Anchor Conversation + First Quarterly Insights Review + Q4 Close</div><div class="week-tags"><span class="week-tag wt-purple">KR 5.4 ✓</span><span class="week-tag wt-purple">KR 4.3 ✓</span><span class="week-tag wt-muted">Q4 Close</span></div></div>
+          <div class="week-date">Dec 7–Jan 2</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 6 hrs/wk avg (holiday-adjusted)</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>ILT anchor conversation delivered (OKR 5.4 ✓)</strong> — 60-minute working session with VP of Ops + 2–3 RDOs. Input: 60 days of LMS + Observation Checklist data. Output: written summary framing the 2027 ILT diagnostic agenda. Closes KR 5.4.</div><div class="task-hrs">3 hrs</div></div>
+              <div class="task-item"><div class="task-text"><strong>First Quarterly Insights Review (OKR 4.3 ✓)</strong> — 30-day post-launch readout. Completion trends, menu engagement, readiness coverage. Closes KR 4.3.</div><div class="task-hrs">3 hrs (W36)</div></div>
+              <div class="task-item"><div class="task-text"><strong>FZ post-conference measurement final (OKR 3.5 ✓)</strong> — First cohort completion rate confirmed. 2+ program-iteration recommendations filed. Closes KR 3.5.</div><div class="task-hrs">2 hrs (W36–37)</div></div>
+              <div class="task-item"><div class="task-text"><strong>Hours recovered verified (OKR 6.3 ✓)</strong> + <strong>25% dev time reduction measured (OKR 8.3 ✓)</strong></div><div class="task-hrs">W37</div></div>
+              <div class="task-item"><div class="task-text"><strong>Q4 OKR close-out + Q1 2027 setup</strong> — All Q4 KRs verified. Q1 2027 plan locked.</div><div class="task-hrs">2 hrs (W38)</div></div>
+            </div>
+            <div class="week-note">End of year close-outs: Q4 KRs all ship — 3.5, 4.3, 5.2, 5.3, 5.4, 6.3, 7.4, 7.5, 8.3, 9.4. Holiday buffer Dec 22–Jan 2.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Q1 2027 -->
+  <section id="q1x" class="section-gap">
+    <div class="section-header">
+      <h2>Q1 <em>2027</em> — January through March</h2>
+      <span class="section-tag">Extension Quarter</span>
+    </div>
+    <div class="quarter-header">
+      <div class="quarter-badge q1x">Q1 '27</div>
+      <div>
+        <div class="quarter-title">ILT 2027 kicks off · Dashboard v2 · Plan carries forward solo · Transition to 2027 OKR cycle</div>
+        <div class="quarter-theme">ILT 2027 work kicks off using the Q4 anchor conversation as its starting point. Dashboard v2 adjustments (from KR 5.3 gap analysis) get built. Pace stays around 7–8 hours/week.</div>
+      </div>
+    </div>
+    <div class="week-accordion">
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W39–42</div>
+          <div></div>
+          <div><div class="week-title">New Year Kickoff + ILT 2027 Scoping + Dashboard v2 Planning</div><div class="week-tags"><span class="week-tag wt-muted">ILT 2027</span><span class="week-tag wt-purple">Dashboard v2</span><span class="week-tag wt-gold">Governance</span></div></div>
+          <div class="week-date">Jan 5–30</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 7 hrs/wk</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>ILT 2027 OKR scoped from Q4 anchor summary</strong> — Translate the Nov/Dec anchor conversation output into a 2027 OKR structure: diagnostic sessions, inventory, standards drafting, evaluation criteria, pilot.</div><div class="task-hrs">2 hrs (W40)</div></div>
+              <div class="task-item"><div class="task-text"><strong>Dashboard v2 adjustments prioritized (from KR 5.3)</strong> — FZ dashboard gap analysis recommendations reviewed. Which changes happen in Q1 2027?</div><div class="task-hrs">1.5 hrs (W41)</div></div>
+              <div class="task-item"><div class="task-text"><strong>Second Quarterly Insights Review</strong> — 90-day post-launch view. Trend line on completion, engagement, readiness coverage.</div><div class="task-hrs">2 hrs (W42)</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W43–46</div>
+          <div></div>
+          <div><div class="week-title">ILT 2027 Diagnostic Sessions Begin + Dashboard v2 Build</div><div class="week-tags"><span class="week-tag wt-muted">ILT Diagnostic</span><span class="week-tag wt-purple">Dashboard v2</span></div></div>
+          <div class="week-date">Feb 2–27</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 7 hrs/wk</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>ILT 2027 diagnostic sessions begin</strong> — Individual or small-group sessions with RDOs. Observation Checklists feature used as reference tool during sessions.</div><div class="task-hrs">2 hrs/wk</div></div>
+              <div class="task-item"><div class="task-text"><strong>Dashboard v2 build (post-conference iteration)</strong> — Implement changes recommended in KR 5.3 gap analysis. Shipped by end of February.</div><div class="task-hrs">2 hrs/wk</div></div>
+              <div class="task-item"><div class="task-text"><strong>Ongoing FZ cohort tracking</strong> — New operators enrolling. Completion rate averages, confidence pulse trends.</div><div class="task-hrs">1 hr/wk</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-header" onclick="toggleWeek(this)">
+          <div class="week-num">W47–52</div>
+          <div class="week-milestone gold-ms">Year-End Closure</div>
+          <div><div class="week-title">2026 Retro + 2027 Plan Finalized</div><div class="week-tags"><span class="week-tag wt-muted">Retro</span><span class="week-tag wt-gold">2027 Plan</span></div></div>
+          <div class="week-date">Mar 2–28</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">
+            <div class="week-hours-badge">Dir · 7 hrs/wk</div>
+            <div class="task-list">
+              <div class="task-item"><div class="task-text"><strong>2026 OKR retrospective</strong> — Full plan review. What worked. What didn't. Written retro delivered to Sr. Director. Informs 2027 plan.</div><div class="task-hrs">3 hrs (W48–49)</div></div>
+              <div class="task-item"><div class="task-text"><strong>ILT 2027 diagnostic sessions continue</strong> — Additional RDO sessions. Standards language starts surfacing from patterns.</div><div class="task-hrs">2 hrs/wk</div></div>
+              <div class="task-item"><div class="task-text"><strong>2027 OKR plan finalized</strong> — ILT as a main OKR. Dashboard v2+ iterations. Continued LMS governance. Plan visible to leadership by end of March.</div><div class="task-hrs">2 hrs (W50–51)</div></div>
+              <div class="task-item"><div class="task-text"><strong>Governance calendar — 6-month retrospective</strong> — 6 months since conference launch. Catalog count? Default Menu %? Channel engagement? Architecture holding?</div><div class="task-hrs">1.5 hrs (W52)</div></div>
+            </div>
+            <div class="week-note">Plan handover: the end of Q1 2027 is the clean close of this OKR cycle. The architecture, feature activations, governance rhythm, and signal infrastructure are now the foundation for whatever 2027 builds on top.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADBLOCKS -->
+  <section id="roadblocks" class="section-gap">
+    <div class="section-header">
+      <h2>Roadblocks <em>&amp; Risks</em></h2>
+      <span class="section-tag">Mitigation Plans</span>
+    </div>
+    <p style="font-size:0.85rem;color:rgba(15,28,46,0.55);margin-bottom:1.25rem;line-height:1.65;">The critical path runs: Governance Playbook → backend rebuilt → features activated → Rise build → Docebo deploy → pilot → conference. Each link has a failure mode that cascades downstream. These are the risks worth planning against now.</p>
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-header" onclick="toggleRisk(this)">
+          <div class="risk-level high">High Risk</div>
+          <div class="risk-title">⚠ IT / Docebo Platform Dependencies</div>
+          <div class="risk-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="risk-body">
+          <p class="risk-desc">Some architecture work requires IT or Docebo account-team involvement: menu creation at scale, group-scope permission changes, Notification Center configuration, Insights dashboard role access, any SSO-adjacent configuration. If IT request queues are long or Docebo support windows don't align, weeks get lost waiting.</p>
+          <div class="risk-response">Week 1 task: named meeting with IT and Docebo account team to walk through the LMS rebuild plan and get clarity on which changes can be made directly vs. which require their involvement. Flag the Notification Center configuration, Insights role access, and group-scope changes as the highest-dependency items. If IT queues slow, escalate to Sr. Director early — don't wait for the dependency to bite mid-July.</div>
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header" onclick="toggleRisk(this)">
+          <div class="risk-level high">High Risk</div>
+          <div class="risk-title">⚠ July CTM Meeting Date — Immovable Anchor for OKR 9</div>
+          <div class="risk-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="risk-body">
+          <p class="risk-desc">The Monday Readiness Email and dashboard breakout launch are both gated on the July CTM meeting as the introduction vehicle. If the CTM meeting date shifts or agenda time is lost, the entire OKR 9 sequence misfires. Launching the email without the CTM introduction means announcing a tool cold to operators who haven't seen the dashboards yet.</p>
+          <div class="risk-response">Confirm CTM date and agenda slot by end of May — before OKR 9 build work intensifies. If the date moves, the email launch moves with it (that's fine). If agenda slot gets squeezed, negotiate for a full breakout rather than compressed time. Hard rule: don't launch the email without the CTM introduction first, even if the dashboards are technically ready.</div>
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header" onclick="toggleRisk(this)">
+          <div class="risk-level med">Medium Risk</div>
+          <div class="risk-title">◆ Devin Operator Availability (May–Sep Field Partnerships)</div>
+          <div class="risk-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="risk-body">
+          <p class="risk-desc">Both Devin partnerships depend on operator schedules that aren't under our control. Store construction timelines slip. NRO dates move. Operators running into daily pressure cancel scheduled observation time. A single operator pulling out mid-cycle costs half the evidence the synthesis (KR 7.4) depends on.</p>
+          <div class="risk-response">Build the partnerships around both operators so one can carry if the other goes sideways. Log observations after every touchpoint — don't wait to synthesize at the end. If the NRO date shifts, treat that as an expected outcome rather than a crisis. Target 4 visits/quarter is achievable even with one operator rather than two.</div>
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header" onclick="toggleRisk(this)">
+          <div class="risk-level med">Medium Risk</div>
+          <div class="risk-title">◆ New-Initiative Scope Creep Against the Anchor</div>
+          <div class="risk-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="risk-body">
+          <p class="risk-desc">Things will come up between now and conference — new programs, new dashboards, training requests. Each individually seems small. Three of them across May–August consume an entire KR's worth of hours. OKR 1 has no slack to absorb this.</p>
+          <div class="risk-response">Conference-protection rule: every new-initiative request between now and mid-September is treated as a direct trade against OKR 1. If it has to be yes, name what slides. "Yes, but the backend rebuild moves to July" is a real answer. Sr. Director alignment on this rule before the first ask arrives — so the pushback has cover.</div>
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header" onclick="toggleRisk(this)">
+          <div class="risk-level med">Medium Risk</div>
+          <div class="risk-title">◆ Automation and AI Workflow Adoption</div>
+          <div class="risk-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="risk-body">
+          <p class="risk-desc">Automations #1 and #2 produce reports that have to actually be looked at for the governance calendar to work. AI workflows only recover hours if they get used. Building them without adoption means the hours-recovered KR (6.3) fails — and the redirected OKR 5 capacity disappears with it.</p>
+          <div class="risk-response">SOP docs for each automation + AI workflow aren't end-state — they're the onboarding artifact. Each automation includes named owner (who gets the weekly email), clear trigger action, escalation point. AI workflows documented end-to-end so anyone can run them independently without tacit knowledge transfer.</div>
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header" onclick="toggleRisk(this)">
+          <div class="risk-level low">Low Risk</div>
+          <div class="risk-title">✓ ILT Anchor Conversation Timing (VP Ops + RDO Availability)</div>
+          <div class="risk-toggle"><svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="risk-body">
+          <p class="risk-desc">KR 5.4 requires one 60-minute session with VP of Ops and 2–3 RDOs between early November and mid-December. End-of-year schedules are volatile. A single failed scheduling attempt could push to January — which breaks the "60 days of post-launch data" input premise.</p>
+          <div class="risk-response">Pre-flag the conversation at conference (W23) — "I'd like to bring you data from the new LMS in Nov or Dec; is your November open?" Calendar request goes out end of October. If December slips, January is acceptable — the anchor conversation's value doesn't evaporate with a month's delay. The only hard deadline is before 2027 ILT OKR work begins.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRATEGIES -->
+  <section id="strategies" class="section-gap">
+    <div class="section-header">
+      <h2>Execution <em>Strategies</em></h2>
+      <span class="section-tag">How to Protect the Plan</span>
+    </div>
+    <p style="font-size:0.85rem;color:rgba(15,28,46,0.55);margin-bottom:1.25rem;">Six operating principles that run across the whole plan — patterns to apply recurrently, not one-time decisions.</p>
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <div class="strategy-icon">🎯</div>
+        <h4>Stack Compound Work</h4>
+        <ul class="strategy-list">
+          <li><strong>One hour, two deliverables.</strong> Every OKR 1 task should produce at least one reusable artifact.</li>
+          <li><strong>AI workflow outputs feed OKR 1 activations.</strong> Workflow #1 (metadata tagging) → OKR 1.4 Skill Management. Workflow #2 (checklist generation) → OKR 1.4 Observation Checklists. No standalone AI experiments.</li>
+          <li><strong>Documentation is a byproduct, not a separate task.</strong> SOPs for automations are written while building, not as a later writing sprint.</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-icon">🛡</div>
+        <h4>Protect Deep Work Blocks May–August</h4>
+        <ul class="strategy-list">
+          <li><strong>Tuesday through Thursday, 2–3 hours/day,</strong> blocked for OKR 1 anchor work.</li>
+          <li><strong>Monday morning (1 hr) is check-in only.</strong> Review production pipeline status, update tracker, confirm week's single most important deliverable.</li>
+          <li><strong>Friday afternoon (30 min) is close-out.</strong> Log hours, flag at-risk items, chase external reviewers.</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-icon">🗓</div>
+        <h4>One Priority Per Week</h4>
+        <ul class="strategy-list">
+          <li><strong>Every week names its single most important deliverable.</strong> That deliverable drives the deep-work blocks.</li>
+          <li><strong>If the week's priority slips, nothing else advances until it's back on track.</strong> Stops cascading delays.</li>
+          <li><strong>Published in Smartsheet.</strong> Visible to Sr. Director.</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-icon">📊</div>
+        <h4>Use the Data Being Built</h4>
+        <ul class="strategy-list">
+          <li><strong>Insights dashboards replace intuition.</strong> Decisions about what to iterate post-launch come from signal data, not anecdote.</li>
+          <li><strong>Governance calendar produces weekly inputs.</strong> Default Menu audit, catalog orphan report, courses-not-accessed.</li>
+          <li><strong>Friction report + dashboard gap report are scoped as OKR 5 deliverables,</strong> not optional side analyses.</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-icon">🤝</div>
+        <h4>Manage Dependencies Proactively</h4>
+        <ul class="strategy-list">
+          <li><strong>Named reviewer per packet,</strong> specific turnaround date, midpoint check-in, escalation path documented.</li>
+          <li><strong>External dependency dashboard updated weekly.</strong> Which reviews are in flight, which are late.</li>
+          <li><strong>Chase early, not late.</strong> A 1-week slip caught at week 2 costs an afternoon; caught at week 4 costs a month.</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-icon">✂</div>
+        <h4>Ruthless Scope Discipline</h4>
+        <ul class="strategy-list">
+          <li><strong>Conference-protection rule through September.</strong> Every new-initiative request is a trade against OKR 1.</li>
+          <li><strong>Post-launch v2 list exists for a reason.</strong> Items surfacing mid-build that aren't critical go to the v2 list, not into the current scope.</li>
+          <li><strong>"Nice to have" is not on this plan.</strong> The plan is the minimum viable conference launch.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MASTER TABLE -->
+  <section id="master" class="section-gap">
+    <div class="section-header">
+      <h2>Master <em>KR Table</em></h2>
+      <span class="section-tag">Full OKR Inventory</span>
+    </div>
+    <p style="font-size:0.85rem;color:rgba(15,28,46,0.55);margin-bottom:1.25rem;">All Key Results across all 9 OKRs, in execution order with deadlines and owner. Single view for tracking progress week-to-week.</p>
+    <div class="master-table-wrap" style="overflow-x:auto;">
+      <table class="master-table">
+        <thead>
+          <tr>
+            <th>KR</th>
+            <th>Key Result</th>
+            <th>Owner</th>
+            <th>Deadline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="okr-group-row"><td colspan="4">OKR 0 · Reference — LMS Architecture Hub</td></tr>
+          <tr><td class="kr-id">0.1</td><td class="kr-desc"><strong>LMS Architecture Hub complete</strong> — 14-section blueprint serving as source of truth</td><td class="kr-owner">Dir</td><td class="kr-deadline done">Complete</td></tr>
+          <tr><td class="kr-id">0.2</td><td class="kr-desc"><strong>Hub actively referenced during Q2–Q3</strong> · deviations documented as explicit exceptions</td><td class="kr-owner">Dir</td><td class="kr-deadline">Ongoing</td></tr>
+          <tr class="okr-group-row"><td colspan="4">OKR 1 · Anchor — Complete Docebo Reconstruction</td></tr>
+          <tr><td class="kr-id">1.1</td><td class="kr-desc"><strong>Governance Playbook published</strong> (decision rights, naming, catalog rules, LTO lifecycle, page publication checklist, governance calendar)</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">End May</td></tr>
+          <tr><td class="kr-id">1.2</td><td class="kr-desc"><strong>Backend reconfigured</strong> — 7 menus, 138→12 catalogs, Default Menu &lt;5%</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">End Jun</td></tr>
+          <tr><td class="kr-id">1.3</td><td class="kr-desc"><strong>Design system + 7 role-based homepages live</strong></td><td class="kr-owner">Dir</td><td class="kr-deadline hard">End Jul</td></tr>
+          <tr><td class="kr-id">1.4</td><td class="kr-desc"><strong>5 feature activations complete</strong> — Channels (4), Skill Sets, Observation Checklists (3), Learning Plans (5), Insights dashboards (3)</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">Mid-Aug</td></tr>
+          <tr><td class="kr-id">1.5</td><td class="kr-desc"><strong>Pilot market validates the architecture</strong> · revisions incorporated</td><td class="kr-owner">Dir</td><td class="kr-deadline">Early Sep</td></tr>
+          <tr><td class="kr-id">1.6</td><td class="kr-desc"><strong>Conference launch</strong> — all users migrated, Regional menu live, dashboards accessible, readout delivered</td><td class="kr-owner">Dir</td><td class="kr-deadline conf">Mid-Sep</td></tr>
+          <tr class="okr-group-row"><td colspan="4">OKR 2 · People — OpCo Onboarding</td></tr>
+          <tr><td class="kr-id">2.1</td><td class="kr-desc"><strong>4 role Learning Plans live with auto-enrollment</strong> (rolled into OKR 1.4)</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">Mid-Aug</td></tr>
+          <tr><td class="kr-id">2.2</td><td class="kr-desc"><strong>Consolidation proposal delivered to leadership</strong> at conference</td><td class="kr-owner">Dir</td><td class="kr-deadline conf">Mid-Sep</td></tr>
+          <tr><td class="kr-id">2.3</td><td class="kr-desc"><strong>Pilot cohort tracked</strong> — 100% 2-business-day enrollment; 2+ curriculum recommendations</td><td class="kr-owner">Dir</td><td class="kr-deadline">End Q4</td></tr>
+          <tr class="okr-group-row"><td colspan="4">OKR 3 · People — FZ Onboarding</td></tr>
+          <tr><td class="kr-id">3.1</td><td class="kr-desc"><strong>18 web objects + 2 M6 companion tools produced</strong></td><td class="kr-owner">Dir</td><td class="kr-deadline hard">End Jun</td></tr>
+          <tr><td class="kr-id">3.2</td><td class="kr-desc"><strong>Rise courses built + SCORM 2004 exported</strong> for all 6 modules</td><td class="kr-owner">Rise Dev</td><td class="kr-deadline">Mid-late Jul</td></tr>
+          <tr><td class="kr-id">3.3</td><td class="kr-desc"><strong>Docebo deployment</strong> — Regional menu, Learning Plan, sequential locking, Call #1 + Call #2 automation</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">Mid-Aug</td></tr>
+          <tr><td class="kr-id">3.4</td><td class="kr-desc"><strong>Conference demo + pilot cohort enrolled</strong></td><td class="kr-owner">Dir</td><td class="kr-deadline conf">Mid-Sep</td></tr>
+          <tr><td class="kr-id">3.5</td><td class="kr-desc"><strong>Post-conference measurement</strong> — 85% / 4.2, 2+ program-iteration recommendations</td><td class="kr-owner">Dir</td><td class="kr-deadline">End Q4</td></tr>
+          <tr class="okr-group-row"><td colspan="4">OKR 4 · Performance — FZ Dashboards</td></tr>
+          <tr><td class="kr-id">4.1</td><td class="kr-desc"><strong>3 Insights dashboards scoped + built</strong> (GM, AD/RDO, T&amp;D Admin)</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">Mid-Aug</td></tr>
+          <tr><td class="kr-id">4.2</td><td class="kr-desc"><strong>Dashboards accessible to franchise admins at conference</strong></td><td class="kr-owner">Dir</td><td class="kr-deadline conf">Mid-Sep</td></tr>
+          <tr><td class="kr-id">4.3</td><td class="kr-desc"><strong>First Quarterly Insights Review completed</strong></td><td class="kr-owner">Dir</td><td class="kr-deadline">End Q4</td></tr>
+          <tr class="okr-group-row"><td colspan="4">OKR 5 · Performance — Signal Analysis</td></tr>
+          <tr><td class="kr-id">5.1</td><td class="kr-desc"><strong>Survey instruments developed + deployed</strong></td><td class="kr-owner">Dir</td><td class="kr-deadline">End Aug</td></tr>
+          <tr><td class="kr-id">5.2</td><td class="kr-desc"><strong>Onboarding friction signal report</strong> · 2+ curriculum adjustments filed</td><td class="kr-owner">Dir</td><td class="kr-deadline">End Oct</td></tr>
+          <tr><td class="kr-id">5.3</td><td class="kr-desc"><strong>FZ dashboard gap analysis</strong> · v2 changes recommended</td><td class="kr-owner">Dir</td><td class="kr-deadline">End Q4</td></tr>
+          <tr><td class="kr-id">5.4</td><td class="kr-desc"><strong>Post-launch ILT anchor conversation</strong> · 2027 agenda framed</td><td class="kr-owner">Dir + VP Ops</td><td class="kr-deadline">Nov / Dec</td></tr>
+          <tr class="okr-group-row"><td colspan="4">OKR 6 · Profit — Automation</td></tr>
+          <tr><td class="kr-id">6.1</td><td class="kr-desc"><strong>Automation #1 — course naming audit</strong> · live + SOP</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">End May</td></tr>
+          <tr><td class="kr-id">6.2</td><td class="kr-desc"><strong>Automation #2 — Default Menu + orphan catalog report</strong> · live + SOP</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">End Jun</td></tr>
+          <tr><td class="kr-id">6.3</td><td class="kr-desc"><strong>5+ hours/week recovered</strong> · redirected to OKR 5</td><td class="kr-owner">Dir</td><td class="kr-deadline">End Q4</td></tr>
+          <tr class="okr-group-row"><td colspan="4">OKR 7 · Profit — Field Visits</td></tr>
+          <tr><td class="kr-id">7.1</td><td class="kr-desc"><strong>90-day retention baseline pulled</strong></td><td class="kr-owner">Dir</td><td class="kr-deadline hard">End May</td></tr>
+          <tr><td class="kr-id">7.2</td><td class="kr-desc"><strong>Side-by-side with new operator taking over existing store</strong> · recurring local visits</td><td class="kr-owner">Dir + Devin</td><td class="kr-deadline">May – Sep</td></tr>
+          <tr><td class="kr-id">7.3</td><td class="kr-desc"><strong>Full-cycle with new-store-opening operator</strong> · multi-site + NRO attendance</td><td class="kr-owner">Dir + Devin</td><td class="kr-deadline">May – Sep</td></tr>
+          <tr><td class="kr-id">7.4</td><td class="kr-desc"><strong>Multi-unit leader onboarding enablement insights synthesized</strong> · feeds OpCo + 2027 work</td><td class="kr-owner">Dir</td><td class="kr-deadline">End Q3</td></tr>
+          <tr><td class="kr-id">7.5</td><td class="kr-desc"><strong>Chain narrative documented</strong> — automation + LMS + field visits</td><td class="kr-owner">Dir</td><td class="kr-deadline">End Q4</td></tr>
+          <tr class="okr-group-row"><td colspan="4">OKR 8 · Personal — AI Workflows</td></tr>
+          <tr><td class="kr-id">8.1</td><td class="kr-desc"><strong>AI Workflow #1 — metadata tagging</strong> · SOP + prompt library</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">End Jun</td></tr>
+          <tr><td class="kr-id">8.2</td><td class="kr-desc"><strong>AI Workflow #2 — observation checklist generation</strong> · SOP</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">End Jul</td></tr>
+          <tr><td class="kr-id">8.3</td><td class="kr-desc"><strong>25% dev time reduction measured</strong></td><td class="kr-owner">Dir</td><td class="kr-deadline">End Q4</td></tr>
+          <tr class="okr-group-row"><td colspan="4">OKR 9 · People — Monday Readiness Email</td></tr>
+          <tr><td class="kr-id">9.1</td><td class="kr-desc"><strong>Monday Readiness Email built</strong> — template, weekly signal pull, Power Automate flow, tested</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">End Jun</td></tr>
+          <tr><td class="kr-id">9.2</td><td class="kr-desc"><strong>July CTM meeting — dashboard breakout delivered</strong> · lab-style · connects to coaching</td><td class="kr-owner">Dir</td><td class="kr-deadline hard">July</td></tr>
+          <tr><td class="kr-id">9.3</td><td class="kr-desc"><strong>Monday Readiness Email launches for OpCo</strong> · weekly cadence · open/click tracked</td><td class="kr-owner">Dir</td><td class="kr-deadline">July (post-CTM)</td></tr>
+          <tr><td class="kr-id">9.4</td><td class="kr-desc"><strong>Coaching connection validated</strong> · CTM pulse check · iteration documented</td><td class="kr-owner">Dir</td><td class="kr-deadline">End of Sep</td></tr>
+          <tr class="okr-group-row"><td colspan="4">Deferred — ILT Full Diagnostic</td></tr>
+          <tr><td class="kr-id">—</td><td class="kr-desc"><strong>ILT Field Application full diagnostic</strong> — DEFERRED to 2027 OKR</td><td class="kr-owner">—</td><td class="kr-deadline">2027</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-name">Kathryn Murrow · Director of Leadership Development &amp; eLearning · Bojangles T&amp;D</div>
+    <div class="footer-meta">Revised Plan v2 · LMS-Anchored · Conference-Driven · Apr 2026 – Mar 2027 · Living document · Single source of truth</div>
+  </div>
+</footer>
+
+<script>
+  function toggleCard(headerEl) {
+    const card = headerEl.closest('.okr-card');
+    card.classList.toggle('open');
+  }
+  function toggleWeek(headerEl) {
+    const item = headerEl.closest('.week-item');
+    item.classList.toggle('open');
+  }
+  function toggleRisk(headerEl) {
+    const card = headerEl.closest('.risk-card');
+    card.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
