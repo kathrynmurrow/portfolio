@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facilitator Certification Transformation Plan — Bojangles T&D</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Mulish:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e1c2b;
+  --ink-mid: #1d3245;
+  --muted: #6b7c8d;
+  --subtle: #9daab5;
+  --bg: #f4f5f7;
+  --white: #fff;
+  --accent: #c8973a;
+  --accent-light: #f5edd8;
+  --rule: #dde2e8;
+  --teal: #0d5c63;
+  --teal-mid: #1a7a82;
+  --teal-light: #e4f4f5;
+  --teal-muted: #5aacb2;
+  --navy: #162848;
+  --keep: #1a6b3a;
+  --keep-bg: #e8f5ee;
+  --cut: #8b1a1a;
+  --cut-bg: #fdecea;
+  --change: #1565c0;
+  --change-bg: #e3f2fd;
+  --add: #6d2e46;
+  --add-bg: #f5e8ed;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Mulish',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+.wrap{width:min(1100px,92vw);margin:0 auto;}
+.section{padding:72px 0;}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+h1{font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.08;font-weight:700;}
+h2{font-size:clamp(1.6rem,2.8vw,2.2rem);line-height:1.15;font-weight:500;}
+h3{font-size:1.1rem;font-weight:500;}
+p{color:var(--muted);line-height:1.75;font-size:.93rem;}
+.rule{border:none;border-top:1px solid var(--rule);margin:0;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:14px;}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent);}
+.back-bar{padding:14px 0;background:var(--bg);border-bottom:1px solid var(--rule);}
+.back-link{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .2s;}
+.back-link:hover{color:var(--ink);}
+.text-link{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:gap .2s,color .2s;border-bottom:1px solid var(--rule);padding-bottom:1px;}
+.text-link::after{content:'↗';}
+.text-link:hover{color:var(--accent);gap:10px;border-color:var(--accent);}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(244,245,247,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--rule);padding:14px 0;}
+.nav-inner{display:flex;justify-content:space-between;align-items:center;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--ink);}
+.nav-links{display:flex;gap:22px;list-style:none;}
+.nav-links a{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--ink);}
+
+/* HERO */
+.hero{background:var(--teal);padding:72px 0 64px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 70% 40%,rgba(255,255,255,.06) 0%,transparent 55%),linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:auto,44px 44px,44px 44px;pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),rgba(200,151,58,.15));}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 380px;gap:56px;align-items:center;}
+.hero-org{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,151,58,.65);margin-bottom:16px;display:block;}
+.hero h1{color:white;margin-bottom:14px;}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero-sub{color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.75;max-width:440px;margin-bottom:28px;}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:4px;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:all .22s;font-family:'Mulish',sans-serif;}
+.btn-primary{background:white;color:var(--teal);}
+.btn-primary:hover{background:rgba(255,255,255,.92);transform:translateY(-1px);}
+.btn-ghost{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.25);}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5);}
+
+/* Hero summary card */
+.hero-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;}
+.hc-header{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;}
+.hc-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);}
+.hc-badge{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(90,172,178,.25);color:var(--teal-muted);}
+.hc-body{padding:16px 18px;}
+.hc-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.hc-stat{padding:10px 12px;background:rgba(255,255,255,.05);border-radius:5px;border:1px solid rgba(255,255,255,.07);}
+.hc-stat-num{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--accent);line-height:1;display:block;margin-bottom:3px;}
+.hc-stat-label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;}
+.hc-legend{display:flex;flex-direction:column;gap:6px;}
+.hc-legend-row{display:flex;align-items:center;gap:8px;}
+.hc-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+.hc-dot--keep{background:var(--keep);}
+.hc-dot--cut{background:var(--cut);}
+.hc-dot--change{background:var(--change);}
+.hc-dot--add{background:var(--add);}
+.hc-legend-label{font-size:.72rem;color:rgba(255,255,255,.55);}
+.hc-legend-count{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.35);margin-left:auto;}
+
+/* DIAGNOSIS */
+.diagnosis-section{background:white;}
+.diagnosis-block{background:var(--ink);border-radius:8px;padding:52px;margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;position:relative;overflow:hidden;}
+.diagnosis-block::before{content:'';position:absolute;right:0;top:0;width:300px;height:100%;background:radial-gradient(circle at 85% 50%,rgba(13,92,99,.5) 0%,transparent 65%);pointer-events:none;}
+.db-text{position:relative;z-index:2;}
+.db-text h2{color:white;margin-bottom:18px;}
+.db-text p{color:rgba(255,255,255,.52);line-height:1.78;font-size:.88rem;margin-bottom:14px;}
+.db-text p em{color:var(--accent);font-style:italic;}
+.db-wirl{position:relative;z-index:2;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:6px;padding:28px;}
+.dw-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-muted);display:block;margin-bottom:14px;}
+.dw-framework{display:flex;gap:8px;margin-bottom:16px;}
+.dw-pill{flex:1;padding:10px 8px;background:rgba(90,172,178,.12);border:1px solid rgba(90,172,178,.2);border-radius:4px;text-align:center;font-size:.72rem;font-weight:700;color:var(--teal-muted);letter-spacing:.06em;text-transform:uppercase;}
+.dw-pill--active{background:rgba(200,151,58,.15);border-color:rgba(200,151,58,.3);color:var(--accent);}
+.dw-insight{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.65;border-left:2px solid rgba(200,151,58,.3);padding-left:12px;font-style:italic;}
+.dw-link{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(200,151,58,.3);padding-bottom:1px;transition:border-color .2s;}
+.dw-link:hover{border-color:var(--accent);}
+
+/* DECISIONS */
+.decisions-section{background:var(--bg);}
+.decision-card{background:white;border-radius:8px;border:1px solid var(--rule);overflow:hidden;margin-bottom:8px;}
+.decision-card:last-child{margin-bottom:0;}
+.dc-header{display:grid;grid-template-columns:100px 1fr auto;gap:0;align-items:stretch;}
+.dc-type{padding:20px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border-right:1px solid var(--rule);}
+.dc-type-badge{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px;text-align:center;}
+.dc-type-badge--keep{background:var(--keep-bg);color:var(--keep);}
+.dc-type-badge--cut{background:var(--cut-bg);color:var(--cut);}
+.dc-type-badge--change{background:var(--change-bg);color:var(--change);}
+.dc-type-badge--add{background:var(--add-bg);color:var(--add);}
+.dc-main{padding:20px 24px;}
+.dc-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:6px;}
+.dc-desc{font-size:.84rem;color:var(--muted);line-height:1.7;}
+.dc-why{margin-top:10px;padding:10px 14px;border-radius:4px;font-size:.78rem;line-height:1.55;}
+.dc-why--keep{background:var(--keep-bg);color:var(--keep);border-left:3px solid var(--keep);}
+.dc-why--cut{background:var(--cut-bg);color:var(--cut);border-left:3px solid var(--cut);}
+.dc-why--change{background:var(--change-bg);color:var(--change);border-left:3px solid var(--change);}
+.dc-why--add{background:var(--add-bg);color:var(--add);border-left:3px solid var(--add);}
+.dc-why strong{display:block;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;opacity:.7;}
+.dc-research{margin-top:8px;padding:8px 12px;background:var(--bg);border-radius:4px;font-size:.74rem;color:var(--subtle);line-height:1.55;font-style:italic;border:1px solid var(--rule);}
+.dc-research strong{font-style:normal;color:var(--muted);}
+
+/* CYCLE */
+.cycle-section{background:white;}
+.cycle-intro{max-width:580px;margin:12px 0 36px;}
+.cycle-track{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;}
+.cycle-row{display:grid;grid-template-columns:72px 1fr;gap:0;border-bottom:1px solid var(--rule);}
+.cycle-row:last-child{border-bottom:none;}
+.cycle-left{display:flex;flex-direction:column;align-items:center;padding:20px 0 20px;border-right:1px solid var(--rule);position:relative;}
+.cycle-left::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:1px;height:0;background:var(--teal);}
+.cycle-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;flex-shrink:0;}
+.cycle-icon--pre{background:var(--teal-light);color:var(--teal);}
+.cycle-icon--session{background:var(--teal);color:white;}
+.cycle-icon--check{background:var(--accent-light);color:var(--accent);}
+.cycle-icon--cert{background:var(--keep-bg);color:var(--keep);}
+.cycle-icon--post{background:var(--ink);color:white;}
+.cycle-connector{width:1px;flex:1;background:var(--rule);margin-top:6px;}
+.cycle-type{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--subtle);margin-top:6px;text-align:center;padding:0 4px;}
+.cycle-body{padding:22px 26px;}
+.cycle-timing{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-mid);display:block;margin-bottom:6px;}
+.cycle-row--dark .cycle-timing{color:rgba(200,151,58,.7);}
+.cycle-body h3{font-size:1rem;margin-bottom:8px;}
+.cycle-row--dark .cycle-body h3{color:white;}
+.cycle-body p{font-size:.83rem;line-height:1.7;}
+.cycle-row--dark .cycle-body p{color:rgba(255,255,255,.5);}
+.cycle-row--dark{background:var(--navy);}
+.cycle-row--dark .cycle-left{border-color:rgba(255,255,255,.08);}
+.cycle-row--dark .cycle-connector{background:rgba(255,255,255,.08);}
+.cycle-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;}
+.cycle-tag{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
+.cycle-tag--keep{background:var(--keep-bg);color:var(--keep);}
+.cycle-tag--add{background:var(--add-bg);color:var(--add);}
+.cycle-tag--change{background:var(--change-bg);color:var(--change);}
+.cycle-tag--cut{background:var(--cut-bg);color:var(--cut);}
+.cycle-tag--new{background:var(--teal-light);color:var(--teal);}
+
+/* RATIONALE */
+.rationale-section{background:var(--bg);}
+.rationale-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.rat-cell{background:white;padding:36px 32px;}
+.rat-cell--dark{background:var(--ink);}
+.rat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--rule);line-height:1;display:block;margin-bottom:10px;}
+.rat-cell--dark .rat-num{color:rgba(255,255,255,.1);}
+.rat-tag{font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-mid);display:block;margin-bottom:8px;}
+.rat-cell--dark .rat-tag{color:var(--teal-muted);}
+.rat-cell h3{font-size:1.05rem;margin-bottom:10px;}
+.rat-cell--dark h3{color:white;}
+.rat-cell p{font-size:.84rem;line-height:1.75;}
+.rat-cell--dark p{color:rgba(255,255,255,.5);}
+.rat-quote{margin-top:14px;padding:12px 14px;background:var(--teal-light);border-left:3px solid var(--teal-mid);border-radius:0 4px 4px 0;font-size:.78rem;color:var(--teal);font-style:italic;line-height:1.6;}
+.rat-cell--dark .rat-quote{background:rgba(13,92,99,.3);border-color:var(--teal-muted);color:rgba(255,255,255,.65);}
+
+/* MEASUREMENT */
+.measurement-section{background:white;}
+.kirkpatrick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.kp-cell{background:white;padding:28px 22px;}
+.kp-level{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--rule);line-height:1;display:block;margin-bottom:8px;}
+.kp-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-mid);display:block;margin-bottom:8px;}
+.kp-cell h3{font-size:.95rem;margin-bottom:8px;}
+.kp-cell p{font-size:.8rem;line-height:1.65;}
+.kp-cell:last-child{background:var(--teal);}
+.kp-cell:last-child .kp-level{color:rgba(255,255,255,.2);}
+.kp-cell:last-child .kp-label{color:rgba(200,151,58,.7);}
+.kp-cell:last-child h3{color:white;}
+.kp-cell:last-child p{color:rgba(255,255,255,.5);}
+
+/* BUILD PRIORITY */
+.priority-section{background:var(--bg);}
+.priority-list{display:flex;flex-direction:column;gap:8px;margin-top:36px;}
+.priority-row{display:grid;grid-template-columns:52px 1fr;gap:0;background:white;border:1px solid var(--rule);border-radius:6px;overflow:hidden;transition:box-shadow .2s;}
+.priority-row:hover{box-shadow:0 4px 16px rgba(14,28,43,.08);}
+.priority-row:first-child{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal);}
+.priority-num{background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;}
+.priority-row:first-child .priority-num{background:var(--teal);}
+.priority-row:nth-child(n+2) .priority-num{background:var(--bg);color:var(--teal);border-right:1px solid var(--rule);}
+.priority-body{padding:16px 20px;}
+.priority-body strong{display:block;font-size:.9rem;color:var(--ink);margin-bottom:4px;font-family:'Playfair Display',serif;font-weight:500;}
+.priority-body p{font-size:.8rem;line-height:1.6;}
+.priority-status{display:inline-flex;align-items:center;gap:5px;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-top:8px;}
+.priority-status--built{background:var(--keep-bg);color:var(--keep);}
+.priority-status--next{background:var(--teal-light);color:var(--teal);}
+.priority-status--planned{background:var(--bg);color:var(--subtle);border:1px solid var(--rule);}
+
+/* CROSS LINK */
+.crosslink-bar{background:var(--teal);border-radius:8px;padding:32px 40px;margin-top:36px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.cl-text h3{color:white;font-size:1.1rem;margin-bottom:6px;}
+.cl-text p{color:rgba(255,255,255,.55);font-size:.84rem;max-width:520px;}
+.cl-link{display:inline-flex;align-items:center;gap:7px;padding:11px 20px;border-radius:4px;background:white;color:var(--teal);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background .2s;}
+.cl-link:hover{background:rgba(255,255,255,.92);}
+
+@media(max-width:960px){
+  .hero-inner,.diagnosis-block,.rationale-grid{grid-template-columns:1fr;}
+  .hero-card{display:none;}
+  .kirkpatrick-grid{grid-template-columns:1fr 1fr;}
+  .dc-header{grid-template-columns:80px 1fr;}
+  .crosslink-bar{flex-direction:column;gap:16px;}
+}
+@media(max-width:640px){
+  .kirkpatrick-grid{grid-template-columns:1fr;}
+  .cycle-row{grid-template-columns:52px 1fr;}
+  h1{font-size:2rem;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.hero-inner{animation:fadeUp .6s ease both;}
+</style>
+</head>
+<body>
+
+<div class="back-bar">
+  <div class="wrap">
+    <a href="https://kathrynmurrow.github.io/portfolio/facilitator-certification-program.html" class="back-link">← Back to portfolio</a>
+  </div>
+</div>
+
+<nav>
+  <div class="wrap nav-inner">
+    <span class="nav-logo">Facilitator Certification · Transformation Plan</span>
+    <ul class="nav-links">
+      <li><a href="#decisions">Decisions</a></li>
+      <li><a href="#cycle">Full Cycle</a></li>
+      <li><a href="#rationale">Rationale</a></li>
+      <li><a href="#measurement">Measurement</a></li>
+      <li><a href="#priority">Build Priority</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-org">Bojangles T&amp;D · BoUniversity · Internal Program</span>
+        <h1>Facilitator Certification <em>Transformation Plan</em></h1>
+        <p class="hero-sub">A structured review of the three-part certification series based on Round 1 findings — what stays, what changes, and the full six-month development cycle going forward. Every decision tied to a diagnosed gap and a research basis.</p>
+        <div class="hero-actions">
+          <a href="#decisions" class="btn btn-primary">See the decisions</a>
+          <a href="facilitator-certification-rubric.html" class="btn btn-ghost">View rubric ↗</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hc-header">
+          <span class="hc-label">Series overview</span>
+          <span class="hc-badge">Round 2 Design</span>
+        </div>
+        <div class="hc-body">
+          <div class="hc-meta">
+            <div class="hc-stat"><span class="hc-stat-num">3</span><span class="hc-stat-label">Sessions</span></div>
+            <div class="hc-stat"><span class="hc-stat-num">6</span><span class="hc-stat-label">Months</span></div>
+            <div class="hc-stat"><span class="hc-stat-num">2</span><span class="hc-stat-label">Checkpoints</span></div>
+            <div class="hc-stat"><span class="hc-stat-num">4</span><span class="hc-stat-label">Kirkpatrick levels</span></div>
+          </div>
+          <div class="hc-legend">
+            <div class="hc-legend-row"><span class="hc-dot hc-dot--keep"></span><span class="hc-legend-label">Keep — proven elements</span><span class="hc-legend-count">3</span></div>
+            <div class="hc-legend-row"><span class="hc-dot hc-dot--cut"></span><span class="hc-legend-label">Cut — ineffective elements</span><span class="hc-legend-count">4</span></div>
+            <div class="hc-legend-row"><span class="hc-dot hc-dot--change"></span><span class="hc-legend-label">Change — redesigned elements</span><span class="hc-legend-count">5</span></div>
+            <div class="hc-legend-row"><span class="hc-dot hc-dot--add"></span><span class="hc-legend-label">Add new — structural gaps</span><span class="hc-legend-count">4</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- DIAGNOSIS -->
+<section class="section diagnosis-section">
+  <div class="wrap">
+    <div class="eyebrow">The diagnosis</div>
+    <h2>This series needed to become a program, not a collection of events.</h2>
+    <div class="diagnosis-block">
+      <div class="db-text">
+        <h2>Three good training days don't make a development program.</h2>
+        <p>Round 1 of the certification series revealed a core structural problem: the three sessions were individually sound but functionally disconnected. No pre-work, no between-session accountability, no shared reflection artifact across the series, no defined standard for what "certified" actually means. Participants couldn't track their own growth because there was no longitudinal thread.</p>
+        <p>The redesign treats the six months between Session 1 and the certification decision as the program — not the three days. <em>The sessions are the anchors. The work between them is where development happens.</em></p>
+        <p>This same diagnosis-before-solution principle is the foundation of the WiRL keynote framework — Teach, Coach, Measure — and it applies here directly: before redesigning any session, the gaps had to be named specifically.</p>
+      </div>
+      <div class="db-wirl">
+        <span class="dw-label">Connected to · WiRL 2026 Keynote</span>
+        <div class="dw-framework">
+          <div class="dw-pill">Teach</div>
+          <div class="dw-pill dw-pill--active">Measure</div>
+          <div class="dw-pill">Coach</div>
+        </div>
+        <p class="dw-insight">The Measure dimension from the Leaders as Learning Architects framework is exactly the gap this redesign addresses: defining observable behavior as the standard before the program is built, not after. The certification rubric is the measurement infrastructure the original series was missing.</p>
+        <a href="wirl-2026.html" class="dw-link">View WiRL session ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- DECISIONS -->
+<section class="section decisions-section" id="decisions">
+  <div class="wrap">
+    <div class="eyebrow">Design decisions</div>
+    <h2>What stays. What goes. What changes.</h2>
+    <p style="max-width:560px;margin-top:10px;">Each decision tied to a specific gap identified in Round 1. Nothing cut without a reason. Nothing added without a purpose.</p>
+
+    <div style="margin-top:32px;">
+
+      <!-- CUTS -->
+      <div style="margin-bottom:6px;padding:12px 16px;background:var(--cut-bg);border-radius:6px;border-left:3px solid var(--cut);">
+        <span style="font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cut);">Cuts — removing what isn't earning its time</span>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--cut">Cut</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">Excess group-sort transitions</h3>
+            <p class="dc-desc">Candy groups, famous quad squads, Nickelodeon characters, iconic art — these mechanics appear 3–4 times per session and create repeated momentum breaks without instructional payoff.</p>
+            <div class="dc-why dc-why--cut"><strong>Why it matters</strong>Adult learners, especially experienced field leaders, disengage when regrouping activities feel like filler. Limit to one per session maximum, and only when it reinforces content.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--cut">Cut</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">Sewing role titles in Session 3</h3>
+            <p class="dc-desc">"Seam Ripper," "Pattern Keeper," "Question Threader" — the metaphor adds cognitive load for participants who are simultaneously managing unfamiliar facilitation skills.</p>
+            <div class="dc-why dc-why--cut"><strong>Why it matters</strong>For participants new to facilitating, every layer of abstraction is a barrier. Replace with plain language: Timekeeper, Engagement Lead, Facilitator, Question Crafter.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--cut">Cut</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">Standalone goal-setting without follow-through</h3>
+            <p class="dc-desc">Session 2 has participants write two facilitator goals that never resurface in Session 3 or any checkpoint. Creates the appearance of accountability without the structure to support it.</p>
+            <div class="dc-why dc-why--cut"><strong>Why it matters</strong>Goals without a mechanism — a check-in, a revisit, a consequence — don't change behavior. Either build the loop or don't build the goal.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEEPS -->
+      <div style="margin:14px 0 6px;padding:12px 16px;background:var(--keep-bg);border-radius:6px;border-left:3px solid var(--keep);">
+        <span style="font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--keep);">Keeps — proven elements that earn their place</span>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--keep">Keep</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">The 4 Essential Questions framework</h3>
+            <p class="dc-desc">The pedagogical spine of the series. Mirrors backward design principles and gives participants a consistent planning language across all three sessions.</p>
+            <div class="dc-why dc-why--keep"><strong>Why it matters</strong>Shared vocabulary is the foundation of a learning culture. This framework earns its place in every session.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--keep">Keep</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">The "Lindsey" reteach activity</h3>
+            <p class="dc-desc">Analyzing a negative model and redesigning it is a cognitively rich task. Requires participants to evaluate, not just recall — a higher-order skill appropriate at this stage.</p>
+            <div class="dc-why dc-why--keep"><strong>Why it matters</strong>Negative examples are underused in adult learning. Seeing bad facilitation and having to fix it builds critical observation skills they'll use when they observe others.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--keep">Keep</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">"A Tale of Two Trainings" icebreaker</h3>
+            <p class="dc-desc">Best/worst training experience. The only icebreaker in the series that directly activates prior knowledge and connects to the session's content.</p>
+            <div class="dc-why dc-why--keep"><strong>Why it matters</strong>Every other icebreaker is fun. This one is instructional. It earns its time by doing two jobs at once.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHANGES -->
+      <div style="margin:14px 0 6px;padding:12px 16px;background:var(--change-bg);border-radius:6px;border-left:3px solid var(--change);">
+        <span style="font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--change);">Changes — redesigned with research backing</span>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--change">Change</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">Filming + peer feedback → filming + guided self-review</h3>
+            <p class="dc-desc">Keep the filming. Drop unstructured peer feedback. Replace with a guided self-review protocol (focused questions, not open reflection), T&D-led focused observation on one dimension at a time, and a structured self-debrief (plus / delta / one thing) immediately after each round.</p>
+            <div class="dc-why dc-why--change"><strong>Why it matters</strong>Peer feedback without feedback training produces hollow praise or vague criticism — neither changes behavior.</div>
+            <div class="dc-research"><strong>Research basis:</strong> Hattie &amp; Timperley (2007) — feedback only improves performance when the receiver knows what "good" looks like. Ericsson's deliberate practice — narrowing feedback to one dimension accelerates growth. Zimmerman (2002) — self-generated next steps stick better than externally assigned ones.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--change">Change</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">Capstone: original content creation → facilitating existing content</h3>
+            <p class="dc-desc">Assign a real piece of existing Bojangles content (e.g., a module from Own the Shift or a hospitality standard) and evaluate how participants bring it to life — their questioning, pacing, engagement design, and ability to make it feel relevant without drifting. Talking points remain as an annotation tool.</p>
+            <div class="dc-why dc-why--change"><strong>Why it matters</strong>Creating your own content lets you hide behind preparation. Facilitating someone else's removes that safety net — you have to actually teach. The skill being certified is delivery, not authorship.</div>
+            <div class="dc-research"><strong>The conductor analogy:</strong> We don't certify a conductor by asking them to compose. We watch them lead an orchestra through music that already exists.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--change">Change</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">Session 1 opening sequence — restructured</h3>
+            <p class="dc-desc">Currently jumps from appliance metaphor to case studies before participants have a shared vocabulary. Add explicit foundation first: what a facilitator is, how it differs from trainer/coach/mentor, and a worked example of the 4 Essential Questions before applying them.</p>
+            <div class="dc-why dc-why--change"><strong>Why it matters</strong>Cognitive load theory. You can't apply a framework you haven't fully internalized. Build the model first, then ask people to use it.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--change">Change</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">Reflection architecture → Facilitator Growth Journal</h3>
+            <p class="dc-desc">Session 1 uses a 3-2-1. Session 2 uses goal-setting. Session 3 uses video + peer feedback. Three different formats with no common thread. Introduce a Facilitator Growth Journal — four consistent questions at the end of every session — so participants can see where they started.</p>
+            <div class="dc-why dc-why--change"><strong>Why it matters</strong>Growth requires a longitudinal artifact. Without one, participants can't track their own development and T&D can't demonstrate impact across the series.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADDS -->
+      <div style="margin:14px 0 6px;padding:12px 16px;background:var(--add-bg);border-radius:6px;border-left:3px solid var(--add);">
+        <span style="font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--add);">Add new — structural gaps that need filling</span>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--add">Add</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">Pre-work before each session (15–30 min)</h3>
+            <p class="dc-desc">A reflection prompt before S1, a planning scenario before S2, and a soft skill outline before S3. Sessions currently start from zero. Pre-work turns the first hour of each session from catch-up into reinforcement.</p>
+            <div class="dc-why dc-why--add"><strong>Why it matters</strong>Spaced practice research (Cepeda et al., 2006) shows that introducing concepts before a session dramatically increases in-session learning depth. Pre-exposure turns new content into reinforcement.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--add">Add</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">Between-session checkpoints (required, not optional)</h3>
+            <p class="dc-desc">A Field Application Reflection (~30 days after S1) and a Peer Observation Task (before S3). These feed directly into the next session — not optional journaling, not self-paced, not skippable.</p>
+            <div class="dc-why dc-why--add"><strong>Why it matters</strong>Six months between S1 and S3 with no accountability creates drift. Checkpoints convert a 3-event series into an ongoing development program.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--add">Add</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">Certification rubric with observable standards</h3>
+            <p class="dc-desc">Five dimensions, observable criteria, three-outcome scoring: Certified, Conditionally Certified, Not Yet. Participants need to know what they're being evaluated against before the series begins.</p>
+            <div class="dc-why dc-why--add"><strong>Why it matters</strong>Without a standard, certification is a participation award. With one, it's a credential that means something. This is Build Priority #1.</div>
+            <a href="facilitator-certification-rubric.html" class="text-link" style="margin-top:10px;">View rubric</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="dc-header">
+          <div class="dc-type"><span class="dc-type-badge dc-type-badge--add">Add</span></div>
+          <div class="dc-main">
+            <h3 class="dc-title">90-day post-certification field observation</h3>
+            <p class="dc-desc">A structured observation 90 days after certification, scored against a shortened rubric, documenting whether skills transferred to the field.</p>
+            <div class="dc-why dc-why--add"><strong>Why it matters</strong>Kirkpatrick Level 3. Did behavior change? You can't answer that without a mechanism to check. This closes the loop and generates the data needed for VP-level reporting.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- FULL CYCLE -->
+<section class="section cycle-section" id="cycle">
+  <div class="wrap">
+    <div class="eyebrow">The full development cycle</div>
+    <h2>From pre-work through post-certification.</h2>
+    <p class="cycle-intro">Every phase, every deliverable, every decision marker. The six months are the program — the three session days are the anchors.</p>
+
+    <div class="cycle-track">
+
+      <div class="cycle-row">
+        <div class="cycle-left">
+          <div class="cycle-icon cycle-icon--pre">P</div>
+          <div class="cycle-connector"></div>
+          <span class="cycle-type">Pre-Work</span>
+        </div>
+        <div class="cycle-body">
+          <span class="cycle-timing">2 Weeks Before Session 1</span>
+          <h3>Prime the Mindset</h3>
+          <p>Short self-reflection prompt ("describe the best trainer you've ever had") + primer on adult learning principles. No grading — pure activation. Turns the S1 opening from zero to reinforcement.</p>
+          <div class="cycle-tags"><span class="cycle-tag cycle-tag--new">New</span><span class="cycle-tag cycle-tag--new">~20 min · Async</span></div>
+        </div>
+      </div>
+
+      <div class="cycle-row cycle-row--dark">
+        <div class="cycle-left">
+          <div class="cycle-icon cycle-icon--session">1</div>
+          <div class="cycle-connector"></div>
+          <span class="cycle-type" style="color:rgba(255,255,255,.3);">Session</span>
+        </div>
+        <div class="cycle-body">
+          <span class="cycle-timing">Full Day · August</span>
+          <h3>Session 1 — Foundations of Facilitation</h3>
+          <p>Explicit facilitator model (vs. trainer/coach/mentor). 4 Essential Questions with worked example before application. Learning strategies + engagement techniques. Lindsey reteach. Ends with Growth Journal entry #1.</p>
+          <div class="cycle-tags">
+            <span class="cycle-tag cycle-tag--keep">Keep: 4EQ · Lindsey</span>
+            <span class="cycle-tag cycle-tag--change">Change: Opening sequence</span>
+            <span class="cycle-tag cycle-tag--new">New: Growth Journal</span>
+            <span class="cycle-tag cycle-tag--cut">Cut: Excess group sorts</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cycle-row">
+        <div class="cycle-left">
+          <div class="cycle-icon cycle-icon--check">✓</div>
+          <div class="cycle-connector"></div>
+          <span class="cycle-type">Check</span>
+        </div>
+        <div class="cycle-body">
+          <span class="cycle-timing">~30 Days After Session 1 · September</span>
+          <h3>Checkpoint 1 — Field Application Reflection</h3>
+          <p>1-page written or 2-minute recorded reflection: one time they used a facilitation technique in the field. Did it work? What would they change? Plus a 10-item Skills Self-Assessment that opens Session 2 with real data.</p>
+          <div class="cycle-tags"><span class="cycle-tag cycle-tag--new">New · Required (not optional)</span><span class="cycle-tag cycle-tag--new">Feeds Session 2</span></div>
+        </div>
+      </div>
+
+      <div class="cycle-row">
+        <div class="cycle-left">
+          <div class="cycle-icon cycle-icon--pre">P</div>
+          <div class="cycle-connector"></div>
+          <span class="cycle-type">Pre-Work</span>
+        </div>
+        <div class="cycle-body">
+          <span class="cycle-timing">1 Week Before Session 2 · Early October</span>
+          <h3>Review + Plan</h3>
+          <p>Review the Training Playbook independently. Complete a planning scenario using the 4 Essential Questions and bring it to Session 2 for peer calibration.</p>
+          <div class="cycle-tags"><span class="cycle-tag cycle-tag--new">New · ~30 min · Async</span></div>
+        </div>
+      </div>
+
+      <div class="cycle-row cycle-row--dark">
+        <div class="cycle-left">
+          <div class="cycle-icon cycle-icon--session">2</div>
+          <div class="cycle-connector"></div>
+          <span class="cycle-type" style="color:rgba(255,255,255,.3);">Session</span>
+        </div>
+        <div class="cycle-body">
+          <span class="cycle-timing">Full Day · October</span>
+          <h3>Session 2 — Identity, Planning &amp; Questioning</h3>
+          <p>Opens with aggregate Skills Self-Assessment data from Checkpoint 1. Who are you as a facilitator? Planning with intention. Six questioning types in jigsaw format. Fred case study — now with tools to apply. Goals set with accountability partner. Growth Journal entry #2.</p>
+          <div class="cycle-tags">
+            <span class="cycle-tag cycle-tag--keep">Keep: Tale of Two Trainings · Questioning</span>
+            <span class="cycle-tag cycle-tag--change">Change: Goals → Accountability Partner</span>
+            <span class="cycle-tag cycle-tag--cut">Cut: Standalone goal-setting</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cycle-row">
+        <div class="cycle-left">
+          <div class="cycle-icon cycle-icon--check">✓</div>
+          <div class="cycle-connector"></div>
+          <span class="cycle-type">Check</span>
+        </div>
+        <div class="cycle-body">
+          <span class="cycle-timing">30–45 Days After Session 2 · November</span>
+          <h3>Checkpoint 2 — Peer Observation Task</h3>
+          <p>Observe a peer facilitating something real — a huddle, coaching conversation, or training rollout — and complete a structured observation form. Notes brought to Session 3 and feed directly into the capstone debrief.</p>
+          <div class="cycle-tags"><span class="cycle-tag cycle-tag--new">New · Required · Feeds Session 3</span></div>
+        </div>
+      </div>
+
+      <div class="cycle-row">
+        <div class="cycle-left">
+          <div class="cycle-icon cycle-icon--pre">P</div>
+          <div class="cycle-connector"></div>
+          <span class="cycle-type">Pre-Work</span>
+        </div>
+        <div class="cycle-body">
+          <span class="cycle-timing">1 Week Before Session 3 · Late November</span>
+          <h3>Prepare to Facilitate Existing Content</h3>
+          <p>Receive assigned Bojangles content (a real module or standard). Use the talking points template to annotate it — building entry points, questions, and transitions without changing the content itself. Arrive with a working plan, not a blank page.</p>
+          <div class="cycle-tags"><span class="cycle-tag cycle-tag--new">New · Replaces original content creation · ~45 min</span></div>
+        </div>
+      </div>
+
+      <div class="cycle-row cycle-row--dark">
+        <div class="cycle-left">
+          <div class="cycle-icon cycle-icon--session">3</div>
+          <div class="cycle-connector"></div>
+          <span class="cycle-type" style="color:rgba(255,255,255,.3);">Session</span>
+        </div>
+        <div class="cycle-body">
+          <span class="cycle-timing">2–3 Days · December</span>
+          <h3>Session 3 — Facilitate, Reflect &amp; Grow</h3>
+          <p>Retrieval review via jigsaw teach-back. Talking points deep dive. Three or four facilitation rounds (7–10 min) using assigned Bojangles content. After each: structured self-debrief (plus/delta/one thing), then T&D focused observation on one dimension only. Video self-review with guided protocol. Growth Journal entry #3. Certification decision.</p>
+          <div class="cycle-tags">
+            <span class="cycle-tag cycle-tag--keep">Keep: Filming · Jigsaw</span>
+            <span class="cycle-tag cycle-tag--change">Change: Guided protocol · Existing content</span>
+            <span class="cycle-tag cycle-tag--new">New: Facilitation rounds · Self-debrief</span>
+            <span class="cycle-tag cycle-tag--cut">Cut: Original creation · Unstructured peer feedback</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cycle-row">
+        <div class="cycle-left">
+          <div class="cycle-icon cycle-icon--cert">★</div>
+          <div class="cycle-connector"></div>
+          <span class="cycle-type">Cert</span>
+        </div>
+        <div class="cycle-body">
+          <span class="cycle-timing">End of Session 3</span>
+          <h3>Certification Decision</h3>
+          <p>Evaluated against the Facilitator Certification Rubric — 5 dimensions: learner-centeredness, questioning quality, engagement design, content accuracy, facilitation presence. Three outcomes: Certified, Conditionally Certified with a follow-up task, or a structured re-attempt plan. Documented in BoUniversity.</p>
+          <div class="cycle-tags"><span class="cycle-tag cycle-tag--new">New rubric required</span><span class="cycle-tag cycle-tag--new">Three-outcome model</span><a href="facilitator-certification-rubric.html" style="font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-mid);text-decoration:none;border-bottom:1px solid var(--teal-light);padding-bottom:1px;">View rubric ↗</a></div>
+        </div>
+      </div>
+
+      <div class="cycle-row">
+        <div class="cycle-left">
+          <div class="cycle-icon cycle-icon--post">90</div>
+        </div>
+        <div class="cycle-body">
+          <span class="cycle-timing">90 Days Post-Certification · March</span>
+          <h3>Field Observation</h3>
+          <p>T&D team member or certified peer observes the participant facilitating something real in their context. Scored on a shortened rubric. Results documented. Closes the loop and generates data on whether certification is producing behavior change in the field.</p>
+          <div class="cycle-tags"><span class="cycle-tag cycle-tag--new">New · Kirkpatrick Level 3 · Feeds future cohorts</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- RATIONALE -->
+<section class="section rationale-section" id="rationale">
+  <div class="wrap">
+    <div class="eyebrow">Session 3 rationale</div>
+    <h2>Two decisions. Both grounded in research.</h2>
+    <div class="rationale-grid">
+      <div class="rat-cell">
+        <span class="rat-num">01</span>
+        <span class="rat-tag">Capstone shift</span>
+        <h3>Facilitating existing content is harder than creating your own</h3>
+        <p>When facilitators write their own content, they can design around their comfort zone — familiar examples, safe topics, material they know cold. Facilitating a pre-built module removes that safety net. They have to read the room, respond to what comes up, and make someone else's structure feel alive.</p>
+        <p style="margin-top:10px;">That's the actual job. The talking points work stays — it's how participants internalize and annotate existing content without drifting from it or reading it verbatim.</p>
+        <div class="rat-quote">We don't certify a conductor by asking them to compose. We watch them lead an orchestra through music that already exists.</div>
+      </div>
+      <div class="rat-cell rat-cell--dark">
+        <span class="rat-num">02</span>
+        <span class="rat-tag">Feedback shift</span>
+        <h3>Facilitation rounds replace one high-stakes capstone</h3>
+        <p style="color:rgba(255,255,255,.5);">Three or four short facilitation rounds (7–10 min each) with focused T&D observation beats one high-stakes filmed presentation on every dimension that matters: lower anxiety, higher practice volume, faster skill acquisition. After each round, the participant completes a structured self-debrief before receiving any external input.</p>
+        <div class="rat-quote">Research basis: Rosenshine (2012) — high-frequency low-stakes practice accelerates skill acquisition. Ericsson — narrow focus per session outperforms comprehensive evaluation. Zimmerman (2002) — self-generated commitments produce more durable behavior change than externally assigned ones.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- MEASUREMENT -->
+<section class="section measurement-section" id="measurement">
+  <div class="wrap">
+    <div class="eyebrow">Measurement framework</div>
+    <h2>Grounded in Kirkpatrick's Four Levels.</h2>
+    <div class="kirkpatrick-grid">
+      <div class="kp-cell">
+        <span class="kp-level">L1</span>
+        <span class="kp-label">Reaction</span>
+        <h3>Did they value it?</h3>
+        <p>End-of-session surveys enhanced with two items: confidence rating (pre/post) and one specific change suggestion. Trend tracked across cohorts to improve the design over time.</p>
+      </div>
+      <div class="kp-cell">
+        <span class="kp-level">L2</span>
+        <span class="kp-label">Learning</span>
+        <h3>Did they grow?</h3>
+        <p>Facilitation rounds scored by T&D against the certification rubric — one dimension observed per round across multiple rounds. Final round is the certification decision point.</p>
+      </div>
+      <div class="kp-cell">
+        <span class="kp-level">L3</span>
+        <span class="kp-label">Behavior</span>
+        <h3>Did behavior change?</h3>
+        <p>90-day field observation. Did the skills transfer to the real work? Scored on a shortened rubric by T&D or a certified peer observer. The most important data point in the stack.</p>
+      </div>
+      <div class="kp-cell">
+        <span class="kp-level">L4</span>
+        <span class="kp-label">Results</span>
+        <h3>Did it move the org?</h3>
+        <p>Long-term: training consistency scores, new hire retention rates, and operational metrics in areas with certified facilitators vs. those without. The business case for the program.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- BUILD PRIORITY -->
+<section class="section priority-section" id="priority">
+  <div class="wrap">
+    <div class="eyebrow">Build priority order</div>
+    <h2>Nothing else functions without #1.</h2>
+    <p style="max-width:560px;margin-top:10px;">Work down the list. Each item either enables the ones below it or fills a structural gap independently.</p>
+    <div class="priority-list">
+      <div class="priority-row">
+        <div class="priority-num">1</div>
+        <div class="priority-body">
+          <strong>Facilitator Certification Rubric</strong>
+          <p>5 dimensions, observable behaviors, three-outcome scoring. Foundation of every feedback and measurement activity in the series. Without this, nothing else is evaluable.</p>
+          <span class="priority-status priority-status--built">Built — view rubric ↗</span>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">2</div>
+        <div class="priority-body">
+          <strong>Between-Session Checkpoints (1 &amp; 2)</strong>
+          <p>Checkpoint templates, submission format, and the Skills Self-Assessment that opens Session 2. These convert the series from 3 events to a 6-month program.</p>
+          <span class="priority-status priority-status--next">Next to build</span>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">3</div>
+        <div class="priority-body">
+          <strong>Pre-Work Packets (all three sessions)</strong>
+          <p>Low-lift to build. High-impact for participants with no prior facilitation experience. Reduces first-hour catch-up in each session.</p>
+          <span class="priority-status priority-status--planned">Planned</span>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">4</div>
+        <div class="priority-body">
+          <strong>Facilitator Growth Journal Template</strong>
+          <p>One page, four consistent questions, used at the end of every session. Creates a longitudinal artifact participants own across the series.</p>
+          <span class="priority-status priority-status--planned">Planned</span>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">5</div>
+        <div class="priority-body">
+          <strong>Session 1 &amp; 3 Restructure</strong>
+          <p>Session 1: tighten the opening, explicit facilitator model, move Lindsey reteach. Session 3: build the facilitation rounds structure, guided self-review protocol, and talking points annotation activity.</p>
+          <span class="priority-status priority-status--planned">Planned</span>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">6</div>
+        <div class="priority-body">
+          <strong>90-Day Post-Certification Observation Tool</strong>
+          <p>Shortened rubric + structured observation protocol. Kirkpatrick Level 3 evidence and the most important artifact for VP-level reporting on program impact.</p>
+          <span class="priority-status priority-status--planned">Planned</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cross-link to WiRL -->
+    <div class="crosslink-bar">
+      <div class="cl-text">
+        <h3>Connected: Leaders as Learning Architects · WiRL 2026</h3>
+        <p>The Teach/Coach/Measure framework from the WiRL keynote is the conceptual foundation for this redesign — specifically the Measure dimension, which is exactly what was missing from Round 1. The certification rubric is the measurement infrastructure that makes "did they learn to facilitate?" answerable with evidence, not assumption.</p>
+      </div>
+      <a href="wirl-2026.html" class="cl-link">View WiRL session ↗</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
