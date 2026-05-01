@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaders as Learning Architects — WiRL 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Mulish:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e1c2b;
+  --muted: #6b7c8d;
+  --subtle: #9daab5;
+  --bg: #f4f5f7;
+  --white: #fff;
+  --accent: #c8973a;
+  --accent-light: #f5edd8;
+  --rule: #dde2e8;
+  --wirl: #6d2e46;
+  --wirl-mid: #a24d6b;
+  --wirl-light: #f5e8ed;
+  --wirl-muted: #c48a9e;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Mulish',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+.wrap{width:min(1060px,92vw);margin:0 auto;}
+h1,h2,h3{font-family:'Playfair Display',serif;}
+p{color:var(--muted);line-height:1.75;font-size:.93rem;}
+.rule{border:none;border-top:1px solid var(--rule);margin:0;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:14px;}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent);}
+.back-bar{padding:14px 0;background:var(--bg);border-bottom:1px solid var(--rule);}
+.back-link{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .2s;}
+.back-link:hover{color:var(--ink);}
+
+/* HERO */
+.hero{background:var(--wirl);padding:72px 0 64px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 70% 40%, rgba(255,255,255,.06) 0%, transparent 55%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),rgba(200,151,58,.2));}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 380px;gap:56px;align-items:center;}
+.hero-venue{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,151,58,.7);margin-bottom:16px;display:block;}
+.hero h1{font-size:clamp(2rem,4vw,3.2rem);color:white;line-height:1.1;margin-bottom:14px;}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero-sub{color:rgba(255,255,255,.55);font-size:.92rem;line-height:1.75;max-width:420px;}
+.hero-meta{display:flex;flex-direction:column;gap:8px;margin-top:28px;}
+.hm-row{display:flex;align-items:center;gap:10px;}
+.hm-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);min-width:72px;}
+.hm-val{font-size:.82rem;color:rgba(255,255,255,.7);font-weight:600;}
+
+/* Speaker card */
+.speaker-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;}
+.sc-header{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.08);}
+.sc-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);}
+.sc-body{padding:20px;}
+.sc-speaker{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.sc-speaker:last-child{border-bottom:none;padding-bottom:0;}
+.sc-avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:600;}
+.sc-avatar--km{background:rgba(200,151,58,.25);color:var(--accent);}
+.sc-avatar--lh{background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);}
+.sc-name{font-size:.82rem;font-weight:700;color:white;display:block;margin-bottom:2px;}
+.sc-role{font-size:.7rem;color:rgba(255,255,255,.4);}
+.sc-you{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;border-radius:2px;background:rgba(200,151,58,.2);color:var(--accent);margin-left:6px;}
+.sc-framework{margin-top:16px;padding:14px;background:rgba(255,255,255,.04);border-radius:6px;}
+.scf-label{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);display:block;margin-bottom:10px;}
+.scf-row{display:flex;gap:8px;}
+.scf-pill{flex:1;padding:8px 10px;background:rgba(200,151,58,.12);border:1px solid rgba(200,151,58,.2);border-radius:4px;text-align:center;}
+.scf-pill span{font-size:.7rem;font-weight:700;color:var(--accent);display:block;}
+
+/* FRAMEWORK */
+.framework-section{padding:72px 0;background:white;}
+.framework-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.fw-card{background:white;padding:32px 28px;transition:background .2s;}
+.fw-card:hover{background:#fafbfc;}
+.fw-icon{width:44px;height:44px;border-radius:8px;margin-bottom:18px;display:flex;align-items:center;justify-content:center;}
+.fw-icon--teach{background:var(--wirl-light);}
+.fw-icon--coach{background:#fff3e0;}
+.fw-icon--measure{background:#e8f5e9;}
+.fw-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--rule);line-height:1;display:block;margin-bottom:10px;}
+.fw-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;color:var(--ink);margin-bottom:10px;}
+.fw-desc{font-size:.84rem;line-height:1.72;}
+.fw-insight{margin-top:14px;padding:10px 14px;border-left:3px solid var(--wirl);border-radius:0 4px 4px 0;background:var(--wirl-light);font-size:.78rem;color:var(--wirl);line-height:1.55;font-style:italic;}
+.fw-card:nth-child(2) .fw-insight{border-color:var(--accent);background:var(--accent-light);color:#8a5e1a;}
+.fw-card:nth-child(3) .fw-insight{border-color:#2e7d32;background:#e8f5e9;color:#2e7d32;}
+
+/* KEY IDEAS */
+.ideas-section{padding:72px 0;background:var(--bg);}
+.ideas-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.idea-card{background:white;padding:32px 28px;}
+.idea-card--dark{background:var(--ink);}
+.idea-tag{font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:10px;}
+.idea-card--dark .idea-tag{color:rgba(200,151,58,.75);}
+.idea-card h3{font-size:1.05rem;margin-bottom:10px;}
+.idea-card--dark h3{color:white;}
+.idea-card p{font-size:.84rem;line-height:1.72;}
+.idea-card--dark p{color:rgba(255,255,255,.5);}
+.idea-quote{margin-top:14px;padding:12px 16px;background:var(--wirl-light);border-left:3px solid var(--wirl);border-radius:0 4px 4px 0;font-size:.8rem;color:var(--wirl);font-style:italic;line-height:1.6;}
+.idea-card--dark .idea-quote{background:rgba(255,255,255,.05);border-color:rgba(200,151,58,.3);color:rgba(255,255,255,.65);}
+
+/* METACOGNITIVE */
+.meta-section{padding:72px 0;background:white;}
+.meta-block{background:var(--wirl);border-radius:8px;padding:52px;margin-top:36px;position:relative;overflow:hidden;}
+.meta-block::before{content:'';position:absolute;top:0;right:0;width:300px;height:100%;background:radial-gradient(circle at 85% 50%,rgba(255,255,255,.07) 0%,transparent 60%);}
+.meta-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+.mb-text h2{color:white;font-size:1.7rem;margin-bottom:16px;}
+.mb-text p{color:rgba(255,255,255,.55);line-height:1.78;font-size:.88rem;margin-bottom:14px;}
+.mb-text p em{color:var(--accent);font-style:italic;}
+.mb-moments{display:flex;flex-direction:column;gap:10px;}
+.mb-moment{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:16px 18px;}
+.mb-moment-label{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--wirl-muted);display:block;margin-bottom:5px;}
+.mb-moment p{font-size:.8rem;color:rgba(255,255,255,.65);line-height:1.6;font-style:italic;}
+
+/* QUESTION BANK */
+.qbank-section{padding:72px 0;background:var(--bg);}
+.qbank-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.qb-card{background:white;padding:28px 26px;}
+.qb-type{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:8px;}
+.qb-card:nth-child(1) .qb-type{color:var(--wirl);}
+.qb-card:nth-child(2) .qb-type{color:var(--accent);}
+.qb-card:nth-child(3) .qb-type{color:#2e7d32;}
+.qb-card:nth-child(4) .qb-type{color:#1565c0;}
+.qb-card h3{font-size:.95rem;margin-bottom:10px;}
+.qb-examples{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+.qb-example{font-size:.78rem;color:var(--muted);padding:8px 12px;background:var(--bg);border-radius:4px;border-left:2px solid var(--rule);font-style:italic;line-height:1.5;}
+.rule-box{margin-top:16px;background:var(--ink);border-radius:6px;padding:20px 24px;display:flex;align-items:center;gap:16px;}
+.rb-label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);white-space:nowrap;}
+.rb-rule{font-size:.85rem;color:white;line-height:1.55;}
+.rb-rule em{color:var(--accent);font-style:normal;font-weight:700;}
+
+/* THROUGH LINE */
+.through-section{padding:72px 0;background:white;}
+.through-block{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.tb-cell{background:white;padding:36px 32px;}
+.tb-cell--accent{background:var(--wirl-light);}
+.tb-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--wirl);display:block;margin-bottom:10px;}
+.tb-cell:not(.tb-cell--accent) .tb-label{color:var(--subtle);}
+.tb-cell h3{font-size:1.05rem;margin-bottom:10px;}
+.tb-cell p{font-size:.84rem;line-height:1.72;}
+
+@media(max-width:860px){
+  .hero-inner,.framework-grid,.ideas-grid,.meta-inner,.qbank-grid,.through-block{grid-template-columns:1fr;}
+  .speaker-card{display:none;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.hero-inner{animation:fadeUp .6s ease both;}
+</style>
+</head>
+<body>
+
+<div class="back-bar">
+  <div class="wrap">
+    <a href="https://kathrynmurrow.github.io/portfolio/" class="back-link">← Back to portfolio</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-venue">Women in Restaurant Leadership · WiRL 2026 · Keynote Session</span>
+        <h1>Leaders as <em>Learning Architects</em></h1>
+        <p class="hero-sub">Rethinking how leaders teach, measure, and coach — moving beyond completion metrics toward evidence of real behavior change. A framework for any leader who shapes how others learn and decide.</p>
+        <div class="hero-meta">
+          <div class="hm-row"><span class="hm-label">Session</span><span class="hm-val">Leaders as Learning Architects: Rethinking How We Teach, Measure, and Coach</span></div>
+          <div class="hm-row"><span class="hm-label">Venue</span><span class="hm-val">Women in Restaurant Leadership (WiRL) · 2026</span></div>
+          <div class="hm-row"><span class="hm-label">Format</span><span class="hm-val">Co-facilitated keynote · 26 slides · interactive activities</span></div>
+          <div class="hm-row"><span class="hm-label">Framework</span><span class="hm-val">Teach · Coach · Measure</span></div>
+        </div>
+      </div>
+      <div class="speaker-card">
+        <div class="sc-header"><span class="sc-label">Learning Architects</span></div>
+        <div class="sc-body">
+          <div class="sc-speaker">
+            <div class="sc-avatar sc-avatar--km">KM</div>
+            <div>
+              <span class="sc-name">Kathryn Murrow <span class="sc-you">You</span></span>
+              <span class="sc-role">Director, Leadership Development &amp; eLearning · Bojangles</span>
+            </div>
+          </div>
+          <div class="sc-speaker">
+            <div class="sc-avatar sc-avatar--lh">LH</div>
+            <div>
+              <span class="sc-name">Lindsey Halson</span>
+              <span class="sc-role">Sr. Director, Training and Development</span>
+            </div>
+          </div>
+          <div class="sc-framework">
+            <span class="scf-label">The framework</span>
+            <div class="scf-row">
+              <div class="scf-pill"><span>Teach</span></div>
+              <div class="scf-pill"><span>Coach</span></div>
+              <div class="scf-pill"><span>Measure</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- FRAMEWORK -->
+<section class="framework-section">
+  <div class="wrap">
+    <div class="eyebrow">The framework</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">Teaching hides in leadership. Most leaders don't see it.</h2>
+    <p style="max-width:580px; margin-top:10px;">Every leader who shapes how others learn, decide, or change behavior is already a learning architect — whether they know it or not. The question is whether the design is intentional.</p>
+    <div class="framework-grid">
+      <div class="fw-card">
+        <div class="fw-icon fw-icon--teach">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="4" width="16" height="11" rx="2" stroke="#6d2e46" stroke-width="1.5"/><path d="M8 19h6M11 15v4" stroke="#6d2e46" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <span class="fw-num">01</span>
+        <h3 class="fw-title">Teach</h3>
+        <p>Design experiences that create understanding — not just information transfer. The best leaders don't explain more clearly. They architect moments where learning happens naturally, and they plan for transfer from the start.</p>
+        <p class="fw-insight">Stop being the answer. Start being the architect. Facilitate, don't lecture — your role is to guide thinking, not deliver it.</p>
+      </div>
+      <div class="fw-card">
+        <div class="fw-icon fw-icon--coach">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="8" r="4" stroke="#c8973a" stroke-width="1.5"/><path d="M4 18c0-3.31 3.13-6 7-6s7 2.69 7 6" stroke="#c8973a" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <span class="fw-num">02</span>
+        <h3 class="fw-title">Coach</h3>
+        <p>Use strategic questions to unlock thinking rather than providing all the answers. Directive questions check for compliance. Guiding questions create understanding. One closes thinking. The other opens it.</p>
+        <p class="fw-insight">Write guiding questions for the thinking level your audience is ready for — not the thinking level you wish they had.</p>
+      </div>
+      <div class="fw-card">
+        <div class="fw-icon fw-icon--measure">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 16l4-4 3 3 7-8" stroke="#2e7d32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="fw-num">03</span>
+        <h3 class="fw-title">Measure</h3>
+        <p>Seek and confirm evidence of understanding through observable behavior — not assumption. Engagement makes us feel good. Evidence tells us if understanding actually happened. The two are not the same thing.</p>
+        <p class="fw-insight">Define what "understanding" looks like as an observable behavior before the session starts — not after.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- KEY IDEAS -->
+<section class="ideas-section">
+  <div class="wrap">
+    <div class="eyebrow">Key ideas</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">The thinking behind the session.</h2>
+    <div class="ideas-grid">
+      <div class="idea-card">
+        <span class="idea-tag">The dangerous assumption</span>
+        <h3>Engagement is not evidence of understanding</h3>
+        <p>We've all been there: people nodded, looked engaged, asked a question. You assume it landed. But engagement measures participation — not proficiency. And when we coach engagement, we miss whether learning actually transferred to behavior.</p>
+        <div class="idea-quote">The question isn't "did they pay attention?" It's "what will they do differently tomorrow?"</div>
+      </div>
+      <div class="idea-card idea-card--dark">
+        <span class="idea-tag">The design discipline</span>
+        <h3>Better thinking doesn't happen by accident</h3>
+        <p style="color:rgba(255,255,255,.5);">Think-Pair-Share isn't a warm-up — it's a deliberate design decision. Alone prevents groupthink. Pairs create safety to test ideas. Group builds collective knowledge. Every facilitation choice is an architecture choice.</p>
+        <div class="idea-quote">Master Think-Pair-Share: give people time to think alone, then discuss in pairs, then share with the group. The sequence matters.</div>
+      </div>
+      <div class="idea-card idea-card--dark">
+        <span class="idea-tag">The transfer problem</span>
+        <h3>Learning isn't the goal — transfer is</h3>
+        <p style="color:rgba(255,255,255,.5);">If a leader can't use a framework to design something they actually own, it's still just information. The culminating activity of any well-designed session forces the shift from "I understand it" to "I can apply it" — with a measurable indicator so you're not guessing based on vibes.</p>
+        <div class="idea-quote">We're ending with application because that's where learning either happens or it doesn't.</div>
+      </div>
+      <div class="idea-card">
+        <span class="idea-tag">The precision tool</span>
+        <h3>Rewriting questions is where transfer happens</h3>
+        <p>Sorting examples that are similar forces hierarchical comparison of nuances. Ordering forces decisions rooted in reality. Rewriting does two things: it protects the quality of thinking under pressure, and it ensures discussion moves toward the outcome actually needed — not whatever comes up naturally.</p>
+        <div class="idea-quote">You're more likely to use questions you've made your own.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- METACOGNITIVE MOMENTS -->
+<section class="meta-section">
+  <div class="wrap">
+    <div class="eyebrow">Design transparency</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">Metacognitive moments — the thinking behind the design.</h2>
+    <div class="meta-block">
+      <div class="meta-inner">
+        <div class="mb-text">
+          <h2>We showed our work on purpose.</h2>
+          <p>One of the distinctive design choices in this session was building in explicit "metacognitive moments" — brief pauses where the facilitation team named <em>why</em> the session was designed the way it was, so attendees could recognize and replicate the strategies themselves.</p>
+          <p>The goal wasn't just to deliver the framework — it was to model the framework in the act of delivering it. Every design decision in the session was itself a teaching demonstration.</p>
+          <p>This approach came directly from the same philosophy behind the Credible Feedback Process: <em>the best way to develop a coach is to make your coaching thinking visible, not just your coaching behavior.</em></p>
+        </div>
+        <div class="mb-moments">
+          <div class="mb-moment">
+            <span class="mb-moment-label">Metacognitive moment · Opening</span>
+            <p>Adults learn best when new ideas connect to prior knowledge. Starting with a reflection question surfaces assumptions before the framework is introduced — so learning has something real to attach to.</p>
+          </div>
+          <div class="mb-moment">
+            <span class="mb-moment-label">Metacognitive moment · Think-Pair-Share</span>
+            <p>We had you sort and select questions on purpose. Sorting similar examples forces hierarchical comparison of nuances that abstract explanation can't create.</p>
+          </div>
+          <div class="mb-moment">
+            <span class="mb-moment-label">Metacognitive moment · Closing</span>
+            <p>We're ending with application because learning isn't the ultimate goal — transfer is. If you can't use the framework to design something you own, it's still just information.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- QUESTION BANK -->
+<section class="qbank-section">
+  <div class="wrap">
+    <div class="eyebrow">From the session</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">Building your question bank.</h2>
+    <p style="max-width:580px; margin-top:10px;">Guiding questions are one of the highest-leverage tools a leader has — designed to unlock thinking, not test for answers. Four types, each targeting a different level of cognitive engagement.</p>
+    <div class="qbank-grid">
+      <div class="qb-card">
+        <span class="qb-type">Connection questions</span>
+        <h3>Bridge to prior knowledge</h3>
+        <p style="font-size:.82rem;">Create safe entry points. Surface what people already know so new ideas have something to attach to.</p>
+        <div class="qb-examples">
+          <div class="qb-example">"How does this relate to what we discussed last week?"</div>
+          <div class="qb-example">"Where have you seen this work before?"</div>
+        </div>
+      </div>
+      <div class="qb-card">
+        <span class="qb-type">Analysis questions</span>
+        <h3>Surface patterns and assumptions</h3>
+        <p style="font-size:.82rem;">Where the real thinking happens. Forces examination of what's actually driving a result.</p>
+        <div class="qb-examples">
+          <div class="qb-example">"What patterns are you noticing?"</div>
+          <div class="qb-example">"What assumptions are we making?"</div>
+        </div>
+      </div>
+      <div class="qb-card">
+        <span class="qb-type">Application questions</span>
+        <h3>Force transfer to real context</h3>
+        <p style="font-size:.82rem;">Bridges understanding to action. If someone can't answer this, learning hasn't transferred yet.</p>
+        <div class="qb-examples">
+          <div class="qb-example">"How would you apply this tomorrow?"</div>
+          <div class="qb-example">"What's your next step?"</div>
+        </div>
+      </div>
+      <div class="qb-card">
+        <span class="qb-type">Reflection questions</span>
+        <h3>Capture what shifted</h3>
+        <p style="font-size:.82rem;">Makes learning visible. If nothing shifted, it's worth knowing that before the session ends.</p>
+        <div class="qb-examples">
+          <div class="qb-example">"What changed in your thinking?"</div>
+          <div class="qb-example">"What do you understand differently now?"</div>
+        </div>
+      </div>
+    </div>
+    <div class="rule-box" style="margin-top:16px;">
+      <span class="rb-label">The 1–2–1 Rule</span>
+      <p class="rb-rule">Before any session, prepare: <em>1</em> connection question (easy entry, builds safety) · <em>2</em> analysis questions (where the real thinking happens) · <em>1</em> application question (forces transfer). Four questions. Prepared in advance. Changes everything.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- THROUGH LINE -->
+<section class="through-section">
+  <div class="wrap">
+    <div class="eyebrow">The through-line</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">Same thesis. Two contexts.</h2>
+    <div class="through-block">
+      <div class="tb-cell">
+        <span class="tb-label">WiRL 2026 session</span>
+        <h3>Leaders as Learning Architects</h3>
+        <p>Every leader who shapes how others learn, decide, or change behavior is already designing learning — whether or not they recognize it. The session named that role explicitly and gave attendees the tools to do it deliberately: the Teach/Coach/Measure framework, guiding question design, and behavioral evidence as the standard for measuring impact.</p>
+      </div>
+      <div class="tb-cell tb-cell--accent">
+        <span class="tb-label">The enterprise work it connects to</span>
+        <h3>Leadership Foundations Series</h3>
+        <p>The same framework drives the four-course Leadership Foundations Series built for 870+ restaurant locations — where GMs, AGMs, and Shift Leaders are explicitly trained as coaches and learning architects for their teams. The "How Do You Know They Know?" module in each course is a direct application of the evidence-of-understanding principle from this session.</p>
+      </div>
+      <div class="tb-cell tb-cell--accent">
+        <span class="tb-label">The research it's grounded in</span>
+        <h3>Published in The Learning Professional</h3>
+        <p>The differentiated coaching approach in this session connects directly to the 2022 publication "In professional learning for coaches, one size doesn't fit all" — which argues that coaching development must be adapted to where each leader actually is, not where you wish they were.</p>
+      </div>
+      <div class="tb-cell">
+        <span class="tb-label">The tool it produced</span>
+        <h3>GrowthLens</h3>
+        <p>The hardest part of the Teach/Coach/Measure framework is the Measure — because coaching conversations evaporate the moment they end. GrowthLens was built specifically to fix that: continuous AI-interpreted development records that make the evidence of coaching visible, cumulative, and fair.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Designing Learning That Sticks — Consero L&D Forum 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Mulish:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e1c2b;
+  --muted: #6b7c8d;
+  --subtle: #9daab5;
+  --bg: #f4f5f7;
+  --white: #fff;
+  --accent: #c8973a;
+  --accent-light: #f5edd8;
+  --rule: #dde2e8;
+  --consero: #4a3800;
+  --consero-mid: #7a5c00;
+  --consero-light: #fdf3dc;
+  --gold: #b8860b;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Mulish',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+.wrap{width:min(1060px,92vw);margin:0 auto;}
+h1,h2,h3{font-family:'Playfair Display',serif;}
+p{color:var(--muted);line-height:1.75;font-size:.93rem;}
+.rule{border:none;border-top:1px solid var(--rule);margin:0;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:14px;}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent);}
+.back-bar{padding:14px 0;background:var(--bg);border-bottom:1px solid var(--rule);}
+.back-link{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .2s;}
+.back-link:hover{color:var(--ink);}
+
+/* HERO */
+.hero{background:var(--consero);padding:72px 0 64px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 60% 50%,rgba(200,151,58,.15) 0%,transparent 55%),linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:auto,40px 40px,40px 40px;pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),rgba(200,151,58,.2));}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 360px;gap:56px;align-items:center;}
+.hero-venue{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,151,58,.65);margin-bottom:16px;display:block;}
+.hero h1{font-size:clamp(1.9rem,3.5vw,3rem);color:white;line-height:1.1;margin-bottom:14px;}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero-sub{color:rgba(255,255,255,.52);font-size:.92rem;line-height:1.75;max-width:440px;}
+.hero-meta{display:flex;flex-direction:column;gap:8px;margin-top:24px;}
+.hm-row{display:flex;align-items:flex-start;gap:10px;}
+.hm-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);min-width:72px;padding-top:2px;}
+.hm-val{font-size:.82rem;color:rgba(255,255,255,.68);font-weight:600;line-height:1.4;}
+
+/* Panel card -->
+.panel-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;}
+.pc-header{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.08);}
+.pc-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);}
+.pc-body{padding:16px 18px;}
+.pc-panelist{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.pc-panelist:last-child{border-bottom:none;padding-bottom:0;}
+.pc-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:600;}
+.pc-avatar--km{background:rgba(200,151,58,.3);color:var(--accent);}
+.pc-avatar--other{background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);}
+.pc-name{font-size:.78rem;font-weight:700;color:white;display:block;margin-bottom:1px;}
+.pc-org{font-size:.68rem;color:rgba(255,255,255,.38);}
+.pc-you{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 5px;border-radius:2px;background:rgba(200,151,58,.2);color:var(--accent);margin-left:5px;}
+
+/* CONTEXT */
+.context-section{padding:72px 0;background:white;}
+.context-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.ctx-cell{background:white;padding:36px 32px;}
+.ctx-cell--dark{background:var(--ink);}
+.ctx-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--rule);line-height:1;display:block;margin-bottom:10px;}
+.ctx-cell--dark .ctx-num{color:rgba(255,255,255,.1);}
+.ctx-tag{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px;}
+.ctx-cell--dark .ctx-tag{color:rgba(200,151,58,.7);}
+.ctx-cell h3{font-size:1.05rem;margin-bottom:10px;}
+.ctx-cell--dark h3{color:white;}
+.ctx-cell p{font-size:.84rem;line-height:1.75;}
+.ctx-cell--dark p{color:rgba(255,255,255,.5);}
+
+/* THEMES -->
+.themes-section{padding:72px 0;background:var(--bg);}
+.themes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.theme-card{background:white;padding:30px 26px;}
+.theme-num{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--rule);line-height:1;display:block;margin-bottom:8px;}
+.theme-tag{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px;}
+.theme-card h3{font-size:1rem;margin-bottom:10px;}
+.theme-card p{font-size:.82rem;line-height:1.7;}
+.theme-quote{margin-top:12px;padding:10px 13px;background:var(--consero-light);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;font-size:.77rem;color:var(--consero-mid);font-style:italic;line-height:1.55;}
+
+/* CONNECTION */
+.connection-section{padding:72px 0;background:white;}
+.conn-block{background:var(--consero);border-radius:8px;padding:52px;margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;position:relative;overflow:hidden;}
+.conn-block::before{content:'';position:absolute;right:0;top:0;width:280px;height:100%;background:radial-gradient(circle at 80% 50%,rgba(200,151,58,.12) 0%,transparent 60%);pointer-events:none;}
+.cb-text{position:relative;z-index:2;}
+.cb-text h2{color:white;font-size:1.7rem;margin-bottom:16px;}
+.cb-text p{color:rgba(255,255,255,.52);line-height:1.78;font-size:.88rem;margin-bottom:14px;}
+.cb-text p em{color:var(--accent);font-style:italic;}
+.cb-credential{position:relative;z-index:2;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:28px;}
+.cc-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,151,58,.6);display:block;margin-bottom:14px;}
+.cc-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:flex-start;gap:10px;}
+.cc-item:last-child{border-bottom:none;padding-bottom:0;}
+.cc-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:6px;}
+.cc-text{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.5;}
+.cc-text strong{display:block;color:white;font-size:.82rem;margin-bottom:2px;}
+
+@media(max-width:860px){
+  .hero-inner,.context-grid,.themes-grid,.conn-block{grid-template-columns:1fr;}
+  .panel-card{display:none;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.hero-inner{animation:fadeUp .6s ease both;}
+</style>
+</head>
+<body>
+
+<div class="back-bar">
+  <div class="wrap">
+    <a href="https://kathrynmurrow.github.io/portfolio/" class="back-link">← Back to portfolio</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-venue">Consero Corporate Learning &amp; Development Forum · 2026</span>
+        <h1>Designing Learning <em>That Sticks:</em> Behavioral Science &amp; Learning Nudges</h1>
+        <p class="hero-sub">A panel discussion on the psychology of retention, designing for follow-through rather than just completion, and what behavioral science actually tells us about how adults learn and change.</p>
+        <div class="hero-meta">
+          <div class="hm-row"><span class="hm-label">Session</span><span class="hm-val">Designing Learning That Sticks: Behavioral Science &amp; Learning Nudges</span></div>
+          <div class="hm-row"><span class="hm-label">Venue</span><span class="hm-val">Consero Corporate L&amp;D Forum · 2026 · Day 3 closing panel</span></div>
+          <div class="hm-row"><span class="hm-label">Format</span><span class="hm-val">Expert panel · moderated discussion</span></div>
+          <div class="hm-row"><span class="hm-label">Moderator</span><span class="hm-val">Suneeta Mishra · Equifax</span></div>
+        </div>
+      </div>
+      <div class="panel-card">
+        <div class="pc-header"><span class="pc-label">Panelists</span></div>
+        <div class="pc-body">
+          <div class="pc-panelist">
+            <div class="pc-avatar pc-avatar--km">KM</div>
+            <div>
+              <span class="pc-name">Kathryn Murrow <span class="pc-you">You</span></span>
+              <span class="pc-org">Bojangles Restaurants, Inc.</span>
+            </div>
+          </div>
+          <div class="pc-panelist">
+            <div class="pc-avatar pc-avatar--other">GM</div>
+            <div>
+              <span class="pc-name">Gwendolyn Martin</span>
+              <span class="pc-org">Tractor Supply Company</span>
+            </div>
+          </div>
+          <div class="pc-panelist">
+            <div class="pc-avatar pc-avatar--other">RR</div>
+            <div>
+              <span class="pc-name">Rhonda Reeves</span>
+              <span class="pc-org">NOV</span>
+            </div>
+          </div>
+          <div class="pc-panelist">
+            <div class="pc-avatar pc-avatar--other">TS</div>
+            <div>
+              <span class="pc-name">Tatiana Schrader</span>
+              <span class="pc-org">Baptist Health South Florida</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CONTEXT -->
+<section class="context-section">
+  <div class="wrap">
+    <div class="eyebrow">The conversation</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">What the panel covered.</h2>
+    <div class="context-grid">
+      <div class="ctx-cell">
+        <span class="ctx-num">01</span>
+        <span class="ctx-tag">The central question</span>
+        <h3>Why does most learning not stick?</h3>
+        <p>Organizations invest heavily in learning programs that produce completion rates — and little else. The panel examined what behavioral science actually tells us about retention, transfer, and behavior change: why information doesn't automatically become capability, and what it takes to close that gap by design.</p>
+      </div>
+      <div class="ctx-cell ctx-cell--dark">
+        <span class="ctx-num">02</span>
+        <span class="ctx-tag">The behavioral science angle</span>
+        <h3>Designing for follow-through, not just attendance</h3>
+        <p style="color:rgba(255,255,255,.5);">The forum went deep on the psychology of retention — spaced repetition, retrieval practice, implementation intentions, and nudge theory. The practical implication: if behavior change isn't engineered into the design of a learning program, it won't emerge from attendance alone. Completion certificates don't produce behavior change. Deliberate follow-through architecture does.</p>
+      </div>
+      <div class="ctx-cell ctx-cell--dark">
+        <span class="ctx-num">03</span>
+        <span class="ctx-tag">The enterprise angle</span>
+        <h3>Learning nudges at scale</h3>
+        <p style="color:rgba(255,255,255,.5);">Panelists shared specific applications from organizations operating at scale — where the challenge isn't designing one well-crafted learning experience, but engineering the conditions for behavior change across hundreds of sites and thousands of managers who are running operations while trying to develop their teams.</p>
+      </div>
+      <div class="ctx-cell">
+        <span class="ctx-num">04</span>
+        <span class="ctx-tag">The Bojangles perspective</span>
+        <h3>30-60-90 day follow-through as infrastructure</h3>
+        <p>The automation pipeline being built at Bojangles — ILT events that trigger 30/60/90-day implementation reminders automatically — is a direct application of nudge theory at enterprise scale. The insight isn't that training needs to be better designed. It's that the environment after training needs to be deliberately engineered to reinforce what was learned.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- THEMES -->
+<section class="themes-section">
+  <div class="wrap">
+    <div class="eyebrow">Key themes</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">What came out of the discussion.</h2>
+    <div class="themes-grid">
+      <div class="theme-card">
+        <span class="theme-num">01</span>
+        <span class="theme-tag">Retention science</span>
+        <h3>Spacing beats massing</h3>
+        <p>One well-designed four-hour training is less effective than four one-hour sessions spread over weeks. The research on spaced practice is unambiguous — and almost universally ignored in enterprise L&D because spaced delivery is harder to schedule and count.</p>
+        <div class="theme-quote">The half-life of a training event is about 72 hours. Without deliberate reinforcement, most of what was learned has faded before the employee ever applies it.</div>
+      </div>
+      <div class="theme-card">
+        <span class="theme-num">02</span>
+        <span class="theme-tag">Nudge design</span>
+        <h3>Environment shapes behavior more than intention</h3>
+        <p>Implementation intentions — "when X happens, I will do Y" — dramatically increase follow-through rates. Learning nudges are environmental cues designed to trigger those intentions at the right moment, in the right context, with minimal friction.</p>
+        <div class="theme-quote">Don't ask managers to remember to coach. Engineer the moment when coaching is most likely to happen, and make it easy to act.</div>
+      </div>
+      <div class="theme-card">
+        <span class="theme-num">03</span>
+        <span class="theme-tag">Transfer gap</span>
+        <h3>Completion is the wrong metric</h3>
+        <p>Organizations measure completion because it's easy to count. But completion tells you a person attended — it says nothing about whether behavior changed. Designing for transfer requires defining what observable behavior change looks like before the program is built, not after.</p>
+        <div class="theme-quote">If you can't describe what "success" looks like as an observable behavior at 90 days, you're measuring the wrong thing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CONNECTION TO ENTERPRISE WORK -->
+<section class="connection-section">
+  <div class="wrap">
+    <div class="eyebrow">The connection</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">How this panel connects to the enterprise work.</h2>
+    <div class="conn-block">
+      <div class="cb-text">
+        <h2>This isn't theory. It's the design brief for the systems being built.</h2>
+        <p>The behavioral science framing from this panel is the intellectual foundation for the ILT communication pipeline being built at Bojangles — where every training event automatically triggers 30/60/90-day implementation reminders, classroom-to-field resources sent to supervisors, and follow-through nudges designed to close the gap that training alone never closes.</p>
+        <p>It's also the thesis behind GrowthLens: <em>development evidence should accumulate the way environmental reinforcement does</em> — gradually, continuously, triggered by real moments rather than scheduled review cycles.</p>
+        <p>The panel wasn't a separate track from the enterprise work. It was a public articulation of the same thinking that's being operationalized across 870+ locations.</p>
+      </div>
+      <div class="cb-credential">
+        <span class="cc-label">Related systems built from this thinking</span>
+        <div class="cc-item">
+          <span class="cc-dot"></span>
+          <span class="cc-text"><strong>ILT Follow-Through Pipeline</strong>Power Automate automation triggering 30/60/90-day nudges after every training event — 14–21 hours eliminated per event across 6 coordinators</span>
+        </div>
+        <div class="cc-item">
+          <span class="cc-dot"></span>
+          <span class="cc-text"><strong>Leadership Foundations Series</strong>56-artifact program with embedded behavior checkpoints, exit tickets, and commitment cards designed for transfer — not completion</span>
+        </div>
+        <div class="cc-item">
+          <span class="cc-dot"></span>
+          <span class="cc-text"><strong>GrowthLens</strong>AI-interpreted development records built around the insight that behavior change requires continuous reinforcement — not annual snapshots</span>
+        </div>
+        <div class="cc-item">
+          <span class="cc-dot"></span>
+          <span class="cc-text"><strong>Published research</strong>"In professional learning for coaches, one size doesn't fit all" (The Learning Professional, 2022) — the evidence base for differentiated nudge design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
