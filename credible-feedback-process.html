@@ -1,94 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Credible Feedback Process</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'DM Sans',sans-serif;background:#fff;color:#2C2A27;padding:24px 14px 30px}
-    .wrap{max-width:1180px;margin:0 auto}
-    .eyebrow{text-align:center;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9A9590;margin-bottom:8px}
-    h1{text-align:center;font-family:'DM Serif Display',serif;font-size:clamp(2.1rem,4.8vw,4rem);line-height:1.02;margin-bottom:10px}
-    h1 em{font-style:italic;color:#6B6560}
-    .sub{text-align:center;color:#7A7570;font-size:clamp(.98rem,2vw,1.08rem);line-height:1.62;max-width:740px;margin:0 auto 24px}
-    .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-    .step{border:1px solid #E4E0DB;border-radius:20px;padding:22px 18px;background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.035)}
-    .numwrap{width:62px;height:62px;border-radius:999px;background:#F0EDE8;border:1px solid #C4BFB8;display:grid;place-items:center;margin:0 auto 16px}
-    .num{font-family:'DM Serif Display',serif;font-size:24px;color:#5A5550}
-    .label{text-align:center;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9A9590;margin-bottom:8px}
-    .title{text-align:center;font-family:'DM Serif Display',serif;font-size:22px;line-height:1.23;margin-bottom:14px}
-    .divider{width:28px;height:1px;background:#C4BFB8;margin:0 auto 14px}
-    ul{list-style:none}
-    li{font-size:.96rem;line-height:1.55;padding:8px 0;border-top:1px solid #E4E0DB;color:#4D4945}
-    li:last-child{border-bottom:1px solid #E4E0DB}
-    @media (max-width:1000px){.steps{grid-template-columns:repeat(2,minmax(0,1fr));}}
-    @media (max-width:640px){
-      body{padding:18px 12px 24px}
-      .steps{grid-template-columns:1fr;gap:12px}
-      .step{padding:18px 16px;border-radius:16px}
-      .title{font-size:1.55rem}
-      li{font-size:.94rem}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credible Feedback Process</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Mulish:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e1c2b;
+  --muted: #6b7c8d;
+  --subtle: #9daab5;
+  --bg: #f4f5f7;
+  --white: #ffffff;
+  --accent: #c8973a;
+  --accent-light: #f5edd8;
+  --rule: #dde2e8;
+  --navy: #162848;
+  --warm: #2a1a0e;
+  --warm-mid: #8b4513;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Mulish',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+.wrap{width:min(1060px,92vw);margin:0 auto;}
+h1,h2,h3{font-family:'Playfair Display',serif;}
+p{color:var(--muted);line-height:1.75;font-size:.93rem;}
+.rule{border:none;border-top:1px solid var(--rule);margin:0;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:14px;}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent);}
+.back-bar{padding:14px 0;background:var(--bg);border-bottom:1px solid var(--rule);}
+.back-link{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .2s;}
+.back-link:hover{color:var(--ink);}
+
+/* HERO */
+.hero{background:var(--warm);padding:72px 0 64px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),transparent);}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.hero-org{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,151,58,.65);margin-bottom:16px;display:block;}
+.hero h1{font-size:clamp(2.2rem,4vw,3.4rem);color:white;line-height:1.1;margin-bottom:16px;}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero-sub{color:rgba(255,255,255,.52);font-size:.95rem;line-height:1.75;max-width:420px;}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden;}
+.hs-cell{padding:22px 20px;}
+.hs-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--accent);line-height:1;display:block;margin-bottom:4px;}
+.hs-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;}
+
+/* CONTEXT */
+.context-section{padding:72px 0;background:white;}
+.context-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.ctx-cell{background:white;padding:36px 32px;}
+.ctx-cell--dark{background:var(--ink);}
+.ctx-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--rule);line-height:1;display:block;margin-bottom:10px;}
+.ctx-cell--dark .ctx-num{color:rgba(255,255,255,.1);}
+.ctx-tag{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px;}
+.ctx-cell--dark .ctx-tag{color:rgba(200,151,58,.75);}
+.ctx-cell h3{font-size:1.1rem;margin-bottom:10px;}
+.ctx-cell--dark h3{color:white;}
+.ctx-cell p{font-size:.85rem;line-height:1.75;}
+.ctx-cell--dark p{color:rgba(255,255,255,.5);}
+
+/* PROCESS DIAGRAM */
+.diagram-section{padding:72px 0;background:var(--bg);}
+.steps-wrap{margin-top:48px;display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;}
+.step-row{display:grid;grid-template-columns:80px 1fr 1fr;gap:0;background:white;border-bottom:1px solid var(--rule);transition:background .2s;}
+.step-row:last-child{border-bottom:none;}
+.step-row:hover{background:#fafbfc;}
+.step-row--dark{background:var(--navy)!important;}
+.step-row--dark:hover{background:#1d3255!important;}
+.step-left{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:28px 0 28px;border-right:1px solid var(--rule);position:relative;}
+.step-row--dark .step-left{border-color:rgba(255,255,255,.08);}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--accent);line-height:1;opacity:.6;}
+.step-connector{flex:1;width:1px;background:var(--rule);margin-top:10px;}
+.step-row--dark .step-connector{background:rgba(255,255,255,.08);}
+.step-arrow{font-size:.9rem;color:var(--accent);margin-bottom:8px;}
+.step-main{padding:28px 28px;border-right:1px solid var(--rule);}
+.step-row--dark .step-main{border-color:rgba(255,255,255,.08);}
+.step-tag{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px;}
+.step-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:500;margin-bottom:10px;}
+.step-row:not(.step-row--dark) .step-title{color:var(--ink);}
+.step-row--dark .step-title{color:white;}
+.step-main p{font-size:.83rem;line-height:1.7;}
+.step-row--dark .step-main p{color:rgba(255,255,255,.5);}
+.step-detail{padding:28px 28px;}
+.step-detail-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--subtle);display:block;margin-bottom:12px;}
+.step-row--dark .step-detail-label{color:rgba(255,255,255,.25);}
+.step-bullets{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.step-bullets li{font-size:.8rem;display:flex;align-items:flex-start;gap:8px;color:var(--muted);}
+.step-row--dark .step-bullets li{color:rgba(255,255,255,.4);}
+.step-bullets li::before{content:'—';color:var(--accent);font-weight:700;flex-shrink:0;margin-top:1px;}
+.step-evidence{margin-top:14px;padding:10px 13px;background:var(--accent-light);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;}
+.step-row--dark .step-evidence{background:rgba(200,151,58,.1);border-color:rgba(200,151,58,.3);}
+.step-evidence-label{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:3px;}
+.step-evidence p{font-size:.75rem;color:#8a5e1a;font-style:italic;}
+.step-row--dark .step-evidence p{color:rgba(200,151,58,.65);}
+
+/* CO-DESIGN CALLOUT */
+.codesign-section{padding:72px 0;background:white;}
+.codesign-block{background:var(--ink);border-radius:8px;padding:52px;margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;position:relative;overflow:hidden;}
+.codesign-block::before{content:'';position:absolute;right:0;top:0;width:300px;height:100%;background:radial-gradient(circle at 85% 50%,rgba(200,151,58,.1) 0%,transparent 60%);pointer-events:none;}
+.cb-text{position:relative;z-index:2;}
+.cb-text h2{color:white;font-size:1.7rem;margin-bottom:18px;}
+.cb-text p{color:rgba(255,255,255,.52);line-height:1.78;font-size:.88rem;margin-bottom:14px;}
+.cb-text p em{color:var(--accent);font-style:italic;}
+.cb-quote{position:relative;z-index:2;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:30px;}
+.cb-qmark{font-family:'Playfair Display',serif;font-size:4rem;line-height:.7;color:var(--accent);opacity:.35;display:block;margin-bottom:8px;}
+.cb-quote p{font-size:.92rem;color:rgba(255,255,255,.78);font-style:italic;line-height:1.75;}
+.cb-attr{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);}
+.cb-attr span{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:block;}
+.cb-attr small{font-size:.66rem;color:rgba(255,255,255,.28);margin-top:2px;display:block;}
+
+/* LINEAGE */
+.lineage-section{padding:72px 0;background:var(--bg);}
+.lineage-cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.lc-card{background:white;padding:32px 28px;}
+.lc-card--accent{background:var(--accent-light);border-left:4px solid var(--accent);}
+.lc-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:10px;}
+.lc-card:not(.lc-card--accent) .lc-label{color:var(--subtle);}
+.lc-card--accent .lc-label{color:var(--accent);}
+.lc-card h3{font-size:1.05rem;margin-bottom:10px;}
+.lc-card p{font-size:.83rem;line-height:1.7;}
+
+/* OUTCOMES */
+.outcomes-section{padding:72px 0;background:white;}
+.outcomes-bar{display:flex;background:var(--warm);border-radius:8px;overflow:hidden;margin-top:36px;}
+.ob-cell{flex:1;padding:28px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.08);}
+.ob-cell:last-child{border-right:none;}
+.ob-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--accent);line-height:1;display:block;margin-bottom:5px;}
+.ob-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.32);display:block;line-height:1.4;}
+.pub-strip{margin-top:16px;background:var(--bg);border:1px solid var(--rule);border-radius:6px;padding:20px 28px;display:flex;align-items:center;gap:20px;}
+.pub-strip-line{flex:1;height:1px;background:var(--rule);}
+.pub-strip p{font-size:.82rem;color:var(--muted);text-align:center;line-height:1.65;}
+.pub-strip p em{color:var(--ink);font-style:italic;}
+
+@media(max-width:860px){
+  .hero-inner,.context-grid,.step-row,.codesign-block,.lineage-cards{grid-template-columns:1fr;}
+  .step-left{display:none;}
+  .step-row{grid-template-columns:1fr;}
+  .step-main{border-right:none;border-bottom:1px solid var(--rule);}
+  .step-row--dark .step-main{border-color:rgba(255,255,255,.08);}
+  .hero-stats{display:flex;flex-wrap:wrap;}
+  .hs-cell{flex:1;min-width:45%;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.hero-inner{animation:fadeUp .6s ease both;}
+</style>
 </head>
 <body>
-  <main class="wrap">
-    <p class="eyebrow">Instructional leadership framework</p>
-    <h1>Credible feedback <em>process</em></h1>
-    <p class="sub">A four-step approach to observation, analysis, and accountable support.</p>
-    <section class="steps">
-      <article class="step">
-        <div class="numwrap"><div class="num">01</div></div>
-        <div class="label">Step one</div>
-        <h2 class="title">Attain knowledge of the standards</h2>
-        <div class="divider"></div>
-        <ul>
-          <li>PLC presence</li>
-          <li>See/hear charts</li>
-          <li>Vertical alignment of standards</li>
-          <li>Content-specific professional learning</li>
-        </ul>
-      </article>
-      <article class="step">
-        <div class="numwrap"><div class="num">02</div></div>
-        <div class="label">Step two</div>
-        <h2 class="title">Conduct classroom observations</h2>
-        <div class="divider"></div>
-        <ul>
-          <li>Observation roles</li>
-          <li>Low-inference data</li>
-          <li>See/hear charts</li>
-          <li>Calibration</li>
-        </ul>
-      </article>
-      <article class="step">
-        <div class="numwrap"><div class="num">03</div></div>
-        <div class="label">Step three</div>
-        <h2 class="title">Analyze data and determine area of focus</h2>
-        <div class="divider"></div>
-        <ul>
-          <li>Synthesize findings</li>
-          <li>Data-driven area of focus</li>
-          <li>Cumulative coaching evidence</li>
-          <li>Feedback trends</li>
-        </ul>
-      </article>
-      <article class="step">
-        <div class="numwrap"><div class="num">04</div></div>
-        <div class="label">Step four</div>
-        <h2 class="title">Deliver standards-based feedback</h2>
-        <div class="divider"></div>
-        <ul>
-          <li>Actionable next steps</li>
-          <li>Evidence-aligned support</li>
-          <li>Accountability through follow-up</li>
-          <li>Coaching documentation</li>
-        </ul>
-      </article>
-    </section>
-  </main>
+
+<div class="back-bar">
+  <div class="wrap">
+    <a href="https://kathrynmurrow.github.io/portfolio/" class="back-link">← Back to portfolio</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-org">Instructional Leadership Framework · OCPS</span>
+        <h1>Credible <em>feedback</em> process</h1>
+        <p class="hero-sub">A four-step observation and coaching system built for 350+ school leaders — grounded in low-inference data, standards alignment, and accountability through follow-up. Co-designed with the Chief Schools Officer.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hs-cell">
+          <span class="hs-num">350+</span>
+          <span class="hs-label">School leaders trained</span>
+        </div>
+        <div class="hs-cell">
+          <span class="hs-num">77%</span>
+          <span class="hs-label">School improvement rate</span>
+        </div>
+        <div class="hs-cell">
+          <span class="hs-num">5K+</span>
+          <span class="hs-label">K–2 students affected</span>
+        </div>
+        <div class="hs-cell">
+          <span class="hs-num">2</span>
+          <span class="hs-label">Peer-reviewed publications</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CONTEXT -->
+<section class="context-section">
+  <div class="wrap">
+    <div class="eyebrow">Origin</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">Built because feedback without evidence isn't feedback — it's opinion.</h2>
+    <div class="context-grid">
+      <div class="ctx-cell">
+        <span class="ctx-num">01</span>
+        <span class="ctx-tag">The problem</span>
+        <h3>Coaching was happening but nothing was changing</h3>
+        <p>School leaders were receiving feedback from principals and coaches, but the feedback wasn't grounded in observed behavior. Without standards mastery, low-inference data, or accountability structures, the conversations felt productive and produced nothing. The cycle repeated every year.</p>
+      </div>
+      <div class="ctx-cell ctx-cell--dark">
+        <span class="ctx-num">02</span>
+        <span class="ctx-tag">The design decision</span>
+        <h3>Evidence before judgment. Always.</h3>
+        <p style="color:rgba(255,255,255,.5);">The framework was built around a single non-negotiable: feedback must be grounded in observable, standards-aligned evidence before it's delivered. The four steps weren't arbitrary — they created the conditions for feedback that could actually be acted on, not just heard and forgotten.</p>
+      </div>
+      <div class="ctx-cell ctx-cell--dark">
+        <span class="ctx-num">03</span>
+        <span class="ctx-tag">The collaboration</span>
+        <h3>Co-designed with the Chief Schools Officer</h3>
+        <p style="color:rgba(255,255,255,.5);">The framework wasn't designed in isolation — it was built in partnership with the district's Chief Schools Officer and deployed through a cross-functional system for 350+ instructional leaders and coaches. The principal coaching system that emerged from it produced a 77% school improvement rate.</p>
+      </div>
+      <div class="ctx-cell">
+        <span class="ctx-num">04</span>
+        <span class="ctx-tag">The lineage</span>
+        <h3>The direct precursor to CLEAR coaching</h3>
+        <p>Every element of this framework — observable evidence, structured analysis, differentiated feedback, accountable follow-up — now lives inside the CLEAR coaching model embedded in the Bojangles Leadership Foundations Series. The context changed. The structure held.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- PROCESS DIAGRAM -->
+<section class="diagram-section">
+  <div class="wrap">
+    <div class="eyebrow">The framework</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">Four steps. Evidence at every stage.</h2>
+
+    <div class="steps-wrap">
+
+      <div class="step-row">
+        <div class="step-left">
+          <span class="step-num">01</span>
+          <div class="step-connector"></div>
+          <span class="step-arrow">↓</span>
+        </div>
+        <div class="step-main">
+          <span class="step-tag">Step one</span>
+          <h3 class="step-title">Attain knowledge of the standards</h3>
+          <p>Before any observation can produce credible feedback, the coach must deeply understand what excellent practice looks like — the standards, the vertical alignment, the specific indicators of mastery at each level. Without this foundation, observation is just watching.</p>
+        </div>
+        <div class="step-detail">
+          <span class="step-detail-label">How it's done</span>
+          <ul class="step-bullets">
+            <li>PLC participation and presence</li>
+            <li>See/hear chart development</li>
+            <li>Vertical alignment of standards across grade levels</li>
+            <li>Content-specific professional learning</li>
+          </ul>
+          <div class="step-evidence">
+            <span class="step-evidence-label">Evidence of completion</span>
+            <p>Coach can articulate what "good" looks like in observable terms before entering a classroom.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row step-row--dark">
+        <div class="step-left">
+          <span class="step-num">02</span>
+          <div class="step-connector"></div>
+          <span class="step-arrow">↓</span>
+        </div>
+        <div class="step-main">
+          <span class="step-tag">Step two</span>
+          <h3 class="step-title">Conduct classroom observations</h3>
+          <p>Observations must produce low-inference data — what was seen and heard, not what was interpreted. The use of calibrated observation roles and see/hear charts ensures that what gets recorded is evidence, not judgment. This is the step most coaching systems skip.</p>
+        </div>
+        <div class="step-detail">
+          <span class="step-detail-label">How it's done</span>
+          <ul class="step-bullets">
+            <li>Defined observation roles (scripting, tallying, scanning)</li>
+            <li>Low-inference data collection — behavior, not evaluation</li>
+            <li>See/hear charts to separate observation from interpretation</li>
+            <li>Inter-rater calibration for consistency across coaches</li>
+          </ul>
+          <div class="step-evidence">
+            <span class="step-evidence-label">Evidence of completion</span>
+            <p>Coach has documented behavioral data that could be verified by another observer in the same room.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-left">
+          <span class="step-num">03</span>
+          <div class="step-connector"></div>
+          <span class="step-arrow">↓</span>
+        </div>
+        <div class="step-main">
+          <span class="step-tag">Step three</span>
+          <h3 class="step-title">Analyze data and determine area of focus</h3>
+          <p>The data from multiple observations is synthesized to identify patterns — not isolated moments. A data-driven area of focus is selected based on what the evidence actually shows, not what the coach already believed. Cumulative evidence prevents recency bias from shaping the coaching conversation.</p>
+        </div>
+        <div class="step-detail">
+          <span class="step-detail-label">How it's done</span>
+          <ul class="step-bullets">
+            <li>Synthesis of findings across multiple observations</li>
+            <li>Data-driven identification of the area of focus</li>
+            <li>Cumulative coaching evidence review</li>
+            <li>Pattern identification across sessions</li>
+          </ul>
+          <div class="step-evidence">
+            <span class="step-evidence-label">Evidence of completion</span>
+            <p>A single, specific area of focus selected from evidence — not assumption — with data to support it.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row step-row--dark">
+        <div class="step-left">
+          <span class="step-num">04</span>
+        </div>
+        <div class="step-main">
+          <span class="step-tag">Step four</span>
+          <h3 class="step-title">Deliver standards-based feedback</h3>
+          <p>Feedback is delivered with specific, actionable next steps grounded in the evidence collected — not general encouragement or vague direction. Accountability is built into the delivery: follow-up is scheduled, documentation is maintained, and the loop closes at the next observation cycle.</p>
+        </div>
+        <div class="step-detail">
+          <span class="step-detail-label">How it's done</span>
+          <ul class="step-bullets">
+            <li>Evidence-aligned, actionable next steps</li>
+            <li>Differentiated delivery based on leader's development stage</li>
+            <li>Accountability through scheduled follow-up</li>
+            <li>Coaching documentation maintained across cycles</li>
+          </ul>
+          <div class="step-evidence">
+            <span class="step-evidence-label">Evidence of completion</span>
+            <p>Leader can articulate one specific next behavior and the date of the follow-up conversation.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CO-DESIGN -->
+<section class="codesign-section">
+  <div class="wrap">
+    <div class="eyebrow">The collaboration</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">Built with the Chief Schools Officer. Measured by student outcomes.</h2>
+    <div class="codesign-block">
+      <div class="cb-text">
+        <h2>A coaching system is only as good as the evidence it produces.</h2>
+        <p>This framework wasn't designed at a desk — it was co-designed in partnership with the district's Chief Schools Officer and tested across 350+ instructional leaders and coaches. The principal coaching system that emerged from it was tied directly to academic performance outcomes: 77% of participating schools showed measurable improvement.</p>
+        <p>The result was also the subject of two peer-reviewed publications in <em>The Learning Professional</em> and presented at ASCD, Learning Forward, and the Council of Great City Schools — the same national venues where the work was recognized as a model for differentiated coaching infrastructure.</p>
+      </div>
+      <div class="cb-quote">
+        <span class="cb-qmark">"</span>
+        <p>The value of a feedback framework isn't in the conversation it produces. It's in the behavior change that follows — and whether you can trace a line from the evidence you collected to the improvement you measured.</p>
+        <div class="cb-attr">
+          <span>The design principle behind the Credible Feedback Process</span>
+          <small>Orange County Public Schools · 2021–2024</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- LINEAGE -->
+<section class="lineage-section">
+  <div class="wrap">
+    <div class="eyebrow">The lineage</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">From instructional coaching to enterprise leadership development.</h2>
+    <div class="lineage-cards">
+      <div class="lc-card">
+        <span class="lc-label">Origin — OCPS</span>
+        <h3>Credible Feedback Process</h3>
+        <p>Four-step observation and coaching framework. Built for instructional leaders and coaches. Grounded in low-inference data, standards alignment, and accountable follow-up. Deployed across 350+ school leaders; produced 77% school improvement rate.</p>
+      </div>
+      <div class="lc-card lc-card--accent">
+        <span class="lc-label">Enterprise application — Bojangles</span>
+        <h3>CLEAR Coaching Framework</h3>
+        <p>The same four-phase logic — establish context, observe behavior, analyze evidence, deliver feedback with accountable next steps — adapted for GM, AGM, and Shift Leader development. Embedded across all four courses of the Leadership Foundations Series serving 870+ locations.</p>
+      </div>
+      <div class="lc-card">
+        <span class="lc-label">Further evolution</span>
+        <h3>GrowthLens</h3>
+        <p>The problem this framework was designed to solve — coaching conversations that happened and then vanished — is the same problem GrowthLens is built to fix at AI scale. Continuous, AI-interpreted development records that accumulate across sessions instead of disappearing after each one.</p>
+      </div>
+      <div class="lc-card lc-card--accent">
+        <span class="lc-label">The through-line</span>
+        <h3>Evidence before judgment. Always.</h3>
+        <p>Every system in this lineage is built around the same non-negotiable: observe first, interpret from data, deliver feedback grounded in what was actually seen — not what was assumed. The context changed. The principle didn't.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- OUTCOMES -->
+<section class="outcomes-section">
+  <div class="wrap">
+    <div class="eyebrow">Outcomes</div>
+    <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:500;">What the system produced.</h2>
+    <div class="outcomes-bar">
+      <div class="ob-cell">
+        <span class="ob-num">77%</span>
+        <span class="ob-label">School improvement rate — participating schools showed measurable academic gains</span>
+      </div>
+      <div class="ob-cell">
+        <span class="ob-num">350+</span>
+        <span class="ob-label">Instructional leaders and coaches trained through the system</span>
+      </div>
+      <div class="ob-cell">
+        <span class="ob-num">5K+</span>
+        <span class="ob-label">K–2 students affected by the Science of Reading coaching system</span>
+      </div>
+      <div class="ob-cell">
+        <span class="ob-num">2</span>
+        <span class="ob-label">Peer-reviewed publications in The Learning Professional</span>
+      </div>
+    </div>
+    <div class="pub-strip">
+      <div class="pub-strip-line"></div>
+      <p>Published in <em>The Learning Professional</em> (Vol. 43 &amp; 44) · Presented at ASCD, Learning Forward, and Council of Great City Schools</p>
+      <div class="pub-strip-line"></div>
+    </div>
+  </div>
+</section>
+
 </body>
 </html>
