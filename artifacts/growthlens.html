@@ -1,271 +1,900 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GrowthLens Prototype v2</title>
-  <style>
-    :root{
-      --navy:#0f172a;--cream:#f8f4ec;--cream2:#faf7f0;--white:#fff;--muted:#64748b;
-      --line:#e2e8f0;--green:#047857;--amber:#b45309;--blue:#1d4ed8;--rose:#be123c;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--cream);color:var(--navy)}
-    .app{display:flex;min-height:100vh}
-    aside{width:280px;background:var(--navy);color:white;padding:22px;position:fixed;top:0;bottom:0;overflow:auto}
-    main{margin-left:280px;flex:1}
-    .brand{display:flex;gap:12px;align-items:center;margin-bottom:26px}
-    .logo{width:42px;height:42px;border-radius:16px;background:white;color:var(--navy);display:grid;place-items:center;font-weight:900}
-    .brand h1{font-size:20px;margin:0}.brand p{margin:2px 0 0;color:#cbd5e1;font-size:12px}
-    nav button{width:100%;border:0;border-radius:16px;padding:12px 14px;margin:4px 0;text-align:left;background:transparent;color:#cbd5e1;font-weight:700;cursor:pointer}
-    nav button.active,nav button:hover{background:white;color:var(--navy)}
-    header{position:sticky;top:0;background:rgba(248,244,236,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:20px 32px;z-index:5}
-    .eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);font-weight:900}
-    header h2{margin:4px 0 0;font-size:30px}
-    .content{padding:28px 32px}
-    .hero{background:var(--navy);color:white;border-radius:34px;padding:34px;margin-bottom:22px}
-    .hero h3{font-size:48px;line-height:1;margin:10px 0}.hero p{color:#cbd5e1;line-height:1.7;max-width:850px}
-    .tag{display:inline-flex;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.08);padding:8px 12px;border-radius:999px;font-size:12px;text-transform:uppercase;letter-spacing:.14em;font-weight:900}
-    .grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .card{background:var(--white);border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:0 1px 2px rgba(15,23,42,.04);margin-bottom:18px}
-    .card.alt{background:var(--cream2)}.card.dark{background:var(--navy);color:white}.card.dark p{color:#cbd5e1}
-    .section-title{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px}
-    .icon{width:34px;height:34px;border-radius:14px;background:var(--navy);color:white;display:grid;place-items:center;font-weight:900}
-    .section-title h3{margin:0;font-size:20px}.section-title p{margin:4px 0 0;color:var(--muted);line-height:1.5}
-    .metric h4{margin:0;color:var(--muted);text-transform:uppercase;font-size:12px;letter-spacing:.14em}.metric .value{font-size:26px;font-weight:950;margin-top:8px}.metric p{color:var(--muted);line-height:1.5}
-    .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 10px;font-weight:800;font-size:12px;background:#f8fafc;color:#334155}
-    .green{background:#ecfdf5;color:var(--green);border-color:#bbf7d0}.amber{background:#fffbeb;color:var(--amber);border-color:#fde68a}.blue{background:#eff6ff;color:var(--blue);border-color:#bfdbfe}.rose{background:#fff1f2;color:var(--rose);border-color:#fecdd3}
-    table{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:white}
-    th{background:#f8fafc;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.12em;text-align:left}
-    th,td{padding:14px;border-bottom:1px solid var(--line);vertical-align:top}
-    tr:nth-child(even) td{background:var(--cream2)}
-    textarea,input,select{width:100%;border:1px solid var(--line);background:var(--cream2);border-radius:18px;padding:14px;font-family:inherit}
-    textarea{min-height:110px}
-    .btn{border:0;border-radius:18px;background:var(--navy);color:white;padding:12px 16px;font-weight:900;cursor:pointer}
-    .btn.secondary{background:white;color:var(--navy);border:1px solid var(--line)}
-    .bar{height:9px;background:#e2e8f0;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;background:var(--navy)}
-    .hidden{display:none}
-    @media(max-width:900px){aside{position:relative;width:100%;height:auto}main{margin-left:0}.app{display:block}.g2,.g3,.g4{grid-template-columns:1fr}.hero h3{font-size:34px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrowthLens — Development Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Mulish:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e1c2b;
+  --ink-mid: #1d3245;
+  --muted: #6b7c8d;
+  --subtle: #9daab5;
+  --bg: #f4f5f7;
+  --white: #ffffff;
+  --accent: #c8973a;
+  --accent-light: #f5edd8;
+  --rule: #dde2e8;
+  --lens: #3d2f6b;
+  --lens-mid: #5b47a0;
+  --lens-light: #ede9f8;
+  --lens-muted: #8b7ec4;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Mulish',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.wrap{width:min(1100px,92vw);margin:0 auto;}
+.section{padding:80px 0;}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+h1{font-size:clamp(2.8rem,5.5vw,4.8rem);line-height:1.06;font-weight:700;}
+h2{font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.15;font-weight:500;}
+h3{font-size:1.15rem;font-weight:500;}
+p{color:var(--muted);line-height:1.75;font-size:.93rem;}
+.rule{border:none;border-top:1px solid var(--rule);margin:0;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:14px;}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent);}
+.eyebrow--lens{color:var(--lens-mid);}
+.eyebrow--lens::before{background:var(--lens-mid);}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(244,245,247,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--rule);padding:16px 0;}
+.nav-inner{display:flex;justify-content:space-between;align-items:center;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-mark{width:28px;height:28px;border-radius:6px;background:var(--lens);display:flex;align-items:center;justify-content:center;}
+.nav-logo-mark svg{width:16px;height:16px;}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--ink);letter-spacing:.04em;}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center;}
+.nav-links a{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{background:var(--lens);color:white!important;padding:8px 18px;border-radius:4px;transition:background .2s!important;}
+.nav-cta:hover{background:var(--lens-mid)!important;}
+
+/* HERO */
+.hero{padding:100px 0 80px;position:relative;overflow:hidden;background:var(--ink);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 70% 50%, rgba(61,47,107,.6) 0%, transparent 60%);pointer-events:none;}
+.hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 440px;gap:64px;align-items:center;}
+.hero-eyebrow{margin-bottom:20px;}
+.hero-eyebrow .eyebrow{color:var(--lens-muted);}
+.hero-eyebrow .eyebrow::before{background:var(--lens-muted);}
+.hero h1{color:white;margin-bottom:8px;}
+.hero h1 em{display:block;font-style:italic;color:var(--lens-muted);}
+.hero-lead{font-size:1.05rem;color:rgba(255,255,255,.6);max-width:500px;margin-top:20px;line-height:1.72;}
+.hero-actions{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:13px 24px;border-radius:4px;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:all .22s;font-family:'Mulish',sans-serif;}
+.btn-primary{background:var(--lens);color:white;}
+.btn-primary:hover{background:var(--lens-mid);transform:translateY(-1px);box-shadow:0 6px 20px rgba(61,47,107,.4);}
+.btn-ghost{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.25);}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5);}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:3px;background:rgba(61,47,107,.5);border:1px solid rgba(139,126,196,.3);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lens-muted);margin-bottom:28px;}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:#5dca8a;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(.85);}}
+
+/* Hero card — prototype preview */
+.hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;backdrop-filter:blur(8px);}
+.hero-card-header{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;}
+.hch-label{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.hch-status{display:flex;align-items:center;gap:6px;font-size:.68rem;font-weight:700;color:#5dca8a;letter-spacing:.08em;text-transform:uppercase;}
+.hch-dot{width:5px;height:5px;border-radius:50%;background:#5dca8a;}
+.hero-card-body{padding:20px;}
+.hcb-person{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.08);}
+.hcb-avatar{width:36px;height:36px;border-radius:50%;background:rgba(139,126,196,.3);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--lens-muted);font-weight:600;flex-shrink:0;}
+.hcb-name{font-size:.85rem;font-weight:700;color:white;display:block;margin-bottom:2px;}
+.hcb-role{font-size:.72rem;color:rgba(255,255,255,.45);display:block;}
+.hcb-story-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lens-muted);margin-bottom:8px;display:block;}
+.hcb-story{font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.6;font-style:italic;border-left:2px solid var(--lens-muted);padding-left:12px;margin-bottom:16px;}
+.hcb-row{display:flex;gap:8px;}
+.hcb-chip{flex:1;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;}
+.hcb-chip-label{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:3px;}
+.hcb-chip-val{font-size:.78rem;font-weight:700;color:white;display:block;}
+.hcb-chip-val--up{color:#5dca8a;}
+.hero-card-footer{padding:14px 20px;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;}
+.hcf-text{font-size:.7rem;color:rgba(255,255,255,.35);letter-spacing:.06em;}
+.hcf-action{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lens-muted);}
+
+/* THESIS */
+.thesis{background:white;border-top:none;}
+.thesis-inner{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:40px;}
+.thesis-cell{background:white;padding:40px 36px;}
+.thesis-cell--dark{background:var(--ink);}
+.thesis-cell--lens{background:var(--lens-light);}
+.thesis-num{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--rule);line-height:1;display:block;margin-bottom:12px;}
+.thesis-cell--dark .thesis-num{color:rgba(255,255,255,.1);}
+.thesis-cell--lens .thesis-num{color:rgba(61,47,107,.15);}
+.thesis-label{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px;}
+.thesis-cell--dark .thesis-label{color:rgba(200,151,58,.8);}
+.thesis-cell--lens .thesis-label{color:var(--lens-mid);}
+.thesis-cell h3{font-size:1.2rem;margin-bottom:12px;color:var(--ink);}
+.thesis-cell--dark h3{color:white;}
+.thesis-cell--lens h3{color:var(--lens);}
+.thesis-cell p{font-size:.85rem;line-height:1.75;}
+.thesis-cell--dark p{color:rgba(255,255,255,.55);}
+.thesis-cell--lens p{color:var(--lens);}
+
+/* ORIGIN */
+.origin{background:var(--bg);}
+.origin-block{background:var(--ink);border-radius:8px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:36px;position:relative;overflow:hidden;}
+.origin-block::before{content:'';position:absolute;top:0;right:0;width:320px;height:100%;background:radial-gradient(circle at 80% 50%, rgba(61,47,107,.5) 0%, transparent 70%);pointer-events:none;}
+.origin-text{position:relative;z-index:2;}
+.origin-text h2{color:white;margin-bottom:20px;}
+.origin-text p{color:rgba(255,255,255,.6);line-height:1.78;margin-bottom:16px;}
+.origin-text p em{color:var(--lens-muted);font-style:italic;}
+.origin-quote{position:relative;z-index:2;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:32px;}
+.origin-quote-mark{font-family:'Playfair Display',serif;font-size:4.5rem;line-height:.7;color:var(--lens-muted);opacity:.4;display:block;margin-bottom:8px;}
+.origin-quote p{font-size:.95rem;color:rgba(255,255,255,.8);font-style:italic;line-height:1.75;}
+.origin-quote-attr{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);}
+.origin-quote-attr span{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lens-muted);display:block;}
+.origin-quote-attr small{font-size:.68rem;color:rgba(255,255,255,.3);margin-top:2px;display:block;}
+
+/* WHAT IT DOES */
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.what-card{background:white;padding:32px 28px;}
+.what-icon{width:40px;height:40px;border-radius:8px;background:var(--lens-light);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.what-icon svg{width:20px;height:20px;}
+.what-card h3{font-size:1rem;margin-bottom:10px;}
+.what-card p{font-size:.82rem;line-height:1.7;}
+.what-card .what-note{margin-top:14px;padding-top:14px;border-top:1px solid var(--rule);font-size:.75rem;color:var(--subtle);font-style:italic;}
+
+/* HOW IT'S DIFFERENT */
+.diff-section{background:white;}
+.diff-table{width:100%;border-collapse:collapse;margin-top:36px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;}
+.diff-table th{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:16px 24px;text-align:left;border-bottom:1px solid var(--rule);}
+.diff-table th:first-child{background:var(--bg);color:var(--subtle);}
+.diff-table th:nth-child(2){background:var(--bg);color:var(--muted);}
+.diff-table th:nth-child(3){background:var(--lens);color:white;}
+.diff-table td{padding:16px 24px;font-size:.85rem;border-bottom:1px solid var(--rule);color:var(--muted);}
+.diff-table tr:last-child td{border-bottom:none;}
+.diff-table td:first-child{color:var(--ink);font-weight:600;font-size:.8rem;}
+.diff-table td:nth-child(2){background:var(--bg);}
+.diff-table td:nth-child(3){background:#faf8ff;}
+.check{color:#5dca8a;font-weight:700;}
+.cross{color:#e05a5a;}
+
+/* PROTOTYPE */
+.proto-section{background:var(--bg);}
+.proto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:36px;}
+.proto-card{background:white;padding:0;}
+.proto-card-header{padding:24px 28px;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;}
+.proto-card-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;}
+.proto-tag{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
+.proto-tag--built{background:#e8f5e9;color:#2e7d32;}
+.proto-tag--design{background:var(--lens-light);color:var(--lens);}
+.proto-card-body{padding:24px 28px;}
+
+/* Objectivity check mockup */
+.objcheck{display:flex;flex-direction:column;gap:8px;}
+.objcheck-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:5px;border:1px solid var(--rule);background:var(--bg);}
+.objcheck-item--flagged{background:#fff8f8;border-color:#f5c6c6;}
+.objcheck-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.objcheck-dot--clear{background:#5dca8a;}
+.objcheck-dot--flag{background:#e05a5a;}
+.objcheck-dot--warn{background:#f0a500;}
+.objcheck-label{font-size:.8rem;color:var(--ink);flex:1;}
+.objcheck-sub{font-size:.72rem;color:var(--muted);}
+
+/* Growth story mockup */
+.growth-story{font-size:.82rem;}
+.gs-timeline{display:flex;flex-direction:column;gap:0;}
+.gs-entry{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);}
+.gs-entry:last-child{border-bottom:none;}
+.gs-date{font-size:.7rem;color:var(--subtle);min-width:52px;padding-top:2px;}
+.gs-content{flex:1;}
+.gs-obs{font-size:.8rem;color:var(--ink);margin-bottom:3px;}
+.gs-change{font-size:.72rem;color:var(--muted);font-style:italic;}
+.gs-change--up{color:#2e7d32;}
+.gs-ai-block{margin-top:14px;padding:12px 14px;background:var(--lens-light);border-radius:5px;border-left:3px solid var(--lens-mid);}
+.gs-ai-label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lens-mid);display:block;margin-bottom:5px;}
+.gs-ai-text{font-size:.8rem;color:var(--lens);line-height:1.6;font-style:italic;}
+
+/* Confidence matrix */
+.conf-matrix{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.conf-cell{padding:12px;border-radius:5px;border:1px solid var(--rule);}
+.conf-cell--hl{background:var(--lens-light);border-color:rgba(61,47,107,.2);}
+.conf-label{font-size:.68rem;font-weight:700;color:var(--lens);display:block;margin-bottom:4px;}
+.conf-action{font-size:.75rem;color:var(--ink);line-height:1.45;}
+
+/* Fairness */
+.fair-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--rule);}
+.fair-row:last-child{border-bottom:none;}
+.fair-name{font-size:.8rem;font-weight:600;color:var(--ink);min-width:80px;}
+.fair-bar-wrap{flex:1;height:6px;background:var(--rule);border-radius:3px;overflow:hidden;}
+.fair-bar{height:100%;border-radius:3px;background:var(--lens-mid);}
+.fair-val{font-size:.72rem;color:var(--muted);min-width:24px;text-align:right;}
+.fair-flag{font-size:.7rem;color:#e05a5a;font-weight:700;}
+
+/* STACK */
+.stack-section{background:white;}
+.stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:32px;}
+.stack-card{background:white;padding:26px 24px;}
+.stack-layer{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px;}
+.stack-card strong{display:block;font-size:.88rem;color:var(--ink);margin-bottom:6px;}
+.stack-card p{font-size:.78rem;}
+.stack-note{font-size:.72rem;color:var(--subtle);font-style:italic;margin-top:6px;}
+
+/* STATUS */
+.status-section{background:var(--ink);}
+.status-inner{padding:60px 0;}
+.status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden;margin-top:36px;}
+.status-cell{padding:28px 24px;}
+.status-phase{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lens-muted);display:block;margin-bottom:8px;}
+.status-cell h3{color:white;font-size:.95rem;margin-bottom:8px;}
+.status-cell p{font-size:.78rem;color:rgba(255,255,255,.45);}
+.status-dot{display:inline-flex;align-items:center;gap:5px;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+.sdot--done{color:#5dca8a;}
+.sdot--now{color:var(--lens-muted);}
+.sdot--next{color:rgba(255,255,255,.3);}
+.sdot::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;display:inline-block;}
+
+/* BUILDER */
+.builder-section{background:var(--bg);}
+.builder-block{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:36px;}
+.builder-text p{font-size:.9rem;line-height:1.78;margin-bottom:16px;}
+.builder-creds{display:flex;flex-direction:column;gap:8px;margin-top:24px;}
+.builder-cred{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;background:white;border:1px solid var(--rule);border-radius:5px;}
+.builder-cred-dot{width:5px;height:5px;border-radius:50%;background:var(--lens-mid);flex-shrink:0;margin-top:5px;}
+.builder-cred span{font-size:.82rem;color:var(--ink);line-height:1.5;}
+.builder-cred small{display:block;font-size:.72rem;color:var(--subtle);margin-top:2px;}
+.builder-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.builder-stat{background:white;border:1px solid var(--rule);border-radius:6px;padding:20px 18px;}
+.builder-stat-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--lens);line-height:1;display:block;margin-bottom:4px;}
+.builder-stat-label{font-size:.7rem;color:var(--muted);letter-spacing:.06em;line-height:1.4;}
+
+/* CTA */
+.cta-section{background:var(--lens);padding:80px 0;}
+.cta-inner{text-align:center;}
+.cta-inner h2{color:white;margin-bottom:16px;}
+.cta-inner p{color:rgba(255,255,255,.65);max-width:500px;margin:0 auto 36px;font-size:.95rem;line-height:1.72;}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-white{background:white;color:var(--lens);}
+.btn-white:hover{background:rgba(255,255,255,.9);transform:translateY(-1px);}
+.btn-outline-white{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.35);}
+.btn-outline-white:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.6);}
+
+/* BACK LINK */
+.back-bar{padding:14px 0;background:var(--bg);border-bottom:1px solid var(--rule);}
+.back-link{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .2s;}
+.back-link:hover{color:var(--ink);}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-card{display:none;}
+  .origin-block{grid-template-columns:1fr;padding:40px;}
+  .thesis-inner,.what-grid,.stack-grid{grid-template-columns:1fr 1fr;}
+  .status-grid{grid-template-columns:1fr 1fr;}
+  .builder-block{grid-template-columns:1fr;}
+  .proto-grid{grid-template-columns:1fr;}
+}
+@media(max-width:640px){
+  .thesis-inner,.what-grid,.stack-grid,.status-grid,.conf-matrix,.builder-stat-grid{grid-template-columns:1fr;}
+  h1{font-size:2.4rem;}
+  .cta-inner [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-content{animation:fadeUp .65s ease both;}
+</style>
 </head>
 <body>
-<div class="app">
-  <aside>
-    <div class="brand"><div class="logo">✦</div><div><h1>GrowthLens</h1><p>Development Intelligence</p></div></div>
-    <nav id="nav"></nav>
-    <div class="card dark" style="border-color:rgba(255,255,255,.12);padding:16px;margin-top:20px">
-      <b>Development-first</b>
-      <p style="font-size:12px">Private prep stays private until a manager chooses to convert it into a shared development note.</p>
-    </div>
-  </aside>
-  <main>
-    <header>
-      <div class="eyebrow">AI-enabled growth story system</div>
-      <h2>From coaching moments to growth stories</h2>
-    </header>
-    <div class="content">
 
-      <section id="overview">
-        <div class="hero">
-          <span class="tag">Prototype v2</span>
-          <h3>Development intelligence, not documentation theater.</h3>
-          <p>GrowthLens helps leaders diagnose what a person needs, provide the right support, track what happened next, and build a fair, evidence-based story of growth over time.</p>
-          <button class="btn secondary" onclick="show('onboarding')">Start guided path →</button>
-        </div>
-        <div class="grid g4">
-          <div class="card metric"><h4>Active growth stories</h4><div class="value">12</div><p>People with active support plans.</p></div>
-          <div class="card metric"><h4>Follow-ups overdue</h4><div class="value">3</div><p>Development plans needing action.</p></div>
-          <div class="card metric"><h4>System barriers</h4><div class="value">4</div><p>Recurring issues beyond one person.</p></div>
-          <div class="card metric"><h4>Confidence lift</h4><div class="value">+41%</div><p>Manager confidence before/after AI plan.</p></div>
-        </div>
-        <div class="card">
-          <div class="section-title"><div class="icon">👥</div><div><h3>People actively being supported</h3><p>Current development stories, follow-ups, support quality, and readiness signals.</p></div></div>
-          <table><thead><tr><th>Person</th><th>Focus</th><th>Status</th><th>Readiness</th><th>Confidence Lift</th></tr></thead>
-          <tbody>
-            <tr><td><b>Maria Lopez</b><br><small>Shift Leader • 8 months</small></td><td>Peak deployment + decision-making</td><td><span class="pill green">Improving</span></td><td>Emerging toward Ready</td><td><b>2 → 4</b></td></tr>
-            <tr><td><b>Jordan Smith</b><br><small>Assistant Manager • 1 year, 3 months</small></td><td>Follow-through after coaching conversations</td><td><span class="pill amber">Support in Progress</span></td><td>Developing</td><td><b>1 → 3</b></td></tr>
-            <tr><td><b>Avery Chen</b><br><small>Certified Trainer • 5 months</small></td><td>Behavior-based feedback</td><td><span class="pill blue">Ready for Stretch</span></td><td>Ready for Stretch</td><td><b>3 → 5</b></td></tr>
-          </tbody></table>
-        </div>
-      </section>
-
-      <section id="onboarding" class="hidden">
-        <div class="card">
-          <div class="section-title"><div class="icon">→</div><div><h3>First-Time User Path</h3><p>A guided start so busy managers know exactly where to begin.</p></div></div>
-          <div class="grid g4">
-            <div class="card alt"><b>1. Add a person</b></div><div class="card alt"><b>2. Choose why you’re supporting them</b></div><div class="card alt"><b>3. Complete context profile</b></div><div class="card alt"><b>4. Add one coaching situation</b></div><div class="card alt"><b>5. Run Objectivity Check</b></div><div class="card alt"><b>6. Generate next conversation</b></div><div class="card alt"><b>7. Schedule follow-up</b></div>
-          </div>
-        </div>
-        <div class="card dark"><h3>Launch positioning</h3><p>Start as a private coaching prep assistant, then expand into shared development plans, career ladder readiness, manager/team dashboards, and talent insights. Do not launch as a performance documentation system first.</p></div>
-      </section>
-
-      <section id="person" class="hidden">
-        <div class="card dark">
-          <span class="pill green">Improving</span>
-          <h3 style="font-size:38px;margin:12px 0 4px">Maria Lopez</h3>
-          <p>Shift Leader • 8 months in role • Target: Assistant Manager</p>
-        </div>
-        <div class="grid g4">
-          <div class="card metric"><h4>Primary Gap</h4><div class="value">Confidence / Readiness</div></div>
-          <div class="card metric"><h4>Support Quality</h4><div class="value">Strong</div></div>
-          <div class="card metric"><h4>Readiness</h4><div class="value">Emerging</div></div>
-          <div class="card metric"><h4>Manager Confidence</h4><div class="value">2 → 4</div></div>
-        </div>
-        <div class="card">
-          <div class="section-title"><div class="icon">📖</div><div><h3>AI Growth Story</h3><p>A living, evidence-based narrative.</p></div></div>
-          <div class="card alt">Maria’s growth has focused on building confidence and consistency in shift leadership during peak periods. Early observations showed strong operational knowledge, but hesitation when making deployment decisions without manager direction. Recent logs show she is beginning to make proactive team-positioning decisions with less prompting.</div>
-        </div>
-        <div class="grid g2">
-          <div class="card">
-            <h3>Support Timeline + What Changed</h3>
-            <table><thead><tr><th>Date</th><th>Observation</th><th>Support</th><th>Change</th></tr></thead><tbody>
-              <tr><td>Mar. 3</td><td>Waited for direction during rush.</td><td>Clarified expectation + modeled.</td><td><span class="pill amber">Improved in some conditions</span></td></tr>
-              <tr><td>Mar. 8</td><td>Made one move with prompting.</td><td>Guided practice + feedback.</td><td><span class="pill green">Improved</span></td></tr>
-              <tr><td>Mar. 15</td><td>Made two proactive moves.</td><td>Reinforcement + stretch goal.</td><td><span class="pill green">Improved</span></td></tr>
-            </tbody></table>
-          </div>
-          <div class="card">
-            <h3>Support Transparency Ledger</h3>
-            <p><span class="pill green">Complete</span> Expectation clarified</p>
-            <p><span class="pill green">Complete</span> Behavior modeled</p>
-            <p><span class="pill green">Complete</span> Guided practice</p>
-            <p><span class="pill green">Complete</span> Employee perspective</p>
-            <p><span class="pill amber">Partial</span> System barriers explored</p>
-            <p><span class="pill amber">Partial</span> Shared agreement confirmed</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="employee" class="hidden">
-        <div class="card"><div class="section-title"><div class="icon">🤝</div><div><h3>Employee-Facing: My Growth Plan</h3><p>A shared, empowering view of support, progress, and next goals.</p></div></div>
-          <div class="grid g3"><div class="card alt metric"><h4>My Focus</h4><div class="value">Peak leadership</div></div><div class="card alt metric"><h4>Support</h4><div class="value">Practice + debriefs</div></div><div class="card alt metric"><h4>Next Goal</h4><div class="value">Lead one rush</div></div></div>
-          <div class="card alt"><b>Shared growth summary:</b><br>You’ve made clear progress in reading the floor and making team-positioning decisions. The next step is building consistency when volume changes quickly.</div>
-          <textarea placeholder="Employee reflection: What support helped? What still feels unclear? What do you want to practice next?"></textarea>
-        </div>
-      </section>
-
-      <section id="log" class="hidden">
-        <div class="card"><div class="section-title"><div class="icon">+</div><div><h3>Add Coaching / Development Log</h3><p>Guided intake separates facts from assumptions before generating a support plan.</p></div></div>
-          <div class="grid g2"><textarea placeholder="What happened?"></textarea><textarea placeholder="What was the role expectation?"></textarea><textarea placeholder="Observed behavior"></textarea><textarea placeholder="Impact"></textarea></div>
-        </div>
-        <div class="grid g3">
-          <div class="card"><h3>Objectivity Check</h3><p><span class="pill amber">Frustration fatigue</span> <span class="pill">Recency bias</span> <span class="pill">Confirmation bias</span> <span class="pill">Attribution bias</span></p></div>
-          <div class="card"><h3>Visibility</h3><p><span class="pill blue">Private prep</span> <span class="pill">Shared plan</span> <span class="pill">Formal documentation</span></p></div>
-          <div class="card"><h3>Tone Slider</h3><p><span class="pill green">Warmer</span> <span class="pill">More direct</span> <span class="pill">Documentation-ready</span></p></div>
-        </div>
-        <div class="card"><h3>AI Output Preview</h3><div class="grid g4"><div class="card alt"><b>Likely diagnosis:</b><br>Confidence + readiness gap.</div><div class="card alt"><b>Recommended support:</b><br>Clarify, model, practice, debrief.</div><div class="card alt"><b>Missing evidence:</b><br>Employee perspective + one observation.</div><div class="card alt"><b>Confidence:</b><br>Moderate to high.</div></div></div>
-      </section>
-
-      <section id="followup" class="hidden">
-        <div class="card"><div class="section-title"><div class="icon">↻</div><div><h3>Follow-Up Flow: What Changed Since Last Time?</h3><p>Keeps development from becoming disconnected notes.</p></div></div>
-          <div class="grid g4"><div class="card alt">Improved</div><div class="card alt">Stayed the same</div><div class="card alt">Declined</div><div class="card alt">Improved in some conditions</div><div class="card alt">No evidence yet</div><div class="card alt">Support was not completed</div><div class="card alt">System barrier prevented progress</div></div>
-        </div>
-        <div class="card"><h3>Support Was Not Completed</h3><p>Protects the person from being judged when the support plan never actually happened.</p><div class="grid g3"><div class="card alt">Manager did not have time</div><div class="card alt">Operational volume got in the way</div><div class="card alt">Follow-up was forgotten</div><div class="card alt">Staffing issue</div><div class="card alt">Priority changed</div><div class="card alt">Schedule conflict</div></div></div>
-      </section>
-
-      <section id="assessment" class="hidden">
-        <div class="card"><div class="section-title"><div class="icon">☑</div><div><h3>Self + Supervisor Assessment Comparison</h3><p>Side-by-side calibration for perception, confidence, and evidence gaps.</p></div></div>
-          <table><thead><tr><th>Competency</th><th>Self</th><th>Supervisor</th><th>AI Insight</th></tr></thead><tbody>
-            <tr><td>Role clarity</td><td>4 / 5</td><td>4 / 5</td><td><span class="pill green">Aligned</span></td></tr>
-            <tr><td>Peak decision-making</td><td>4 / 5</td><td>2 / 5</td><td><span class="pill amber">Calibration gap</span></td></tr>
-            <tr><td>Coaching others</td><td>3 / 5</td><td>2 / 5</td><td><span class="pill">Needs evidence</span></td></tr>
-            <tr><td>Confidence under pressure</td><td>2 / 5</td><td>3 / 5</td><td><span class="pill blue">Possible confidence gap</span></td></tr>
-          </tbody></table>
-        </div>
-        <div class="card"><h3>Confidence vs. Competence Matrix</h3><div class="grid g2"><div class="card alt"><b>Low competence / Low confidence</b><br>Teach, model, reassure.</div><div class="card alt"><b>Low competence / High confidence</b><br>Calibrate, train, give specific feedback.</div><div class="card alt"><b>High competence / Low confidence</b><br>Encourage, stretch, reinforce.</div><div class="card alt"><b>High competence / High confidence</b><br>Delegate, stretch, build promotion evidence.</div></div></div>
-      </section>
-
-      <section id="career" class="hidden">
-        <div class="card"><div class="section-title"><div class="icon">🎯</div><div><h3>Career Ladder Readiness Tracker</h3><p>Missing evidence is labeled as no evidence yet, not not capable.</p></div></div>
-          <table><thead><tr><th>AGM Readiness Behavior</th><th>Evidence</th><th>Status</th></tr></thead><tbody>
-            <tr><td>Runs shift independently</td><td>3 moderate-volume shifts</td><td><span class="pill blue">Developing</span></td></tr>
-            <tr><td>Manages deployment</td><td>4 observed team-positioning decisions</td><td><span class="pill green">Ready</span></td></tr>
-            <tr><td>Coaches team members</td><td>1 observed example; more needed</td><td><span class="pill blue">Emerging</span></td></tr>
-            <tr><td>Handles guest recovery</td><td>No evidence yet</td><td><span class="pill">No evidence yet</span></td></tr>
-          </tbody></table>
-        </div>
-        <div class="card dark"><h3>Not ready yet, but here’s the path</h3><p>The tool identifies missing evidence, next support, next practice opportunity, role behavior, follow-up date, and what would change the recommendation.</p></div>
-      </section>
-
-      <section id="promotion" class="hidden">
-        <div class="card"><div class="section-title"><div class="icon">📦</div><div><h3>Promotion Packet Generator</h3><p>A one-click evidence packet for readiness conversations.</p></div></div>
-          <div class="grid g2"><div class="card alt"><b>Readiness Summary</b><br>Maria is showing early readiness indicators for Assistant Manager responsibilities.</div><div class="card alt"><b>Remaining Evidence Needed</b><br>Independent deployment during high-volume shifts and coaching others.</div><div class="card alt"><b>Support Provided</b><br>Clarity, modeling, guided practice, debriefs, reinforcement.</div><div class="card alt"><b>Post-Promotion Support Risk</b><br>May need structured coaching in business ownership and feedback cycles.</div></div>
-        </div>
-      </section>
-
-      <section id="manager" class="hidden">
-        <div class="card"><div class="section-title"><div class="icon">📈</div><div><h3>Manager Coaching Skill Dashboard</h3><p>The tool develops the developer by showing coaching patterns.</p></div></div>
-          <p><b>Uses observable behavior</b><span class="pill green" style="float:right">Strong</span></p><div class="bar"><span style="width:92%"></span></div>
-          <p><b>Defines success clearly</b><span class="pill green" style="float:right">Strong</span></p><div class="bar"><span style="width:84%"></span></div>
-          <p><b>Captures employee perspective</b><span class="pill rose" style="float:right">Needs attention</span></p><div class="bar"><span style="width:67%"></span></div>
-          <p><b>Provides practice opportunities</b><span class="pill rose" style="float:right">Needs attention</span></p><div class="bar"><span style="width:58%"></span></div>
-        </div>
-        <div class="card"><h3>System Barrier Escalation</h3><p class="card alt"><b>AI insight:</b> Three people show performance gaps connected to unclear deployment expectations. This may indicate a team-level clarity issue, not individual performance gaps.</p></div>
-      </section>
-
-      <section id="fairness" class="hidden">
-        <div class="card"><div class="section-title"><div class="icon">⚖</div><div><h3>Fairness Distribution View</h3><p>Shows whether support, recognition, stretch, and accountability language are distributed consistently.</p></div></div>
-          <table><thead><tr><th>Category</th><th>Maria</th><th>Jordan</th><th>Avery</th><th>Insight</th></tr></thead><tbody>
-            <tr><td>Stretch opportunities</td><td>2</td><td>1</td><td>3</td><td>Avery receives most stretch reps</td></tr>
-            <tr><td>Recognition logged</td><td>3</td><td>1</td><td>4</td><td>Recognition is uneven</td></tr>
-            <tr><td>Employee perspective captured</td><td>Yes</td><td>Missing</td><td>Yes</td><td>Jordan needs voice captured</td></tr>
-            <tr><td>Accountability language</td><td>Low</td><td>Moderate</td><td>Low</td><td>Check standard consistency</td></tr>
-          </tbody></table>
-        </div>
-      </section>
-
-      <section id="rehearsal" class="hidden">
-        <div class="card"><div class="section-title"><div class="icon">🎙</div><div><h3>Conversation Rehearsal Mode</h3><p>Managers can practice difficult conversations before they happen.</p></div></div>
-          <p><span class="pill">Receptive</span> <span class="pill amber">Defensive</span> <span class="pill">Confused</span> <span class="pill">Emotional</span> <span class="pill">Disengaged</span> <span class="pill">Overconfident</span></p>
-          <div class="card dark"><div class="eyebrow">AI plays employee: defensive</div><h3>“I get what you’re saying, but I feel like I only hesitate because I don’t want to make the wrong call and mess up the shift.”</h3><p><b>Coach suggestion:</b> Validate the concern, clarify the practice target, and set one low-risk decision rep before peak.</p></div>
-        </div>
-      </section>
-
-      <section id="support" class="hidden">
-        <div class="card"><div class="section-title"><div class="icon">📚</div><div><h3>Support Menu Library</h3><p>Choose the right support instead of defaulting to retraining or vague feedback.</p></div></div>
-          <div class="grid g3">
-            <div class="card alt"><b>Clarify expectation</b><br><small>Use when the person may not know what good looks like. Evidence: can restate expectation.</small></div>
-            <div class="card alt"><b>Model behavior</b><br><small>Use when they need to see the skill in context. Evidence: can explain what worked.</small></div>
-            <div class="card alt"><b>Guided practice</b><br><small>Use when they understand but need reps. Evidence: attempts behavior with reduced prompting.</small></div>
-            <div class="card alt"><b>Job aid / checklist</b><br><small>Use when consistency or memory load is the barrier. Evidence: fewer missed steps.</small></div>
-            <div class="card alt"><b>Stretch assignment</b><br><small>Use when readiness evidence is emerging. Evidence: performs next-level behavior safely.</small></div>
-            <div class="card alt"><b>Accountability conversation</b><br><small>Use after clarity, support, follow-up, and repeated evidence.</small></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="data" class="hidden">
-        <div class="card"><div class="section-title"><div class="icon">⇧</div><div><h3>Data Import Layer</h3><p>MVP can start manual, then later connect to LMS, operations, and survey data.</p></div></div>
-          <div class="grid g3"><div class="card alt">LMS completions</div><div class="card alt">Assessment results</div><div class="card alt">Certification status</div><div class="card alt">Operational KPIs</div><div class="card alt">Guest feedback</div><div class="card alt">Observation forms</div><div class="card alt">CSV upload</div><div class="card alt">Manual entry</div><div class="card alt">Self-assessments</div></div>
-        </div>
-        <div class="card"><h3>Audit Trail + Retention</h3><table><thead><tr><th>Date</th><th>Action</th><th>User</th><th>Visibility</th></tr></thead><tbody><tr><td>Apr. 25</td><td>Private prep converted to shared development note</td><td>Manager</td><td><span class="pill blue">Shared</span></td></tr><tr><td>Apr. 24</td><td>Promotion readiness packet generated</td><td>Manager</td><td>Private prep</td></tr><tr><td>Apr. 22</td><td>Objectivity check completed</td><td>Manager</td><td>Private prep</td></tr></tbody></table></div>
-      </section>
-
-      <section id="governance" class="hidden">
-        <div class="card dark"><div class="section-title"><div class="icon" style="background:white;color:var(--navy)">✓</div><div><h3>Governance + Guardrails</h3><p>The tool is only trustworthy if it protects people while improving support quality.</p></div></div>
-          <div class="grid g3"><div class="card dark"><b>Development-first</b><p>Not a hidden punishment file.</p></div><div class="card dark"><b>Private prep stays private</b><p>Delete, keep private, or convert.</p></div><div class="card dark"><b>AI does not decide</b><p>Human judgment owns decisions.</p></div><div class="card dark"><b>Evidence over labels</b><p>Observed behavior, impact, and standards.</p></div><div class="card dark"><b>Human review required</b><p>Formal action requires review.</p></div><div class="card dark"><b>Retention rules</b><p>Private prep can auto-delete.</p></div></div>
-        </div>
-        <div class="card"><h3>Recommended Technical Stack</h3><div class="grid g3"><div class="card alt"><b>Frontend</b><br>Next.js / React + Tailwind</div><div class="card alt"><b>Backend</b><br>Supabase Postgres + RLS</div><div class="card alt"><b>Auth</b><br>Supabase Auth; Azure AD/Okta later</div><div class="card alt"><b>AI</b><br>OpenAI API prompt chains</div><div class="card alt"><b>Storage</b><br>Supabase Storage</div><div class="card alt"><b>Hosting</b><br>Vercel</div><div class="card alt"><b>Vector Search</b><br>pgvector</div><div class="card alt"><b>Analytics</b><br>Power BI or embedded dashboards</div><div class="card alt"><b>Audit</b><br>Access logs + prompt versions</div></div></div>
-      </section>
-    </div>
-  </main>
+<!-- BACK BAR -->
+<div class="back-bar">
+  <div class="wrap">
+    <a href="https://kathrynmurrow.github.io/portfolio/" class="back-link">← Back to portfolio</a>
+  </div>
 </div>
-<script>
-  const pages = [
-    ['overview','Executive Overview'],['onboarding','First-Time Path'],['person','Person Dashboard'],['employee','Employee View'],['log','Add Coaching Log'],['followup','Follow-Up Flow'],['assessment','Assessments'],['career','Career Ladder'],['promotion','Promotion Packet'],['manager','Manager Skills'],['fairness','Fairness View'],['rehearsal','Rehearsal Mode'],['support','Support Menu'],['data','Data + Audit'],['governance','Governance']
-  ];
-  const nav = document.getElementById('nav');
-  pages.forEach(([id,label])=>{
-    const b=document.createElement('button'); b.textContent=label; b.id='nav-'+id; b.onclick=()=>show(id); nav.appendChild(b);
-  });
-  function show(id){
-    pages.forEach(([pid])=>{
-      document.getElementById(pid).classList.toggle('hidden', pid!==id);
-      document.getElementById('nav-'+pid).classList.toggle('active', pid===id);
-    });
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-  show('overview');
-</script>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="8" r="5" stroke="white" stroke-width="1.5"/>
+          <circle cx="8" cy="8" r="2" fill="white"/>
+        </svg>
+      </div>
+      <span class="nav-logo-text">GrowthLens</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#thesis">The Problem</a></li>
+      <li><a href="#what">What It Does</a></li>
+      <li><a href="#prototype">Prototype</a></li>
+      <li><a href="#status">Status</a></li>
+      <li><a href="mailto:kathrynmurrow@gmail.com" class="nav-cta">Get in touch</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Active development · Prototype v2
+        </div>
+        <div class="hero-eyebrow">
+          <span class="eyebrow">Development Intelligence</span>
+        </div>
+        <h1>
+          Growth isn't a moment.
+          <em>It's a story.</em>
+        </h1>
+        <p class="hero-lead">GrowthLens turns coaching conversations into a continuous, AI-interpreted record of development — so every manager carries the institutional memory a good coach would have, and every person gets a fair account of their own growth.</p>
+        <div class="hero-actions">
+          <a href="#prototype" class="btn btn-primary">See the prototype</a>
+          <a href="#thesis" class="btn btn-ghost">Read the thesis</a>
+        </div>
+      </div>
+      <!-- Prototype preview card -->
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <span class="hch-label">Active growth story</span>
+          <span class="hch-status"><span class="hch-dot"></span>Improving</span>
+        </div>
+        <div class="hero-card-body">
+          <div class="hcb-person">
+            <div class="hcb-avatar">ML</div>
+            <div>
+              <span class="hcb-name">Maria Lopez</span>
+              <span class="hcb-role">Shift Leader · 8 months in role</span>
+            </div>
+          </div>
+          <span class="hcb-story-label">AI growth story</span>
+          <p class="hcb-story">Maria's growth has focused on building confidence in peak deployment. Early hesitation is giving way to proactive team-positioning — with less prompting each week.</p>
+          <div class="hcb-row">
+            <div class="hcb-chip">
+              <span class="hcb-chip-label">Confidence</span>
+              <span class="hcb-chip-val hcb-chip-val--up">2 → 4</span>
+            </div>
+            <div class="hcb-chip">
+              <span class="hcb-chip-label">Readiness</span>
+              <span class="hcb-chip-val">Emerging</span>
+            </div>
+            <div class="hcb-chip">
+              <span class="hcb-chip-label">Sessions</span>
+              <span class="hcb-chip-val">4 logged</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card-footer">
+          <span class="hcf-text">3 follow-ups pending · Next: stretch assignment</span>
+          <span class="hcf-action">View full story →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- THESIS -->
+<section class="section" id="thesis">
+  <div class="wrap">
+    <div class="eyebrow">The problem</div>
+    <h2>The performance development industry runs on snapshots.</h2>
+    <div class="thesis-inner">
+      <div class="thesis-cell">
+        <span class="thesis-num">01</span>
+        <span class="thesis-label">The gap</span>
+        <h3>Annual reviews reward recency, not reality</h3>
+        <p>A manager's memory of who someone is gets compressed into whatever happened last. Three months of real progress disappear behind one rough week. The review captures a moment — and calls it a record.</p>
+      </div>
+      <div class="thesis-cell thesis-cell--dark">
+        <span class="thesis-num">02</span>
+        <span class="thesis-label">The hidden cost</span>
+        <h3>Coaching conversations evaporate</h3>
+        <p style="color:rgba(255,255,255,.55);">Every conversation a manager has disappears the moment it ends. There's no pattern, no follow-through record, no compounding. The next conversation starts from scratch — and so does the development.</p>
+      </div>
+      <div class="thesis-cell thesis-cell--lens">
+        <span class="thesis-num">03</span>
+        <span class="thesis-label">The design premise</span>
+        <h3>Development should accumulate — like a good manager's memory would</h3>
+        <p>If a manager never forgot anything, never had recency bias, and could see patterns across every person they'd ever developed — what would their coaching look like? That's the system GrowthLens is designed to be.</p>
+      </div>
+      <div class="thesis-cell">
+        <span class="thesis-num">04</span>
+        <span class="thesis-label">Why AI</span>
+        <h3>This isn't a documentation problem. It's an interpretation problem.</h3>
+        <p>A form captures what happened. AI interprets what it means — whether confidence is the barrier or competence, whether this is a pattern or an outlier, what the right support is and whether it actually worked. That gap is where GrowthLens lives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ORIGIN -->
+<section class="section origin" id="origin">
+  <div class="wrap">
+    <div class="origin-block">
+      <div class="origin-text">
+        <div class="eyebrow" style="color:var(--lens-muted);"><span style="background:var(--lens-muted); width:24px; height:1px; display:inline-block;"></span>&nbsp;Origin</div>
+        <h2 style="color:white; margin-bottom:20px;">This problem was lived before it was built.</h2>
+        <p>Building coaching systems for 350+ school leaders and instructional coaches across one of Florida's largest school districts revealed the same failure pattern every time: coaching conversations happened and then <em>vanished</em>. No institutional record. No compounding. No way to know whether the support actually changed anything.</p>
+        <p>The feedback frameworks that emerged from that work — the Credible Feedback Process, the evidence-based observation system — were attempts to solve it structurally. GrowthLens is the AI-era answer to the same problem, rebuilt for enterprise scale.</p>
+        <p>The thesis hasn't changed: <em>systems produce development, not isolated conversations.</em> The tool has finally caught up to the idea.</p>
+      </div>
+      <div class="origin-quote">
+        <span class="origin-quote-mark">"</span>
+        <p>We had coaching conversations with every one of those leaders. We had no system that remembered them. Every manager started from zero every time — which meant every leader started from zero too.</p>
+        <div class="origin-quote-attr">
+          <span>The problem GrowthLens exists to solve</span>
+          <small>Observed across 350+ school leaders · Orange County Public Schools</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- WHAT IT DOES -->
+<section class="section diff-section" id="what">
+  <div class="wrap">
+    <div class="eyebrow">What it does</div>
+    <h2>Six capabilities. One connected record.</h2>
+    <div class="what-grid">
+
+      <div class="what-card">
+        <div class="what-icon">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" fill="#3d2f6b"/>
+            <path d="M10 6v4l3 3" stroke="#3d2f6b" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Continuous growth story</h3>
+        <p>Every coaching conversation is logged and AI-interpreted into a living narrative — not a stack of disconnected notes. The story updates with each session.</p>
+        <p class="what-note">Not documentation theater. The narrative is built to inform the next conversation, not satisfy HR.</p>
+      </div>
+
+      <div class="what-card">
+        <div class="what-icon">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="4" width="14" height="2" rx="1" fill="#3d2f6b"/>
+            <rect x="3" y="9" width="10" height="2" rx="1" fill="#3d2f6b" opacity=".6"/>
+            <rect x="3" y="14" width="7" height="2" rx="1" fill="#3d2f6b" opacity=".3"/>
+          </svg>
+        </div>
+        <h3>Objectivity check</h3>
+        <p>Before logging a coaching entry, AI surfaces whether the manager may be writing from frustration fatigue, recency bias, confirmation bias, or attribution error — protecting the person from being judged on bad data.</p>
+        <p class="what-note">The tool is only trustworthy if it protects people while improving support quality.</p>
+      </div>
+
+      <div class="what-card">
+        <div class="what-icon">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 15l4-4 3 3 5-6" stroke="#3d2f6b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Career ladder readiness</h3>
+        <p>Missing evidence is labeled as "no evidence yet" — not "not capable." The tool tracks observed behavior against role expectations and surfaces what's needed to make a fair promotion recommendation.</p>
+        <p class="what-note">Readiness is an evidence problem, not a judgment problem.</p>
+      </div>
+
+      <div class="what-card">
+        <div class="what-icon">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7" cy="8" r="3" stroke="#3d2f6b" stroke-width="1.5"/>
+            <circle cx="14" cy="8" r="3" stroke="#3d2f6b" stroke-width="1.5" opacity=".5"/>
+            <path d="M2 17c0-2.21 2.24-4 5-4s5 1.79 5 4" stroke="#3d2f6b" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Fairness distribution view</h3>
+        <p>Shows whether coaching, stretch opportunities, recognition, and accountability are being distributed consistently across the team — surfacing patterns a manager can't see in their own behavior.</p>
+        <p class="what-note">Equity isn't a value statement. It's a measurable pattern.</p>
+      </div>
+
+      <div class="what-card">
+        <div class="what-icon">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 3l2 4h4l-3.5 3 1.5 4-4-2.5-4 2.5 1.5-4L4 7h4z" stroke="#3d2f6b" stroke-width="1.4" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Conversation rehearsal</h3>
+        <p>Managers can practice difficult conversations before they happen — AI plays the employee in different states (defensive, disengaged, overconfident) and coaches the manager in real time.</p>
+        <p class="what-note">Preparation produces better conversations than coaching frameworks alone.</p>
+      </div>
+
+      <div class="what-card">
+        <div class="what-icon">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 5h14M3 10h14M3 15h8" stroke="#3d2f6b" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="16" cy="15" r="2.5" fill="#3d2f6b" opacity=".4"/>
+            <path d="M15 15l1 1 2-2" stroke="#3d2f6b" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>System barrier escalation</h3>
+        <p>When three or more people share the same development gap, AI surfaces a team-level or system-level pattern — so the manager knows when individual coaching is the wrong tool.</p>
+        <p class="what-note">Individual coaching applied to a system problem produces frustration, not development.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- HOW IT'S DIFFERENT -->
+<section class="section diff-section">
+  <div class="wrap">
+    <div class="eyebrow">How it's different</div>
+    <h2>Every tool captures moments. This one connects them.</h2>
+    <table class="diff-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>Performance management tools</th>
+          <th>GrowthLens</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Development record</td>
+          <td>Annual review snapshot, recency-biased</td>
+          <td style="color:var(--lens);"><span class="check">✓</span> Continuous, AI-interpreted narrative</td>
+        </tr>
+        <tr>
+          <td>Coaching follow-through</td>
+          <td>Manual reminder, usually skipped</td>
+          <td style="color:var(--lens);"><span class="check">✓</span> Automated cadence, logged outcomes</td>
+        </tr>
+        <tr>
+          <td>Bias protection</td>
+          <td><span class="cross">✗</span> None</td>
+          <td style="color:var(--lens);"><span class="check">✓</span> Pre-entry objectivity check</td>
+        </tr>
+        <tr>
+          <td>Readiness assessment</td>
+          <td>Manager opinion, rarely documented</td>
+          <td style="color:var(--lens);"><span class="check">✓</span> Evidence-based, gap-specific</td>
+        </tr>
+        <tr>
+          <td>Fairness visibility</td>
+          <td><span class="cross">✗</span> None</td>
+          <td style="color:var(--lens);"><span class="check">✓</span> Distribution view across team</td>
+        </tr>
+        <tr>
+          <td>System vs. individual diagnosis</td>
+          <td><span class="cross">✗</span> None</td>
+          <td style="color:var(--lens);"><span class="check">✓</span> Pattern escalation across people</td>
+        </tr>
+        <tr>
+          <td>Manager skill development</td>
+          <td><span class="cross">✗</span> None — tool serves admin, not coach</td>
+          <td style="color:var(--lens);"><span class="check">✓</span> Coaching skill dashboard + rehearsal mode</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- PROTOTYPE -->
+<section class="section proto-section" id="prototype">
+  <div class="wrap">
+    <div class="eyebrow">Prototype</div>
+    <h2>What's been built.</h2>
+    <p style="max-width:580px; margin-top:10px;">Version 2 of the prototype covers the core development loop — intake, objectivity check, AI growth story, confidence matrix, career ladder readiness, and fairness view. Each module below is functional.</p>
+
+    <div class="proto-grid">
+
+      <!-- AI Growth Story -->
+      <div class="proto-card">
+        <div class="proto-card-header">
+          <span class="proto-card-title">AI growth story</span>
+          <span class="proto-tag proto-tag--built">Built · v2</span>
+        </div>
+        <div class="proto-card-body">
+          <div class="growth-story">
+            <div class="gs-ai-block" style="margin-bottom:16px;">
+              <span class="gs-ai-label">AI narrative · Maria Lopez</span>
+              <p class="gs-ai-text">Growth has centered on peak confidence. Early hesitation in deployment decisions is giving way to proactive positioning — the pattern shift started in session 3 and has held across two subsequent observations.</p>
+            </div>
+            <div class="gs-timeline">
+              <div class="gs-entry">
+                <span class="gs-date">Mar 3</span>
+                <div class="gs-content">
+                  <p class="gs-obs">Waited for direction during rush hour; did not self-deploy</p>
+                  <p class="gs-change">Clarified expectation + modeled the move</p>
+                </div>
+              </div>
+              <div class="gs-entry">
+                <span class="gs-date">Mar 8</span>
+                <div class="gs-content">
+                  <p class="gs-obs">Made one proactive positioning call with prompting</p>
+                  <p class="gs-change gs-change--up">↑ Improved — first self-initiated decision</p>
+                </div>
+              </div>
+              <div class="gs-entry">
+                <span class="gs-date">Mar 15</span>
+                <div class="gs-content">
+                  <p class="gs-obs">Two proactive moves without prompting during dinner rush</p>
+                  <p class="gs-change gs-change--up">↑ Pattern holding — stretch goal set</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Objectivity Check -->
+      <div class="proto-card">
+        <div class="proto-card-header">
+          <span class="proto-card-title">Objectivity check</span>
+          <span class="proto-tag proto-tag--built">Built · v2</span>
+        </div>
+        <div class="proto-card-body">
+          <p style="font-size:.8rem; color:var(--muted); margin-bottom:14px;">Run before logging a coaching entry — surfaces bias before it enters the record.</p>
+          <div class="objcheck">
+            <div class="objcheck-item">
+              <span class="objcheck-dot objcheck-dot--clear"></span>
+              <div>
+                <p class="objcheck-label">Frustration fatigue</p>
+                <p class="objcheck-sub">No elevated language detected</p>
+              </div>
+            </div>
+            <div class="objcheck-item objcheck-item--flagged">
+              <span class="objcheck-dot objcheck-dot--flag"></span>
+              <div>
+                <p class="objcheck-label">Recency bias</p>
+                <p class="objcheck-sub">Entry focuses only on this week — prior progress not referenced</p>
+              </div>
+            </div>
+            <div class="objcheck-item">
+              <span class="objcheck-dot objcheck-dot--clear"></span>
+              <div>
+                <p class="objcheck-label">Attribution bias</p>
+                <p class="objcheck-sub">Performance gap attributed to behavior, not system</p>
+              </div>
+            </div>
+            <div class="objcheck-item">
+              <span class="objcheck-dot objcheck-dot--warn"></span>
+              <div>
+                <p class="objcheck-label">Confirmation bias</p>
+                <p class="objcheck-sub">Watch: entry consistent with prior negative pattern</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Confidence vs Competence -->
+      <div class="proto-card">
+        <div class="proto-card-header">
+          <span class="proto-card-title">Confidence vs. competence matrix</span>
+          <span class="proto-tag proto-tag--built">Built · v2</span>
+        </div>
+        <div class="proto-card-body">
+          <p style="font-size:.8rem; color:var(--muted); margin-bottom:14px;">AI assigns the quadrant and surfaces the right support type — before the manager defaults to retraining.</p>
+          <div class="conf-matrix">
+            <div class="conf-cell">
+              <span class="conf-label" style="color:var(--muted);">Low / Low</span>
+              <p class="conf-action" style="color:var(--muted);">Teach, model, reassure</p>
+            </div>
+            <div class="conf-cell">
+              <span class="conf-label" style="color:var(--muted);">Low / High</span>
+              <p class="conf-action" style="color:var(--muted);">Calibrate, train, give specific feedback</p>
+            </div>
+            <div class="conf-cell conf-cell--hl">
+              <span class="conf-label">High / Low ← Maria</span>
+              <p class="conf-action">Encourage, stretch, reinforce — she knows more than she acts on</p>
+            </div>
+            <div class="conf-cell">
+              <span class="conf-label" style="color:var(--muted);">High / High</span>
+              <p class="conf-action" style="color:var(--muted);">Delegate, stretch, build promotion evidence</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fairness View -->
+      <div class="proto-card">
+        <div class="proto-card-header">
+          <span class="proto-card-title">Fairness distribution view</span>
+          <span class="proto-tag proto-tag--design">In design</span>
+        </div>
+        <div class="proto-card-body">
+          <p style="font-size:.8rem; color:var(--muted); margin-bottom:14px;">Stretch opportunities logged this period — surfaces whether access to development is being distributed equitably.</p>
+          <div>
+            <div class="fair-row">
+              <span class="fair-name">Maria L.</span>
+              <div class="fair-bar-wrap"><div class="fair-bar" style="width:40%"></div></div>
+              <span class="fair-val">2</span>
+            </div>
+            <div class="fair-row">
+              <span class="fair-name">Jordan S.</span>
+              <div class="fair-bar-wrap"><div class="fair-bar" style="width:20%"></div></div>
+              <span class="fair-val">1</span>
+              <span class="fair-flag">↓ low</span>
+            </div>
+            <div class="fair-row">
+              <span class="fair-name">Avery C.</span>
+              <div class="fair-bar-wrap"><div class="fair-bar" style="width:60%"></div></div>
+              <span class="fair-val">3</span>
+            </div>
+            <div class="fair-row">
+              <span class="fair-name">Devon R.</span>
+              <div class="fair-bar-wrap"><div class="fair-bar" style="width:20%"></div></div>
+              <span class="fair-val">1</span>
+              <span class="fair-flag">↓ low</span>
+            </div>
+          </div>
+          <p style="font-size:.72rem; color:var(--subtle); font-style:italic; margin-top:12px;">AI insight: Jordan and Devon have received fewer than half the stretch reps of Avery. Review whether scheduling or visibility is the barrier.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <a href="https://growthlens-prototype.netlify.app/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--lens);text-decoration:none;border-bottom:1px solid var(--lens);padding-bottom:2px;">Try the live prototype — run a real coaching session ↗</a>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- STACK -->
+<section class="section stack-section">
+  <div class="wrap">
+    <div class="eyebrow">Technical architecture</div>
+    <h2>Built to be trustworthy, not just functional.</h2>
+    <p style="max-width:580px; margin-top:10px;">The stack reflects the same governing principle as the product: trustworthiness requires architecture decisions, not just good intentions.</p>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <span class="stack-layer">Frontend</span>
+        <strong>Next.js + React + Tailwind</strong>
+        <p>Component-driven UI with role-based views — manager coaching interface, employee growth plan, and team dashboard each surface only the data relevant to that role.</p>
+      </div>
+      <div class="stack-card">
+        <span class="stack-layer">Auth + Data</span>
+        <strong>Supabase (Postgres + RLS + Auth)</strong>
+        <p>Row-level security policies make per-user and per-org data isolation a database guarantee — not an application assumption. Private prep notes auto-delete on configurable schedules.</p>
+        <p class="stack-note">Same architecture pattern validated in Lead Sharper.</p>
+      </div>
+      <div class="stack-card">
+        <span class="stack-layer">AI layer</span>
+        <strong>Anthropic Claude API</strong>
+        <p>Prompt chains handle objectivity detection, growth story generation, support type recommendation, and system-pattern escalation. Human judgment owns every decision — AI surfaces evidence, not verdicts.</p>
+      </div>
+      <div class="stack-card">
+        <span class="stack-layer">Integrations (roadmap)</span>
+        <strong>LMS + Operations data</strong>
+        <p>Planned connectors for LMS completion data, operational KPIs, assessment results, and observation forms — so development records can be correlated with performance evidence.</p>
+      </div>
+      <div class="stack-card">
+        <span class="stack-layer">Hosting</span>
+        <strong>Vercel</strong>
+        <p>Serverless API proxy keeps AI keys off the client. Same pattern as Lead Sharper — proven to handle multi-user isolation without leaking credentials.</p>
+      </div>
+      <div class="stack-card">
+        <span class="stack-layer">Governance</span>
+        <strong>Privacy by design</strong>
+        <p>Private prep always stays private until the manager converts it. Formal action requires human review. AI never decides — it prepares the manager to decide better.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- STATUS -->
+<section class="status-section" id="status">
+  <div class="wrap">
+    <div class="section status-inner">
+      <div class="eyebrow" style="color:var(--lens-muted);"><span style="background:var(--lens-muted); width:24px; height:1px; display:inline-block;"></span>&nbsp;Build status</div>
+      <h2 style="color:white;">Active development. Real problem.</h2>
+      <p style="color:rgba(255,255,255,.5); max-width:560px; margin-top:10px; margin-bottom:0; font-size:.9rem; line-height:1.72;">The problem GrowthLens solves is live right now at 870+ enterprise locations — which is exactly why this isn't moving slowly.</p>
+      <div class="status-grid">
+        <div class="status-cell">
+          <span class="status-dot sdot--done">Live in prototype</span>
+          <h3>Core development loop</h3>
+          <p>Session intake → objectivity check → AI growth story → confidence/competence matrix → career ladder readiness. Functional and interactive in prototype v2 — try it above.</p>
+        </div>
+        <div class="status-cell">
+          <span class="status-dot sdot--now">Shipping next</span>
+          <h3>Fairness engine + follow-through cadence</h3>
+          <p>Equity distribution view across coaching, stretch, and recognition — so managers can see patterns in their own behavior. Automated follow-up logging with outcome tracking.</p>
+        </div>
+        <div class="status-cell">
+          <span class="status-dot sdot--now">In active development</span>
+          <h3>Auth + multi-user architecture</h3>
+          <p>Magic-link authentication and per-org row-level security. Same proven architecture as Lead Sharper, adapted for team-level data isolation and manager dashboards.</p>
+        </div>
+        <div class="status-cell">
+          <span class="status-dot sdot--next">Building toward</span>
+          <h3>Enterprise integrations</h3>
+          <p>LMS connector, operational KPI layer, Azure AD/Okta SSO, and an org-wide talent intelligence dashboard — so development records correlate with real performance data.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILDER -->
+<section class="section builder-section">
+  <div class="wrap">
+    <div class="eyebrow">The builder</div>
+    <h2>Built by someone who ran the system this replaces.</h2>
+    <div class="builder-block">
+      <div class="builder-text">
+        <p>GrowthLens isn't a theoretical product. It's built by someone who spent years inside the coaching infrastructure it's designed to fix — building observation systems, feedback frameworks, and development programs for hundreds of leaders across two industries.</p>
+        <p>The failure patterns GrowthLens addresses — vanishing coaching conversations, recency-biased reviews, coaching gaps that look like performance gaps — aren't hypothetical. They're documented, first-hand, at scale.</p>
+        <p>The frameworks embedded in GrowthLens (the objectivity check, the confidence-vs-competence matrix, the support menu library) didn't come from AI research. They came from building real coaching systems and watching where they broke.</p>
+        <div class="builder-creds">
+          <div class="builder-cred">
+            <span class="builder-cred-dot"></span>
+            <div>
+              <span>Built the Credible Feedback Process — a 4-step observation and coaching system deployed across 350+ school leaders</span>
+              <small>Published in The Learning Professional · Co-designed with Chief Schools Officer · 77% school improvement rate</small>
+            </div>
+          </div>
+          <div class="builder-cred">
+            <span class="builder-cred-dot"></span>
+            <div>
+              <span>Designed tiered leadership development for principals, APs, and emerging leaders across 200+ sites</span>
+              <small>100% demonstrated skill growth · 80% promotion or expansion rate over two years</small>
+            </div>
+          </div>
+          <div class="builder-cred">
+            <span class="builder-cred-dot"></span>
+            <div>
+              <span>Currently Director of Leadership Development &amp; eLearning — building AI-enabled coaching infrastructure at enterprise scale</span>
+              <small>870+ locations · Docebo LMS · Custom AI agents + automation systems</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="builder-stat-grid">
+          <div class="builder-stat">
+            <span class="builder-stat-num">350+</span>
+            <span class="builder-stat-label">School leaders coached through the system GrowthLens was designed to replace</span>
+          </div>
+          <div class="builder-stat">
+            <span class="builder-stat-num">77%</span>
+            <span class="builder-stat-label">School improvement rate from the coaching framework that became GrowthLens's design foundation</span>
+          </div>
+          <div class="builder-stat">
+            <span class="builder-stat-num">870+</span>
+            <span class="builder-stat-label">Enterprise locations where the development infrastructure problem GrowthLens solves is live right now</span>
+          </div>
+          <div class="builder-stat">
+            <span class="builder-stat-num">7 yr</span>
+            <span class="builder-stat-label">Designing, measuring, and iterating on coaching and development systems across education and enterprise</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="wrap">
+    <div class="cta-inner">
+      <div class="eyebrow" style="justify-content:center; color:rgba(255,255,255,.6);"><span style="background:rgba(255,255,255,.4); width:24px; height:1px; display:inline-block;"></span>&nbsp;Get involved</div>
+      <h2>Two ways in.</h2>
+      <p>Whether you're evaluating GrowthLens as a product or considering the person who built it — there's a place to start.</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:640px; margin:0 auto 36px; text-align:left;">
+        <div style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:8px; padding:28px 24px;">
+          <div style="font-size:.65rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:10px;">For organizations</div>
+          <p style="color:white; font-size:.92rem; font-weight:600; margin-bottom:8px; font-family:'Playfair Display',serif;">Interested in piloting GrowthLens?</p>
+          <p style="color:rgba(255,255,255,.55); font-size:.82rem; line-height:1.65; margin-bottom:20px;">Early conversations welcome — enterprise deployment, pilot programs, or just pushing on the product thinking.</p>
+          <a href="mailto:kathrynmurrow@gmail.com?subject=GrowthLens%20pilot%20inquiry" class="btn btn-white" style="font-size:.75rem; padding:10px 18px;">Start a conversation →</a>
+        </div>
+        <div style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:8px; padding:28px 24px;">
+          <div style="font-size:.65rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:10px;">For hiring teams</div>
+          <p style="color:white; font-size:.92rem; font-weight:600; margin-bottom:8px; font-family:'Playfair Display',serif;">See the full portfolio.</p>
+          <p style="color:rgba(255,255,255,.55); font-size:.82rem; line-height:1.65; margin-bottom:20px;">GrowthLens is one piece of a larger body of work in organizational effectiveness, AI systems, and leadership development at scale.</p>
+          <a href="https://kathrynmurrow.github.io/portfolio/" class="btn btn-outline-white" style="font-size:.75rem; padding:10px 18px;">View portfolio →</a>
+        </div>
+      </div>
+      <p style="color:rgba(255,255,255,.3); font-size:.75rem;">Or reach out directly: <a href="mailto:kathrynmurrow@gmail.com" style="color:rgba(255,255,255,.5); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.2);">kathrynmurrow@gmail.com</a></p>
+    </div>
+  </div>
+</section>
+
 </body>
 </html>

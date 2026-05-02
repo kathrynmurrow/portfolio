@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrowthLens · Development Intelligence Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0f14;
+    --ink-2: #141720;
+    --ink-3: #1c2030;
+    --surface: #222840;
+    --surface-2: #2a3050;
+    --border: rgba(255,255,255,0.07);
+    --border-active: rgba(255,255,255,0.15);
+    --gold: #c9a84c;
+    --gold-light: #e4c97e;
+    --gold-dim: rgba(201,168,76,0.15);
+    --amber: #e07d2a;
+    --green: #4caf82;
+    --green-dim: rgba(76,175,130,0.12);
+    --red: #d95f5f;
+    --red-dim: rgba(217,95,95,0.12);
+    --yellow: #e6b84a;
+    --yellow-dim: rgba(230,184,74,0.12);
+    --text: #e8eaf2;
+    --text-2: #9ca3b8;
+    --text-3: #5a6278;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid noise texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(ellipse 80% 60% at 70% -10%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at -10% 80%, rgba(76,175,130,0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* Header */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 0 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 56px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .logo-mark::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .logo-text span {
+    color: var(--gold);
+  }
+
+  .back-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--gold); }
+
+  /* Hero */
+  .hero {
+    margin-bottom: 64px;
+  }
+
+  .proto-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .proto-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: var(--text-2);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* Steps nav */
+  .steps-nav {
+    display: flex;
+    gap: 0;
+    margin-bottom: 48px;
+    background: var(--ink-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .step-tab {
+    flex: 1;
+    padding: 14px 8px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    color: var(--text-3);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    border-right: 1px solid var(--border);
+  }
+
+  .step-tab:last-child { border-right: none; }
+
+  .step-tab.active {
+    color: var(--gold);
+    background: var(--gold-dim);
+  }
+
+  .step-tab.complete {
+    color: var(--green);
+  }
+
+  .step-tab .step-num {
+    display: block;
+    font-size: 18px;
+    font-family: 'DM Serif Display', serif;
+    font-weight: normal;
+    letter-spacing: 0;
+    margin-bottom: 2px;
+  }
+
+  .step-tab.complete .step-num::after {
+    content: '✓';
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--ink-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 24px;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover { border-color: var(--border-active); }
+
+  .card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .card > p {
+    color: var(--text-2);
+    font-size: 14px;
+    margin-bottom: 24px;
+    line-height: 1.65;
+  }
+
+  /* Form elements */
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .field-row { grid-template-columns: 1fr; }
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .field label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    background: var(--ink-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    transition: border-color 0.2s, background 0.2s;
+    resize: none;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.04);
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--text-3);
+  }
+
+  .field select option {
+    background: var(--ink-3);
+    color: var(--text);
+  }
+
+  .field.full { grid-column: 1 / -1; }
+
+  .field-hint {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(201,168,76,0.25);
+  }
+
+  .btn-primary:disabled {
+    background: var(--surface);
+    color: var(--text-3);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-2);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--border-active);
+    color: var(--text);
+  }
+
+  /* Loading state */
+  .loading-bar {
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+
+  .loading-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--amber));
+    width: 0%;
+    transition: width 0.3s ease;
+    animation: load-sweep 1.8s ease-in-out infinite;
+  }
+
+  @keyframes load-sweep {
+    0% { transform: translateX(-100%); width: 40%; }
+    50% { transform: translateX(80%); width: 60%; }
+    100% { transform: translateX(200%); width: 40%; }
+  }
+
+  .loading-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    animation: blink 1.4s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* Results */
+  .result-section {
+    display: none;
+    animation: fadeUp 0.4s ease;
+  }
+
+  .result-section.visible { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Objectivity check results */
+  .bias-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .bias-grid { grid-template-columns: 1fr; }
+  }
+
+  .bias-item {
+    background: var(--ink-3);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s;
+  }
+
+  .bias-item.clear { border-left-color: var(--green); background: var(--green-dim); }
+  .bias-item.flagged { border-left-color: var(--red); background: var(--red-dim); }
+  .bias-item.watch { border-left-color: var(--yellow); background: var(--yellow-dim); }
+
+  .bias-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  .bias-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+
+  .bias-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .bias-item.clear .bias-status { color: var(--green); }
+  .bias-item.flagged .bias-status { color: var(--red); }
+  .bias-item.watch .bias-status { color: var(--yellow); }
+
+  .bias-note {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.55;
+  }
+
+  .objectivity-summary {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: var(--ink-3);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+
+  .objectivity-summary strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Growth story */
+  .story-narrative {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.75;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: var(--ink-3);
+    border-radius: var(--radius-sm);
+    border-left: 2px solid var(--gold);
+    font-style: italic;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 20px;
+    position: relative;
+  }
+
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 24px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item:last-child::before { display: none; }
+
+  .timeline-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--ink-3);
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 12px;
+  }
+
+  .timeline-dot.up { border-color: var(--green); background: var(--green-dim); color: var(--green); }
+  .timeline-dot.new { border-color: var(--gold); background: var(--gold-dim); color: var(--gold); }
+  .timeline-dot.neutral { border-color: var(--surface-2); }
+
+  .timeline-content { flex: 1; padding-top: 4px; }
+
+  .timeline-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .timeline-event {
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 4px;
+    font-weight: 400;
+  }
+
+  .timeline-action {
+    font-size: 12px;
+    color: var(--text-3);
+    font-style: italic;
+  }
+
+  .timeline-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 100px;
+    margin-top: 6px;
+  }
+
+  .timeline-tag.improved { background: var(--green-dim); color: var(--green); }
+  .timeline-tag.new-entry { background: var(--gold-dim); color: var(--gold); }
+  .timeline-tag.baseline { background: var(--surface); color: var(--text-3); }
+
+  /* Confidence matrix */
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .matrix-quadrant {
+    padding: 20px;
+    border-radius: var(--radius-sm);
+    background: var(--ink-3);
+    border: 1.5px solid var(--border);
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .matrix-quadrant.active {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.06);
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.15);
+  }
+
+  .matrix-quadrant.active::after {
+    content: '← You are here';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+  }
+
+  .quadrant-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 8px;
+  }
+
+  .quadrant-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .quadrant-action {
+    font-size: 12px;
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  .matrix-axis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding: 0 4px;
+  }
+
+  .axis-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .matrix-insight {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  .matrix-insight strong { color: var(--gold); font-weight: 500; }
+
+  /* Competency bars */
+  .competency-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .competency-name {
+    font-size: 12px;
+    color: var(--text-2);
+    width: 110px;
+    flex-shrink: 0;
+  }
+
+  .competency-bar-track {
+    flex: 1;
+    height: 6px;
+    background: var(--ink-3);
+    border-radius: 3px;
+    overflow: visible;
+    position: relative;
+  }
+
+  .competency-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--amber));
+    transition: width 1s ease;
+    position: relative;
+  }
+
+  .competency-bar-fill::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(201,168,76,0.5);
+  }
+
+  .competency-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    width: 32px;
+    text-align: right;
+  }
+
+  /* Next action panel */
+  .next-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  /* API key input */
+  .api-key-section {
+    background: var(--ink-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 32px;
+    margin-bottom: 32px;
+  }
+
+  .api-key-section .card-label { margin-bottom: 12px; }
+
+  .api-key-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+  }
+
+  .api-key-row .field { flex: 1; }
+
+  .api-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-top: 10px;
+    display: none;
+  }
+
+  .api-status.connected {
+    display: flex;
+    color: var(--green);
+    background: var(--green-dim);
+  }
+
+  .api-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .api-key-note {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+    line-height: 1.55;
+  }
+
+  /* Section visibility */
+  .phase { display: none; }
+  .phase.active { display: block; }
+
+  /* Error */
+  .error-box {
+    background: var(--red-dim);
+    border: 1px solid rgba(217,95,95,0.25);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #f08080;
+    margin-top: 16px;
+    display: none;
+  }
+
+  /* Divider */
+  .section-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 40px 0;
+  }
+
+  /* Footer */
+  .proto-footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+    gap: 16px;
+  }
+
+  .proto-footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+  }
+
+  /* Tooltip-style note */
+  .inline-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-3);
+    padding: 6px 12px;
+    background: var(--ink-3);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+
+  .inline-note .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* Scroll reveal */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .site-header { padding: 20px 0 32px; }
+    .card { padding: 24px 20px; }
+    .hero h1 { font-size: 28px; }
+    .matrix-grid { grid-template-columns: 1fr; }
+    .matrix-quadrant.active::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="#" class="logo">
+      <div class="logo-mark"></div>
+      <span class="logo-text">Growth<span>Lens</span></span>
+    </a>
+    <a href="https://growthlens2026.netlify.app/" class="back-link">← Back to overview</a>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero fade-in">
+    <div class="proto-badge">Live Prototype · v2</div>
+    <h1>The coaching loop,<br><em>running in real time.</em></h1>
+    <p>Enter a real coaching scenario. GrowthLens will check it for bias, generate an AI growth story, and assign the right support type — before you say a word to the employee.</p>
+  </div>
+
+  <!-- API Key -->
+  <div class="api-key-section fade-in">
+    <div class="card-label">Anthropic API Key — Required</div>
+    <div class="api-key-row">
+      <div class="field">
+        <label>Your API Key</label>
+        <input type="password" id="apiKey" placeholder="sk-ant-..." autocomplete="off">
+      </div>
+      <button class="btn btn-primary" onclick="connectAPI()" id="connectBtn">Connect</button>
+    </div>
+    <div class="api-status" id="apiStatus">Connected</div>
+    <p class="api-key-note">Your key stays in your browser and is never stored or transmitted except directly to Anthropic's API. Get one at <a href="https://console.anthropic.com" target="_blank" style="color: var(--gold); text-decoration: none;">console.anthropic.com</a></p>
+  </div>
+
+  <!-- Step Tabs -->
+  <div class="steps-nav" id="stepsNav">
+    <button class="step-tab active" id="tab-1" onclick="goToTab(1)">
+      <span class="step-num">1</span>Log Session
+    </button>
+    <button class="step-tab" id="tab-2" onclick="goToTab(2)">
+      <span class="step-num">2</span>Objectivity Check
+    </button>
+    <button class="step-tab" id="tab-3" onclick="goToTab(3)">
+      <span class="step-num">3</span>Growth Story
+    </button>
+    <button class="step-tab" id="tab-4" onclick="goToTab(4)">
+      <span class="step-num">4</span>Support Type
+    </button>
+  </div>
+
+  <!-- Phase 1: Log Session -->
+  <div class="phase active" id="phase-1">
+    <div class="card fade-in">
+      <div class="card-label">Step 1</div>
+      <h2>Log a coaching session</h2>
+      <p>Describe what you observed and what you did about it. Use your own words — the more honest, the more useful the analysis.</p>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Employee Name</label>
+          <input type="text" id="empName" placeholder="e.g. Marcus T.">
+        </div>
+        <div class="field">
+          <label>Role / Level</label>
+          <select id="empRole">
+            <option value="">Select role</option>
+            <option value="Team Member">Team Member</option>
+            <option value="Shift Leader">Shift Leader</option>
+            <option value="Assistant General Manager">Assistant General Manager</option>
+            <option value="General Manager">General Manager</option>
+            <option value="Area Director">Area Director</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Time in Role</label>
+          <select id="empTenure">
+            <option value="">Select</option>
+            <option value="less than 1 month">Less than 1 month</option>
+            <option value="1–3 months">1–3 months</option>
+            <option value="3–6 months">3–6 months</option>
+            <option value="6–12 months">6–12 months</option>
+            <option value="1–2 years">1–2 years</option>
+            <option value="2+ years">2+ years</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Session Type</label>
+          <select id="sessionType">
+            <option value="">Select</option>
+            <option value="Shift observation">Shift observation</option>
+            <option value="Formal 1:1">Formal 1:1</option>
+            <option value="In-the-moment coaching">In-the-moment coaching</option>
+            <option value="Performance conversation">Performance conversation</option>
+            <option value="Follow-up check-in">Follow-up check-in</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field full">
+          <label>What did you observe?</label>
+          <textarea id="observation" rows="4" placeholder="Describe specific behavior — what did they do or not do? Be concrete."></textarea>
+          <p class="field-hint">Focus on observable behavior, not interpretation. "She hesitated to redirect the line" rather than "she lacks confidence."</p>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field full">
+          <label>What did you say or do?</label>
+          <textarea id="managerAction" rows="3" placeholder="What coaching move did you make? What did you say?"></textarea>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field full">
+          <label>How did they respond?</label>
+          <textarea id="response" rows="2" placeholder="Their reaction in the moment — resistant, receptive, unclear, surprised..."></textarea>
+        </div>
+      </div>
+
+      <div class="next-actions">
+        <button class="btn btn-primary" onclick="runObjectivityCheck()" id="checkBtn">
+          Run Objectivity Check →
+        </button>
+        <span class="inline-note"><span class="dot"></span> AI will scan for bias before this enters the record</span>
+      </div>
+      <div class="error-box" id="error-1"></div>
+    </div>
+  </div>
+
+  <!-- Phase 2: Objectivity Check -->
+  <div class="phase" id="phase-2">
+    <div class="card fade-in">
+      <div class="card-label">Step 2 — Objectivity Check</div>
+      <h2>Before this enters the record</h2>
+      <p>GrowthLens scans your entry for four common bias patterns that corrupt development records. This protects the employee from being judged on bad data — and protects you from coaching based on your own noise.</p>
+
+      <div id="biasLoading">
+        <div class="loading-bar"><div class="loading-bar-inner"></div></div>
+        <span class="loading-text" id="loadingText">Analyzing entry...</span>
+      </div>
+
+      <div class="result-section" id="biasResults">
+        <div class="bias-grid" id="biasGrid"></div>
+        <div class="objectivity-summary" id="objectivitySummary"></div>
+        <div class="next-actions" style="margin-top: 20px;">
+          <button class="btn btn-primary" onclick="runGrowthStory()">Generate Growth Story →</button>
+          <button class="btn btn-ghost" onclick="goToTab(1)">← Revise entry</button>
+        </div>
+      </div>
+      <div class="error-box" id="error-2"></div>
+    </div>
+  </div>
+
+  <!-- Phase 3: Growth Story -->
+  <div class="phase" id="phase-3">
+    <div class="card fade-in">
+      <div class="card-label">Step 3 — AI Growth Story</div>
+      <h2>The record that accumulates</h2>
+      <p>AI interprets your entry into a continuous development narrative — the kind of story a great manager would hold in memory, but never could.</p>
+
+      <div id="storyLoading">
+        <div class="loading-bar"><div class="loading-bar-inner"></div></div>
+        <span class="loading-text">Building growth narrative...</span>
+      </div>
+
+      <div class="result-section" id="storyResults">
+        <div class="story-narrative" id="storyNarrative"></div>
+
+        <div class="card-label" style="margin-top: 24px;">Development Timeline</div>
+        <div class="timeline" id="storyTimeline"></div>
+
+        <div class="card-label" style="margin-top: 28px;">Competency Signal</div>
+        <div id="competencyBars"></div>
+
+        <div class="next-actions">
+          <button class="btn btn-primary" onclick="runMatrix()">Assign Support Type →</button>
+        </div>
+      </div>
+      <div class="error-box" id="error-3"></div>
+    </div>
+  </div>
+
+  <!-- Phase 4: Confidence Matrix -->
+  <div class="phase" id="phase-4">
+    <div class="card fade-in">
+      <div class="card-label">Step 4 — Support Type</div>
+      <h2>What this person actually needs</h2>
+      <p>Most managers default to retraining. GrowthLens assigns the right support type before you walk into that conversation — based on whether the gap is confidence, competence, or both.</p>
+
+      <div id="matrixLoading">
+        <div class="loading-bar"><div class="loading-bar-inner"></div></div>
+        <span class="loading-text">Assigning quadrant...</span>
+      </div>
+
+      <div class="result-section" id="matrixResults">
+        <div class="matrix-grid" id="matrixGrid"></div>
+
+        <div style="margin-top: 8px;">
+          <div class="matrix-axis">
+            <span class="axis-label">← Low confidence</span>
+            <span class="axis-label">High confidence →</span>
+          </div>
+        </div>
+
+        <div class="matrix-insight" id="matrixInsight"></div>
+
+        <div class="next-actions" style="margin-top: 28px;">
+          <button class="btn btn-primary" onclick="startOver()">Log another session →</button>
+          <a href="https://growthlens2026.netlify.app/" class="btn btn-ghost">← Back to overview</a>
+        </div>
+      </div>
+      <div class="error-box" id="error-4"></div>
+    </div>
+
+    <!-- Summary card -->
+    <div class="card fade-in" id="summaryCard" style="display:none; border-color: rgba(201,168,76,0.2);">
+      <div class="card-label">Session Summary</div>
+      <h2 id="summaryTitle">Full loop complete.</h2>
+      <p id="summarySubtitle" style="margin-bottom: 0;"></p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="proto-footer">
+    <p>GrowthLens Prototype v2 · Built by Kathryn Murrow</p>
+    <a href="https://growthlens2026.netlify.app/" class="back-link">growthlens2026.netlify.app</a>
+  </div>
+
+</div>
+
+<script>
+  let apiKey = '';
+  let sessionData = {};
+  let analysisResults = {};
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function connectAPI() {
+    const key = document.getElementById('apiKey').value.trim();
+    if (!key.startsWith('sk-')) {
+      alert('Please enter a valid Anthropic API key (starts with sk-)');
+      return;
+    }
+    apiKey = key;
+    document.getElementById('apiStatus').classList.add('connected');
+    document.getElementById('connectBtn').textContent = 'Connected ✓';
+    document.getElementById('connectBtn').disabled = true;
+  }
+
+  function goToTab(n) {
+    // Only allow navigation to completed steps
+    document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+    document.getElementById('phase-' + n).classList.add('active');
+    document.querySelectorAll('.step-tab').forEach((t, i) => {
+      t.classList.remove('active');
+      if (i + 1 === n) t.classList.add('active');
+    });
+    window.scrollTo({ top: document.getElementById('stepsNav').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function markTabComplete(n) {
+    const tab = document.getElementById('tab-' + n);
+    tab.classList.remove('active');
+    tab.classList.add('complete');
+  }
+
+  function showError(phase, msg) {
+    const el = document.getElementById('error-' + phase);
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  function hideError(phase) {
+    document.getElementById('error-' + phase).style.display = 'none';
+  }
+
+  async function callClaude(systemPrompt, userPrompt) {
+    if (!apiKey) throw new Error('No API key connected. Please enter your Anthropic API key above.');
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1500,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: userPrompt }]
+      })
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error?.message || 'API error');
+    }
+
+    const data = await res.json();
+    return data.content[0].text;
+  }
+
+  function collectSession() {
+    return {
+      name: document.getElementById('empName').value.trim() || 'the employee',
+      role: document.getElementById('empRole').value || 'team member',
+      tenure: document.getElementById('empTenure').value || 'unknown tenure',
+      sessionType: document.getElementById('sessionType').value || 'coaching session',
+      observation: document.getElementById('observation').value.trim(),
+      managerAction: document.getElementById('managerAction').value.trim(),
+      response: document.getElementById('response').value.trim()
+    };
+  }
+
+  async function runObjectivityCheck() {
+    hideError(1);
+    const s = collectSession();
+
+    if (!s.observation) {
+      showError(1, 'Please describe what you observed before running the objectivity check.');
+      return;
+    }
+    if (!apiKey) {
+      showError(1, 'Please connect your Anthropic API key above first.');
+      return;
+    }
+
+    sessionData = s;
+    markTabComplete(1);
+    goToTab(2);
+
+    document.getElementById('biasLoading').style.display = 'block';
+    document.getElementById('biasResults').classList.remove('visible');
+
+    const loadingTexts = ['Scanning entry for bias patterns...', 'Checking emotional language...', 'Analyzing attribution patterns...', 'Comparing to prior entries...'];
+    let li = 0;
+    const lt = setInterval(() => {
+      document.getElementById('loadingText').textContent = loadingTexts[li++ % loadingTexts.length];
+    }, 1400);
+
+    const systemPrompt = `You are GrowthLens's objectivity engine. You analyze manager-written coaching notes for four bias patterns before they enter the permanent development record.
+
+You must respond ONLY with valid JSON. No markdown, no explanation. Return exactly this structure:
+{
+  "frustrationFatigue": { "status": "clear|watch|flagged", "note": "one sentence" },
+  "recencyBias": { "status": "clear|watch|flagged", "note": "one sentence" },
+  "attributionBias": { "status": "clear|watch|flagged", "note": "one sentence" },
+  "confirmationBias": { "status": "clear|watch|flagged", "note": "one sentence" },
+  "summary": "2–3 sentence overall assessment. State whether this entry is safe to log, and what the manager should be aware of."
+}
+
+Definitions:
+- frustrationFatigue: Elevated emotional language, "always/never" patterns, frustration bleeds into the professional assessment
+- recencyBias: Entry focuses only on this incident, no reference to prior development or pattern context  
+- attributionBias: Performance gap attributed entirely to the person, not to system/environment/support factors
+- confirmationBias: Entry seems to confirm a pre-existing negative narrative about this person
+
+Be honest, specific, and calibrated. "watch" means a minor pattern present, "flagged" means a meaningful concern.`;
+
+    const userPrompt = `Manager coaching entry:
+
+Employee: ${s.name}, ${s.role}, ${s.tenure} in role
+Session type: ${s.sessionType}
+
+Observation: ${s.observation}
+Manager action: ${s.managerAction || 'Not described'}
+Employee response: ${s.response || 'Not described'}`;
+
+    try {
+      const raw = await callClaude(systemPrompt, userPrompt);
+      clearInterval(lt);
+      const result = JSON.parse(raw.replace(/```json|```/g, '').trim());
+      analysisResults.bias = result;
+      renderBiasResults(result);
+    } catch (e) {
+      clearInterval(lt);
+      document.getElementById('biasLoading').style.display = 'none';
+      showError(2, 'Error running objectivity check: ' + e.message);
+    }
+  }
+
+  function renderBiasResults(r) {
+    document.getElementById('biasLoading').style.display = 'none';
+
+    const checks = [
+      { key: 'frustrationFatigue', label: 'Frustration Fatigue', data: r.frustrationFatigue },
+      { key: 'recencyBias', label: 'Recency Bias', data: r.recencyBias },
+      { key: 'attributionBias', label: 'Attribution Bias', data: r.attributionBias },
+      { key: 'confirmationBias', label: 'Confirmation Bias', data: r.confirmationBias }
+    ];
+
+    const statusLabel = { clear: 'Clear', watch: 'Watch', flagged: 'Flagged' };
+
+    document.getElementById('biasGrid').innerHTML = checks.map(c => `
+      <div class="bias-item ${c.data.status}">
+        <div class="bias-item-header">
+          <span class="bias-name">${c.label}</span>
+          <span class="bias-status">${statusLabel[c.data.status]}</span>
+        </div>
+        <p class="bias-note">${c.data.note}</p>
+      </div>
+    `).join('');
+
+    document.getElementById('objectivitySummary').innerHTML = `<strong>Overall assessment:</strong> ${r.summary}`;
+    document.getElementById('biasResults').classList.add('visible');
+  }
+
+  async function runGrowthStory() {
+    hideError(2);
+    markTabComplete(2);
+    goToTab(3);
+
+    document.getElementById('storyLoading').style.display = 'block';
+    document.getElementById('storyResults').classList.remove('visible');
+
+    const s = sessionData;
+
+    const systemPrompt = `You are GrowthLens's narrative engine. You convert coaching session notes into a structured AI growth story — the kind of record a great manager would hold in memory, but at scale.
+
+Respond ONLY with valid JSON. No markdown, no preamble. Exactly this structure:
+{
+  "narrative": "2–3 sentence present-tense growth narrative. Describe the arc, what's shifting, what the signal is. Write as if summarizing a person's development story for a thoughtful reader. Be specific and insightful.",
+  "timeline": [
+    {
+      "date": "date label (e.g. 'Mar 15' or 'Session 1')",
+      "event": "what happened — specific behavior",
+      "action": "what the manager did",
+      "tag": "baseline|improved|new-entry",
+      "indicator": "up|new|neutral"
+    }
+  ],
+  "competencies": [
+    { "name": "competency name (4–5 words max)", "score": 1-5, "trend": "up|stable|down" }
+  ]
+}
+
+Timeline: Create 2 historical plausible entries plus the current session as the newest entry. Make the historical ones feel real based on the role and tenure.
+Competencies: Identify 3–4 relevant competencies for this role. Score them 1–5 based on what the entry implies. Be calibrated.`;
+
+    const userPrompt = `Build the growth story for:
+
+Employee: ${s.name}, ${s.role}, ${s.tenure} in role
+Session: ${s.sessionType}
+Observation: ${s.observation}
+Manager action: ${s.managerAction || 'Not described'}
+Employee response: ${s.response || 'Not described'}
+
+Objectivity check: ${JSON.stringify(analysisResults.bias?.summary || 'No bias flags')}`;
+
+    try {
+      const raw = await callClaude(systemPrompt, userPrompt);
+      const result = JSON.parse(raw.replace(/```json|```/g, '').trim());
+      analysisResults.story = result;
+      renderStoryResults(result);
+    } catch (e) {
+      document.getElementById('storyLoading').style.display = 'none';
+      showError(3, 'Error generating growth story: ' + e.message);
+    }
+  }
+
+  function renderStoryResults(r) {
+    document.getElementById('storyLoading').style.display = 'none';
+
+    document.getElementById('storyNarrative').textContent = r.narrative;
+
+    const iconMap = { up: '↑', new: '★', neutral: '·' };
+    document.getElementById('storyTimeline').innerHTML = r.timeline.map(t => `
+      <div class="timeline-item">
+        <div class="timeline-dot ${t.indicator}">${iconMap[t.indicator] || '·'}</div>
+        <div class="timeline-content">
+          <div class="timeline-date">${t.date}</div>
+          <div class="timeline-event">${t.event}</div>
+          <div class="timeline-action">${t.action}</div>
+          <span class="timeline-tag ${t.tag === 'new-entry' ? 'new-entry' : t.tag === 'improved' ? 'improved' : 'baseline'}">${t.tag === 'new-entry' ? 'New Entry' : t.tag === 'improved' ? '↑ Improved' : 'Baseline'}</span>
+        </div>
+      </div>
+    `).join('');
+
+    document.getElementById('competencyBars').innerHTML = r.competencies.map(c => `
+      <div class="competency-row">
+        <span class="competency-name">${c.name}</span>
+        <div class="competency-bar-track">
+          <div class="competency-bar-fill" style="width: ${(c.score / 5) * 100}%"></div>
+        </div>
+        <span class="competency-val">${c.score}/5</span>
+      </div>
+    `).join('');
+
+    document.getElementById('storyResults').classList.add('visible');
+  }
+
+  async function runMatrix() {
+    hideError(3);
+    markTabComplete(3);
+    goToTab(4);
+
+    document.getElementById('matrixLoading').style.display = 'block';
+    document.getElementById('matrixResults').classList.remove('visible');
+
+    const s = sessionData;
+
+    const systemPrompt = `You are GrowthLens's support-type engine. You assign a confidence/competence quadrant and recommend the right coaching approach.
+
+The four quadrants:
+- Q1 (low confidence, low competence): Teach, model, reassure
+- Q2 (low confidence, high competence): Encourage, stretch, reinforce — they know more than they act on
+- Q3 (high confidence, low competence): Calibrate, give specific feedback, build skill deliberately  
+- Q4 (high confidence, high competence): Delegate, stretch, build promotion evidence
+
+Respond ONLY with valid JSON:
+{
+  "activeQuadrant": "Q1|Q2|Q3|Q4",
+  "confidence": "low|high",
+  "competence": "low|high",
+  "insight": "2–3 sentences. Explain the quadrant assignment. Why this person is here. What the manager should do next, specifically. What the wrong move would be.",
+  "primaryMove": "One-sentence recommended action for the next conversation"
+}`;
+
+    const userPrompt = `Assign the support type for:
+
+Employee: ${s.name}, ${s.role}, ${s.tenure} in role
+Observation: ${s.observation}
+Employee response: ${s.response || 'Not described'}
+Growth story narrative: ${analysisResults.story?.narrative || ''}
+Competency scores: ${JSON.stringify(analysisResults.story?.competencies || [])}`;
+
+    try {
+      const raw = await callClaude(systemPrompt, userPrompt);
+      const result = JSON.parse(raw.replace(/```json|```/g, '').trim());
+      analysisResults.matrix = result;
+      renderMatrixResults(result);
+    } catch (e) {
+      document.getElementById('matrixLoading').style.display = 'none';
+      showError(4, 'Error assigning support type: ' + e.message);
+    }
+  }
+
+  function renderMatrixResults(r) {
+    document.getElementById('matrixLoading').style.display = 'none';
+
+    const quadrants = [
+      {
+        id: 'Q1',
+        label: 'Low confidence · Low competence',
+        title: 'Teach, model, reassure',
+        action: 'Step in directly. Build the skill from scratch and create safety to try.'
+      },
+      {
+        id: 'Q2',
+        label: 'Low confidence · High competence',
+        title: 'Encourage, stretch, reinforce',
+        action: 'They know more than they act on. The barrier is confidence, not capability.'
+      },
+      {
+        id: 'Q3',
+        label: 'High confidence · Low competence',
+        title: 'Calibrate, train, give specific feedback',
+        action: 'Confidence exceeds skill. Specific, evidence-based feedback is the move.'
+      },
+      {
+        id: 'Q4',
+        label: 'High confidence · High competence',
+        title: 'Delegate, stretch, promote',
+        action: 'Get out of the way. Build promotion evidence and give bigger challenges.'
+      }
+    ];
+
+    document.getElementById('matrixGrid').innerHTML = quadrants.map(q => `
+      <div class="matrix-quadrant ${q.id === r.activeQuadrant ? 'active' : ''}">
+        <div class="quadrant-label">${q.label}</div>
+        <div class="quadrant-title">${q.title}</div>
+        <div class="quadrant-action">${q.action}</div>
+      </div>
+    `).join('');
+
+    document.getElementById('matrixInsight').innerHTML = `<strong>AI analysis:</strong> ${r.insight}<br><br><strong>Next move:</strong> ${r.primaryMove}`;
+
+    document.getElementById('matrixResults').classList.add('visible');
+
+    // Show summary
+    const summaryCard = document.getElementById('summaryCard');
+    summaryCard.style.display = 'block';
+    document.getElementById('summaryTitle').textContent = `Full loop complete for ${sessionData.name}.`;
+    document.getElementById('summarySubtitle').textContent = `Objectivity checked · Growth story generated · Support type: ${r.activeQuadrant} assigned. This record is ready to log.`;
+
+    markTabComplete(4);
+  }
+
+  function startOver() {
+    sessionData = {};
+    analysisResults = {};
+
+    ['empName', 'observation', 'managerAction', 'response'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    ['empRole', 'empTenure', 'sessionType'].forEach(id => {
+      document.getElementById(id).selectedIndex = 0;
+    });
+
+    document.querySelectorAll('.step-tab').forEach((t, i) => {
+      t.classList.remove('active', 'complete');
+      if (i === 0) t.classList.add('active');
+    });
+
+    document.getElementById('biasResults').classList.remove('visible');
+    document.getElementById('storyResults').classList.remove('visible');
+    document.getElementById('matrixResults').classList.remove('visible');
+    document.getElementById('summaryCard').style.display = 'none';
+
+    goToTab(1);
+  }
+</script>
+</body>
+</html>
