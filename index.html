@@ -140,6 +140,27 @@ nav {
 }
 
 
+
+.hero-stats-sub {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  max-width: 400px;
+  margin-top: -4px;
+}
+
+.hero-stats-sub span {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 5px 10px;
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+
 .hero-anchor {
   font-size: clamp(13px, 1.3vw, 15px);
   line-height: 1.6;
@@ -876,7 +897,7 @@ footer p {
     <span class="hero-eyebrow">Enterprise Enablement &amp; Org Effectiveness</span>
     <h1 class="hero-name">Kathryn<br>Murrow</h1>
     <p class="hero-title">Charlotte, NC · Organizational Effectiveness</p>
-    <p class="hero-anchor">I build the systems that sit underneath people strategy: diagnostics, enablement architecture, AI tooling, and the governance that keeps it running. Then I measure whether any of it actually changed behavior.</p>
+    <p class="hero-anchor">I build enterprise enablement systems that connect AI workflows, governance, SaaS ecosystems, operational readiness, and behavior-change infrastructure to improve execution at scale.</p>
     <p class="hero-thesis">
       Most organizations don't have a training problem.<br>
       <strong>They have a diagnostic one.</strong><br><br>
@@ -902,20 +923,25 @@ footer p {
     <div class="hero-stats">
       <div class="stat-card">
         <div class="stat-number">57%→33%</div>
-        <div class="stat-label">GM Turnover Reduction</div>
+        <div class="stat-label">GM Turnover, 18 months</div>
       </div>
       <div class="stat-card">
         <div class="stat-number">$5M</div>
-        <div class="stat-label">Cost Reduction Impact</div>
-      </div>
-      <div class="stat-card light">
-        <div class="stat-number">870+</div>
-        <div class="stat-label">Restaurant Locations</div>
+        <div class="stat-label">Cost Reduction</div>
       </div>
       <div class="stat-card light">
         <div class="stat-number">+85%</div>
-        <div class="stat-label">YoY Internal Promotions</div>
+        <div class="stat-label">Internal Promotions YoY</div>
       </div>
+      <div class="stat-card light">
+        <div class="stat-number">870+</div>
+        <div class="stat-label">Locations, $1.95B System</div>
+      </div>
+    </div>
+    <div class="hero-stats-sub">
+      <span>15,000+ employees</span>
+      <span>6 AI tools in production</span>
+      <span>Built and deployed within 6 months</span>
     </div>
   </div>
 </div>
@@ -965,7 +991,7 @@ footer p {
       <div class="study-card-body">
         <div>
           <h3 class="study-card-title">When Training Isn't the Answer: A Diagnostic Framework</h3>
-          <p class="study-card-desc">The diagnostic framework I built to help organizations stop defaulting to training when the real problem is upstream. Sometimes it's a process gap. Sometimes it's selection. Sometimes the manager was never equipped to begin with.</p>
+          <p class="study-card-desc">More than 3 in 4 performance gaps aren't training problems. This framework helps organizations figure out what's actually wrong before they build anything. Sometimes it's a process gap. Sometimes it's selection. Sometimes the manager was never set up to succeed.</p>
         </div>
         <div class="study-card-meta">
           <span class="study-card-org">Built solo · Public Framework</span>
@@ -986,7 +1012,7 @@ footer p {
       <div class="study-card-body">
         <div>
           <h3 class="study-card-title">Readiness Copilot</h3>
-          <p class="study-card-desc">An AI-powered readiness diagnostic I built to ask the questions leaders skip before launching an initiative. The gaps it surfaces are never about training. They're almost always about what wasn't thought through upstream.</p>
+          <p class="study-card-desc">I kept watching initiatives fail for reasons that were obvious in hindsight. This tool asks the readiness questions most leaders skip. The gaps it surfaces are almost never about training.</p>
         </div>
         <div class="study-card-meta">
           <span class="study-card-org">Built solo · Airtable + AI · In progress</span>
@@ -1007,7 +1033,7 @@ footer p {
       <div class="study-card-body">
         <div>
           <h3 class="study-card-title">HIRV Cascade Failure Analysis</h3>
-          <p class="study-card-desc">The HIRV program had good intent and inconsistent results. I traced the failure to a cascade problem: the people responsible for enabling others were operating in the same inconsistency stage as the people they were supposed to develop. This is the recommendation I wrote for the VP of Operations.</p>
+          <p class="study-card-desc">One implementing region drove nearly $1M of a $2.4M company profit and a $500K+ year-over-year improvement. The rest of the system wasn't seeing those results. I traced the gap to a cascade failure and wrote this recommendation for the VP of Operations.</p>
         </div>
         <div class="study-card-meta">
           <span class="study-card-org">Bojangles · VP-level deliverable · 870+ locations</span>
@@ -1028,7 +1054,7 @@ footer p {
       <div class="study-card-body">
         <div>
           <h3 class="study-card-title">Lead the Business: Program Data Dashboard</h3>
-          <p class="study-card-desc">A live dashboard tracking whether the Lead the Business program is actually moving AGM performance metrics. Completion rates tell you nothing. This shows what changed after.</p>
+          <p class="study-card-desc">AGM turnover dropped from 58% to 51% in the year following program launch. This dashboard tracks whether the program is driving the metrics that matter, not just whether people completed it.</p>
         </div>
         <div class="study-card-meta">
           <span class="study-card-org">Bojangles · Live dashboard · 400+ AGMs</span>
